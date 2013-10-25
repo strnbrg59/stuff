@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+<TextView android:id="@+id/clue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/clue" />    
+
+<TextView android:id="@+id/answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/answer" />    
+
+<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showClue"
+        android:text="@string/button_next_card" />
+
+<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showAnswer"
+        android:text="@string/button_show_answer" />
+
+</LinearLayout>
