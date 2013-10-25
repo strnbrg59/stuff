@@ -1,0 +1,1 @@
+char sometimes() { return 's'; }

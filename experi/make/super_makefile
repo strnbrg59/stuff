@@ -1,0 +1,11 @@
+# If I say "make -f super_makefile cmc", it prints "cmc".  But if I
+# uncomment the ".PHONY" part, then I get "make: Nothing to be done for
+# `cmc'."  Adding "-d" to that command shows something utterly amazing:
+# gmake is looking for rules to make super_makefile.c, super_makefile.f,
+# super_makefile.y, and on and on.
+# 
+# If I rename super_makefile to "Makefile", the problem goes away.
+
+.PHONY : cmc mmc
+%mc :
+	@echo $*mc

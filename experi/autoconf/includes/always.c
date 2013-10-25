@@ -1,0 +1,1 @@
+char always() { return 'a'; }
