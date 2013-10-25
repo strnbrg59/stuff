@@ -1,0 +1,13 @@
+#!/bin/sh -x
+#
+# Generate autoconf stuff.
+# To delete use ./zap.
+#
+libtoolize --force
+
+aclocal                   # Produces aclocal.m4, so autoconf can understand
+                          # AM_* statements found in Makefile.am
+
+automake --add-missing --foreign # Produces Makefile.in, and various symlinks.
+
+autoconf                  # Produces configure.
