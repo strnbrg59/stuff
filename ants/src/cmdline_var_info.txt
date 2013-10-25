@@ -1,0 +1,13 @@
+# This file is used by generate_cmdline.py to produce C++ code for the cmdline facility.
+# Each line gives information on one cmdline variable.  The format is:
+# name        type     default      comment
+rank          int      100          "field edge size"
+n_ants        int       10          "population"
+delay         int      100          "in milliseconds"
+show_pheromone bool   true          ""
+pheromone_decay_rate double 0.9      "factor that is applied each iter"
+smell_radius  int       2           "Range of ant's ability to smell food or pheromone"
+ant_life      int      100          "Life span"
+gestation_period int   100          "delay between food arriving at nest, and new ant ready to go out and work"
+feeding_freq  double  0.01          "Proportion of epochs in which food is dropped"
+seed          int       0           "srand(seed)"
