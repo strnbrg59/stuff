@@ -1,0 +1,29 @@
+Quick start:
+    1. Use python2.7.
+    2. yum install python-django
+    3. In this directory type "python manage.py runserver".
+    4. cd client && ./test_all.sh
+
+-----------------------------------
+
+Longer story:
+
+1. Created this directory by running
+$ python /usr/share/pyshared/django/bin/django-admin.py startproject cert_auth
+
+2. To make this stuff accessible from another machine, append "0.0.0.0:8000" to
+the "python manage.py runserver" command.
+
+3. Look in urls.py to see what's legal (i.e. the "API").
+
+4. Sending POST requests from curl:
+    a. Disable Django csrf stuff per http://stackoverflow.com/questions/1650941/django-csrf-framework-cannot-be-disabled-and-is-breaking-my-site
+
+    b. curl --data "name=Rafael%20Sagula&phone=3320780" http://localhost:8000/search/
+    With this data your view function can iterate over request.POST.keys()
+    and print...
+        phone : 3320780<br>
+        name : Rafael Sagula<br>
+
+5. To make this work with Python 2.6, apply the python26.diff patch, i.e.
+$ patch -p0 < python26.diff

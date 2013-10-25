@@ -1,0 +1,14 @@
+The CMC has no certificate yet.
+The CMC has no keypair installed.
+ok
+ok
+This is the CMC's (public) certificate
+This is Steelhead D21ABCDABCD's certificate
+<BR>
+Signed by CMC
+*** D21ABCDABCD.cert ***
+This is Steelhead D21ABCDABCD's certificate
+*** private.cert ***
+This is the CMC's private key
+*** public.cert ***
+This is the CMC's (public) certificate
