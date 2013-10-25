@@ -1,0 +1,54 @@
+1. The CMU dictionary gives multiple pronunciations for some words.
+Use them all.  On the other hand, this could make the Punchlines
+in-memory database much bigger; if a punchline had two words that each
+had two alternative pronunciations, we'd have to store four copies of
+that line.  It's also questionable if in the end we'd get more matches
+since, after all, the alternative pronunciations are pretty similar to
+one another, and we aren't looking for exact matches anyway.  About
+the only time we'd get extra matches would be if the alternative
+pronunciations contained different numbers of phonemes.
+
+So maybe do this, but only take note of alternative pronunciations that
+have different numbers of syllables (or are otherwise "very" different;
+we can assess their degree of difference very easily after all).
+
+Key places to modify the code:
+
+  a. phonics.cpp near line 238 -- where we look up each punchline word
+     in the phonetic dictionary.  The function could have a new argument,
+     vector<int>& currAltPron, whose elements would correspond to words
+     in the punchline that have alternative pronunciations, and the values
+     of those elements could indicate the "current" alternate pronunciation
+     we're on.
+
+     Better yet: have this function -- NormalizedEnglish2BytePhonetic() --
+     operate recursively; each time it hits a new word, it calls itself
+     on that word.
+
+On the other hand, it might not be worth the effort.  There are 127,067
+words in our dictionary, and only about 9000 alternate pronounciations...
+
+~/usr/local/src/puns/data$ for i in 2 3 4 5 6 7 8
+> do
+> grep "($i)" cmudict.0.6.txt | wc
+> done
+   6833   54524  225356
+    642    5307   22337
+    142    1310    5426
+     30     285    1205
+     25     230     986
+      0       0       0
+      0       0       0
+
+...of which I'll bet very, very few are really "different" enough to
+make a difference.
+
+We do in fact consider alternate pronounciations -- of the clue.  Look
+at the outer loop in PunServer::FindPun().
+
+2. Match even if you have to skip over a phoneme here or there.  That's
+the key to matching "aren't you" to "orange".  But this would be hard
+to do at the speed we need.
+DONE
+
+3. Accept multi-word clues.

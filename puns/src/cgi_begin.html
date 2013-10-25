@@ -1,0 +1,141 @@
+<HTML>
+<BODY BGCOLOR="#FFD080">
+<TT>
+<CENTER><H2> All-purpose Shakespearean pun generator </H2></CENTER>
+<FORM TARGET="whatever" ACTION="cgi-bin/puns/bin/cgi_punclient" method="GET">
+
+word:&nbsp&nbsp <INPUT TYPE="text" NAME="clue"><BR>
+(except <INPUT TYPE="text" NAME="egrep_iv" VALUE=" ">)<BR>
+Maximum badness: <SELECT NAME="badness" SIZE=1>
+<OPTION> 1
+<OPTION> 2
+<OPTION> 3
+<OPTION SELECTED> 4
+<OPTION> 5
+<OPTION> 6
+<OPTION> 7
+<OPTION> 8
+<OPTION> 9
+</SELECT><BR>
+
+Multiword match only: <INPUT TYPE="checkbox" NAME="multispan" CHECKED="checked"><BR>
+
+<INPUT TYPE="submit" value="Go">
+</FORM>
+
+</TT>
+<HR>
+
+Example:
+
+<P>
+<PRE>
+    Knock, knock.
+    Who's there?
+    Sudan.
+    Sudan who?
+    <EM>His army is a ragged multitude/ Of hinds and peasant<FONT COLOR=#007700>s, rude an</FONT>d merciless."</EM> (Henry VI Part II, Act IV, Scene 4)
+</PRE>
+
+This program takes what you type next to "word:" and tries to find
+something that sounds like it, among all of Shakespeare's plays and
+sonnets and anything else Shakespearean covered by the Guttenberg project
+(http://www.gutenberg.org).
+
+<P> Perfect matches -- lines of Shakespeare that actually contain your
+word -- are not reported; it's not a pun if the match is perfect.  You
+can, optionally, define other matches as insufficiently funny by
+entering them next to "except".  For example, if your word is
+<TT>horse,</TT> then you probably want to exclude <TT>hoarse.</TT> To
+exclude more than one match, separate them with the | character,
+e.g. <TT>hoarse|whore</TT>.
+
+<P> The number to the left of every line of your results is called the
+"badness".  At badness 0, the line will contain something (indicated
+by contrasting color) that sounds just like your word.  At higher
+badness ratings, the match becomes less and less exact -- m's
+substituted for n's, g's for k's, entire syllables skipped, etc.  An
+average user has trouble recognizing his word above badness 3 or so,
+while a Shakespeare expert might top out around 7.
+Mathematically, badness is defined as the inverse of tolerance.
+Physically, badness indicates the resistance of the human brain to
+humor, and is therefore measured in ohms per volt meter
+squared.  Set "maximum badness" to a higher number if you don't get
+enough (or any) hits at the default.
+
+<P> The "multiword match only" checkbox is another filter.  When it's
+checked, the only lines shown are those in which your word matches
+across two or more words.  I think those are funnier, but you decide.
+
+<P> Only your imagination limits what you can do with the results.
+Work them into after-dinner speeches, sprinkle them like gravitas
+crystals over your college papers, deliver them as the knockout punch
+in a political argument.  My favorite application of course is
+inventing sophisticated knock-knock jokes.  Here's one for mathematicians:
+
+<PRE>
+    Knock knock!
+    Who's there?
+    Riemann.
+    Riemann who?
+    <EM>But I and Har<FONT COLOR=#007700>ry Mon</FONT>mouth!</EM> (Henry IV, Act V, Scene 2)
+</PRE>
+
+<P>
+Here's a pickup line for all you single guys out there:
+<PRE>
+    Knock knock!
+    Who's there?
+    Rhino.
+    Rhino who?
+    <EM>Thou hast no husband yet, no<FONT COLOR=#007700>r I no</FONT> wife!</EM> (The Comedy of Errors, Act III, Scene 2)
+</PRE>
+
+<P>
+And here's one that'll resonate with any disappointed dot-com investor:
+<PRE>
+    Knock, knock.
+    Who's there?
+    Stock.
+    Stock who?
+    <EM>With mine own weakness being be<FONT COLOR=#007700>st acq</FONT>uainted.</EM> (Sonnet 88)
+</PRE>
+
+<P>
+Can't think of anything that rhymes with Orange?
+<PRE>
+    Knock, knock.
+    Who's there?
+    Orange.
+    Orange who?
+    <EM>And when I mount, alive may I not light,
+    If I be traitor <FONT COLOR=#007700>or unj</FONT>ustly fight.</EM> (Richard II, Act I, Scene 1)
+    [or]
+    <EM>His eyes do drop no tears his prayers <FONT COLOR=#007700>are in j</FONT>est.</EM>(Richard II, Act V, Scene 3)
+</PRE>
+
+<P>
+A new motto for ex-Congressman Anthony Weiner of the lewd emails?
+<PRE>
+    <EM>What should such fellows as I do crawling bet<FONT COLOR=#007700>ween ear</FONT>th and heaven?
+    We are arrant knaves all.</EM> (Hamlet Act 3, Scene 1)
+</PRE>
+
+
+<BR> Or experience the bard through Beavis & Butthead's ears:
+<PRE>
+    <EM>Is the young Dauphin every <FONT COLOR=#007700>way c</FONT>omplete...</EM>
+    "He said, 'whack'."
+
+    <EM>April when they <FONT COLOR=#007700>woo, D</FONT>ecember when they wed...</EM>
+    "He said, 'wood'."
+
+    <EM>Here let us re<FONT COLOR=#007700>st, if</FONT> this rebellious earth
+    Have any resting for her true King's queen.</EM> (Richard II, Act V, Scene 1)
+    "He said, 'stiff', uh-huh-uh-huh-uh-huh."
+</PRE>
+
+<HR>
+<P> Author: Ted Sternberg <IMG SRC="email.gif">
+
+</HTML>

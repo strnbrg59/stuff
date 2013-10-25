@@ -1,0 +1,70 @@
+AA AO 2
+AA AW 4
+AA AH 3
+
+AE EY 3
+AE EH 4
+
+AH ER 4
+AH AO 4
+
+AO AW 3
+
+AW OW 3
+
+AY EY 3
+AY OY 3
+
+B P   3
+B D   6
+
+CH JH 3
+CH ZH 4
+CH K  5
+CH SH 4
+
+D DH 3
+D T  4
+D Z  5
+
+DH TH 4
+DH V 5
+
+ER UH 3
+
+F P  5
+F S  7
+F SH 5
+F TH 5
+F V  5
+
+G K 3
+G NG 5
+
+IH IY 3
+
+JH CH 3
+JH DH 5
+JH ZH 3
+
+L R 9
+
+M N 5
+
+N NG 3
+
+OW W 4
+
+S SH 3
+S Z 4
+
+SH ZH 3
+SH TH 5
+
+T TH 5
+
+UH UW 3
+
+V W 2
+
+Z ZH 5

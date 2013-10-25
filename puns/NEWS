@@ -1,0 +1,24 @@
+0.3.0
+  Network server, no client (gotta use telnet)
+
+0.3.1
+  "make dist" produces something that builds
+
+0.4.0
+  Client starts server if there's no server up.  Waits until server is
+  ready and then sends the clue word.
+
+1.0.0
+  "Except" filtering (sorta like egrep -v).
+  Web page with title, explanations -- somewhat presentable.
+
+1.1.0
+  Tolerance -- affecting just cmdline.word_cutoff.
+
+1.2.0
+  Cleaned up shaks12.txt and added words to cmudict.  Lots of work and in the
+  end it only reduced the number of lines I have to reject from 27584 to 24300
+  (out of 82233 lines in total).
+
+1.3.0
+  Matching part of punchline is indicated in dark green.

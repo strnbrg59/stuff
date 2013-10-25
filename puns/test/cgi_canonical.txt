@@ -1,0 +1,289 @@
+Info: ParseCommandLine() cmd-line-option debug_level=4
+Info: ParseCommandLine() cmd-line-option inet_port=41959
+<HTML><TT>
+<BODY BGCOLOR="#FFD080">
+Info (ProcessQueryString()): QUERY_STRING=|clue=margot&egrep_iv=&tolerance=5&multispan=on|
+Info (ProcessQueryString()): options[clue]=margot
+Info (ProcessQueryString()): options[egrep_iv]=(null)
+Info (ProcessQueryString()): options[tolerance]=5
+Info (ProcessQueryString()): options[multispan]=on
+(1) And others <FONT COLOR=#007700>more, going </FONT>to seek the grave
+<BR><BR>
+(1) Rob one another. There's <FONT COLOR=#007700>more gold. </FONT>Cut throats;
+<BR><BR>
+(1) The source of all erection. There's <FONT COLOR=#007700>more gold.</FONT>
+<BR><BR>
+(3) <FONT COLOR=#007700>Mark our </FONT>contract.
+<BR><BR>
+(3) And add <FONT COLOR=#007700>more coals </FONT>to Cancer when he burns
+<BR><BR>
+(3) To be received plain, I'll speak <FONT COLOR=#007700>more gross-</FONT>
+<BR><BR>
+(4) <FONT COLOR=#007700>Mark what </FONT>I say, which you shall find
+<BR><BR>
+(4) <FONT COLOR=#007700>Mark what </FONT>I say. Attend me where I wheel;
+<BR><BR>
+(4) A <FONT COLOR=#007700>mark so </FONT>bloody on the business; but
+<BR><BR>
+(4) And <FONT COLOR=#007700>mark what </FONT>object did present itself.
+<BR><BR>
+(4) And <FONT COLOR=#007700>mark what </FONT>way I make. Come, good my lord.         Exeunt
+<BR><BR>
+(4) But neither chain <FONT COLOR=#007700>nor goldsmith </FONT>came to me.
+<BR><BR>
+(4) Than the main voice of <FONT COLOR=#007700>Denmark goes </FONT>withal.
+<BR><BR>
+(5) <FONT COLOR=#007700>Mark how </FONT>he bears his course, and runs me up
+<BR><BR>
+(5) <FONT COLOR=#007700>Mark how </FONT>one string sweet husband to another,
+<BR><BR>
+(5) <FONT COLOR=#007700>Mark how </FONT>they whisper. Urge them while their souls
+<BR><BR>
+(5) <FONT COLOR=#007700>Mark how </FONT>with my neglect I do dispense.
+<BR><BR>
+(5) <FONT COLOR=#007700>More quaint, </FONT>more pleasing, nor more commendable;
+<BR><BR>
+(5) <FONT COLOR=#007700>they are going </FONT>to meet him.
+<BR><BR>
+(5) And <FONT COLOR=#007700>mark how </FONT>he continues.
+<BR><BR>
+(5) And <FONT COLOR=#007700>mark how </FONT>well the sequel hangs together:
+<BR><BR>
+(5) But <FONT COLOR=#007700>mark how </FONT>heavily this befell to the poor gentlewoman:
+<BR><BR>
+(5) Do you but <FONT COLOR=#007700>mark how </FONT>this becomes the house:
+<BR><BR>
+(5) I shall unfold to thee, as <FONT COLOR=#007700>we are going</FONT>
+<BR><BR>
+(5) So 'a bade me lay <FONT COLOR=#007700>more clothes </FONT>on his feet; I put my hand into
+<BR><BR>
+(5) The ear <FONT COLOR=#007700>more quick </FONT>of apprehension makes;
+<BR><BR>
+(5) To hold your hand <FONT COLOR=#007700>more close. </FONT>I did endure
+<BR><BR>
+(5) Will ever after droop. Here cease <FONT COLOR=#007700>more questions;</FONT>
+<BR><BR>
+(5) [As <FONT COLOR=#007700>they are going </FONT>out,] enter Edgar [disguised].
+<BR><BR>
+(5) maid and serves for wages. She hath <FONT COLOR=#007700>more qualities </FONT>than a
+<BR><BR>
+(5) masters of their wealth. <FONT COLOR=#007700>Mark now </FONT>how a plain tale shall put you
+<BR><BR>
+(5) milking-time, when <FONT COLOR=#007700>you are going </FONT>to bed, or kiln-hole, to whistle
+<BR><BR>
+Info: DoCGI() TimedRead() timed out (after 2 seconds)
+</TT></HTML>
+Info: ParseCommandLine() cmd-line-option debug_level=4
+Info: ParseCommandLine() cmd-line-option inet_port=41959
+<HTML><TT>
+<BODY BGCOLOR="#FFD080">
+Info (ProcessQueryString()): QUERY_STRING=|clue=diesel&egrep_iv=this|it is|tis|is all&tolerance=5&multispan=on|
+Info (ProcessQueryString()): options[clue]=diesel
+Info (ProcessQueryString()): options[egrep_iv]=this|it is|tis|is all
+Info (ProcessQueryString()): options[tolerance]=5
+Info (ProcessQueryString()): options[multispan]=on
+(2) "<FONT COLOR=#007700>D sol </FONT>re" one clef, two notes have I-
+<BR><BR>
+(2) And be <FONT COLOR=#007700>not easily </FONT>won to our requests.
+<BR><BR>
+(2) Of one <FONT COLOR=#007700>not easily </FONT>jealous, but, being wrought,
+<BR><BR>
+(3) 'By-and-by' <FONT COLOR=#007700>is easily </FONT>said.- Leave me, friends.
+<BR><BR>
+(3) <FONT COLOR=#007700>As easily </FONT>as I do tear his paper.
+<BR><BR>
+(3) <FONT COLOR=#007700>As easily </FONT>as a king.
+<BR><BR>
+(3) <FONT COLOR=#007700>Dogs, easily </FONT>won to fawn on any man!
+<BR><BR>
+(3) I have <FONT COLOR=#007700>already delivered </FONT>him letters, and there appears much
+<BR><BR>
+(3) Sir, your wit ambles well; it <FONT COLOR=#007700>goes easily.</FONT>
+<BR><BR>
+(4) "<FONT COLOR=#007700>D sol </FONT>re" one clef, two notes have I-
+<BR><BR>
+(4) <FONT COLOR=#007700>But he's a </FONT>learned man. May he continue
+<BR><BR>
+(4) And be <FONT COLOR=#007700>not easily </FONT>won to our requests.
+<BR><BR>
+(4) And drive his purpose on to <FONT COLOR=#007700>these delights.</FONT>
+<BR><BR>
+(4) And give to dust <FONT COLOR=#007700>that is a little </FONT>gilt
+<BR><BR>
+(4) Attend me, lords. The <FONT COLOR=#007700>proud insulting </FONT>Queen,
+<BR><BR>
+(4) But more than <FONT COLOR=#007700>these, in </FONT>love I do deserve.
+<BR><BR>
+(4) From a prince to a <FONT COLOR=#007700>prentice? A low </FONT>transformation! That
+<BR><BR>
+(4) He <FONT COLOR=#007700>did solicit </FONT>you in free contempt
+<BR><BR>
+(4) I have three daughters: the <FONT COLOR=#007700>eldest is eleven;</FONT>
+<BR><BR>
+(4) I love to cope him in <FONT COLOR=#007700>these sullen </FONT>fits,
+<BR><BR>
+(4) It did, it <FONT COLOR=#007700>did! alas </FONT>the day, it did!
+<BR><BR>
+(4) Now am I like that <FONT COLOR=#007700>proud insulting </FONT>ship
+<BR><BR>
+(4) O, <FONT COLOR=#007700>these deliberate </FONT>fools! When they do choose,
+<BR><BR>
+(4) Of one <FONT COLOR=#007700>not easily </FONT>jealous, but, being wrought,
+<BR><BR>
+(4) Or any of <FONT COLOR=#007700>these all, </FONT>or all, or more
+<BR><BR>
+(4) When you shall <FONT COLOR=#007700>these unlucky </FONT>deeds relate,
+<BR><BR>
+(5) 'By-and-by' <FONT COLOR=#007700>is easily </FONT>said.- Leave me, friends.
+<BR><BR>
+(5) <FONT COLOR=#007700>And evils </FONT>imminent, and on her knee
+<BR><BR>
+(5) <FONT COLOR=#007700>As easily </FONT>as I do tear his paper.
+<BR><BR>
+(5) <FONT COLOR=#007700>As easily </FONT>as a king.
+<BR><BR>
+(5) <FONT COLOR=#007700>Claudio alone; </FONT>tell them that you know that Hero loves me; intend
+<BR><BR>
+(5) <FONT COLOR=#007700>Dogs, easily </FONT>won to fawn on any man!
+<BR><BR>
+(5) <FONT COLOR=#007700>Good Ursula, </FONT>wake my cousin Beatrice and desire her to rise.
+<BR><BR>
+(5) <FONT COLOR=#007700>How easily </FONT>murder is discovered!
+<BR><BR>
+(5) <FONT COLOR=#007700>May easily </FONT>win a woman's. Ay, my mother,
+<BR><BR>
+(5) <FONT COLOR=#007700>So easily </FONT>open?
+<BR><BR>
+(5) <FONT COLOR=#007700>Very easily </FONT>possible. He wears his faith but as the fashion
+<BR><BR>
+(5) <FONT COLOR=#007700>Which easily </FONT>endures not article
+<BR><BR>
+(5) <FONT COLOR=#007700>ladies' flesh </FONT>at a million a dram, you cannot preserve it from
+<BR><BR>
+(5) A bloody <FONT COLOR=#007700>deed- almost </FONT>as bad, good mother,
+<BR><BR>
+(5) A man, young lady! <FONT COLOR=#007700>lady, such </FONT>a man
+<BR><BR>
+(5) Against strange <FONT COLOR=#007700>maladies a sovereign </FONT>cure:
+<BR><BR>
+(5) And all th' embossed sores and <FONT COLOR=#007700>headed evils</FONT>
+<BR><BR>
+(5) And to survey the <FONT COLOR=#007700>bodies of </FONT>the dead.
+<BR><BR>
+(5) And wrap our <FONT COLOR=#007700>bodies in </FONT>black mourning-gowns,
+<BR><BR>
+(5) As to prevent our <FONT COLOR=#007700>maladies unseen,</FONT>
+<BR><BR>
+(5) As you do love your <FONT COLOR=#007700>lady Silvia.</FONT>
+<BR><BR>
+(5) Coin words till their decay against <FONT COLOR=#007700>those measles</FONT>
+<BR><BR>
+(5) Daughter, remember what I told you. If the Prince <FONT COLOR=#007700>do solicit</FONT>
+<BR><BR>
+(5) Dear earth, I <FONT COLOR=#007700>do salute </FONT>thee with my hand,
+<BR><BR>
+(5) Do you not come your <FONT COLOR=#007700>tardy son </FONT>to chide,
+<BR><BR>
+(5) Enter Hero and two Gentlewomen, Margaret <FONT COLOR=#007700>and Ursula.</FONT>
+<BR><BR>
+(5) Enter Hero, and Margaret <FONT COLOR=#007700>and Ursula.</FONT>
+<BR><BR>
+(5) Exeunt [Hero <FONT COLOR=#007700>and Ursula].</FONT>
+<BR><BR>
+(5) God <FONT COLOR=#007700>shield us!- a lion </FONT>among ladies is a most dreadful thing; for
+<BR><BR>
+(5) He'll soon find means to make the <FONT COLOR=#007700>body follow.</FONT>
+<BR><BR>
+(5) Help to dress me, good coz, good Meg, <FONT COLOR=#007700>good Ursula.</FONT>
+<BR><BR>
+(5) Here in Verona, <FONT COLOR=#007700>ladies of </FONT>esteem,
+<BR><BR>
+(5) I find she names my very <FONT COLOR=#007700>deed of </FONT>love;
+<BR><BR>
+(5) I have <FONT COLOR=#007700>already delivered </FONT>him letters, and there appears much
+<BR><BR>
+(5) I have seen him do. How <FONT COLOR=#007700>he solicits </FONT>heaven,
+<BR><BR>
+(5) Lord Mayor, Aldermen, Lords and <FONT COLOR=#007700>Ladies in </FONT>the Dumb
+<BR><BR>
+(5) O, <FONT COLOR=#007700>he's a lovely </FONT>gentleman!
+<BR><BR>
+(5) Our king has all the <FONT COLOR=#007700>Indies in </FONT>his arms,
+<BR><BR>
+(5) See how the <FONT COLOR=#007700>giddy multitude </FONT>do point
+<BR><BR>
+(5) Sir, your wit ambles well; it <FONT COLOR=#007700>goes easily.</FONT>
+<BR><BR>
+(5) Some bring the murdered <FONT COLOR=#007700>body, some </FONT>the murderers;
+<BR><BR>
+(5) Tell me thy mind; for I have <FONT COLOR=#007700>Pisa left</FONT>
+<BR><BR>
+(5) Than you shall hear the <FONT COLOR=#007700>surly sullen </FONT>bell
+<BR><BR>
+(5) That <FONT COLOR=#007700>babies lulls </FONT>asleep! The smiles of knaves
+<BR><BR>
+(5) Then take my soul-my <FONT COLOR=#007700>body, soul, </FONT>and all,
+<BR><BR>
+(5) To bear <FONT COLOR=#007700>him easily </FONT>hence!
+<BR><BR>
+(5) To make a <FONT COLOR=#007700>bloody supper </FONT>in the Tower.
+<BR><BR>
+(5) To the dead <FONT COLOR=#007700>bodies of </FONT>my queen and son.
+<BR><BR>
+(5) To use our utmost <FONT COLOR=#007700>studies in </FONT>your service.
+<BR><BR>
+(5) We <FONT COLOR=#007700>do salute </FONT>you, Duke of Burgundy.
+<BR><BR>
+(5) Who like a good and <FONT COLOR=#007700>hardy soldier </FONT>fought
+<BR><BR>
+(5) Why, then my cousin, Margaret, <FONT COLOR=#007700>and Ursula</FONT>
+<BR><BR>
+(5) and <FONT COLOR=#007700>gracefully salute </FONT>him
+<BR><BR>
+(5) and Beatrice his Niece, and a Kinsman; [also Margaret <FONT COLOR=#007700>and Ursula].</FONT>
+<BR><BR>
+(5) as good as my word. He will bear <FONT COLOR=#007700>you easily </FONT>and reins well.
+<BR><BR>
+(5) finger, there is some hope the <FONT COLOR=#007700>ladies of </FONT>Rome, especially his
+<BR><BR>
+(5) ill-rooted <FONT COLOR=#007700>already; the least </FONT>wind i' th' world will blow them
+<BR><BR>
+(5) into the north of my <FONT COLOR=#007700>lady's opinion; </FONT>where you will hang like an
+<BR><BR>
+(5) not the gout; for the one <FONT COLOR=#007700>sleeps easily </FONT>because he cannot study,
+<BR><BR>
+(5) nothing, and the other too like my <FONT COLOR=#007700>lady's eldest </FONT>son, evermore
+<BR><BR>
+(5) simple, none else would; but you are so without <FONT COLOR=#007700>these follies</FONT>
+<BR><BR>
+(5) that <FONT COLOR=#007700>these follies </FONT>are within you, and shine through you like the
+<BR><BR>
+Info: DoCGI() TimedRead() timed out (after 2 seconds)
+*** 46 results eliminated by 'except'. <BR><BR>
+</TT></HTML>
+Info: ParseCommandLine() cmd-line-option debug_level=4
+Info: ParseCommandLine() cmd-line-option inet_port=41959
+<HTML><TT>
+<BODY BGCOLOR="#FFD080">
+Info (ProcessQueryString()): QUERY_STRING=|clue=wmfxwwpa&egrep_iv=&tolerance=7&multispan=off|
+Info (ProcessQueryString()): options[clue]=wmfxwwpa
+Info (ProcessQueryString()): options[egrep_iv]=(null)
+Info (ProcessQueryString()): options[tolerance]=7
+Info (ProcessQueryString()): options[multispan]=off
+WMFXWWPA not found in dictionary.  Sorry.
+<BR><BR>
+Info: DoCGI() TimedRead() timed out (after 2 seconds)
+</TT></HTML>
+Info: ParseCommandLine() cmd-line-option debug_level=4
+Info: ParseCommandLine() cmd-line-option inet_port=41959
+<HTML><TT>
+<BODY BGCOLOR="#FFD080">
+Info (ProcessQueryString()): QUERY_STRING=|clue=disestablishment&egrep_iv=&tolerance=1&multispan=off|
+Info (ProcessQueryString()): options[clue]=disestablishment
+Info (ProcessQueryString()): options[egrep_iv]=(null)
+Info (ProcessQueryString()): options[tolerance]=1
+Info (ProcessQueryString()): options[multispan]=off
+No matches found that meet all the selection criteria.  Sorry.
+<BR><BR>
+Info: DoCGI() TimedRead() timed out (after 2 seconds)
+</TT></HTML>
