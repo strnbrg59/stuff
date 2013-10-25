@@ -1,0 +1,1481 @@
+               Speculative Microeconomics for Tomorrow's Economy
+
+                             Bradford DeLong
+   University of California at Berkeley, and National Bureau of Economic
+                                  Research
+   
+                            Michael Froomkin
+                     University of Miami School of Law
+
+The Utility of the Market
+
+     Two and a quarter centuries ago the Scottish moral philosopher Adam
+     Smith used a particular metaphor to describe the competitive market
+     system, a metaphor which still resonates today. He saw the
+     competitive market as a system in which:
+     
+   "...every individual... endeavours as much as he can... to direct...
+       industry so that its produce may be of the greatest value....
+       neither intend[ing] to promote the public interest, nor know[ing]
+       how much he is promoting it.... He intends only his own gain, and
+       he is in this, as in many other cases, led by an invisible hand to
+       promote an end that was no part of his intention.... By pursuing
+       his own interest he frequently promotes that of society more
+       effectually than when he really intends to promote it..."
+       
+     Adam Smith's claim back in 1776 that the market system promoted the
+     general good was new. Today it is one of the most frequently-heard
+     commonplaces. For Adam Smith's praise of the market as a social
+     mechanism for regulating the economy was the opening shot of a
+     grand campaign to reform how politicians and governments looked at
+     the economy.
+     
+     The campaign waged by Adam Smith and his successors was completely
+     successful. The past two centuries have seen his doctrines woven
+     into the fabric of how our society works. It is hard to even begin
+     to think about our society without basing one's thought to some
+     degree on Adam Smith. And the governments that have followed the
+     path Adam Smith laid down today preside over economies that are
+     more materially prosperous and technologically powerful than ever
+     before seen.
+     
+     Belief in free trade, an aversion to price controls, freedom of
+     occupation, freedom of domicile, freedom of enterprise, and the
+     other corollaries of belief in Smith's invisible hand have today
+     become the background assumptions for thought about the
+     relationship between the government and the economy. A free-market
+     system, economists claim and most participants in capitalism
+     believe, generates a level of total economic product that is as
+     high as possible--and is certainly higher than under any
+     alternative system that any branch of humanity has conceived and
+     attempted to implement. It is even possible to prove the
+     "efficiency" of a competitive market--albeit under restrictive
+     technical assumptions.
+     
+     The lesson usually drawn from this economic success story is
+     laissez-faire, laissez-passer: in the overwhelming majority of
+     cases the best thing the government can do for the economy is
+     simply to leave it alone. Define property rights, set up honest
+     courts, perhaps rearrange the distribution of income, impose minor
+     taxes and subsidies to compensate for well-defined and
+     narrowly-specified "market failures"--but otherwise the economic
+     role of the government is to disappear.
+     
+     The main argument for a free competitive market system is the dual
+     role played by prices. On the one hand, prices serve to ration
+     demand: anyone unwilling to pay the market price because he or she
+     would rather do other things with his or her (not unlimited) money
+     does not get the good (or service). On the other hand, price serves
+     to elicit production: any organization that can make a good (or
+     provide a service) for less than its market price has a powerful
+     financial incentive to do so. Thus what is produced goes to those
+     who value it the most. What is produced is made by the
+     organizations that can make it the cheapest. And what is produced
+     is whatever the ultimate users value the most.
+     
+     You can criticize the market system because it undermines the
+     values of community and solidarity. You can criticize the market
+     system because it is unfair--for it gives good things to those who
+     have control over whatever resources turn out to be most scarce as
+     society solves its production allocation problem, not to those who
+     have any moral right to good things. But--at least under the
+     conditions economists have for two and a quarter centuries first
+     implicitly and more recently explicitly assumed--you cannot
+     criticize the market system for being unproductive.
+     
+     Adam Smith's case for the invisible hand so briefly summarized
+     above will be familiar to almost all readers: it is one of the
+     foundation-stones of our civilization's social thought. Our purpose
+     in this chapter is to shake these foundations--or at least to make
+     readers aware that the changes in technology now going on as a
+     result of the revolutions in data processing and data
+     communications may shake these foundations. Unexpressed but
+     implicit in Adam Smith's argument for the efficiency of the market
+     system are assumptions about the nature of goods and services and
+     the process of exchange--assumptions that fit reality less well
+     today than they did back in Adam Smith's day.
+     
+     Moreover, these implicit underlying assumptions are likely to fit
+     the "new economy" of the future even less well than they fit the
+     economy of today.
+     ______________________________________________________________
+     
+   The Structure of This Chapter
+  
+     Thus the next section of this chapter deconstructs Adam Smith's
+     case for the market system. It points out three assumptions about
+     production and distribution technologies necessary if the invisible
+     hand is to work as Adam Smith claimed it did. We point out that
+     these assumptions are being undermined more and more by the
+     revolutions in data processing and data communications currently
+     ongoing.
+     
+     In the subsequent section we take a look at things happening on the
+     frontiers of electronic commerce and in the developing markets for
+     information. Our hope is that what is now going on at the frontiers
+     of electronic commerce may contain some clues to processes that
+     will be more general in the future.
+     
+     Our final section does not answer all the questions we raise. We
+     are not prophets, after all. Thus our final section raises still
+     more questions, for the most we can begin to do today is to
+     organize our concerns. By looking at the behavior of people in
+     high-tech commerce--people for whom the abstract doctrines and
+     theories that we present have the concrete reality of determining
+     if they get paid--we can make some guesses about what the next
+     economics and the next set of sensible policies might look like, if
+     indeed there is going to be a genuinely new economy and thus a
+     genuinely next economics.
+     
+     Moreover, we can warn against some pitfalls in the hope that such
+     warnings might make things better rather than worse.
+   _________________________________________________________________
+   
+"Technological" Prerequisites of the Market Economy
+
+     The ongoing revolution in data processing and data communications
+     technology may well be starting to undermine those basic features
+     of property and exchange that make the invisible hand a powerful
+     social mechanism for organizing production and distribution. The
+     case for the market system has always rested on three implicit
+     pillars, three features of the way that property rights and
+     exchange worked.
+     
+     
+      Call the first feature excludability: the ability of sellers to
+       force consumers to become buyers, and thus to pay for whatever
+       goods and services they use.
+      Call the second feature rivalry: a structure of costs in which two
+       cannot partake as cheaply as one, in which producing enough for
+       two million people to use will cost at least twice as many of
+       society's resources as producing enough for one million people to
+       use.
+      Call the third transparency: the ability of individuals to see
+       clearly what they need and what is for sale, so that they truly
+       know just what it is that they wish to buy.
+       
+     All three of these pillars fit the economy of Adam Smith's day
+     relatively well. The prevalence of craft as opposed to mass
+     production guaranteed that two could only be made at twice the cost
+     of one. The fact that most goods and services were valued
+     principally for their (scarce) physical form meant that two could
+     not use one good: if I am using the plow to plow my field today,
+     you cannot use it to plow yours. Thus rivalry was built into the
+     structure of material life that underpinned the economy of
+     production and exchange.
+     
+     Excludability was less a matter of nature and more a matter of
+     culture, but certainly by Smith's day large-scale theft and pillage
+     was more the exception than the rule: the courts and the law were
+     there to give property owners the power to restrict the set of
+     those who could utilize their property to those who had paid for
+     the privilege.
+     
+     Last, the slow pace and low level of technology meant that the
+     purpose and quality of most goods and services were transparent:
+     what you saw was pretty much what you got.
+     
+     All three of these pillars fit much of today's economy pretty well
+     too--although the fit for the telecommunications and
+     information-processing industries is less satisfactory. But they
+     will fit tomorrow's economy less well than today's. And there is
+     every indication that they will fit the twenty-first century
+     economy relatively poorly.
+     
+     As we look at developments along the leading technological edge of
+     the economy, we can see that considerations that used to be
+     second-order "externalities" that served as corrections growing in
+     strength to possibly become first-order phenomena. And we can see
+     the invisible hand of the competitive market beginning to work less
+     and less well in an increasing number of areas.
+     ______________________________________________________________
+     
+   Excludability
+  
+     In the information-based sectors of the next economy, the owners of
+     goods and services--call them "commodities" for short--will find
+     that they are no longer able to easily and cheaply exclude others
+     from using or enjoying the commodity. The carrot-and-stick which
+     had enabled owners of property to extract value from those who
+     wanted to use it was always that if you paid you got to make use of
+     it, and if you did not pay you did not get to make use of it.
+     
+     But digital data is cheap and easy to copy. Methods do exist to
+     make copying difficult, time-consuming, and dangerous to the
+     freedom and wealth of the copier, but these methods add expense and
+     complexity. "Key disk" methods of copy protection for programs
+     vanished in the late 1980s as it became clear that the burdens they
+     imposed on legitimate owners and purchasers were annoying enough to
+     cause buyers to vote-with-their-feet for alternative products.
+     Identification-and-password restrictions on access to online
+     information are only as powerful as users' concern for information
+     providers' intellectual property rights--which is surely not as
+     powerful as the information providers' concern.
+     
+     In a world of clever hackers, these methods are also unreliable.
+     The methods used to protect Digital Video Discs against casual
+     copying are no longer secure.
+     
+     Without excludability, the relationship between producer and
+     consumer becomes much more akin to a gift-exchange than a
+     purchase-and-sale relationship. The appropriate paradigm then
+     shifts in the direction of a fund-raising drive for a National
+     Public Radio station. When commodities are not excludable then
+     people simply help themselves. If the user feels like it he or she
+     may make a "pledge" to support the producer. The user sends money
+     to the producer not because it is the only way to gain the power to
+     utilize the product, but out of gratitude and for the sake of
+     reciprocity.
+     
+     This reciprocity-driven revenue stream may well be large enough
+     that producers cover their costs and earn a healthy profit.
+     Reciprocity is a basic mode of human behavior. People in the large
+     do feel a moral obligation to tip cabdrivers and waiters. People
+     
+     do contribute to National Public Radio. But without excludability
+     the belief that the market economy produces the optimal quantity of
+     any commodity is hard to justify. Other forms of provision--public
+     support funded by taxes that are not voluntary, for example--that
+     had fatal disadvantages vis-a-vis the competitive market when
+     excludability
+     
+     reigned may well deserve reexamination.
+     
+     We can get a glimpse of how the absence of excludability can warp a
+     market and an industry by taking a brief look at the history of
+     network television. During its three-channel heyday in the 1960s
+     and 1970s, North American network television was available to
+     anyone with an antenna and a receiver: broadcasters lacked the
+     means of
+     
+     preventing the public from getting the signals for free. Free
+     access was, however, accompanied by scarce bandwidth, and by
+     government allocation of the scarce bandwidth to producers.
+     
+     The absence of excludability for broadcast television did not
+     destroy the television broadcasting industry. Broadcasters couldn't
+     charge for what they were truly producing, but broadcasters worked
+     out that they could charge for something else: the attention of the
+     program-watching consumers during commercials. Rather than paying
+     money directly, the customers of the broadcast industry merely had
+     to endure the commercials (or get up and leave the room; or
+     channel-surf) if they wanted to see the show.
+     
+     This "attention economy" solution prevented the market for
+     broadcast programs from collapsing: it allowed broadcasters to
+     charge someone for something, to charge advertisers for eyeballs
+     rather than viewers for programs. But it left its imprint on the
+     industry. Charging-for-advertising does not lead to the same
+     invisible hand guarantee of productive optimum as does charging for
+     product. In the case of network television, audience attention to
+     advertisements was more-or-less unconnected with audience
+     involvement in the program.
+     
+     This created a bias toward lowest-common-denominator programming.
+     Consider two programs, one of which will fascinate 500,000 people,
+     and the other of which 30 million people will watch as slightly
+     preferable to watching their ceiling. The first might well be
+     better for social welfare: the 500,000 with a high
+     willingness-to-pay might well, if there was a way to charge them,
+     collectively outbid the 30 million apathetic couch potatoes for the
+     use of scarce bandwidth to broadcast their preferred program. Thus
+     a network able to collect revenues from interested viewers would
+     broadcast the first program, seeking the applause (and the money)
+     of the dedicated and forgoing the eye-glazed semi-attention of the
+     larger audience.
+     
+     But this competitive process breaks down when the network obtains
+     revenue by selling commercials to advertisers. The network can
+     offer advertisers either 1,000,000 or 60 million eyeballs. How
+     influenced the viewers will be by the commercials depends
+     relatively little on how much they like the program. As a result,
+     charging-for-advertising gives every incentive to broadcast what a
+     mass audience would tolerate. It gives no incentive to broadcast
+     what a niche audience would love.
+     
+     As bandwidth becomes cheaper, these problems become less important:
+     one particular niche program may well be worth broadcasting when
+     the mass audience has become sufficiently fragmented by the
+     viewability of multiple clones of bland programming. Until then,
+     however, expensive bandwidth combined with the absence of
+     excludability meant that broadcasting revenues depended on the
+     viewer numbers rather than the intensity of demand.
+     Non-excludability helped ensure that broadcast programming would be
+     "a vast wasteland."
+     
+     In the absence of excludability industries today and tomorrow are
+     likely to fall prey to analogous distortions. Producers' revenue
+     streams--wherever they come from--will be only tangentially related
+     to the intensity of user demand. Thus the flow of money through the
+     market will not serve its primary purpose of registering the
+     utility to users of the commodity being produced. There is no
+     reason to think ex ante that the commodities
+     
+     that generate the most attractive revenue streams paid by
+     advertisers or others ancillary will be the commodities that
+     ultimate consumers would wish to see produced.
+     ______________________________________________________________
+     
+   Rivalry
+  
+     In the information-based sectors of the next economy the use or
+     enjoyment of the information-based commodity will no longer
+     necessarily involve rivalry. With most tangible goods, if Alice is
+     using a particular good, Bob cannot be. Charging the ultimate
+     consumer the good's cost of production or the free market price
+     provides the producer with an ample reward for his or her effort.
+     It also leads to the appropriate level of production: social
+     surplus (measured in money) is not maximized by providing the good
+     to anyone whose final demand for a commodity is too weak to wish to
+     pay the cost for it that a competitive market would require.
+     
+     But if goods are non-rival--if two can consume as cheaply as
+     one--then charging a per-unit price to users artificially restricts
+     distribution: to truly maximize social welfare you need a system
+     that supplies everyone whose willingness to pay for the good is
+     greater than the marginal cost of producing another copy. And if
+     the marginal cost of reproduction of a digital good is near-zero,
+     that means almost everyone should have it for almost free. However,
+     charging price equal to marginal cost almost surely leaves the
+     producer bankrupt, with little incentive to maintain the product
+     except the hope of maintenance fees, and no incentive whatsoever to
+     make another one except that warm fuzzy feeling one gets from
+     impoverishing oneself for the general good.
+     
+     Thus a dilemma: if the price of a digital good is above the
+     marginal cost of making an extra copy, some people who truly
+     ought--in the best of all possible worlds--to be using it do not
+     get to have it, and the system of exchange that we have developed
+     is getting in the way of a certain degree of economic prosperity.
+     But if price is not above the marginal cost of making an extra copy
+     of a non-rival good, the producer will not get paid enough to cover
+     costs. Without non-financial incentives, all but the most
+     masochistic producer will get out the business of production.
+     
+     More important, perhaps, is that the existence of large numbers of
+     important and valuable goods that are non-rival casts the value of
+     competition itself into doubt. Competition has been the standard
+     way of keeping individual producers from exercising power over
+     consumers: if you don't like the terms the producer is offering,
+     then you can just go down the street. But this use of private
+     economic power to check private power may come at an expensive cost
+     if competitors spend their time duplicating one another's efforts
+     and attempting to slow down technological development in the
+     interest of obtaining a compatibility advantage, or creating a
+     compatibility or usability disadvantage for the other guy.
+     
+     One traditional answer to this problem--now in total disfavor--was
+     to set up a government regulatory commission to control the
+     "natural monopoly". The commission would set prices, and do the
+     best it could to simulate a socially optimum level of production.
+     On the eve of World War I when American Telephone and
+     Telegraph--under the leadership of its visionary CEO Theodore N.
+     Vail--began its drive for universal coverage, a rapid political
+     consensus formed both in Washington and within AT&T that the right
+     structural form for the telephone industry was a privately-owned
+     publicly-regulated national monopoly.
+     
+     While it may have seemed like the perfect answer in the Progressive
+     era, in this more cynical age commentators have come to believe
+     that regulatory commissions of this sort almost inevitably become
+     "captured" by the industries they are supposed to regulate. Often
+     this is because the natural career path for analysts and
+     commissioners involves someday going to work for the regulated
+     industry in order to leverage expertise in the regulatory process;
+     sometimes it is because no one outside the regulated industry has
+     anywhere near the same financial interest in manipulating the
+     rules, or lobbying to have them adjusted. The only effective way a
+     regulatory agency has to gauge what is possible is to examine how
+     other firms in other regions are doing. But such "yardstick"
+     competition proposals--judge how this natural monopoly is doing by
+     comparing it to other analogous organizations--are notoriously hard
+     to implement.
+     
+     A good economic market is characterized by competition to limit the
+     exercise of private economic power, by price equal to marginal
+     cost, by returns to investors and workers corresponding to the
+     social value added of the industry, and by appropriate incentives
+     for innovation and new product development. These seem impossible
+     to achieve all at once in markets for non-rival goods--and digital
+     goods are certainly non-rival.
+     ______________________________________________________________
+     
+   Transparency
+  
+     In many information-based sectors of the next economy the purchase
+     of a good will no longer be transparent. The invisible hand assumed
+     that purchasers know what it is that they want and what they are
+     buying so that they can effectively take advantage of competition
+     and comparison-shop. If purchasers need first to figure out what
+     they want and what they are buying, there is no good reason to
+     presume that their willingness to pay corresponds to its true value
+     to them.
+     
+     Why is transparency at risk? Because much of the value-added in the
+     data-processing and data-communications industries today comes from
+     complicated and evolving systems of information provision. Adam
+     Smith's pinmakers sold a good that was small, fungible,
+     low-maintenance and easily understood. Alice could buy her pins
+     from Gerald today, and from Henry tomorrow. But today's purchaser
+     of, say, a cable modem connection to the internet from
+     AT&T-Excite-@Home is purchasing a bundle of present goods and
+     future services, and is making a down payment on the establishment
+     of a long-term relationship with AT&T-Excite-@Home. Once the
+     relationship is established, both buyer and seller find themselves
+     in different positions. Adam Smith's images are less persuasive in
+     the context of services--especially bespoke services which require
+     deep knowledge of the customer's wants and situation (and of the
+     maker's capabilities)--which are not, by their nature fungible or
+     easily comparable.
+     
+     When Alice shops for a software suite, she not only wants to know
+     about its current functionality--something notoriously difficult to
+     figure out until one has had days or weeks of hands-on
+     experience--but she also needs to have some idea of the likely
+     support that the manufacturer will provide. Is the line busy at all
+     hours? Is it a toll call? Do the operators have a clue? Will next
+     year's corporate downsizing lead to longer holds on support calls?
+     
+     Worse, what Alice really needs to know cannot be measured at all
+     before she is committed: learning how to use a software package is
+     an investment she would prefer not to repeat. Since operating
+     systems change version numbers frequently, and interoperability
+     needs changes even more often, Alice needs to have a prediction
+     about the likely upgrade path for her suite. This, however, turns
+     on unknowable and barely guessable factors: the health of the
+     corporation, the creativity of the software team, the corporate
+     relationships between the suite seller and other companies.
+     
+     Some of the things Alice wants to know, such as whether the suite
+     works and works quickly enough on her computer, are potentially
+     measurable at least--although one rarely finds a consumer capable
+     of measuring them before purchase, or a marketing system designed
+     to accommodate such a need. You buy the shrink-wrapped box at a
+     store, take it home, unwrap the box--and find that the program is
+     incompatible with your hardware, your operating system, or one of
+     the six programs you bought to cure defects in the hardware or the
+     operating system...
+     
+     Worse still, the producer of a software product has every incentive
+     to attempt to "lock in" as many customers as possible. Operating
+     system revisions that break old software versions require upgrades.
+     And a producer has an attractive and inelastic revenue source to
+     the extent that "lock in" makes switching to an alternative
+     painful. While consumers prefer the ability to comparison-shop and
+     to switch easily to another product, producers fear this
+     ability--and have incentives to perform subtle tweaks to their
+     programs to make it difficult to do so.
+     ______________________________________________________________
+     
+   The Economics of Market Failure
+  
+     That the absence of excludability, rivalry, or transparency is bad
+     for the functioning invisible hand is not news. The analysis of
+     failure of transparency has made up an entire subfield of economics
+     for decades: "imperfect information." Non-rivalry has been the
+     basis of the theory of government programs and public goods, as
+     well as of natural
+     
+     monopolies: the solution has been to try to find a regulatory
+     regime will mimic the decisions that the competitive market ought
+     to make, or to accept that the "second-best" public provision of
+     the good by the government is the best that can be done.
+     
+     Analysis of the impact of the lack of excludability is the core of
+     the economic analysis of research and development. It has led to
+     the conclusion that the best course is to try to work around
+     non-excludability by mimicking what a well-functioning market
+     system would have done. Use the law to expand "property," or use
+     tax-and-subsidy schemes to promote actions with broad benefits.
+     
+     But the focus of analysis has traditionally been on overcoming
+     "frictions": how can we make this situation where the requirements
+     of laissez faire fail to hold into a situation in which the
+     invisible hand works tolerably well? As long as it works well
+     throughout most of the economy, this is a very sensible analytical
+     and policy strategy. A limited number of government programs and
+     legal doctrines will be needed to closely mimic what the invisible
+     hand would do if it could function properly in a few distinct areas
+     of the economy (like the regional natural monopolies implicit in
+     the turn-of-the-twentieth-century railroad, or in government
+     subsidies basic research).
+   _________________________________________________________________
+   
+Out on the Cybernetic Frontier
+
+     But what happens when the friction becomes the machine?
+     
+     What will happen in the future should problems of
+     non-excludability, of non-rivalry, of non-transparency come to
+     apply to a large range of the economy? What happens should they
+     come to occupy as central a place in business decision-making as
+     inventory control or production operations management do today? In
+     the natural sciences, perturbation-theory approaches break down
+     when the deviations of initial conditions from those necessary for
+     the simple solution become large. Does something similar happen in
+     political economy? Is examining how the market system handles a few
+     small episodes of "market failure" a good guide toward how it will
+     handle many large ones?
+     
+     We do not know. But we do want to take a first step toward
+     discerning what new theories of the new markets might look like
+     should new visions turn out to be necessary (or should old visions
+     need to be adjusted). The natural place to look is to examine how
+     enterprises and entrepreneurs are reacting today to the coming of
+     non-excludability, non-rivalry, and non-transparency on the
+     electronic frontier. The hope is that experience along the
+     frontiers of electronic commerce will serve as a good guide to what
+     pieces of the theory are likely to be most important, and will
+     suggest areas in which further development might have a high rate
+     of return.
+     ______________________________________________________________
+     
+   The Market for Software (Shareware, Public Betas and More)
+  
+     We noted above that the market for modern, complex products is
+     anything but transparent. While one can think of services, such as
+     medicine, which are particularly opaque to the buyer, today it is
+     difficult to imagine a more opaque product than software. Indeed,
+     when one considers the increasing opacity of products in the
+     context of the growing importance of services to the economy, it
+     suggests that transparency will become a particularly important
+     issue in the next economy.
+     
+     Consumers' failure to acquire full information about the software
+     they buy certainly demonstrates that acquiring the information must
+     be expensive. In response to this cost, social institutions have
+     begun to spring up to get around the shrink-wrap dilemma. The first
+     was so-called shareware: you download the program, if you like the
+     program you send its author some money, and maybe in return you get
+     a manual, access to support, or an upgraded version.
+     
+     The benefit to try-before-you-buy is precisely that it makes the
+     process more transparent. The cost is that try-before-you-buy often
+     turns out to be try-use-and-don't-pay.
+     
+     The next stage beyond shareware has been the evolution of the
+     institution of the "public beta." This public beta is a
+     time-limited (or bug-ridden, or otherwise restricted) version of
+     the product: users can investigate the properties of the public
+     beta version to figure out if the product is worthwhile. But to get
+     the permanent (or the less-bug-ridden) version, they have to pay.
+     
+     Yet a third is the "dual track" version: Eudora shareware versus
+     Eudora Professional, for example. Perhaps the hope is that users of
+     the free low-power version will some day become richer, or less
+     patient, or find they have greater needs. At that point they will
+     find it least disruptive to switch to a product that looks and
+     feels familiar, that is compatible with their habits, and their
+     existing files. In effect (and if the sellers are lucky), the free
+     version captures them as future customers before they are even
+     aware they are future buyers.
+     
+     The developing free-public-beta industry is a way of dealing with
+     the problem of lack of transparency. It is a relatively benign
+     development, in the sense that it involves competition through
+     distribution of lesser versions of the ultimate product. An
+     alternative would be (say) the strategy of constructing barriers to
+     compatibility: the famous examples in the computer industry come
+     from the 1970s when the Digital Equipment Corporation made
+     non-standard cable connectors; from the mid-1980s when IBM
+     attempted to appropriate the entire PC industry through the PS/2
+     line; and from the late 1980s when Apple Computers used a partly
+     ROM-based operating system to exclude clones.
+     
+     Fortunately for consumers, these alternative strategies proved (in
+     the latter two cases at least) to be catastrophic failures for the
+     companies pursuing them. Perhaps the main reason that the
+     free-public-beta strategy is now dominant is this catastrophic
+     failure of strategies of non-compatibility--even though they did
+     come close to success.
+     
+     A fourth, increasingly important, solution to the transparency
+     problem is Open Source software. Open Source solves the software
+     opacity problem with total transparency: the source code itself is
+     available to all for examination and re-use. Open Source programs
+     can be sold, but whenever a right to use a program is conferred, it
+     brings with it the additional rights to inspect and alter the
+     software, and to convey the altered program to others.
+     
+     In the "Copyleft license," for example, anyone may modify and
+     re-use the code, provided that they comply with the conditions in
+     the original license and impose similar conditions of openness and
+     re-usability on all subsequent users of the code. License terms do
+     vary. This variation itself is a source of potential opacity.
+     However, it is easy to envision a world in which Open Source
+     software plays an increasingly-large role
+     
+     Open Sources' vulnerability (and perhaps also its strength) is that
+     it is, by design, only minimally excludible. Without excludability,
+     it is harder to get paid for your work. Traditional economic
+     thinking suggests that all other things being equal, people will
+     tend to concentrate their efforts on things that get them paid. And
+     when, as in software markets, the chance to produce a product that
+     dominates a single category holds out the prospect of enormous
+     payment (think "Windows"), one might expect that effort to be
+     greater still.
+     
+     Essentially volunteer software development would seem particularly
+     vulnerable to the tragedy of the commons. Open Source has, however,
+     evolved a number of strategies that at least ameliorate and may
+     even overcome this problem. Open Source authors gain status by
+     writing code. Not only do they gain kudos, but the work can be used
+     as a way to gain marketable reputation. Writing Open Source code
+     that becomes widely used and accepted is serves as a virtual
+     business card--and helps overcome the lack of transparency in the
+     market for high-level software engineers.
+     
+     The absence of the prospect of an enormous payout may retard the
+     development of new features in large, collaborative, open-source
+     projects. It may also reduce the richness of the feature set.
+     However, since most people apparently use a fairly small subset of
+     the features provided by major packages, this may not be a major
+     problem. Furthermore, open source may make proprietary designer
+     add-ons both technically feasible and economically rational.
+     
+     In open source the revenues cannot come from traditional
+     intellectual property rights alone. One must provide some sort of
+     other value, be it help desk, easy installation, or extra features,
+     in order to be paid. Moreover, there remains the danger that one
+     may not be paid at all.
+     
+     Nevertheless, open source already has proven itself to be viable in
+     important markets: the world wide web as we know it exists because
+     Tim Berners-Lee Open-Sourced html and http.
+     ______________________________________________________________
+     
+   Of Shop-bots, Online Auctions, and Meta-Sites
+  
+     Predictions abound as to how software will use case- and rule-based
+     thinking to do your shopping for you, advise you on how to spend
+     your leisure time, and in general organize your life for you. But
+     that day is still far in the future. So far, we have only the early
+     generations of the knowledge-scavenging virtual robot and the
+     automated comparison shopper. Already, however, we can discern some
+     trends, and identify places where legal rules are likely to shape
+     micro-economic outcomes. The interaction between the law and the
+     market has, as one would expect, distributional consequences. More
+     surprisingly, perhaps, it also has potential implications for
+     economic efficiency.
+     
+     
+    Shop-Bots
+    
+     BargainFinder was one of the first Internet-based shopping agents.
+     In its first incarnation, back in 1997, it did just one thing. Even
+     then it did it too well for some. Now that Bargain Finder and other
+     intelligent shopping agents have spread into a wide range of
+     markets, a virtual war over access to and control of price
+     information is raging in the online marketplace. Thus one has to
+     ask: does the price come at a price?
+     
+     In the initial version of BargainFinder, and to this day, the user
+     enters the details of a music compact disk she might like to
+     purchase. BargainFinder interrogated several online music stores
+     that might offer to sell them. It then reports back the prices in a
+     tidy table that makes comparison shopping easy. Initially, the
+     system was not completely transparent: it was not always possible
+     to discern the vendor's shipping charges without visiting the
+     vendor's web site. But as BargainFinder's inventors said, it was
+     "only an experiment."
+     
+     Today, it's no longer an experiment. Shipping and handling is
+     included as a separate and visible charge. The output is a handsome
+     table which can be sorted by price, by speed of delivery, or by
+     merchant. It can be further customized to take account of shipping
+     costs by zip code, and results can be sorted by price or speed of
+     delivery. While the user sees the names of the firms whose prices
+     are listed, it's a short list, and there is no way to know what
+     other firms might have been queried.
+     
+     Other, newer, shopping agents take a more aggressive approach.
+     R-U-Sure, available at http://r-u-sure.com , installs an
+     application on the desktop that monitors the user's web browsing.
+     Whenever the user interacts with an e-commerce site that R-U-Sure
+     recognizes, it swings into action, and a little box pops up with a
+     wooshing noise. It display the queries it is sending to competing
+     merchants' web stores to see if they have a better price, and
+     reports on the winner.
+     
+     Competitor clickthebutton, http://www.clickthebutton.com, installs
+     an icon in the\ taskbar, but only pops up when clicked. The company
+     provides a full and impressively lengthy list of the sites it is
+     capable of querying on the shopper's behalf.
+     
+     
+     
+    Bidding Services
+    
+     Price competition is also fostered by bidding services and
+     auctions. Bidding services such as http://www.priceline.com
+     (hotels, air tickets) and http:// www.nextag.com (consumer goods
+     and electronics) invite customers to send a price they would be
+     willing to pay for a commodity service or good. The price
+     competition is, however, constrained. There is no obvious way for
+     consumers to learn what deals others have been able to secure, and
+     the bidding services appear designed to discourage experimentation
+     designed to find out the market-clearing price.
+     
+     Priceline requires the consumer to commit to pay if his offer is
+     accepted; Nextag does not, but tracks the user's behavior with a
+     "reputation" number that goes up when a merchant's acceptance of a
+     bid results in a purchase and goes down when an accepted bid does
+     not lead to a purchase. Unlike Priceline, however, Nextag
+     contemplates multi-round negotiations: "sellers" it warns, "will be
+     more likely to respond to your requests if you have a high rating."
+     
+     At first glance, a highly variegated good like a college education
+     would seem to resist any effort at a bidding process. Nevertheless
+     ecollegebid.org, http://www.ecollegebid.org/, has a web site
+     inviting prospective college students to state what they are
+     willing to pay and then offers to match it with a "college's
+     willingness to offer tuition discounts." Although the list of
+     participating colleges is not published, or even shared with
+     competing colleges, Executive Director Tedd Kelly states that 6
+     colleges are set to participate and negotiations are under way with
+     more than 15 others. In its first five weeks 508 students placed
+     ecollegebids. Once a college meets a price, the student is asked,
+     but not required, to reply within 30 days--and to submit an
+     application that the college retains the option of rejecting.
+     
+     
+     
+    Auction Sites
+    
+     Auction sites provide a different type of price competition, and a
+     different interface with shopping bots. Users can either place each
+     of their bids manually, or they can set up a bidding bot to place
+     their bids for them. Ebay, for example, encourages bidders to not
+     only place an initial bid but also to set up "proxy bidding" in
+     which any competing bid immediately will be met with a response up
+     to the user's maximum price. Since Ebay gets a commission based in
+     part on the final sale price, it gains whenever proxy bidding
+     pushes up the price.
+     
+     Perhaps the fastest growing segment of the online auction market is
+     aimed at business-to-business transactions. An example is
+     Freemarkets, http://www.freemarkets.com which boasts that "[w]e
+     created online auctions covering approximately $1 billion in 1998,
+     and estimate we saved clients 2-25%. Since 1995, we have created
+     online auctions for more than 30 buyers in over 50 product
+     categories. More than 1,800 suppliers from more than 30 countries
+     have participated in our auctions."
+     
+     
+     
+    Meta Auction Sites
+    
+     There are a significant number of competing consumer auction sites
+     in operation. The profusion of auctions has created a demand for
+     meta-sites that provide information about the goods on offer on
+     multiple online auctions. Examples of meta sites include
+     http://www.auctionwatch.com/ and http://www.auctionwatchers.com/.
+     
+     Auctionwatch, like BargainFinder before it, has become too
+     successful for some. E-bay initially requested meta-sites not list
+     its auctions. When Auctionwatch failed to comply, E-bay} threatened
+     auctionwatch.com with legal action, claiming that Auctionwatch's
+     "Universal Search" function, which directs users to auctions on
+     E-bay and competing services (Yahoo, Amazon.com, MSN, Bidstream,
+     and Ruby Lane) is an "unauthorized intrusion" that places an
+     unnecessary load on E-bay's servers, violates E-bay's intellectual
+     property rights, and misleads users by not returning the full
+     results of some searches.
+     
+     The claim that E-bay's auction prices or the details of the
+     sellers' offers to sell are protected by copyright, trade secret or
+     other intellectual property law is bogus. (However, there are
+     proposals in Congress to change the law in a way that might make
+     the claim more plausible in the future.) Other hitherto untested
+     legal theories might, however, prove more plausible. A claim that
+     meta-sites were imposing somehow damaging E-bay by overloading its
+     servers, or a claim based on some kind of trespass might find more
+     support.
+     
+     Whether meta-auction sites do burden searchees' servers is itself a
+     difficult factual issue. To the extent that multiple people not
+     interested in bidding see the data on the meta-site, the load on
+     E-bay is reduced. The current law is probably in the meta-sites
+     favor. But there is uncertainty. And this uncertainty is compounded
+     by the possibility of legislation.
+     
+     
+     
+    Efficiency?
+    
+     It is particularly appropriate to ask what the
+     economically-efficient solution might be at a time when the law is
+     in some flux. Most economists, be they Adam Smithian classicists,
+     neo-classical Austrians, or more modern economics of information
+     mavens, would at first thought instinctively agree with the
+     proposition that a vendor in a competitive market selling a
+     standardized product--for one Tiger Lily CD is as good as
+     another--would want customers to know as much as possible about
+     what the vendor offers for sale, and the prices at which the goods
+     are available.
+     
+     The reason for this near-consensus is that in a competitive market
+     every sale at the offer price should be welcome: all are made at a
+     markup over marginal cost. Thus all on-line CD retailers ought to
+     have wanted to be listed by BargainFinder, if only because every
+     sale that went elsewhere when they had the lowest price was lost
+     profit.
+     
+     But not so.
+     
+     A significant fraction of the merchants regularly visited by
+     BargainFinder were less than ecstatic. They retaliated by blocking
+     the agent's access to their otherwise publicly-available data. As
+     of March 1997, one third of the merchants targeted by the
+     BargainFinder locked out its queries. One, CDNow, did so for
+     frankly competitive reasons. The other two said that the costs of
+     large numbers of "hobbyist" queries were too great for them. More
+     E-bay, the best-known online auction site, had begun to walk down
+     the trail blazed by BargainFinder by blocking Auctionwatch's access
+     to Ebay's data.
+     
+     One possible explanation for the divergence between the economic
+     theorist's prediction that every seller should want to be listed by
+     BargainFinder or Auctionwatch and the apparent outcome is the
+     price-gouging story. In this story, stores blocking comparison
+     sites tend to charge higher than normal prices because they are
+     able to take advantage of consumer ignorance of cheaper
+     alternatives. The stores are gouging buyers by taking advantage of
+     relatively high costs of search.
+     
+     Our utterly unscientific web-browsing supports the hypothesis that
+     consumers have yet to figure out how to bring their search costs
+     down--R-U-Sure may need a lot more publicity. Prices are in flux,
+     and do not appear to be behaving the way Adam Smith would predict.
+     Random browsing among various delivery channels reveals wide price
+     fluctuations, peaking at 40% on one occasion for consumer
+     electronics items under $200. In this case BargainFinder and its
+     successors would indeed be valuable developments. They will make
+     markets more efficient and lower prices.
+     
+     Another possibility is the "kindly service" story. Perhaps stores
+     blocking BargainFinder, R-U-Sure, or meta-sites tend to charge
+     higher than normal prices because they provide additional service
+     or convenience. If commerce becomes increasingly electronic and
+     impersonal (or if "personal" comes to mean "filtered through
+     fiendishly clever software agents"), this sort of humanized
+     attention will become increasingly expensive. To the extent that
+     this additional service or convenience can be provided
+     automatically, things are less clear.
+     
+     In a sometimes forgotten classic, The Joyless Economy, Tibor
+     Scitovsky noted that the advent of mass production of furniture
+     seemed to cause the price of hand-carved chairs to increase, even
+     as the demand for them shrank. As consumers switched to less costly
+     (and less carefully made, one size-fits-all) mass-produced
+     furniture, carvers became scarce and business for remaining carvers
+     became scarcer. Soon only the rich could engage their services.
+     
+     If the kindly service story is right, the rise of the commodity
+     market creates a risk of a possible decline in service-intensive or
+     higher-quality goods. Mass tastes will be satisfied more cheaply;
+     yet specialty tastes will become more of an expensive luxury. On
+     the other hand, the rise of ShopBots such as BargainFinder or
+     R-U-Sure offers an opportunity for consumers to aggregate their
+     preferences on worldwide scale. Indeed, Mercata,
+     http://www.mercata.com/, provides a service by which consumers can
+     group together to put in a group buy for a product. The larger the
+     number of units, the lower the price, although it is not clear that
+     the even the resulting price is always lower than might be found by
+     determined web-browsing. Thus the transactions costs associated
+     with both aggregation of identical but disparate preferences, and
+     the communication and satisfaction of individualized preferences
+     should be going down. As it becomes increasingly easy for consumers
+     to communicate their individualized preferences to manufacturers
+     and suppliers, and increasingly easy to tailor goods to individual
+     tastes--be it a CD that only has the tracks you like, customized
+     blue jeans, or a car manufactured just-in-time to your
+     specifications--personalized goods may become the norm, putting the
+     "joy" back into the economy and replacing the era of mass
+     production with an era of mass customization.
+     
+     Some signs of this were visible even before the information
+     revolution: lower costs of customization has already undermined one
+     of Scitovsky's examples, as fresh-baked bread makes its comeback at
+     many supermarkets and specialty stores. And Alfred Sloan created
+     General Motors and the automobile industry of the post-World War II
+     era by piling different body styles, colors, and option packages on
+     top of the same Chevy drive train.
+     
+     In either the "price gouging" or "kindly service" stories, the
+     advent of services such as BargainFinder and R-U-Sure presents
+     retailers of many goods with a dilemma: If they join in, they
+     contribute towards turning the market for CDs, books, consumer
+     electronics and other similar goods into a commodity market with
+     competition only on price. If they act "selflessly" and stay out,
+     in order to try to degrade the utility of shop-bots and meta-sites
+     (and preserve their higher average markup), they must hope that
+     their competitors will understand their long-run self-interest in
+     the same way.
+     
+     But overt communication in which all sellers agreed to block
+     BargainFinder would, of course, violate the Sherman Act. And
+     without a means of retaliation to "punish" players who do not
+     pursue the collusive long-run strategy of blocking BargainFinder,
+     the collapse of the market into a commodity market with only price
+     competition, and with little provided in the way of ancillary
+     shopping services, appears likely.
+     
+     When we wrote the first draft of this essay, we noted that if CD
+     retailers were trying to undermine BargainFinder by staying away,
+     their strategy appeared to be failing. Some CD retailers who
+     initially blocked BargainFinder then unblocked it, while others
+     were clamoring to join. Since then, the rise of a new generation of
+     meta-sites and alternate means of creating price competition makes
+     the question somewhat moot. The technological arms race pitting
+     meta-sites and shop-bots against merchants will continue, but the
+     advantage seems to be with the attackers, if only due to their
+     numbers.
+     
+     Whether or not this is an occasion for joy depends on which
+     explanation above is closer to the truth. The growth of the
+     bookstore chain put the local bookshop out of business, just as the
+     growth of supermarkets killed the corner grocer. Not everyone
+     considers this trend to be a victory, despite the lower prices. A
+     human element has been lost, and a "personal service" element that
+     may have led to a better fit between purchaser and purchase has
+     been lost as well.
+     
+     So far, the discussion has operated on the basis of the assumption
+     that merchants would have an incentive to block comparison shopping
+     services if they charge higher than normal prices. Strangely, some
+     merchants may have had an incentive to block it if they charged
+     lower than normal prices. As we all know, merchants sometimes
+     advertise a "loss leader," and offer to sell a particular good at
+     an unprofitable price. Merchants do this in order to lure consumers
+     into the store where they either may be attracted to more
+     profitable versions of the same good (leading, in the extreme case,
+     to "bait and switch"), or in the hope that the consumer will spy
+     other, more profitable, goods to round out the market basket.
+     
+     You can explain this merchant behavior in different ways, either by
+     talking about the economics of information, locational utility,
+     myopic consumers generalizing incorrectly on the basis of a small
+     number of real bargains, or about temporary monopolies caused by
+     the consumer's presence in this store as opposed to another store
+     far away.
+     
+     It may be that merchants blocking BargainFinder did not want
+     consumers to be able to exploit their loss-leaders without having
+     to be exposed to the other goods offered simultaneously. Without
+     this exposure the loss-leaders would not lure buyers to other,
+     higher-profit, items, but would simply be losses. The merchant's
+     ability to monopolize the consumer's attention for a period may be
+     the essence of modern retailing; the reaction to BargainFinder, at
+     least, suggests that this is what merchants believe.
+     
+     The growing popularity of frequent buyer and other loyalty programs
+     also suggests that getting and keeping customer attention is
+     important to sellers. Interestingly, this explanation works about
+     equally well for the "kindly service" and "loss leader"
+     explanations--the two stories that are consistent with the
+     assumption that the CD market was relatively efficient before
+     BargainFinder came along.
+     ______________________________________________________________
+     
+   Browsing Is Our Business
+  
+     More important and perhaps more likely is the possibility that
+     BargainFinder and other shop-bots threaten merchants who are in the
+     "browsing assistance" business. Some online merchants are
+     enthusiastically attempting to fill the role of personal shopping
+     assistant. Indeed, some of the most successful online stores have
+     adapted to the new marketplace by inverting the information
+     equation.
+     
+     Retail stores in meatspace ("meatspace" being the part of life that
+     is not cyberspace) provide information about available
+     products--browsing and information acquisition services--that
+     consumers find valuable and are willing to pay for, either in time
+     and attention or in cash. Certainly meatspace shopping is conducive
+     to unplanned, impulse, purchases, as any refrigerator groaning
+     under kitchen magnets will attest. Retail stores in cyberspace may
+     exacerbate this: what, after all, is a store in cyberspace but a
+     collection of information?
+     
+     CDNow, for example, tailors its virtual storefront to what it knows
+     of a customer's tastes based upon her past purchases. In addition
+     to dynamically altering the storefront on each successive visit,
+     CDNow also offers to send shoppers occasional email information
+     about new releases that fit their past buying patterns.
+     
+     One can imagine stores tailoring what they present to what they
+     presume to be the customer's desires, based on demographic
+     information available about the customer even before the first
+     purchase. Tailoring might extend beyond showcasing different wares:
+     taken to the logical extreme it would include some form of price
+     discrimination based on facts known about the customer's
+     preferences, or on demographic information thought to be correlated
+     with preferences. (The U.and other legal systems impose
+     constraints on the extent to which stores may generalize from
+     demographic information: for example, stores that attempt
+     race-based, sex-based, or other types of invidious price variation
+     usually violate U.law.)
+     
+     A critical microeconomic question in all this is how consumers and
+     manufacturer/sellers exchange information in this market. Both
+     consumers and sellers have an interest in encouraging the exchange
+     of information: in order to provide what the consumer wants, the
+     sellers need to know what is desired and how badly it is wanted.
+     Consumers need to know what is on offer where, and at what price. A
+     shop-bot may solve the consumer's problem of price, but it will not
+     tell him about an existing product of which he is unaware.
+     Similarly, CDNow may reconfigure its store to fit customer
+     profiles, but without some external source of information about
+     customers this takes time, and requires repeat visitors.
+     
+     Indeed, it requires that customers come in through the front door:
+     all the reconfiguration in the world will not help CDNow or E-bay
+     if customers are either unaware that they would enjoy its products,
+     or if the customers' only relationship with CDNow is via a shop-bot
+     or a meta-site.
+     
+     The retail outlet in the average mall can plausibly be described as
+     a mechanism for informing consumers about product attributes. The
+     merchant gives away product information in the hopes that consumers
+     will make purchases. Physical stores, however, have fixed displays
+     and thus must provide more or less identical information to every
+     customer. Anyone who looks in the window, anyone who studies the
+     product labels, or even the product catalogs, receives the same
+     sales pitch.
+     
+     Indeed, some of the more interesting recent writing on the
+     micro-economics of virtual retailing suggests that what is really
+     at stake is a war for the customer's attention--a war for eyeballs.
+     Certainly, the rush to create "portals" that, providers hope, will
+     become the surfer-shopper's default homepage on the Internet
+     suggests that some large investors believe eyeballs ware well worth
+     having. So too does the tendency of successful early entrants in
+     one product market to seek to leverage their brand into other
+     markets.
+     
+     It may be that the "dynamic storefront" story is the Internet's
+     substitute for the kindly service story. If so, then the rise of
+     agent-based shopping may well be surprisingly destructive. It
+     raises the possibility of a world in which retail shops providing
+     valuable services are destroyed by an economic process that funnels
+     a large percentage of consumer sales into what become commodity
+     markets without middlemen: people use the high-priced premium
+     cyberstore to browse, but then use BargainFinder to purchase.
+     
+     To appreciate the problem, consider Bob, an on-line merchant who
+     has invested a substantial amount in a large and easy to use
+     "browsing" database that combines your past purchases, current
+     news, new releases, and other information to present you with a
+     series of choices and possible purchases that greatly increase your
+     chances of coming across something interesting. After all, a
+     customer enters seeking not a particular title, and not a random
+     title, but a product that he or she would like. What is being sold
+     is the process of search and information acquisition that leads to
+     the judgment that this is something to buy. A good on-line merchant
+     would make the service of "browsing" easy--and would in large part
+     be selling that browsing assistance.
+     
+     In this browsing is our business story there is a potential
+     problem: browsing assistance is not an excludable commodity. Unless
+     Bob charges for his services (which is likely to discourage most
+     customers and especially the impulse purchaser), there is nothing
+     to stop Alice from browsing merchant Bob's website to determining
+     the product she wants, and then using BargainFinder to find the
+     cheapest source of supply. BargainFinder will surely find a
+     competitor with lower prices because Bob's competitor will not have
+     to pay for the database and the software underlying the browsing
+     assistance.
+     
+     If so, then projects like BargainFinder will have a potentially
+     destructive application, for many online stores will be easy to
+     turn into commodity markets once the process of information
+     acquisition and browsing is complete. It would be straightforward
+     to run a market in kitchen gadgets along the lines of the
+     BargainFinder, even if much of the market for gadgets involves
+     finding solutions to problems one was not consciously aware one
+     had. First free-ride off of one of the sites that provides browsing
+     assistance to discover what you want, then open another window and
+     access BargainFinder to buy it.
+     
+     Students and other people with more time than money have been using
+     this strategy to purchase stereo components for decades: draw on
+     the sales expertise of the premium store, then buy from the
+     warehouse. But the scope and ease of this strategy is about to
+     become much greater.
+     
+     To merchants providing helpful shopping advice, the end result will
+     be as if they spent all their time in their competitors' discount
+     warehouse, pointing out goods that the competitors' customers ought
+     to buy. The only people who will pay premium prices for the
+     physical good--and thus pay for browsing and information
+     services--will be those who feel under a gift-exchange moral
+     obligation to do so: the "sponsors" of NPThus cyberstores that
+     offer browsing assistance may find that they have many interests in
+     common with the physical stores in the mall--which fear that
+     consumers will browse in their stores, and then go home and buy
+     sales tax-free on the Internet.
+     ______________________________________________________________
+     
+   Collaborative Filtering
+  
+     Collaborative filtering provides part of the answer to the
+     information exchange problem. It also provides another example of
+     how information technology changes the way that consumer markets
+     will operate. In their simplest form, collaborative filters such as
+     FireFly bring together consumers to exchange information about
+     their preferences. The assumption is that if Alice finds that
+     several other readers--each of whom also likes Frisch, Kafka,
+     Kundera and Klima but gets impatient with James and Joyce--tends to
+     like William Gass, the odds are good that Alice might enjoy Gass's
+     On Being Blue as well.
+     
+     In the process of entering sufficient information about her tastes
+     to prime the pump, Alice adds to the database of linked preference
+     information. In helping herself, Alice helps others. In this
+     simplest form, the collaborative filter helps Alice find out about
+     new books she might like. The technology is applicable to finding
+     potentially congenial CDs, news, web sites, software, travel,
+     financial services and restaurants--as well as to helping Alice
+     find people who share her interests.
+     
+     At the next level of complexity, the collaborative filter can be
+     linked to a shop-bot. Once Alice has decided that she will try On
+     Being Blue she can find out who will sell it to her at the best
+     price.
+     
+     The truly interesting development, however, comes when Alice's
+     personal preference data is available to every merchant Alice
+     visits. (Leave aside for a moment who owns this data, and the terms
+     on which it becomes available.) A shop like CDNow becomes able to
+     tailor its virtual storefront to a fairly good model of Alice's
+     likely desires upon her first visit. CDNow may use this information
+     to showcase its most enticing wares, or it may use it to fine tune
+     its prices to charge Alice all that her purse will bear--or both.
+     
+     Whichever is the case, shopping will not be the same.
+     
+     Once shops acquire the ability to engage in price discrimination,
+     consumers will of course seek ways of fighting back. One way will
+     be to shop anonymously, and see what price is quoted when no
+     consumer data is proffered. Consumers can either attempt to prevent
+     merchants and others from acquiring the transactional data that
+     could form the basis of a consumer profile, or they can avail
+     themselves of anonymizing intermediaries who will protect the
+     consumer against the merchant's attempt to practice perfect price
+     discrimination by aggregating data about the seller's prices and
+     practices. In this model, a significant fraction of cyber commerce
+     will be conducted by software agents who will carry accreditation
+     demonstrating their credit-worthiness, but will not be traceable
+     back to their progenitors.
+     
+     Thus potential legal constraints on online anonymity may have more
+     far-reaching consequences than their obvious effect on
+     unconstrained political speech. In some cases, consumers may be
+     able to use collaborative filtering techniques to form buying clubs
+     and achieve quantity discounts like Mercata. Or consumers will
+     construct shopping personas with false demographics and purchase
+     patterns in the hope of getting access to discounts. Business
+     flyers across America routinely purchased back-to-back round trip
+     tickets that bracket a Saturday night in an attempt to diminish
+     airlines' abilities to charge business travelers premium prices.
+     Airlines, meanwhile, have invested in computer techniques to catch
+     and invalidate the second ticket.
+     
+     Consumers will face difficult maximization problems. In the absence
+     of price discrimination, and assuming privacy itself is only an
+     intermediate good (i.e., that consumers do not value privacy in and
+     of itself), the marginal value to the consumer of a given datum
+     concerning her behavior is likely to be less than the average value
+     to the merchant of each datum in an aggregated consumer profile. If
+     markets are efficient, or if consumers suffer from a plausible
+     myopia in which they value data at the short-run marginal value
+     rather than long-term average cost, merchants will purchase this
+     information leading to a world with little transactional privacy.
+     
+     Furthermore, the lost privacy is not without gain: every time Alice
+     visits a virtual storefront that has been customized to her
+     preferences, her search time is reduced, and she is more likely to
+     find what she wants--even if she didn't know she wanted it--and
+     this is ever more true the more information the merchant has about
+     her.
+     
+     The picture becomes even more complicated once one begins to treat
+     privacy itself as a legitimate consumer preference rather than as
+     merely an intermediate good. Once one accepts that consumers may
+     have a taste for privacy it no longer becomes obvious that the
+     transparent consumer is an efficient solution to the management of
+     customer data. Relaxing an economic assumption does not, however,
+     change anything about actual behavior, and the same tendencies
+     which push the market towards a world in which consumer data is a
+     valuable and much-traded commodity persist.
+     
+     Indeed, basic ideas of privacy are under assault. Data miners and
+     consumer profilers are able to produce detailed pictures of the
+     tastes and habits of increasing number of consumers. The spread of
+     intelligent traffic management systems, video security and
+     recognition systems and the gradual integration of information
+     systems built into every appliance will eventually make it possible
+     to track movement as well as purchases. Once one person has this
+     information there is, of course, almost no cost to making it
+     available to all.
+     
+     Unfortunately, it is difficult to measure the demand for privacy.
+     Furthermore, the structure of the legal system does not tend to
+     allow consumers to express this preference. Today, most consumer
+     transactions are governed by standard-form contracts. The default
+     rules may be constrained by state consumer law, or by portions of
+     the Uniform Commercial Code, but they generally derive most of
+     their content from boilerplate language written by a merchant's
+     lawyer. If you are buying a dishwasher you do not get to haggle
+     over the terms of the contract, which (in the rare case they are
+     even read) can be found in small print somewhere on the invoice.
+     
+     Although it is possible to imagine a world in which the Internet
+     allows for negotiation of contractual terms even in consumer sales,
+     we have yet to hear of a single example of this phenomenon, and see
+     little reason to expect it. On the contrary, to the extent a trend
+     can be discerned, it is in the other direction, towards the "web
+     wrap" or "clip wrap" contract (the neologism derives from
+     "shrinkwrap" contracts, in which the buyer of software is informed
+     that she has agreed to the terms by opening the wrapper) in which
+     the consumer is asked to agree to the contract before being allowed
+     to view the web site's content. Indeed, the enforcement of these
+     agreements is enshrined in law in the proposed, and very
+     controversial, Uniform Computer Information Transactions Act
+     <http://www.law.upenn.edu/bll/ulc/ucita/cita10st.htm>.
+   _________________________________________________________________
+   
+The Next Economics?
+
+     We have argued that assumptions which underlie the microeconomics
+     of the invisible hand fray when transported into tomorrow's
+     information economy. Commodities that take the form of single
+     physical objects are rivalrous and are excludible: there is only
+     one of it, and if it is locked up in the seller's shop no one else
+     can use it. The structure of the distribution network delivered
+     marketplace transparency as a cheap byproduct of getting the goods
+     to their purchasers. All of these assumptions did fail at the
+     margin, but the match of the real to the ideal was reasonably good.
+     
+     Modest as they may be in comparison to the issues we have left for
+     another day, our observations about microfoundations do have some
+     implications for economic theory and for policy. At some point soon
+     it will become practical to charge for everything on the world wide
+     web. Whether it will become economically feasible, or common,
+     remains to be seen. The outcome of this battle will have profound
+     economic and social consequences.
+     
+     Consider just two polar possibilities. On the one hand, one can
+     envision a hybrid gift-exchange model, in which most people pay as
+     much for access to web content as they pay for NPR, and in which
+     the few who value an in-depth information edge or speed of
+     information acquisition pay more. At the other extreme, one can as
+     easily foresee a world in which great efforts have been made to
+     reproduce familiar aspects of the traditional model of profit
+     maximization.
+     
+     Which vision will dominate absent government intervention depends
+     in part on the human motivation of programmers, authors, and other
+     content providers. The invisible hand assumed a "rational economic
+     man," a greedy human. The cybernetic human could be very greedy,
+     for greed can be automated. But much progress in basic science and
+     technology has always been based on other motivations besides
+     money. The thrill of the chase, the excitement of discovery, and
+     the respect of one's peers have played a very large role as well,
+     perhaps helped along by the occasional Nobel Prize, Knighthood for
+     services to science, or a distinguished chair; in the future
+     "Net.Fame" may join the list.
+     
+     Government will surely be called upon to intervene. Adam Smith said
+     that eighteenth-century "statesmen" could in most cases do the most
+     good by sitting on their hands. The twenty-first century
+     "stateswomen" will have to decide whether this advice still applies
+     once the fit between the institutions of market exchange and
+     production and distribution technologies has decayed.
+     
+     We suspect that policies which ensure diversity of providers will
+     continue to have their place. One of the biggest benefits of a
+     market economy is that it provides for sunset. When faced with
+     competition, relatively inefficient organizations fail to take in
+     revenue to cover their costs, and then they die. Competition is
+     thus still a virtue, whether the governing framework is one of
+     gift-exchange or buy-and-sell--unless competition destroys the
+     ability to capture significant economies of scale.
+     
+     The challenge for policy makers is likely to be particularly acute
+     in the face of technological attempts to recreate familiar market
+     relationships. Just because markets characterized by the properties
+     of rivalry, excludability, and transparency were efficient does not
+     mean that any effort to reintroduce these properties to a market
+     lacking them
+     
+     necessarily increases social welfare. Furthermore, in some cases
+     the new, improved, versions may provide more excludability or
+     transparency than did the old model; this raises new problems.
+     Holders of intellectual property rights in digital information, be
+     they producers or sellers, do have a strong incentive to
+     re-introduce rivalry and excludability to the market for digital
+     information.
+     ______________________________________________________________
+     
+   Increasing Excludability
+  
+     It appears increasingly likely that technological advances such as
+     "digital watermarks" will allow each copy of a digital data set, be
+     it a program or a poem, to be uniquely identified. Coupled with
+     appropriate legal sanctions for unlicensed copying, a large measure
+     of excludability can be restored to the market. Policy makers will
+     need to be particularly alert to three dangers.
+     
+      First, technologies which permit excludability risk introducing
+       socially unjustified costs if the methods of policing
+       excludability are themselves costly.
+      Second, as the example of broadcast television demonstrates,
+       imperfect substitutes for excludability themselves can have bad
+       consequences that sometimes are difficult to anticipate.
+      Third, over-perfect forms of excludability raise the specter that
+       traditional limits on excludability of information such as "fair
+       use" might be changed by technical means without the political and
+       social debate that should precede such a shift.
+       
+     We counsel caution: In the absence of any clear indication of what
+     the optimum would be, the burden of proof should be on those who
+     argue that any level of excludability should be mandated. This
+     applies particularly to information that is not the content being
+     sold but that is instead about the current state of the market
+     itself. There is a long tradition that information about the state
+     of the marketplace should be as widely broadcast as possible. We
+     cannot see any economic arguments against this tradition.
+     
+     In particular, reforming the law to give sellers a property right
+     in information about the prices that they charge appears extremely
+     dangerous. There has never in the past been a legal right to
+     exclude competitors from access to bulk pricing data. It is hard to
+     see what improvement in economic efficiency could follow from the
+     creation of such a right in the future.
+     ______________________________________________________________
+     
+   Increasing Rivalry
+  
+     It is somewhat harder to imagine how rivalry might be recreated for
+     digitized data without using an access system that relied on a
+     hardware token of some sort. Rivalry can be reintroduced if access
+     to a program, a document or other digital data can be conditioned
+     on access to a particular smartcard or other physical object.
+     Perhaps a cryptographically based software analog might be
+     developed that relied on some secret that the purchaser would have
+     a strong incentive to keep to herself. In either case, a form of
+     rivalry results, since multiple users can be prevented from using
+     the data simultaneously.
+     
+     But imposing rivalry where it is not naturally found means imposing
+     a socially unnecessary cost on someone. The result may look and
+     feel like a traditional market, but it cannot, by definition, carry
+     the "optimality" properties markets have possessed in the past. The
+     artificial creation of rivalry ensures that many users whose
+     willingness to pay for the good is greater than the (near-zero)
+     marginal cost of producing another copy will not get one.
+     
+     Policy makers should therefore be very suspicious of any
+     market-based arguments for artificial rivalry.
+     ______________________________________________________________
+     
+   Increasing Transparency
+  
+     It might seem that anything which encourages transparency must be
+     good. Indeed, all other things being equal, from the point of view
+     of consumers, merchants selling products that can survive scrutiny,
+     and the economy as a whole, increases in the transparency of
+     product markets are always a good thing. The issue, however, is to
+     what extent this logic justifies a transparent consumer.
+     
+     The answer is fundamentally political. It depends on the extent to
+     which one is willing to recognize privacy as an end in itself. If
+     information about consumers is just a means to economic end, then
+     there is no reason for concern. If, on the other hand, citizens
+     perceive maintaining control over facts about their economic
+     actions as a good in itself, some sort of governmental intervention
+     into the market may be needed to make it easier for this preference
+     to express itself.
+     ______________________________________________________________
+     
+   The Next Economics?
+  
+     We have focused on the ways in which digital media undermine the
+     assumptions of rivalry, excludability, and transparency--and have
+     tried to suggest that the issue of transparency is at least as
+     important, complicated, and interesting as the other two. In so
+     doing we have been forced to slight important microeconomic
+     features of the next economy. We have not, for example, discussed
+     the extent to which the replacement of human salespeople, travel
+     agents, and shop assistants will affect the labor market.
+     
+     The consequences may be earth-shaking. For about two centuries
+     starting in 1800 technological progress was the friend of the
+     unskilled worker: it provided a greater relative boost to the
+     demand for workers who were relatively unskilled (who could tighten
+     bolts on the assembly line, or move things about so that the
+     automated production process could use them, or watch largely
+     self-running machines and call for help when they stopped) than for
+     those who were skilled. The spread of industrial civilization was
+     associated with a great leveling in the distribution of income. But
+     there is nothing inscribed in the nature of reality that
+     technological progress must always boost the relative wages of the
+     unskilled.
+     
+     Nor have we addressed potentially compensating factors such as the
+     looming disaggregation of the university, a scenario in which
+     distance learning bridges the gap between elite lecturers and mass
+     audiences, turning many educational institutions into little more
+     than degree-granting standards bodies, with financial aid and
+     counseling functions next to a gym, (just maybe) a library. While
+     this may benefit the mass audience, it has harmful effects on one
+     elite: it risks creating an academic proletariat made up of those
+     who would have been well-paid professors before the triumph of
+     "distance learning" in the lecture hall.
+     
+     Along a number of dimensions, there is good reason to fear that the
+     enormous economies of scale found in the production of
+     non-rivalrous commodities are pushing us in the direction of a
+     winner-take-all economy. The long-run impact of the information
+     revolution on the distribution of income and wealth is something
+     that we have not even begun to analyze.
+     
+     Similarly, we have completely ignored a number of interesting
+     macroeconomic issues. Traditional ideas of the "open" and "closed"
+     economy will have to be rethought on sectoral grounds. Once a
+     nation becomes part of the global information infrastructure, its
+     ability to raise either tariff or non-tariff walls against certain
+     foreign trade activities becomes vanishingly small. Nations will
+     not, for example, be able to protect an "infant" software industry.
+     It will be hard to enforce labor laws when the jobs telecommute
+     away.
+     
+     National accounts are already becoming increasingly inaccurate as
+     it becomes harder and harder to track imports and exports.
+     Governments are unable to distinguish a personal letter with a
+     picture attached from the electronic delivery of a $100,000
+     software program. Monetary and financial economics will also have
+     to adapt.
+     
+     Traditionally the field of economics has always had some difficulty
+     explaining money: there has been something "sociological" about how
+     tokens worthless in themselves get and keep their value that is
+     hard to fit with economists' underlying explanatory strategies of
+     rational agents playing games-of-exchange with one another. These
+     problems will intensify as the nature and varieties of money
+     changes. The introduction of digital currencies suggests a possible
+     return of private currencies. It threatens the end of seigneurage,
+     and raises questions about who can control the national money
+     supply.
+     
+     The market system may well prove to be tougher than its traditional
+     defenders have thought, and to have more subtle and powerful
+     advantages than those that defenders of the invisible hand have
+     usually listed. At the very least, however, defenders will need new
+     arguments. Economic theorists have enormous powers of resilience:
+     economists regularly try to spawn new theories--today evolutionary
+     economics, the economics of organizations and bureaucracies, public
+     choice theory, and the economics of networks. We will see how they
+     do.

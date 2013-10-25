@@ -1,0 +1,31 @@
+<HTML>
+<BODY BGCOLOR="AAFFAA">
+<BR><BR><BR>
+This is a program that generates new words and sentences based on
+patterns in one or more texts of your choice.  It works as follows.
+Let d be your choice of dependency depth.  Then for every d-1-tuple of
+characters in the training text(s) you chose, the program finds the empirical
+distribution of the characters that follow that d-1-tuple.  Generating
+text is then a matter of sampling from those distributions.
+<P>
+For generating new words, or a hybrid language (e.g. Hispano-Czech,
+Italo-Polish), the best dependency depth is about 3 or 4.  Slightly
+higher values for dependency depth net you mostly real words, but the
+syntax is strange.  At the highest values of dependency depth you get
+whole words and pretty good syntax, the only missing ingredient being
+a coherent train of thought; at that point you are, in effect,
+generating college-level essays.
+<P>
+Some of the "languages" here, aren't.  That is, they're particular texts
+in English, included here for their unique style, vocabulary or subject
+matter.  Select a high dependency depth, check "Obama", and you're off
+and running generating never-before-heard Obamaesque speeches.  Click
+"Bush" <IT>and</IT> "Obama" for the best of both!
+<P>
+The generated texts are kept short in the interest of conserving
+CPU cycles at the server end.  However, every time you press the
+submit button, the program will reseed its random number generator
+and you will therefore obtain a different text.
+<P>
+Author: Ted Sternberg <IMG SRC="/images/email.gif">
+</HTML>

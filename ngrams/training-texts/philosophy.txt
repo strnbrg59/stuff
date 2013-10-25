@@ -1,0 +1,288 @@
+Imagine that you lived in a place where you had to ask someone else's
+permission to leave your property.  Even if the other person always gave
+permission, you wouldn't be free.  You'd be under conditional house
+arrest, with the other person your discretionary jailor.  The case
+wouldn't be much better if you had a choice of 5 people to ask, any one
+of whose permission would let you leave your property.  Then those 5
+would be your joint jailors.  You'd have somewhat wider opportunities,
+assuming their decisions were not coordinated.  But you'd still be
+dominated by them.  To be fully free, it's not enough just to have wide
+opportunities.  People must be free from the prospect of domination
+power of others to arbitrarily put them in a state of subjection, where
+they must beg to get an opportunity critical to living a free life. 
+It's worse, from the perspective of freedom, to be deprived of a
+critical opportunity by the arbitrary exercise of another's will, than
+to lack it due to natural causes or lack of technological development. 
+It's worse to be unable to cross an unnavigable river because others
+arbitrarily forbid one from using the bridge, than because the
+technology for building a bridge at that point is lacking.  In the first
+case, one lives in a state of subjection to others; in the second, one
+is merely technologically poor.
+The "house arrest" case does not require that the "jailors" be state
+agents.  They could be private property owners, in a property regime
+that enforces an absolute right against tresspass, and in which an
+entire territory is completely privately appropriated, such that some
+parcels of private property are wholly surrounded by other parcels. 
+Then the owners of the surrounded parcels would all be effectively
+trapped by the owners of the surrounding ones.  They'd be unfree. 
+They'd be unfree even if helicopter travel were feasible, and private
+property owners didn't have airspace rights, so one could fly over their
+property.  A property regime that makes escape from one's property
+/either/ massively expensive, inconvenient, rarely scheduled, and likely
+beyond one's budget, /or/ conditional on someone's arbitrary will, is
+nearly as bad from the perspective of freedom as one that conditions it
+on someone's arbitrary will alone.
+I'm going to argue that consideration of freedom in cases like these yields:
+1. An argument in favor of keeping certain parcels of land in the commons;
+2. An argument in favor of the common carrier rule
+operators of transportation, communication, and hotel services offer
+their services to all, without discrimination);
+3. An argument in favor of applying the common carrier rule to
+pharmacists and other providers of medical care.
+Robert Nozick considered cases like these (Anarchy, State, and Utopia
+p. 55).  He rightly argued that in such circumstances, property rights
+against trespass should yield to the compelling liberty interest of
+trapped persons in being free to leave their property.  Nozick's answer
+entails that/ the bundle of rights that should go along with a parcel of
+private property may properly vary with the impact the exercise of those
+rights has on the liberty of other people./  It recognizes a point I
+made in an earlier post
+securing an exclusive right to the owner, private property takes away
+certain liberties of others.  This raises the question of whose
+liberties should prevail in determining the proper scope of a property
+right.
+Nozick answered this question by invoking what he called "the Lockean
+Proviso": a diminution of one's freedoms due to the private property
+appropriations of others is ok as long as it doesn't make one worse off
+than one would have been in a state of nature without any private
+property  (Anarchy, State, and Utopia, p. 175).  The case of being
+trapped makes one worse off than if one could move around, which one was
+free to do in the pre-appropriation state.  So Nozick can claim that
+surrounded individuals have a right to an easement across the property
+of the surrounding owners under the Lockean Proviso.
+Brad DeLong has offered a devastating internal criticism
+of Nozick's Lockean Proviso.  The Proviso permits taking away people's
+natural rights (to use the whole earth freely--which they enjoy before
+there is any appropriation) just so long as this makes people no worse
+off in terms of utility.  Utilitarians are of course happy with this. 
+But the whole point of Nozick's system is to oppose such tradeoffs of
+rights against utility.  DeLong argues that Nozick is inconsistent: 
+he's got to allow such tradeoffs to get private property off the ground,
+but after that, he wants to prohibit them.
+To be consistent, Nozick should have judged property regimes in the
+currency of freedom, rather than utility.  Moreover, Nozick should have
+considered that the important comparison is not between having /his/
+specification of a private property regime and having /no/ private
+property, but between /alternative specifications of property regimes/.
+If freedom is what matters, then we should choose the specification that
+best promotes the freedom of everyone.  It is not sufficient to justify
+Nozick's specification of private property rights that it satisfies the
+Lockean proviso, if lots of alternative specifications would equally
+well satisfy it, but generate a superior package of freedoms for people
+generally.  We should choose the specification that generates the best
+package of freedoms overall.
+Given that every specification of a private property right secures some
+freedoms at the cost of others, we need a rough metric of the value of
+freedoms to determine which specification would be best. In general, the
+answer will depend upon two factors:
+1) Whether each person has a more compelling interest in exercising a
+given person-specific liberty in himself (for example, P deciding
+whether P shall leave P's property) than in exercising that liberty in
+the person of another (P deciding whether S shall leave S's property); and
+2) Whether permitting the liberty to be used, transferred, or
+constrained
+the ways specified has dynamic effects that generally enhance people's
+overall package of liberties.
+(Let me introduce a notation to help us compare the freedoms made
+available by rival specifications of property rights.  We can ignore the
+liberties that the rival specifications have in common, and consider
+only where they differ.  Since every property right trades off some
+liberties for others, we can denote property right X in terms of the
+ways it differs from Y as follows:  X = [people have liberty a, and lack
+liberty b]; Y = [people lack liberty a, and have liberty b].)
+Considerations of the first type typically speak to individuals' freedom
+in the sense of personal independence or non-domination.  Some liberties
+in the person are so critical to freedom that each person has a more
+compelling liberty interest in possessing them in their own person than
+in possessing them in the person of anyone else.  For each person P, P
+has a stronger liberty interest in having the freedom to determine what
+P shall think, whom P will befriend, when P will leave P's property,
+etc., than in having the freedom to determine what anyone else S shall
+think, whom S will befriend, whether S will leave S's property, etc.  In
+short, the liberty package [I'm secured against being a slave to anyone,
+I can't own any slaves] is a more valuable package of freedoms than the
+package [I could be a slave to someone, I could own slaves].  Such
+considerations generate grounds not just for "self-ownership," but for
+inalienable rights
+one's own person.  (And no, dynamic considerations of free contract do
+not always override such arguments.  Having the right to sell oneself
+into slavery does not make one freer than not having the right to sell
+oneself into slavery, because having that right weakens one's bargaining
+position and thereby shrinks one's opportunities.  Opportunities others
+would have offered to one in a regime in which one enjoys an inalienable
+right against enslavement they may now offer only on condition of
+accepting enslavement.)
+Considerations of the second, dynamic, type usually speak to
+individuals' opportunity freedom, and do most of the work in determining
+how to specify the bundles of rights properly attached to any parcel of
+property external to the self.  Yet, as the "house arrest" cases show,
+considerations of non-domination or personal independence enter here as
+well.  The liberty package [I can leave my property without having to
+ask anyone else's permission; others can cross my property if they need
+to do so to leave their own property] is superior to the package [I
+can't leave my property without asking someone else's permission; I can
+forbid anyone from crossing my property].
+So far, I have shown that system B, in which all property is privately
+appropriated, combined with easements for everyone to cross /their
+neighbors/' property, secures more freedom than system A, in which all
+property is privately appropriated, and everyone has strict rights
+against trespass.  Yet there are compelling liberty interests that B
+would not satisfy.  Each of us has a compelling interest in being free
+to have visitors to our homes, without having to ask anyone else's
+permission.  System C: [all property privately appropriated; anyone has
+the right to cross /anyone's/ property en route to someone else's home]
+secures a superior package of freedoms than either A or B.  Still, C
+could be faulted for its failure to limit easement rights.  A few people
+crossing one's lawn is no big deal; but big crushes of people will
+invade one's privacy and leave one without the freedom to enjoy one's
+property in peace.  C also fails to satisfy our compelling liberty
+interests in having spaces where we can freely meet larger groups of
+people than we can fit on our properties, and where we can meet lots of
+people who might gather spontaneously.
+What we really need to have a free society is a system in which each
+property owner (and renter) has unconditional access to a network of
+/common/ roads and parks, that links every parcel of private property to
+every other parcel, so that everyone has access to every place and to
+common spaces.  Such a system could be instantiated in the following ways:
+D: Property left in the commons (not privately appropriated, nor under
+formal collective ownership and management), and by convention dedicated
+to transport and communication;
+E: Private property open to the public on non-discriminatory terms--that
+is, where any member of the public has a right of access to it, and the
+private property owner is not allowed to arbitrarily exclude anyone from
+using it, although they may charge a toll for its use.  In other words,
+privately owned toll roads subject to a common carrier rule.
+F: Public property collectively managed for purposes of public transport
+and communication, and funded by general taxes (not tolls).
+There is no sound liberty-based argument for G: private ownership of all
+roads /without/ a common carrier rule.   That is the equivalent of
+letting some individuals arbitrarily trap others, unable to travel to a
+destination where they have a right to be.  The possibility of competing
+private roads to the same destination doesn't change this calculation. 
+That's like the case of being surrounded by 5 property owners rather
+than 1:  having five jailors doesn't make it ok for any one of them to
+arbitrarily deny you the right to cross their property, if you need to
+do so to escape your own property.  If private operation of public
+access roads is to contribute to a free society, it must be subject to
+the common carrier rule.
+In general, F offers a superior package of freedoms to either D or E.  F
+is more free than D because it allows improvements to common paths that
+can increase the traffic they can bear, as well as traffic lights and
+traffic rules than can vastly increase opportunities for mobility
+is more free than E because it doesn't tax communication with others at
+the margin, as toll roads do.  (Thus, the poor and pedestrians generally
+have a superior package of travel opportunities under F than E, because
+they can walk on the roads for free; and we all gain opportunities from
+free communication with others, which would be discouraged if each
+personal interaction carried a toll.)  There may be exceptions to the
+general superiority of F over E.  Sometimes public toll roads can be
+justified (e.g., fast toll-based lanes designed to relieve highway
+traffic jams); sometimes privately operated toll roads are (e.g., if the
+state is too poor or fiscally improvident to manage construction of
+public roads, and too corrupt to be trusted with tolls).  But these
+cases are peripheral.
+F and E share a common feature:  /In a free society, it is impossible
+for private individuals to avoid supporting the freedom of others to do
+things of which they disapprove./  Under F, we all pay taxes to support
+the public roads, which enable people to travel to the church of their
+choice, however much we may disapprove of their choice.  There is no
+conscience exemption to withold that portion of one's taxes that
+supports a road to a church that one believes promotes a false
+religion.  Nor would freedom be gained on net by modifying E (under the
+common carrier rule) to H: giving private operators of public road
+accommodations a limited conscience exemption to the common carrier
+rule, to prevent individuals from using their road to travel to the
+church of what they regard as a false religion.  The package [I'm free
+to travel to the church of my choice; I can't prevent anyone from
+travelling to the church of their choice] is superior to the package
+[road operators are free to block me from using the roads needed to
+travel to the church of my choice; I am free to block others from using
+my road to travel to the church of their choice].  To those private road
+operators who would find it unconscionable to facilitate others' travel
+to the church of what they regard as a false religion, the proper
+response of a free society is not to let them block the travel, but to
+advise them that they had better get out of the road business.
+There are many public accommodations that secure a superior package of
+freedoms under a common carrier rule than under a rule that permits
+arbitrary discrimination on the grounds of individual conscience, or
+other arbitrary grounds.  The Civil Rights Act of 1964, barring
+discrimination in access to public accommodations such as buses,
+restaurants, and hotels on grounds of race, is based on the claim that
+the package [I am free from discrimination to use any public
+accomodation; I am not free to use my ownership of a public
+accommodation to advance a racial caste system] secures a superior set
+of freedoms than the package [others are free to try to make me an
+untouchable in civil society; I am free to use my ownership of a public
+accommodation to advance a caste system].  Note here that considerations
+of non-domination are important over and above opportunity.  Even if
+someone else is willing to offer me a room at a hotel without regard to
+my race (so I don't lack the opportunity to stay overnight in some
+city), this does not remove the subjection inherent in anyone trying to
+make me a subordinate caste, by depriving me of a hotel room on account
+of my race.
+This argument generalizes.  The operators of a private telephone system
+should not be able to claim a right of religious conscience to eavesdrop
+on telephone conversations, so they can cut off blasphemous phone
+calls.  The operator of an ambulance service that takes public calls,
+who is a Christian Scientist, may not claim a right of religious
+conscience to refuse to transport any emergency case to the hospital,
+unless it is for the treatments permitted to a Christian Scientist (bone
+setting, pulling an infected tooth).  A Talibanesque taxi driver may not
+conscientiously refuse to serve women unaccompanied by male relatives,
+on the ground that he might thereby be facilitating their sinful
+consorting with the opposite sex.  And similarly, a pharmacist may not
+claim a right of religious conscience to refuse to fill a prescription
+for birth control to women, or to single women, on the ground that he
+might thereby be facilitating the sin of fornication.
+In the original debates over the Civil Rights Act of 1964, opponents
+claimed that operators of public accommodations had a sacred right to
+freedom of association, as if all that was at stake was the right to
+exercise one's idiosyncratic tastes over whom one wants to serve.  (Even
+if that were all that was at stake, it should still have to yield to the
+common carrier rule, which underpinned the CRA
+But the "taste" for not serving blacks was inseparable from the desire
+to reduce them to an untouchable caste.  Similarly, the "tender
+religious conscience" against filling birth control prescriptions is
+inseparable from a religious world-view that regards women as properly
+confined to a mothering caste (with their sexuality limited to
+reproductive purposes).  The Christian pharmacist who refuses to fill
+birth control prescriptions differs only in degree and not in kind from
+the Talibanesque taxi driver who refuses to serve women who are
+unaccompanied by their male relatives.
+The potential availability of competing pharmacists who assert no
+conscience exemptions is no argument
+favor of allowing them in some cases.  For there may be no such
+providers.  (Recall the frequency of this situation for blacks in the
+U.S. before 1964, where they met comprehensive discrimination in many
+markets in the North, even in the absence of Jim Crow laws.)  Even if
+there are some in a distant county, or on the Internet, this is like the
+person who can escape her property only by helicopter.  Even if there
+are some in the same county, this is like the person who has five
+independent jailors rather than just one.  If women in many towns and
+counties are not to be turned into a subordinate, unfree caste, limited
+to the opportunity package [motherhood, celibacy] by the dominion of
+others, then pharmacists must not have a right to deny them access to
+birth control.  The freedom to use one's pharmacy as an instrument for
+promoting one's religious beliefs is nothing compared to the freedom of
+escape from subordinate caste status-- and even to the freedom of being
+branded with the badges of subordinate caste status (in the case where
+women have other easily accessible pharmacies willing to serve them, but
+still may be snubbed by this or that pharmacist).
+There are some public accommodations of such vital interest to each
+person that each has a compelling liberty interest in unfettered access
+to it, without being subject to the arbitrary decisions of those who
+operate them.  The right to operate a public accommodation is not the
+right to inflict one's religious beliefs on others.  The pharmacist's
+license is a license to practice pharmacy for others, not a license to
+practice one's religion on others.  The state, in the name of freedom,
+properly enforces a common carrier rule in such cases.
