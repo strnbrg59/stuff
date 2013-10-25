@@ -1,0 +1,2 @@
+This is an experiment with building astro -- plus its prerequisite packages
+utils and rcm -- using Gnu autotools.

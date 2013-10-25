@@ -1,0 +1,59 @@
+Info: ParseCommandLine() cmd-line-option debug_level=4
+Info: ParseCommandLine() cmd-line-option data_dir=../data/
+Info: ParseCommandLine() cmd-line-option data_suffix=_no.ppm.gz
+Info: ParseCommandLine() cmd-line-option max_miss_ratio=0.05
+Info: CmdlineBase::   airy_rectangle_dark=0 : This pixel value considered essentially dark.
+Info: CmdlineBase::   airy_rectangle_max_side=50 : If not nearly dark this far out, invalid.
+Info: CmdlineBase::   bad_star_max=10 : After this many match failures, give up on this 'star'
+Info: CmdlineBase::   dark_frame= : dark frame, to subtract away
+Info: CmdlineBase::   data_dir=../data/ : where the ppms are
+Info: CmdlineBase::   data_suffix=_no.ppm.gz : something with ppm, hopefully
+Info: CmdlineBase::   debug_level=4 : 
+Info: CmdlineBase::   matching_star_max_distance=2 : Star corresponding to unmarked centroid
+Info: CmdlineBase::   max_brightness_ratio=2 : Used to limit range of triangle search.
+Info: CmdlineBase::   max_miss_ratio=0.05 : Pct/100 of times failed to find corresponding star
+Info: CmdlineBase::   model_file= : file to align all others to
+Info: CmdlineBase::   quick_finish=0 : Skip rawsample alignment
+Info: CmdlineBase::   sample_size=100000 : maximum, each star must be above threshold
+Info: CmdlineBase::   threshold=5 : brightest pixel must exceed this, for inclusion of star in sample
+Info: CmdlineBase::   triangle_perimeter_min=200 : In pixels
+Info: CmdlineBase::   triangle_search_bandwidth=10 : Width is on alignee side.
+Info: CmdlineBase::   triangle_tolerance=5e-06 : SS of angle diffs (in radians)
+Info (main()): infile_names.size() = 2.
+Info (main()): Loading model file: 1alignable_no.ppm.gz.
+Info (RawData::RawData()): Read comment line:|# CREATOR: XV Version 3.10a  Rev: 12/29/94 (PNG patch 1.2)|.
+Info (RawData::RawData()): Read comment line:|#          |.
+Info (RawData::RawData()): Read width=461, height=465.
+Info (AiryRectangle::AiryRectangle()): Hit domain edge (presumed center=[464,116])
+Warning (Sample::Sample()): Hit domain edge on star at [464,116;9].
+Info: main() Model_sample: (size=8)
+(12.3706, 141.497; 1781) 
+(307.473, 319.421; 670) 
+(32.5455, 77.8636; 66) 
+(79.1364, 408.136; 66) 
+(110.308, 70.2308; 39) 
+(136, 318.182; 33) 
+(445.875, 296.875; 24) 
+(449, 453.5; 12) 
+
+Info (RawData::Copy): Read width=461, height=465.
+Info (main()): Loading alignee: 2alignable_no.ppm.gz.
+Info (RawData::RawData()): Read comment line:|# CREATOR: XV Version 3.10a  Rev: 12/29/94 (PNG patch 1.2)|.
+Info (RawData::RawData()): Read comment line:|#          |.
+Info (RawData::RawData()): Read width=420, height=460.
+Info (AiryRectangle::AiryRectangle()): Hit domain edge (presumed center=[278,419])
+Warning (Sample::Sample()): Hit domain edge on star at [278,419;12].
+Info: main() Alignee sample: (size=9)
+(49.3571, 370.923; 336) 
+(443.66, 333.511; 141) 
+(424.636, 289.818; 66) 
+(44, 9.33333; 36) 
+(364.5, 6.33333; 18) 
+(98, 58.8; 15) 
+(214.75, 66.25; 12) 
+(358.5, 54.25; 12) 
+(451, 332.5; 12) 
+
+Warning (Sample::AlignWith()): Ran out of triangles after 0 strike-outs.
+Warning (main()): Could not align 2alignable_no.ppm.gz, moving to the next file...
+Info (main()): Succeeded in registering 0 of 1 files against the model file.

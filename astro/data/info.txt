@@ -1,0 +1,113 @@
+-- Copied from ~/etc/pictures/2002/astro/Aug31-Cassiopeia/info.txt --
+
+I'm able to align DSCN0924 through DSCN0928.  I can align 929 & 930 to each
+other but not to the first 5.  Just looking at 929 & 930, I think they're of
+a different part of the sky than 924 through 928.
+
+DSCN0924.TIF
+Note iso100
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:15
+QUALITY      : FULL HI
+
+DSCN0925.TIF
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:22
+QUALITY      : FULL HI
+
+DSCN0926.TIF
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:24
+QUALITY      : FULL HI
+
+DSCN0927.TIF
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:28
+QUALITY      : FULL HI
+
+DSCN0928.TIF
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:31
+QUALITY      : FULL HI
+
+DSCN0929.TIF
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:35
+QUALITY      : FULL HI
+
+DSCN0930.TIF
+Alpha Cassiopaei at bottom center.
+Andromeda Galaxy 4 inches from bottom, 4 inches from right.
+CAMERA       : E885V1.0
+METERING     : SPOT
+MODE         : M
+SHUTTER      : 8.00sec
+APERTURE     : F2.8
+EXP +/-      : 0.0
+FOCAL LENGTH : f8.0mm(X1.0)
+IMG ADJUST   : STANDARD
+SENSITIVITY  : ISO100
+WHITEBAL     : AUTO
+SHARPNESS    : AUTO
+DATE         : 2002.09.01 00:37
+QUALITY      : FULL HI

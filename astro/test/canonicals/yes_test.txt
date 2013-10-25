@@ -1,0 +1,156 @@
+Info: ParseCommandLine() cmd-line-option debug_level=4
+Info: ParseCommandLine() cmd-line-option data_dir=../data/
+Info: ParseCommandLine() cmd-line-option data_suffix=_yes.ppm.gz
+Info: ParseCommandLine() cmd-line-option max_miss_ratio=0.05
+Info: CmdlineBase::   airy_rectangle_dark=0 : This pixel value considered essentially dark.
+Info: CmdlineBase::   airy_rectangle_max_side=50 : If not nearly dark this far out, invalid.
+Info: CmdlineBase::   bad_star_max=10 : After this many match failures, give up on this 'star'
+Info: CmdlineBase::   dark_frame= : dark frame, to subtract away
+Info: CmdlineBase::   data_dir=../data/ : where the ppms are
+Info: CmdlineBase::   data_suffix=_yes.ppm.gz : something with ppm, hopefully
+Info: CmdlineBase::   debug_level=4 : 
+Info: CmdlineBase::   matching_star_max_distance=2 : Star corresponding to unmarked centroid
+Info: CmdlineBase::   max_brightness_ratio=2 : Used to limit range of triangle search.
+Info: CmdlineBase::   max_miss_ratio=0.05 : Pct/100 of times failed to find corresponding star
+Info: CmdlineBase::   model_file= : file to align all others to
+Info: CmdlineBase::   quick_finish=0 : Skip rawsample alignment
+Info: CmdlineBase::   sample_size=100000 : maximum, each star must be above threshold
+Info: CmdlineBase::   threshold=5 : brightest pixel must exceed this, for inclusion of star in sample
+Info: CmdlineBase::   triangle_perimeter_min=200 : In pixels
+Info: CmdlineBase::   triangle_search_bandwidth=10 : Width is on alignee side.
+Info: CmdlineBase::   triangle_tolerance=5e-06 : SS of angle diffs (in radians)
+Info (main()): infile_names.size() = 2.
+Info (main()): Loading model file: 1alignable_yes.ppm.gz.
+Info (RawData::RawData()): Read comment line:|# CREATOR: The GIMP's PNM Filter Version 1.0|.
+Info (RawData::RawData()): Read width=657, height=654.
+Info: main() Model_sample: (size=18)
+(332.604, 156.666; 4380) 
+(133.184, 158.663; 1877) 
+(76.769, 162.4; 1052) 
+(332.576, 447.024; 495) 
+(309.695, 403.435; 462) 
+(272.047, 256.551; 381) 
+(618.962, 605.062; 240) 
+(637.179, 378.925; 201) 
+(624.965, 254.789; 171) 
+(561.018, 165.382; 165) 
+(55.28, 325.6; 75) 
+(596.478, 166.435; 69) 
+(512.667, 200.867; 45) 
+(401.667, 407.5; 18) 
+(372.5, 378.667; 18) 
+(363.6, 532.4; 15) 
+(633.4, 61.4; 15) 
+(501.75, 44.25; 12) 
+
+Info (RawData::Copy): Read width=657, height=654.
+Info (main()): Loading alignee: 2alignable_yes.ppm.gz.
+Info (RawData::RawData()): Read comment line:|# CREATOR: The GIMP's PNM Filter Version 1.0|.
+Info (RawData::RawData()): Read width=639, height=603.
+Info: main() Alignee sample: (size=16)
+(265.924, 105.154; 3718) 
+(66.4469, 105.301; 1788) 
+(9.77778, 108.486; 1215) 
+(263.2, 395.25; 480) 
+(240.687, 351.739; 345) 
+(204.402, 204.505; 321) 
+(547.72, 555.849; 279) 
+(557.233, 206.507; 219) 
+(568.092, 330.4; 195) 
+(494.043, 116.522; 138) 
+(529.633, 117.767; 90) 
+(292.75, 480.65; 60) 
+(17.5789, 92.4211; 57) 
+(445.8, 150.9; 30) 
+(568.1, 13.4; 30) 
+(592.889, 382.111; 27) 
+
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 1, 3]  angles=(1.56069 0.975832 0.605071 ), energies: (4380, 1877, 495) perimeter=840.372
+
+                  alignee:[0, 1, 3]  angles=(1.56067 0.975327 0.605593 ), energies: (3718, 1788, 480) perimeter=839.988
+
+Info (StretchParams::Estimate()): max abs(residual) = 0.000000
+Info: Sample::_FindNextStarPair() Found match at distance 0.119875
+  centroid_star = (204.402, 204.505; 321) 
+  transformed   = (272.022, 256.668; 321) 
+  nearest       = (272.047, 256.551; 381) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.087782
+Info (Sample::AlignWith()): hits=1, misses=0, sd=0.217945, would reject above 0.485890 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.223086
+  centroid_star = (240.687, 351.739; 345) 
+  transformed   = (309.671, 403.657; 345) 
+  nearest       = (309.695, 403.435; 462) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.134353
+Info (Sample::AlignWith()): hits=2, misses=0, sd=0.308221, would reject above 0.716441 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.210747
+  centroid_star = (9.77778, 108.486; 1215) 
+  transformed   = (76.5667, 162.341; 1215) 
+  nearest       = (76.769, 162.4; 1052) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.135331
+Info (Sample::AlignWith()): hits=3, misses=0, sd=0.377492, would reject above 0.904983 misses
+Info: Sample::_FindNextStarPair() No match: distance = 17.8516
+  centroid_star = (17.5789, 92.4211; 57) 
+  transformed   = (84.3366, 146.232; 57) 
+  nearest       = (76.769, 162.4; 1052) 
+Info (Sample::AlignWith()): Missed: no excuses.
+Info (Sample::AlignWith()): hits=3, misses=1, sd=0.435890, would reject above 1.071780 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.169505
+  centroid_star = (445.8, 150.9; 30) 
+  transformed   = (512.729, 200.709; 30) 
+  nearest       = (512.667, 200.867; 45) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.136371
+Info (Sample::AlignWith()): hits=4, misses=1, sd=0.487340, would reject above 1.224679 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.772266
+  centroid_star = (292.75, 480.65; 60) 
+  transformed   = (362.915, 532.043; 60) 
+  nearest       = (363.6, 532.4; 15) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.342090
+Info (Sample::AlignWith()): hits=5, misses=1, sd=0.533854, would reject above 1.367708 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.78597
+  centroid_star = (494.043, 116.522; 138) 
+  transformed   = (560.497, 165.97; 138) 
+  nearest       = (561.018, 165.382; 165) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.362539
+Info (Sample::AlignWith()): hits=6, misses=1, sd=0.576628, would reject above 1.503256 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.178626
+  centroid_star = (529.633, 117.767; 90) 
+  transformed   = (596.354, 166.563; 90) 
+  nearest       = (596.478, 166.435; 69) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.181604
+Info (Sample::AlignWith()): hits=7, misses=1, sd=0.616441, would reject above 1.632883 misses
+Info: Sample::_FindNextStarPair() Found match at distance 1.67715
+  centroid_star = (557.233, 206.507; 219) 
+  transformed   = (624.203, 256.284; 219) 
+  nearest       = (624.965, 254.789; 171) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.329126
+Info (Sample::AlignWith()): hits=8, misses=1, sd=0.653835, would reject above 1.757670 misses
+Info: Sample::_FindNextStarPair() Found match at distance 0.145366
+  centroid_star = (568.092, 330.4; 195) 
+  transformed   = (637.107, 379.052; 195) 
+  nearest       = (637.179, 378.925; 201) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.337101
+Info (Sample::AlignWith()): hits=9, misses=1, sd=0.689202, would reject above 1.878405 misses
+Info (Sample::Contains()): Star at [662.687752,430.574751] is OUTSIDE rawdata with dimensions [654,657]
+Info: Sample::_FindNextStarPair() Found match at distance 0.983799
+  centroid_star = (568.1, 13.4; 30) 
+  transformed   = (634.373, 61.5485; 30) 
+  nearest       = (633.4, 61.4; 15) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.337767
+Info (Sample::AlignWith()): hits=10, misses=1, sd=0.722842, would reject above 1.995683 misses
+Info: Sample::_FindNextStarPair() Found match at distance 1.34111
+  centroid_star = (547.72, 555.849; 279) 
+  transformed   = (620.112, 605.753; 279) 
+  nearest       = (618.962, 605.062; 240) 
+Info (StretchParams::Estimate()): max abs(residual) = 0.390614
+Info (Sample::AlignWith()): hits=11, misses=1, sd=0.754983, would reject above 2.109967 misses
+Info (Sample::AlignWith()): hits=11, misses=1, sd=0.754983, would reject above 2.109967 misses
+Info (Sample::AlignWith()): Alignment succeeded after 0 strike-outs.
+Info (main()): Transforming Rawsample by...
+Info: main() (65.7638,54.0621), ((0.99834,0.010793),(-0.00809402,0.998341)), ((1.64923e-06,1.71762e-06,-1.68383e-06),(-4.45552e-06,3.86625e-06,2.36631e-06))
+  [Intuitive: shift=[65.7638, 54.0621],  stretch=[0.998394, 0.998374],  sheer=0.00270323,  rotate=-0.00810729]
+Info (RawData::Copy): Read width=645, height=609.
+Info (main()): Done transforming Rawsample...
+Info (RawData::Copy): Read width=693, height=675.
+Info (main()): Succeeded in registering 1 of 1 files against the model file.
+Info (main()): Writing out trim_scaling...

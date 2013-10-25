@@ -1,0 +1,345 @@
+cmd-line-option data_dir=../testdata/
+cmd-line-option data_suffix=corner.ppm.gz
+cmd-line-option model_file=dscn0927-ne-corner.ppm.gz
+cmd-line-option debug_level=4
+Cmdline parameters:
+  airy_rectangle_dark=0 : This pixel value considered essentially dark.
+  airy_rectangle_max_side=50 : If not nearly dark this far out, invalid.
+  dark_frame= : dark frame, to subtract away
+  data_dir=../testdata/ : where the ppms are
+  data_suffix=corner.ppm.gz : something with ppm, hopefully
+  debug_level=4 : 
+  matching_star_max_distance=5 : Star corresponding to unmarked centroid
+  max_brightness_ratio=2 : Used to limit range of triangle search.
+  max_miss_pct=0.25 : Pct of times failed to find corresponding star
+  model_file=dscn0927-ne-corner.ppm.gz : file to align all others to
+  quick_finish=0 : Skip rawsample alignment
+  sample_size=100000 : maximum, each star must be above threshold
+  threshold=0 : brightest pixel must exceed this, for inclusion of star in sample
+  triangle_perimeter_min=200 : In pixels
+  triangle_search_bandwidth=10 : Width is on alignee side.
+  triangle_tolerance=5e-06 : SS of angle diffs (in radians)
+Info (main()): infile_names.size() = 2.
+Info (main()): Loading model file: dscn0927-ne-corner.ppm.gz.
+Info (RawData::RawData()): Read comment line:|# CREATOR: The GIMP's PNM Filter Version 1.0|.
+Info (RawData::RawData()): Read width=639, height=603.
+Info (AiryRectangle::AiryRectangle()): Hit domain edge (presumed center=[342,0])
+Warning (Sample::Sample()): Hit domain edge on star at [342,0;3].
+Model_sample: (size=31)
+(265.924, 105.154; 3718) 
+(66.4469, 105.301; 1788) 
+(9.77778, 108.486; 1215) 
+(263.2, 395.25; 480) 
+(240.687, 351.739; 345) 
+(204.402, 204.505; 321) 
+(547.72, 555.849; 279) 
+(557.233, 206.507; 219) 
+(568.092, 330.4; 195) 
+(494.043, 116.522; 138) 
+(529.633, 117.767; 90) 
+(292.75, 480.65; 60) 
+(17.5789, 92.4211; 57) 
+(568.1, 13.4; 30) 
+(445.8, 150.9; 30) 
+(592.889, 382.111; 27) 
+(326.5, 430.5; 12) 
+(67.25, 336; 12) 
+(592.5, 188.5; 12) 
+(332.667, 356.667; 9) 
+(566.333, 366.333; 9) 
+(366.5, 129; 6) 
+(457, 283.5; 6) 
+(278.5, 433; 6) 
+(245, 537.5; 6) 
+(385, 128; 3) 
+(463, 273; 3) 
+(527, 107; 3) 
+(553, 513; 3) 
+(163, 457; 3) 
+(20, 366; 3) 
+
+Info (main()): Loading alignee: dscn0926-ne-corner.ppm.gz.
+Info (RawData::RawData()): Read comment line:|# CREATOR: The GIMP's PNM Filter Version 1.0|.
+Info (RawData::RawData()): Read width=657, height=654.
+Alignee sample: (size=38)
+(332.604, 156.666; 4380) 
+(133.184, 158.663; 1877) 
+(76.769, 162.4; 1052) 
+(332.576, 447.024; 495) 
+(309.695, 403.435; 462) 
+(272.047, 256.551; 381) 
+(618.962, 605.062; 240) 
+(637.179, 378.925; 201) 
+(624.965, 254.789; 171) 
+(561.018, 165.382; 165) 
+(55.28, 325.6; 75) 
+(596.478, 166.435; 69) 
+(512.667, 200.867; 45) 
+(401.667, 407.5; 18) 
+(372.5, 378.667; 18) 
+(363.6, 532.4; 15) 
+(633.4, 61.4; 15) 
+(135.5, 389.5; 12) 
+(501.75, 44.25; 12) 
+(433.5, 179.5; 12) 
+(451.667, 178.667; 9) 
+(388.667, 348.667; 9) 
+(42.6667, 524.667; 9) 
+(412.5, 270; 6) 
+(414.5, 233; 6) 
+(235, 594.5; 6) 
+(279.5, 350; 6) 
+(233.5, 510; 6) 
+(525, 332.5; 6) 
+(221, 510.5; 6) 
+(565, 528.5; 6) 
+(100, 589; 3) 
+(201, 118; 3) 
+(575, 386; 3) 
+(532, 323; 3) 
+(508, 72; 3) 
+(407, 50; 3) 
+(316, 590; 3) 
+
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 1, 3]  angles=(1.56067 0.975327 0.605593 ) perimeter=839.988
+
+                  alignee:[0, 1, 3]  angles=(1.56069 0.975832 0.605071 ) perimeter=840.372
+
+Info: Sample::_FindNextStarPair() Found match at distance 0.119778
+  centroid_star = (272.047, 256.551; 381) 
+  transformed   = (204.428, 204.388; 381) 
+  nearest       = (204.402, 204.505; 321) 
+Info: Sample::_FindNextStarPair() No match: distance = 61.5208
+  centroid_star = (279.5, 350; 6) 
+  transformed   = (211.008, 297.851; 6) 
+  nearest       = (240.687, 351.739; 345) 
+Info: Sample::_FindNextStarPair() No match: distance = 92.7388
+  centroid_star = (412.5, 270; 6) 
+  transformed   = (344.776, 219.158; 6) 
+  nearest       = (366.5, 129; 6) 
+Info (Sample::AlignWith()): Struck out.  Trying a different triangle...
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 1, 4]  angles=(1.46807 0.9561 0.717422 ) perimeter=749.163
+
+                  alignee:[0, 1, 4]  angles=(1.46822 0.956044 0.717332 ) perimeter=749.037
+
+Info: Sample::_FindNextStarPair() Found match at distance 0.020671
+  centroid_star = (272.047, 256.551; 381) 
+  transformed   = (204.415, 204.489; 381) 
+  nearest       = (204.402, 204.505; 321) 
+Info: Sample::_FindNextStarPair() No match: distance = 61.3814
+  centroid_star = (279.5, 350; 6) 
+  transformed   = (210.986, 298.022; 6) 
+  nearest       = (240.687, 351.739; 345) 
+Info: Sample::_FindNextStarPair() No match: distance = 79.0907
+  centroid_star = (201, 118; 3) 
+  transformed   = (134.656, 65.2658; 3) 
+  nearest       = (66.4469, 105.301; 1788) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info (Sample::AlignWith()): Struck out.  Trying a different triangle...
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 1, 5]  angles=(1.01561 0.624166 1.50181 ) perimeter=486.254
+
+                  alignee:[0, 1, 5]  angles=(1.01577 0.624035 1.50178 ) perimeter=486.135
+
+Info: Sample::_FindNextStarPair() No match: distance = 79.1025
+  centroid_star = (201, 118; 3) 
+  transformed   = (134.664, 65.2562; 3) 
+  nearest       = (66.4469, 105.301; 1788) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info: Sample::_FindNextStarPair() No match: distance = 25.9034
+  centroid_star = (76.769, 162.4; 1052) 
+  transformed   = (29.708, 125.033; 1052) 
+  nearest       = (9.77778, 108.486; 1215) 
+Info (Sample::Contains()): Star at [-24.643460,261.865811] is OUTSIDE rawdata with dimensions [603,639]
+Info: Sample::_FindNextStarPair() No match: distance = 71.5588
+  centroid_star = (279.5, 350; 6) 
+  transformed   = (179.267, 271.504; 6) 
+  nearest       = (204.402, 204.505; 321) 
+Info (Sample::AlignWith()): Struck out.  Trying a different triangle...
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 1, 6]  angles=(2.12884 0.753172 0.259581 ) perimeter=1390.27
+
+                  alignee:[0, 1, 6]  angles=(2.12913 0.75319 0.259277 ) perimeter=1391.2
+
+Info: Sample::_FindNextStarPair() No match: distance = 60.4812
+  centroid_star = (388.667, 348.667; 9) 
+  transformed   = (320.021, 297.522; 9) 
+  nearest       = (332.667, 356.667; 9) 
+Info: Sample::_FindNextStarPair() No match: distance = 92.7448
+  centroid_star = (412.5, 270; 6) 
+  transformed   = (344.668, 219.139; 6) 
+  nearest       = (366.5, 129; 6) 
+Info: Sample::_FindNextStarPair() No match: distance = 41.3249
+  centroid_star = (372.5, 378.667; 18) 
+  transformed   = (303.543, 327.349; 18) 
+  nearest       = (332.667, 356.667; 9) 
+Info (Sample::AlignWith()): Struck out.  Trying a different triangle...
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 2, 3]  angles=(1.5484 0.86005 0.733144 ) perimeter=928.972
+
+                  alignee:[0, 2, 3]  angles=(1.54829 0.861079 0.732222 ) perimeter=928.942
+
+Info: Sample::_FindNextStarPair() Found match at distance 0.125038
+  centroid_star = (272.047, 256.551; 381) 
+  transformed   = (204.379, 204.382; 381) 
+  nearest       = (204.402, 204.505; 321) 
+Info: Sample::_FindNextStarPair() No match: distance = 61.5397
+  centroid_star = (279.5, 350; 6) 
+  transformed   = (210.977, 297.846; 6) 
+  nearest       = (240.687, 351.739; 345) 
+Info: Sample::_FindNextStarPair() No match: distance = 78.973
+  centroid_star = (201, 118; 3) 
+  transformed   = (134.552, 65.3209; 3) 
+  nearest       = (66.4469, 105.301; 1788) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info (Sample::AlignWith()): Struck out.  Trying a different triangle...
+Info: Sample::AlignWith() Matching triangles:
+                    model:[0, 2, 4]  angles=(1.4558 0.824432 0.861362 ) perimeter=839.437
+
+                  alignee:[0, 2, 4]  angles=(1.45582 0.824914 0.860861 ) perimeter=838.918
+
+Info: Sample::_FindNextStarPair() Found match at distance 0.0356816
+  centroid_star = (272.047, 256.551; 381) 
+  transformed   = (204.373, 204.483; 381) 
+  nearest       = (204.402, 204.505; 321) 
+Info: Sample::_FindNextStarPair() No match: distance = 61.3919
+  centroid_star = (279.5, 350; 6) 
+  transformed   = (210.969, 298.02; 6) 
+  nearest       = (240.687, 351.739; 345) 
+Info: Sample::_FindNextStarPair()   (6 too dim)
+Info: Sample::_FindNextStarPair() No match: distance = 79.012
+  centroid_star = (201, 118; 3) 
+  transformed   = (134.558, 65.2546; 3) 
+  nearest       = (66.4469, 105.301; 1788) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info: Sample::_FindNextStarPair() Found match at distance 0.153226
+  centroid_star = (133.184, 158.663; 1877) 
+  transformed   = (66.2944, 105.286; 1877) 
+  nearest       = (66.4469, 105.301; 1788) 
+Info: Sample::_FindNextStarPair() No match: distance = 56.6709
+  centroid_star = (414.5, 233; 6) 
+  transformed   = (347.189, 182.279; 6) 
+  nearest       = (366.5, 129; 6) 
+Info: Sample::_FindNextStarPair()   (6 too dim)
+Info: Sample::_FindNextStarPair() Found match at distance 0.771946
+  centroid_star = (135.5, 389.5; 12) 
+  transformed   = (66.499, 336.179; 12) 
+  nearest       = (67.25, 336; 12) 
+Info (Sample::Contains()): Star at [-12.720923,271.412448] is OUTSIDE rawdata with dimensions [603,639]
+Info: Sample::_FindNextStarPair() No match: distance = 92.8939
+  centroid_star = (412.5, 270; 6) 
+  transformed   = (344.688, 219.297; 6) 
+  nearest       = (366.5, 129; 6) 
+Info: Sample::_FindNextStarPair()   (6 too dim)
+Info: Sample::_FindNextStarPair() No match: distance = 60.3665
+  centroid_star = (388.667, 348.667; 9) 
+  transformed   = (319.518, 297.75; 9) 
+  nearest       = (332.667, 356.667; 9) 
+Info: Sample::_FindNextStarPair() No match: distance = 41.3811
+  centroid_star = (372.5, 378.667; 18) 
+  transformed   = (303.215, 327.598; 18) 
+  nearest       = (332.667, 356.667; 9) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.308511
+  centroid_star = (332.576, 447.024; 495) 
+  transformed   = (263.127, 395.55; 495) 
+  nearest       = (263.2, 395.25; 480) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.745752
+  centroid_star = (401.667, 407.5; 18) 
+  transformed   = (331.932, 356.541; 18) 
+  nearest       = (332.667, 356.667; 9) 
+Info: Sample::_FindNextStarPair() Found match at distance 1.0611
+  centroid_star = (233.5, 510; 6) 
+  transformed   = (164.059, 457.059; 6) 
+  nearest       = (163, 457; 3) 
+Info: Sample::_FindNextStarPair() No match: distance = 12.2625
+  centroid_star = (221, 510.5; 6) 
+  transformed   = (150.743, 457.381; 6) 
+  nearest       = (163, 457; 3) 
+Info: Sample::_FindNextStarPair()   (6 too dim)
+Info: Sample::_FindNextStarPair() Found match at distance 0.701254
+  centroid_star = (433.5, 179.5; 12) 
+  transformed   = (367.199, 129.06; 12) 
+  nearest       = (366.5, 129; 6) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.392548
+  centroid_star = (451.667, 178.667; 9) 
+  transformed   = (384.848, 128.362; 9) 
+  nearest       = (385, 128; 3) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.193078
+  centroid_star = (363.6, 532.4; 15) 
+  transformed   = (292.56, 480.685; 15) 
+  nearest       = (292.75, 480.65; 60) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.68259
+  centroid_star = (525, 332.5; 6) 
+  transformed   = (457.23, 282.857; 6) 
+  nearest       = (457, 283.5; 6) 
+Info: Sample::_FindNextStarPair() Found match at distance 1.49745
+  centroid_star = (532, 323; 3) 
+  transformed   = (464.193, 273.905; 3) 
+  nearest       = (463, 273; 3) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.23457
+  centroid_star = (512.667, 200.867; 45) 
+  transformed   = (445.583, 150.99; 45) 
+  nearest       = (445.8, 150.9; 30) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.814047
+  centroid_star = (316, 590; 3) 
+  transformed   = (244.19, 537.416; 3) 
+  nearest       = (245, 537.5; 6) 
+Info: Sample::_FindNextStarPair() No match: distance = 62.5672
+  centroid_star = (575, 386; 3) 
+  transformed   = (505.864, 336.903; 3) 
+  nearest       = (568.092, 330.4; 195) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info: Sample::_FindNextStarPair() No match: distance = 81.0834
+  centroid_star = (235, 594.5; 6) 
+  transformed   = (163.993, 541.021; 6) 
+  nearest       = (245, 537.5; 6) 
+Info: Sample::_FindNextStarPair()   (6 too dim)
+Info: Sample::_FindNextStarPair() Found match at distance 0.86338
+  centroid_star = (561.018, 165.382; 165) 
+  transformed   = (494.463, 115.767; 165) 
+  nearest       = (494.043, 116.522; 138) 
+Info (Sample::Contains()): Star at [341.098566,-1.154590] is OUTSIDE rawdata with dimensions [603,639]
+Info: Sample::_FindNextStarPair() No match: distance = 68.1007
+  centroid_star = (565, 528.5; 6) 
+  transformed   = (493.989, 479.009; 6) 
+  nearest       = (553, 513; 3) 
+Info: Sample::_FindNextStarPair()   (6 too dim)
+Info: Sample::_FindNextStarPair() Found match at distance 0.0244727
+  centroid_star = (624.965, 254.789; 171) 
+  transformed   = (557.209, 206.513; 171) 
+  nearest       = (557.233, 206.507; 219) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.323748
+  centroid_star = (637.179, 378.925; 201) 
+  transformed   = (567.992, 330.708; 201) 
+  nearest       = (568.092, 330.4; 195) 
+Info: Sample::_FindNextStarPair() Found match at distance 0.0422539
+  centroid_star = (596.478, 166.435; 69) 
+  transformed   = (529.636, 117.725; 69) 
+  nearest       = (529.633, 117.767; 90) 
+Info: Sample::_FindNextStarPair() No match: distance = 107.795
+  centroid_star = (508, 72; 3) 
+  transformed   = (441.92, 22.1664; 3) 
+  nearest       = (494.043, 116.522; 138) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info (Sample::Contains()): Star at [435.866584,-5.711182] is OUTSIDE rawdata with dimensions [603,639]
+Info: Sample::_FindNextStarPair() Found match at distance 0.756987
+  centroid_star = (633.4, 61.4; 15) 
+  transformed   = (567.472, 12.9779; 15) 
+  nearest       = (568.1, 13.4; 30) 
+Info: Sample::_FindNextStarPair() Found match at distance 1.03755
+  centroid_star = (618.962, 605.062; 240) 
+  transformed   = (546.721, 555.57; 240) 
+  nearest       = (547.72, 555.849; 279) 
+Info: Sample::_FindNextStarPair() No match: distance = 154.51
+  centroid_star = (100, 589; 3) 
+  transformed   = (29.4401, 534.685; 3) 
+  nearest       = (163, 457; 3) 
+Info: Sample::_FindNextStarPair()   (3 too dim)
+Info (Sample::Contains()): Star at [-27.155040,470.112383] is OUTSIDE rawdata with dimensions [603,639]
+Info (main()): Transforming Rawsample by...
+(-65.1905,-54.6558), ((0.998733,-0.00789725),(0.00765789,1.0021)), ((2.33676e-06,-2.63975e-06,-1.43239e-06),(3.75996e-06,-7.67852e-07,-4.79734e-06))
+  [Intuitive: shift=[-65.1905, -54.6558],  stretch=[0.998764, 1.00213],  sheer=-0.000265407,  rotate=0.00764169]
+Info (main()): Done transforming Rawsample...
+Info (main()): Writing out trim_scaling...

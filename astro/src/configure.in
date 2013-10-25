@@ -1,0 +1,15 @@
+AC_INIT( stretch_params.cpp,
+         point.cpp,
+         sample.cpp,
+         star_accreter.cpp,
+         cmdline.cpp,
+         misc.cpp,
+         rawdata.cpp,
+         triangle.cpp,
+         astro-main.cpp )
+AM_INIT_AUTOMAKE(PACKAGE, VERSION)
+#AC_ARG_PROGRAM
+AC_PROG_CXX
+AC_PROG_LIBTOOL
+AC_PROG_INSTALL(astro)
+AC_OUTPUT(Makefile)

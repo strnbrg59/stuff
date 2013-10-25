@@ -1,0 +1,21 @@
+8/6/04. Bug -- attempt to reference out of bounds pixel.  Set threshold=0 in
+        unittest.sh and see how it fails on the deneb test.
+
+8/6/04. Confirmation (don't allow a star into the sum unless it appears on
+        at least two ppms).
+
+8/6/04. Checkpoint files, and ability to start alignment from a checkpoint
+        file.
+
+8/6/04. Deconvolution: gather up eliptical stars into circles.  (Even with
+        3 megapixels and 8 second exposures, at the celestial equator a star
+        will move almost a pixel.)
+
+8/6/04. Image subtraction.
+
+12/30/06. Remove gross cases of hot pixels by comparing *unaligned* pictures!
+
+1/8/09. Report statistics, for each picture, of stars visible in that picture
+        but not in the others.
+
+1/8/09. Color.
