@@ -1,0 +1,6 @@
+security: Tbill
+dividend: 10
+date:   11 04 94
+time:   13 00 00
+
+These are input parameters for exdiv.c, the dividend-crediting program.

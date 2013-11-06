@@ -1,0 +1,9 @@
+security: dollar
+endowment: 100000
+date:   11 27 96
+time:   16 00 00
+
+These are input parameters for initact.exe, which sets initial (or
+other) endowments of securities and money.
+
+Time must be in Pacific Standard Time.

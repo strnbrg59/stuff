@@ -1,0 +1,244 @@
+\twelvepoint
+\def\interline{12pt}
+\font\bfsl=cmbxsl10 at 12pt
+
+%**** this is for consecutively-numbered footnotes...
+\newcount\notenumber
+\def\clearnotenumber{\notenumber=0\relax}
+\def\note#1{%
+  \advance\notenumber by 1\baselineskip=12pt
+  \footnote{$^{\the\notenumber}$}{{\tenpoint #1\vskip -12pt}}
+  \baselineskip=\interline}
+\clearnotenumber
+%*********************
+
+\def\section#1{\vskip 4pt\noindent
+  {\baselineskip 9pt\relax\bf#1}\vskip 0pt\noindent}
+\def\subsection#1{\vskip 4pt\noindent
+  {\baselineskip 9pt\relax\bfsl#1}\vskip 0pt\noindent}
+
+\parskip=4pt
+\baselineskip=\interline
+\hsize=6.5 true in
+\vsize=8 true in\relax
+\hoffset= -.05 true in
+\voffset=.5 true in
+
+\headline{\tenpoint\sl BA130---Financial Management\hfil T.D.\thinspace Sternberg}
+
+\centerline{{\bf The Market Game, round 3}}
+
+\section{I. What's new}%
+There is no firm and no stock this time.  Instead, we will trade
+bonds, in the process endogenously determining the term structure of
+interest rates.  The purpose of this round is for you to learn how
+interest rates are determined in a free market, and how you can
+enrich yourself trading in that market.
+
+\section{II. Bonds}%
+We will trade three bonds.  One is a zero-coupon bond that matures in
+one week and pays \$10; we will call this the {\it bill}.  The other
+bonds are coupon bonds.  One of them pays \$2 at the end of the first
+week and \$10 at the end of the second: we'll call this {\it bond2}.
+The other coupon bond pays \$8 and \$10: we'll call this one {\it bond8}.
+
+In previous rounds of the game, Fed fixed the price of the one bond to
+reflect a constant per-week interest rate.  This time, Fed steps aside
+and lets you determine the whole term structure of interest rates 
+through your trading.
+				   
+\section{III. Money and forced sales}%
+Money plays the same role as in the past.  You use money to pay for
+securities you buy, while selling securities adds to your money
+holdings.  The objective is, as always, to have as much money as
+possible at the end of the game.  As before, the program will not let
+your money holdings go negative.  To prevent that, forced sales will
+take place in the bill market.
+
+\section{IV. Initial endowments}%
+You start with \$50 cash and no securities.
+
+\section{V. Strategy}%
+If you plan to play only a little, at least don't let your cash sit
+idle; buy some bonds and earn interest.  Beyond this, there are three
+more ways to make money---arbitrage, the bid-ask bounce, and
+speculation.
+
+\subsection{A. Arbitrage}%
+An arbitrage opportunty awaits you any time you can buy one of the
+three securities for less than you can sell its equivalent in terms
+of a combination of the other two.  You got some practice on the
+problem set.
+
+Just remember that because of the bid-ask spread, you cannot buy and
+sell securities at the same price.  Therefore in calculating
+arbitrage trades, be sure you take account of which prices are asks
+and which are bids.  For a really fast buck, execute arbitrage trades
+with market orders.  On the other hand, you'll get better prices with
+limit orders, but your orders may not all execute.
+
+\subsection{B. Bid-ask bounce}%
+The idea is to place limit orders so you repeatedly sell at the ask
+and buy at the bid, thereby earning the bid-ask spread every ``round
+trip''.  In past rounds of the game, this was not a significant source
+of income because you were limited to a very small number of orders.
+This time, however, you may place up to 100 orders each week in each
+security, a limit you will find hard to run up against since you still
+have only three hours of connect time per week.  Thus, you now have 
+an opportunity to be a real market maker and make real money at it.
+
+The market orders that will generate your bid-ask bounce income will
+come only in part from your classmates.  We have a new player this
+round, Poisson.  Poisson is a computer program that places random
+market orders all day long.  See section VI for details on Poisson's
+behavior.
+
+\subsection{C. Speculation}%
+
+\subsection{\quad 1. What determines the interest rate!?}%
+This round you're not speculating about Dow Jones index changes, but
+about the interest rates in our game.  While a natural first reaction
+is consternation and confusion over the apparent indeterminacy of our
+interest rates, on second thought there really is a great deal to go
+on.
+
+Start by ignoring the bonds; imagine our game ran for just one week,
+and that the bill were the only security.  This way we can talk about
+just one interest rate, and focus on the essentials.
+
+Our first insight is that the interest rate will not be negative; no
+one will lend at a negative interest rate because money offers an
+interest rate of zero.
+
+Having established that the interest rate will be at least zero
+percent, let's consider why it might actually be positive.  The
+interest rate is the rental price of money.  Now, who would want to
+rent money?  The answer is, anyone who hopes to be a market maker
+i.e. earn the bid-ask bounce.  Your friends the market makers will
+need a stockpile of money in order to avoid forced sales when their
+limit buy orders cross with market sells.  For example, suppose a
+market maker has only \$4 money, and her limit buy at \$9 crosses with
+a market sell.  The trade drops money to --\$5, which instantly
+generates a forced sale on behalf of the market maker.  Result: the
+market maker earned the bid-ask spread on the first trade, then lost
+it back on the forced sale.%
+\note{In fact, it's even worse for the market maker, because the forced
+sale will cross with the best limit buy order {\it below} hers on the
+order book.}
+
+For a market maker, then, a money stockpile is working capital.  The next
+question to ask is, how high an interest rate would a market maker pay
+for this working capital?  The market maker will look at how productive
+the working capital will be, which means how much income off Poisson
+it will support.  A small amount of working capital---say \$20---could
+pretty easily be parlayed into profits approaching 100\% per day.
+A larger amount of working capital will support profits larger in dollars
+but smaller as a percent of working capital.  Market makers will look
+at the interest rate and borrow money up to the point where the marginal
+productivity of the money equals the interest rate.  So, if the interest
+rate is low, market makers will borrow a great deal of money; if the
+interest rate is high they will borrow less.
+
+That, in other words, sums up the demand for money!  As for the supply
+of money, it's just a vertical line (i.e. infinitely inelastic) at the
+sum of everyone's initial endowments, plus whatever dribbles in at
+Poisson's expense.  Ultimately, the interest rate(s) will be whatever
+clears the ``rental'' market for money and part of your challenge to
+develop a feel for that.
+
+
+\subsection{\quad 2. How to speculate}%
+Suppose you think the short interest rate will be lower tomorrow.
+Then you should buy bills.  Or you can place a bet on the long
+interest rate by trading combinations of securities equivalent to a
+two-week zero-coupon bond.  In fact, bond2 has such a low first-week
+coupon that it approximates a two-week zero well enough if your
+purpose is just to bet on the long interest rate.  To bet on the
+future spot rate, put together a forward contract.
+
+You may find yourself speculating against your will if your attempt
+to be a market maker results in a large long or short position: be
+careful.
+
+\section{VI. Poisson, the noise trader}%
+A fictional character named Poisson (actually a computer program
+running out of my account) will place random market orders daily from
+8AM to 6PM, while the game is up and running.  Poisson provides an
+important element of real markets that would otherwise be missing from
+our game---noise trading.  A noise trader (in the real world) is a
+person who trades for other than speculative motives, or speculates
+but does so in an unintelligent fashion so as to appear random.  The
+principal nonspeculative motive for trading is consumption and saving;
+people sell securities when they want to finance a major purchase, and buy
+securities to save.  Seen in aggregate, the
+behavior of these traders appears random, hence the term {\it noise
+traders.}  Noise traders are an important feature in the real
+world, so it's time we simulated them in the game.
+
+Poisson's trading will benefit you.  The benefit is that if you have
+a good bid or offer on the limit order book, you can expect it to
+cross even if none of your classmates think you're being particularly
+generous.  Poisson's average order size is 10 units,%
+\note{Poisson will be active in all three markets.}
+alternating randomly between buys and sells, and he trades about
+every five minutes.  The process of buying high (at the ask) and
+selling low (at the bid) ensures Poisson will lose money to those of
+you with the most competitive bids and asks.
+
+Poisson will not trade if the bid-ask spread is wider than 10\% of the
+lowest ask; he's random but not stupid.
+
+\section{VII. Fed}%
+Fed will try hard to stay out of the action.  Nonetheless, someone has
+to make sure the bid side of the bill order book never empties out
+entirely (for if it did, forced sales would fail to clear).  Fed will
+therefore place large ``backstop'' orders at prices so ridiculously low
+they should always be below bids from real players.  Hopefully, the
+backstop orders will never get hit.
+
+\section{VIII. Grading}%
+One-half of your grade rides on your performance in the game.  This
+is based, as before, on your final wealth in standard deviations from
+the mean.  There will, however, be a slight change to the way that
+standard deviation and mean are calculated: they will be calculated
+after I discard the top and bottom 5\% of the distribution. This
+should result in a more equitable and sensitive grading scale which
+will not be unduly influenced by a few people who realize
+extraordinarily large gains or losses.
+
+A write-up will determine the other half of your grade.  I will
+announce details of the write-up later.  For now, to ensure you will
+have something to write about, just make sure you clear at least one
+trade in each market, in each week.
+
+\section{IX. What happens at the end of the first week}%
+At the end of the first week, the bill and bonds pay their first (and
+in the bill's case last) coupons.  At the same time, the order books
+are reduced by the amounts of the coupons (just as in the stock
+markets).  The bill market shuts down, with subsequent forced sales
+routed to the bond8 market.  
+
+\section{X. Market manipulation and irresponsible play}%
+With as many as 300 orders at your disposal, you can do yourself alot
+of damage.  Wild, irresponsible play, or bald attempts to manipulate
+prices, will also detract from your classmates' learning experience.
+For these reasons, I reserve the right to shut down the account of
+any person who I deem to be out of control, or so deep in the hole as
+to have lost any incentive to play responsibly.
+
+\section{XI. Timetable}%
+\medskip
+\settabs 2 \columns
+\+7AM, Tuesday April 26		&game begins\cr
+\smallskip
+\+8AM -- 6PM daily		&Poisson trades in all three markets\cr
+\smallskip
+\+7AM, Tuesday May 3            &bill pays \$10\cr
+\+		                &bond2 pays \$2\cr
+\+				&bond8 pays \$8\cr
+\smallskip
+\+7AM, Tuesday May 10		&trading ends\cr
+\+				&bond2 pays \$10\cr
+\+                              &bond8 pays \$10\cr
+
+\bye

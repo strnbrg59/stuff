@@ -1,0 +1,81 @@
+#!/usr/local/bin/expect
+
+################ Definition of TCL random function ################
+proc random_init {seed} {
+	global _ran;
+	set _ran $seed;
+}
+
+proc urand {} {
+	global _ran;
+	set period 259200;
+	set _ran [expr ($_ran*7141 + 54773) % $period];
+    expr $_ran%20;
+} 
+
+proc absval { x } {
+	if { [expr $x < 0] } {
+		expr 0 - $x;
+	} else {
+		expr $x;
+	}
+}
+############### end of TCL random function definition #############
+
+
+## Spawn aqc and get into the order Tbill menu.
+## This proc has to be followed by something else, as we are left
+##	with aqc running.
+proc enter_aqc { player } {
+#	spawn aqc;
+## If you "spawn aqc" in here, aqc becomes kind of a "local" process,
+## which other procs apparently can't interact with.
+	expect "knickname:";     # It doesn't see "knickname: " (w/ space)
+	send "$player\r";
+	expect "password:";
+	send "shbolet\r";
+	expect "q to quit";
+	send "T\r";
+} 
+##--------------------------------
+
+proc market_order { n_units } {
+## Has to be called after enter_aqc{}
+	expect "x to exit"	# Message inside security menu.
+	send "o\r"
+	expect "limit order"
+	send "m\r"
+	expect "sell:"
+
+	if { $n_units < 0 } {
+		send "s\r";
+	}	else {
+		send "b\r";
+	}
+
+	expect "units:";
+	send "[absval $n_units]\r";
+	expect "(y|n)";
+	send "y\r";
+} 
+##---- proc market_order ------------------
+
+proc exit_aqc {} {
+	expect "x to exit";
+	send "x\r";
+	expect "q to quit";
+	send "q\r";
+	expect		# Without this, aqc doesn't return.
+} 
+##--------------------------------
+
+random_init 49;
+spawn aqc;
+enter_aqc "andy"; 
+for { set i 0 } { $i < 14 } { incr i 1 } {
+#	sleep 1;
+	set amt [ expr [urand] - 10 ]
+	market_order $amt;
+}
+exit_aqc;
+

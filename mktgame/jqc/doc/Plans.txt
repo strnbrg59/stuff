@@ -1,0 +1,76 @@
+-- Automated clients --
+
+1. NoiseTrader: place random bids and asks at the market price.
+
+2. MarketMaker: place bids and asks to maintain a narrow spread.
+
+3. Populator: place a bunch of bids and asks, just to get something 
+   on the book quickly.
+
+
+-- GUI --
+
+Basic features now implemented.
+
+-- Notification --
+Use the server call-back feature (UnicastRemoteObject.exportObject()), to
+alert the client that something has happened -- a transaction, a change to
+the order book, etc.
+
+Order book pane darkens when notification is received.  Click on order book
+pane to update display.
+
+Notify only the affected market.
+
+
+-- Properties file for constants --
+Things like maximum price, maximum order size, widths to display
+trader names, units and prices.
+
+-- Passwords --
+
+A name-password hash table.
+
+Implementation:
+placeOrder() calls Password.verifyTrader(), which loads a 
+Properties object from a file.
+
+
+-- Client loop --
+Accept and interpret commands.  So we don't have to fire up the java
+interpreter for every single thing we want to do.
+
+
+-- Display from client --
+Instead of printing everything from the server, have the server pass
+strings back to the client.
+
+Implemented.
+
+-- Stand-alone (non-rmi) version --
+Make it possible to test everything without using a client-server
+setup.  Put the guts of the client in a class that can also be invoked
+from a driver visible to the server.
+
+I tried, and so far have failed.  The main() method in the stand-alone
+class has to say
+
+    	    RemoteMarketServer market = new RemoteMarketServer();
+
+and the compiler insists that RemoteException (the exception that
+RemoteMarketServer ctor throws) must be caught, "or it must be
+declared in the throws clause of this method".  I tried that, but it
+still wouldn't compile.
+
+-- Persistent data --
+
+-- Multiple securities, forced sales when money < 0 --
+
+We have multiple securities.  But no forced sales yet.
+
+-- Appletization --
+
+Be able to enter the market from a web browser.
+
+-- Tcl/Tk front end --
+

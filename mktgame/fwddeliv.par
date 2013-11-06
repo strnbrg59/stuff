@@ -1,0 +1,7 @@
+cash: dbond
+dirpath: fwdmkt
+date: 12 21 93
+time: 08 01 02
+
+These are parameters for the forward delivery program.  "cash" is the
+name of the underlying security for the forward contract.

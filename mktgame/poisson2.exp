@@ -1,0 +1,23 @@
+#!/usr/local/bin/expect
+spawn aqc
+expect "knickname:"     # Interesting: it doesn't see "knickname: " (w/ space)
+send "poisson\r"
+expect "password:"
+send "shbolet\r"
+expect "q to quit. >"
+send "q\r"
+#expect "x to exit. >"
+#send "o\r"
+#expect "limit order"
+#send "m\r"
+#expect "sell:"
+#send "b\r"
+#expect "units:"
+#send "1\r"
+#expect "y|n)"
+#send "y\r"
+#expect "x to exit. >"
+#send "x\r"
+#expect "q to quit. >"
+#send "q\r"
+expect		# Without this, aqc doesn't return.

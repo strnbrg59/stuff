@@ -1,0 +1,350 @@
+\twelvepoint
+\def\interline{12pt}
+\font\bfsl=cmbxsl10 at 12pt
+
+%**** this is for consecutively-numbered footnotes...
+\newcount\notenumber
+\def\clearnotenumber{\notenumber=0\relax}
+\def\note#1{%
+  \advance\notenumber by 1\baselineskip=12pt
+  \footnote{$^{\the\notenumber}$}{{\tenpoint #1\vskip -12pt}}
+  \baselineskip=\interline}
+\clearnotenumber
+%*********************
+
+\def\section#1{\vskip 4pt\noindent
+  {\baselineskip 9pt\relax\bf#1}\vskip 0pt\noindent}
+\def\subsection#1{\vskip 4pt\noindent
+  {\baselineskip 9pt\relax\bfsl#1}\vskip 0pt\noindent}
+
+\parskip=4pt
+\baselineskip=\interline
+\hsize=6.25 true in
+\vsize=8 true in\relax
+\hoffset=.1 true in
+\voffset=.5 true in
+
+\headline{\tenpoint\sl BA133---Investments\hfil T.D.\thinspace Sternberg}
+
+\centerline{{\bf The Market Game, round 1}}
+
+\section{I. Introduction}%
+You have been handed 10 shares of stock, \$100 cash and no bonds.  By means of
+a computer program, you may trade stock and bonds with your
+classmates.  Your goal is to end the game as wealthy as possible.
+
+\section{II. The stock}%
+Your stock, together with that of all your classmates, constitutes
+the equity of a certain firm.  That firm has the following
+characteristics.  It exists for just under three days---6PM Monday July
+11, through 1PM Thursday July 14.  It earns income once---at 1PM
+Thursday---and pays it all out (immediately) as a dividend.  The
+dividend equals \$1000 times the sum of the absolute values of the
+percent changes in the Dow Jones Industrial Average over the three
+NYSE trading days Tuesday, Wednesday and Thursday.
+
+To make that definition clearer, here is an example.  Suppose the
+DJIA closing prices turn out to be as follows.
+
+\bigskip
+\settabs 5 \columns
+\+& Day         &   DJIA      & \% chg (absolute value) &\cr
+\+& 7/11        &  3642.11    &  --- &\cr
+\+& 7/12        &  3624.60    & 0.48 &\cr
+\+& 7/13        &  3676.71    & 1.44 &\cr
+\+& 7/14        &  3665.25    & 0.31 &\cr
+\bigskip
+
+If these turn out to be the closing Dow prices, our firm would pay
+out a dividend of
+$$
+\$480+\$1440+\$310 = \$2230.
+$$
+To find the dividend
+per share divide these numbers by 440 (44 people enrolled in the
+course times 10 shares per person).%
+\note{I won't let add/drops during the time the game is on affect the
+number of shareholders.}
+
+That determines how much each of your shares is worth.  But you
+didn't know what that was going to be, when the game began.  And
+that's how it is with real stocks in the real world; they're valuable
+because they pay dividends, but the dividends aren't known in
+advance.  They can be guessed at and forecasted with varying degrees
+of accuracy and sophistication, but there is always some uncertainty.
+This uncertainty gets slowly resolved over time, and that is the main
+reason stock prices fluctuate.  Every day (indeed every hour) some
+new information arrives and you are able to improve your prior
+estimate of the firm's earnings.  Likewise in the real world: every
+day brings news that helps stock analysts improve their assessments
+of how profitable a firm will be this quarter, this year, and beyond.
+In both markets---ours and the real world's---news will cause stock
+prices to change.%
+\note{The most obvious dissimilarity with the real world is our
+firm's unusual ``production function''; in the real world, firms
+produce hamburgers or haircuts, not ``dow days''.  Alas, it's
+impractical to produce real things in class!  So instead we turn to
+the DJIA to essentially generate random news and cash flows for us.
+The advantage of using the DJIA rather than a computer-generated
+stream of random numbers is that the DJIA is a much-watched financial
+index and you will benefit from the experience of being a Dow-watcher
+for a while.}
+
+In the real world, when two people differ in the value they place on
+a share of stock, they will want to trade.  Stock exchanges such as
+the NYSE, the AMEX, and the NASDAQ facilitate such trades.  In our
+class, you may trade your stock by means of a computer program.
+
+\section{III. Bonds}%
+You don't have to invest all your money in stocks; we have two
+securities in this game, and the other one is a bond.  Unlike the
+stock, the bond's payoff is not risky.  Every bond you own will pay
+you \$10 at the end of the game---guaranteed.
+
+Unlike in the introductory round, the bond market will not be rigged!
+You are free to buy and sell bonds; presumably you will buy bonds when
+you believe them to offer a greater risk-adjusted return than stocks.
+
+Equilibrium in the bond market will determine the interest rate in
+our economy.  Thus, suppose you observe at 1PM on Tuesday July 12
+that the price of bonds is \$5.79.  There being two more days to go
+until the \$10 payout on the bonds, the interest rate is 
+$$
+\big((10/5.79)^{1/2} - 1\big)\times 100\% = 31.42\%
+$$
+per day.
+
+\section{IV. Money (Dollars)}%
+Money here is like cash in your pocket; it earns no interest.  Its
+role is that of a means of exchange.  Anytime you buy stocks or
+bonds, their price is deducted from your money holdings.  Sell stocks
+or bonds and your money increases.%
+\note{Of course, you can't get rich just selling stocks and bonds,
+because while the sales will increase your money holdings, you will
+owe money on the stocks and bonds you sold.  Just as you receive \$10
+for every bond you own at the end of the game, you will pay \$10 for
+every bond you are short, should your bond holdings be negative.
+Likewise, you pay dividends on shares you are short.}
+
+Should you have insufficient money for a stock or bond purchase, the
+computer will automatically place an order, in your name, to sell
+bonds in a quantity sufficient to raise the money you need.  The
+computer will never let your money holdings go negative; negative
+money holdings would amount to interest-free loans. 
+
+\section{V. Money, working capital, and the equilibrium interest rate}%
+You're probably wondering what fundamental forces will determine the
+equilibrium interest rate in this economy.  While a natural first
+reaction is consternation and confusion over the apparent
+indeterminacy of our interest rates, on second thought there really is
+a great deal to go on.
+
+Our first insight is that the interest rate will not be negative; no
+one will lend at a negative interest rate because money offers an
+interest rate of zero.
+
+Having established that the interest rate will be at least zero
+percent, let's consider why it might actually be positive.  The
+interest rate is the rental price of money.  Now, who would want to
+rent money?  The answer is, anyone who hopes to be a market maker
+i.e. earn the bid-ask bounce.  Your friends the market makers will
+need a stockpile of money in order to avoid forced sales when their
+limit buy orders cross with market sells.  For example, suppose a
+market maker has only \$4 money, and her limit buy at \$9 crosses with
+a market sell.  The trade drops money to --\$5, which instantly
+generates a forced sale on behalf of the market maker.  Result: the
+market maker earned the bid-ask spread on the first trade, then lost
+it back on the forced sale.%
+\note{In fact, it's even worse for the market maker, because the forced
+sale will cross with the best limit buy order {\it below} hers on the
+order book.}
+
+For a market maker, then, a money stockpile is working capital.  The
+next question to ask is, how high an interest rate would a market
+maker pay for this working capital?  The market maker will look at
+how productive the working capital will be, which means how much
+income it will support.  A small amount of working capital---say
+\$20---could pretty easily be parlayed into profits approaching 100\%
+per day.  A larger amount of working capital will support profits
+larger in dollars but smaller as a percent of working capital.
+Market makers will look at the interest rate and borrow money up to
+the point where the marginal productivity of the money equals the
+interest rate.  So, if the interest rate is low, market makers will
+borrow a great deal of money; if the interest rate is high they will
+borrow less.
+
+That, in other words, sums up the demand for money!  As for the
+supply of money, it's just a vertical line (i.e. infinitely
+inelastic) at the sum of everyone's initial endowments.  Ultimately,
+the interest rate(s) will be whatever clears the ``rental'' market
+for money and part of your challenge to develop a feel for that.
+
+\section{VI. How to use the program}%
+\subsection{A. Getting in}%
+Log into your e-mail account, just as you did to send me your
+password.  At the main menu (where you chose ``Pine'' to send me
+mail), type a capital $X$.  The screen will go blank except for a
+short message like {\it Haas(1)}.  When you see that, type {\it aqc}
+and hit return.
+
+From here on, control passes to our game.  It prompts you for your
+knickname; type that in.  It then prompts you for your
+password---that's the password you e-mailed me last week---type that
+in, too.  (For your security, it won't appear on the screen, but
+there's a danger in this, too; it's easy to mistype your password, so
+if the computer rejects it, try again.)
+
+\subsection{B. How to play}%
+Basically, there are two sorts of things you can do in this game.
+You can place orders, and you can obtain information.  All your
+options are listed for you in two menus.
+
+Use the top-level menu to select which security you'd like to look at
+or trade---the stock or the bond.%
+\note{A third option in the main menu---`\$'---gives you your money
+holdings.  The $f$ option lets you ``finger'' someone, i.e. check on
+his or her portfolio.} Once you pick one of the two securities, you
+drop into the other menu, which presents you with the following
+choices...
+
+\item{b.}Check limit order {\bf b}ook.
+Bids are on the left, offers on the right.  They are ordered from
+best to worst.  You see the knickname of the person who placed the
+order, the number of shares or bonds ordered, and the price.
+
+\item{o.}Place an {\bf o}rder.
+This option prompts you for the type of order (market/limit), the
+side you want to take (buy/sell), the number of shares or bonds, and
+the price (for limit orders).  If you want to trade with the best bid
+(offer), place a market order to sell (buy).  A limit order will not
+cross with the other side of the order book, regardless of the price
+you enter.
+
+\item{c.}{\bf C}ancel one of your orders.
+Limit orders, that is; market orders execute as soon as you place them.
+Limit orders stay on the limit order book until they cross with a market
+order, or you cancel them, or the game ends.
+
+\item{a.}{\bf A}ccount activity.
+Here you can see a record of all the orders you placed, and what
+became of them---what traded, what didn't, and what you cancelled.
+You also see where your holdings of the security stood after each
+event.  A {\it C} in the first column indicates a cancelled order. A
+{\it F} indicates an forced sale of bonds (which is done for you if
+you're short of money).
+
+\item{t.}{\bf T}icker history.
+Chronological list of all trades, showing player's knickname, number
+of shares or bonds traded (minus sign indicates a sale), price, and
+the number of shares or bonds in the person's portfolio after the
+trade.
+
+\item{p.}{\bf P}rospectus.
+This is a short statement that describes the security and the
+determinants of its payoffs.
+
+\item{q.}{\bf Q}uit.
+If you want to leave, type {\it logout}, too.  If you want to use
+other Haas computer services, type {\it menu}.
+
+\subsection{C. Availability}%
+The program is available to you 24 hours a day until the game ends.
+You may watch the action as much as you like, but you are limited to
+two hours of playing time.  ``Finger'' yourself if you want to know
+how much time you've used up.
+
+\section{VII. Grading}%
+Do whatever you think will make you rich at the end of the game.
+Grading depends on your standing relative to your classmates.  You
+start at a B+.  For every 1/2 standard deviation%
+\note{Calculated after throwing away the top and bottom 5\% of the data.}
+above
+(below) the mean you gain (lose) 1/3 of a grade.  For example, if you
+finish 1.51 s.d. above the mean you will have an A+.
+
+\section{VIII. Strategy hints}%
+First, keep your money invested in stocks or bonds; money by itself
+earns no interest.  The problem of how to allocate your money over
+stocks and bonds is straightforward in principle: forecast the
+dividends yet to come and discount at the interest rate, buying stock
+if it's undervalued in the market, selling it if it's overvalued.
+
+That's the classic NPV reasoning you already know about.  Beyond that, there
+are a couple of tactical issues that could make a difference: should you
+place market or limit orders, and when should you do so?
+
+The choice between market and limit orders presents a tradeoff.  A
+market order gets executed instantly, enabling you to capitalize on
+some temporary mispricing.  A limit order, on the other hand, could
+buy or sell you the security at a better price, but you have no
+assurance that a limit order will execute at all.
+
+Timing turns on several considerations.  Certainly, if the DJIA does
+something dramatic and you think you're one of the first people to
+hear, that's the time to buy stock; there will be limit buy orders
+reflecting a now-underestimated DJIA volatility.  Another time you
+could catch some people napping is at the NYSE's opening bell (9:30AM
+New York time).  The Dow often makes its biggest moves of the day
+during the opening half-hour.  OK, maybe you don't feel like getting
+up that early.  If so, consider cancelling your limit orders before
+you go to bed.
+
+One profitable but risky strategy is to set yourself up as a
+marketmaker.  You do this by placing a large bid and a large offer
+inside the spread.  If you are successful, then every time someone
+places a market order, you are on the other side of the deal and you
+repeatedly buy low (at your bid) and sell high (at your offer).  But
+beware: there's no guarantee your bids and offers will execute in the
+same amounts.
+
+\section{IX. Poisson, the noise trader}%
+A fictional character named Poisson (actually a computer program
+running out of my account) will place random market orders daily from
+8AM to 6PM, while the game is up and running.  Poisson provides an
+important element of real markets that would otherwise be missing
+from our game---noise trading.  A noise trader (in the real world) is
+a person who trades for other than speculative motives, or speculates
+but does so in an unintelligent fashion so as to appear random.  The
+principal nonspeculative motive for trading is consumption and
+saving; people sell securities when they want to finance a major
+purchase, and buy securities to save.  Seen in aggregate, the
+behavior of these traders appears random, hence the term {\it noise
+traders.} Noise traders are an important feature in the real world,
+so it's time we simulated them in the game.
+
+Poisson's trading will benefit you.  The benefit is that if you have
+a good bid or offer on the limit order book, you can expect it to
+cross even if none of your classmates think you're being particularly
+generous.  Poisson's average order size is 10 shares or bonds,%
+\note{Poisson will be active in both markets.}
+alternating randomly between buys and sells, and he trades about
+every five minutes.  The process of buying high (at the ask) and
+selling low (at the bid) ensures Poisson will lose money to those of
+you with the most competitive bids and asks.
+
+Poisson will not trade if the bid-ask spread is wider than 10\% of the
+lowest ask; he's random but not stupid.
+
+\section{X. Fed}%
+In the practice round, Fed rigged the bond market to support it at a
+constant interest rate.  This time Fed's only role will be to make
+sure there's {\it something} on the bid side of the bond market at
+all times.  That assures that you will always be able to borrow money.
+However, Fed's interest rate will be very high.  You have to hope your
+classmates will place bids at lower interest rates (i.e. higher prices).
+
+\section{XI. Timetable}%
+The precise timing of events is important, so here it is again, in summary.
+All times are Pacific coast times.
+\medskip
+\settabs 2 \columns
+\+6PM, Monday July 11	&trading begins.\cr
+\smallskip
+\+1PM Tuesday--Thursday   &NYSE trading ends, closing DJIA is determined.\cr
+\smallskip
+\+1PM, Thursday  &Stocks pay dividends.\cr
+\+               &Bonds pay \$10.\cr
+\+               &Your final wealth is your final money.\cr
+\+		 &Game ends.\cr
+
+\bye

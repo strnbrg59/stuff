@@ -1,0 +1,11 @@
+The goal now is to make aqc run on the WWW.
+
+1. 	A problem that was minor in the past becomes significant now.  This
+is the matter of players checking the order book, placing a market order,
+then finding that the limit order they wanted has been taken.  
+	The solution: cause limit orders to cross with each other, if the 
+highest limit bid is >= the lowest limit ask.  This way, the worst thing
+that can happen, when you try to snap up a very low ask, is that your
+(limit) bid just stays on the book.
+
+2. Security is much improved, now that aqc doesn't have to run suid.

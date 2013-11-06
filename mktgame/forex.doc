@@ -1,0 +1,155 @@
+Below is a log of the process by which I modified the standard aqc
+system to handle multiple currencies...
+
+
+*********************************************************************
+We're going to modify the aqc system to handle securities denominated
+in several currencies, and spot and forward currency markets.
+
+Steps...
+
+1. Create a new structure,
+typedef struct SECURITY {
+	char name[NAMELEN+1];   /* the security's name */
+    char currency[NAMELEN+1]; /* money that's spent to purchase this security */
+} SECURITY;
+
+...and a global variable N_sec (# of securities).
+
+1a. Read data on the SECURITY structures from a file (security.par), and
+load into a global variable SECURITY **Securitydata.  Making it global
+like this is much better than passing SECURITY *'s where we've been
+passing the mere names of securities.  That gets into overly-long parameter
+lists, and lots of functions getting SECURITY *'s passed to them when
+they don't need this information, except to pass it down another level.
+Much better to keep passing char *security around, and let the functions
+that really need to know about a security's currency
+look it up in the global Securitydata.  (That can be done with find_sec(),
+now in util.c.)  DONE.
+
+2. Replace NSEC with N_sec everywhere.  DONE.
+
+3. Remove DECL_SECNAMES everywhere, and compensate with access to
+**Securitydata. DONE.
+
+4. Replace all instances of "cash" with a reference to
+Securitydata[i]->currency, where i refers to the appropriate security
+(found by find_sec() ). DONE.
+
+4.5. Start calling it money rather than cash. DONE.
+
+5. Direct cash transactions into any currency we want. DONE.
+(although we're not able to run initact.exe on other currencies yet).
+Forced sales still take place in the "money" market, so deficits in the
+pound market are never remedied.
+
+6. Load from file a database on the various kinds of
+currencies, just as we now load Securitydata.  We need this so the
+program can (a) select the various kinds of currency for displaying
+all_holdings, (b) looking over all currencies when looking for
+necessary forced sales, and (c) to know what market to do the forced
+sale in.  DONE.
+
+We should probably store currency data and transactions records in the
+same sort of structures we use for proper securities, because eventually
+we'll want to be able to trade currencies.  DONE.
+
+6. Direct forced sales into markets as indicated for each currency as
+shown in security.par.  DONE.
+
+7. Get initact, exdiv, poisson and discwind to run again.  DONE.
+
+8. Replace "PORTFOLIO" and "portf" with "HOLDINGS" and "holding" everywhere
+in *.c and *.h, and rename portf.c to holdings.c.  DONE.
+
+9. All that remains is to be able to trade currencies (and have
+poisson do so as well).  We should discontinue the MONEY structure;
+its purpose has been to track activity in a money market, but now we
+need more; we need to know not just how much money someone held and
+the trades that brought that about, but also about orders placed in
+the money market (i.e. for spot forex trades).  So our cashact files
+should store triples just like the normal securities' .act
+files--triples of ORDER, TRADE and HOLDINGS.  (MONEY now is the
+equivalent of just TRADE and HOLDINGS.)
+
+Maybe a good way to think about this is, What would it take for us to
+pass "pound" as the argument to handle_trade()?  handle_trade() would
+look for an order book ---- OK, so we need an order book for pounds
+---- then, for a market order, it would clear a trade and try to
+record it in two places--an .act file for pounds, and a MONEY .act
+file for dolars, "dolar" being the ->currency field for SECURITY
+pound.
+
+Note there would be an asymetry; there would be an order book for the
+pound market but not for the dollar market.  So in the main menu,
+when we chose "pound", we'd see a security-level menu with all the
+options--o, a,t,c,s,p--but when we chose "dolar" we'd see just the
+listing of activity we see now for a MONEY.
+
+One important difference between carrying out a trade in a currency
+market and in a normal security market is that in the currency market
+we don't want to allow negative holdings (whereas we don't mind short
+positions in a normal security).  But this won't be hard to take care
+of; we check for negative money as it is; we'll just have to check
+for it in two, rather than just one, currencies when the trade was a
+forex trade.
+
+9a. Start by adding a field to TRADE--char *other_sec--to indicate
+what we traded for.  In the case of proper securities, this is always
+their currency, but for a currency, this could be either another currency
+or a proper security denominated in that currency. DONE.
+
+9b. Now change the "int shares" fields of ORDER, TRADE and HOLDINGS into
+"double amount", since with currency holdings, fractional amounts will
+be the norm.  But be sure to keep displaying integer values for proper
+securities, and to reject any but integer quantities when taking an order
+from the keyboard.
+  DONE for ORDER.
+  DONE for TRADE.
+  DONE for HOLDINGS.
+
+9c. Time to revamp handling of money.  Start by abolishing the MONEY
+structure; from now on, the .act files for currencies should have the
+same format as those for proper securities, i.e. triples of ORDER,
+TRADE, HOLDINGS.
+  Initact.C done.
+
+  We've got recordkeeping working, treating currencies as securities.
+However, forced sales aren't happening (because we haven't told the
+forced sale functions that the format of the currency .act files is
+no longer MONEY structures but triples of ORDER,TRADE,HOLDINGS.
+
+9d. Forced sales operational in AQC and EXDIV.
+
+9e. Get Poisson running. DONE.
+
+9f. Trade currencies, finally.  The only thing we still need to make
+this work is to allow for forced sales if _either_ involved currency
+develops a negative balance.
+
+9g. Clean up the displays.  For currencies that have their own order
+book, we need two modes to display activity: 'a' to show trades and
+orders in the forex "mode" and using the same format we've been using
+in get_ts_act(); and 'h', which should have the format of the '$',
+i.e. showing all trades in securities denominated in this security,
+including forex trades.  The reason we shouldn't try to show everything
+under the 'a' option is that while the "prices" of forex trades take
+the other currency as numeraire, prices of trades in proper securities
+take as numeraire the native currency.  This would be confusing.  And
+we can't start denominating forex trades in terms of the native currency
+because that would mean the ordering of the bid and ask sides of the
+order book would be inverted from what we're accustomed to, and we'd
+need extra code to put the correct limit orders at the tops of the sides
+of the order book. DONE.
+
+10. Arrange for forced sales to take place in the native market, too,
+when that is a currency.  I.e. if s.o. sells more yen than he has, in
+the yen market, that should trigger a forced sale of yen bonds. DONE.
+
+11. Set up zstats again, prompting the user for an exchange rate to use.
+DONE.
+
+12. Automate user menus, so you can change the set of securities without
+that requiring any change to the C code.  DONE.
+
+13. Get fwddeliv working again.

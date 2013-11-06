@@ -1,0 +1,21 @@
+				Security Concerns We Must Deal With
+
+1. The password file, even though it's not readable by the "world", does
+lie in the cgi-bin directory.  Therefore anyone (on rahul, anyway) can
+simply copy the password file to himself, and look at it there.
+
+2. Virtual html forms must identify the user not just by name but by
+password as well.  Otherwise anyone can execute an order for anyone
+else by just invoking CGIbldordr and sending it the user's name in
+stdin.  Eventually, you should encrypt the password using some
+technique that produces a different encrypted version every time, so
+that if someone intercepts the transmission, he can't retransmit and
+execute on behalf of someone else.
+
+I am beginning to remedy this problem.  I've started with disp_choices1()
+(called by CGInamepwd), making it send the password as a hidden variable.
+Now I'm working on the program that is the ACTION invoked by the virtual
+html file produced by disp_choices1().
+
+
+

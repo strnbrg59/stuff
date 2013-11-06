@@ -1,0 +1,31 @@
+N_sec: 4
+
+name: stock
+currency: dollar
+menulisting: stock s
+option: NULL c 0
+maxorders: 100
+
+name: bond
+currency: dollar
+menulisting: bond b
+option: NULL c 0
+maxorders: 100
+
+name: option
+currency: dollar
+menulisting: option o
+option: stock c 6
+maxorders: 100
+
+name: dollar
+currency: dollar
+menulisting: dollar $
+forcemkt: bond
+maxorders: 20000
+
+*********************************************
+
+
+
+

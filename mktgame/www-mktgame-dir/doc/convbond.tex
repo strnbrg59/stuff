@@ -1,0 +1,166 @@
+\input workpap
+\parskip=4pt
+\parindent=0pt
+\hsize=6.25 true in
+\vsize=8 true in\relax
+\hoffset=.1 true in
+\voffset=.5 true in
+
+\headline{{\tenpoint\sl BA133---Investments\hfil T.D.\thinspace Sternberg}}
+\footline{\hfil\folio\hfil}
+
+\centerline{{\bf The Market Game, Round 2}}
+
+\section{I. What's new}%
+Convertible corporate bonds: you have your choice between a \$10
+end-of-game payoff, on the one hand, and a share of stock, on the
+other.  Our other securities are stock, a call option on the stock,
+and the kind of risk-free bonds we had last time.
+
+\section{II. Stock}%
+As in round 1, everyone starts with ten shares.  The firm's earnings
+are also the same as in round 1---\$10,000 times the sum of the
+absolute values of the percent changes in the Dow Jones Industrial
+Average over five days.
+
+Now here are the differences.
+
+\subsection{a. Fewer shares outstanding} 
+We are down to seventy-six
+students, so there are initially 760 shares outstanding.
+
+\subsection{b. Bond claims are senior}
+There are also 760 convertible bonds outstanding, and they have to be
+paid off before there can be any dividend.  As in the real world,
+shareholders are the {\it residual claimants}; they get everything
+left after the more senior claims are paid.
+
+\subsection{c. Bond conversion dilutes stock}
+Holders of convertible bonds may trade in (``convert'') their bonds
+one-for-one for shares.  Therefore, if all the bonds get converted,
+there will be 760 more shares to spread the dividend over.  (Of
+course, there would be more dividend to go around then, since
+converted bonds have no more claims as bonds; conversion extinguishes
+them.)
+
+Here is an example.  Suppose the sum of the absolute percent changes
+in the DJIA is 7.00.  Earnings then are \$70,000.  If none of the
+bonds are converted, \$7600 goes to bondholders and the remaining
+\$62,400 gets divided up among the 760 shares, for an \$82.11
+dividend per share.
+
+In such a situation, however, the bonds will be converted because the
+dividend is greater than the \$10 payoff to unconverted bonds.  With
+all the bonds converted, the entire \$70,000 is available as a
+dividend---unfortunately spread over 1520 shares.  That makes the
+per-share dividend \$46.05.
+
+This example has assumed a total DJIA change of 7\%, which is rather
+high.  At more moderate levels of DJIA volatility, the convertible
+bonds will remain unconverted.  For example, if the total DJIA change
+is 1.00\%, the dividend per share will be
+$$
+{10,000 - 760\times10\over 760} = \$3.16.
+$$
+
+A really tranquil week will leave no money at all for dividends, and
+result in a partial bond default.  Suppose the DJIA moves by just 0.5\%.
+That makes earnings a mere \$5000, which is short of the bonds' \$7600
+face value.  Each bond then receives \$6.58, and the shares get nothing.
+
+Do you remember when I tried to sound intelligent by saying stock is
+a call option on the firm's assets?  Now you know what I meant.%
+\note{Almost.  Bond conversion dilutes the shares.  So to be precise,
+our stock amounts to a {\it combination} of call options: carefully
+draw a payoff diagram and you'll see.}
+
+\section{III. Convertible Bonds}%
+You start with ten convertible bonds.  Each one entitles you to \$10
+or the firm's earnings divided by the number of outstanding
+convertible bonds, whichever is less.  Optionally, you may convert
+each bond you own into a share of stock.  In that case, your
+converted bond disappears and in its place you own one share of
+stock.  The conversion option is a European call on the stock, with
+``exercise price'' equal to the bond itself.%
+\note{In the real world, it's common for the conversion option to
+yield more or less than exactly one share.  Our game avoids this
+superfluous complexity.}
+
+Since the convertibility option is European, you won't see the `e'
+option.  I will see to converting all the bonds, at the end of the
+game, if and only if the dividend exceeds \$10.  Thus at the end of
+the game, there will be either 760 convertible bonds, or no
+convertible bonds.
+
+For some examples, reread section II above.
+
+\section{IV. Call options}%
+These are American call options on the stock, with exercise price
+\$10.  I will exercise your unexercised in-the-money options at the
+end of the game.  In that case, you will pay the exercise price to
+receive whatever dividend each share of stock has coming to it.
+
+The firm has no involvement with these call options.  Therefore,
+exercise does not affect the number of shares.
+
+\section{V. Treasury Bills}%
+These are what we called ``bonds'' last time.  (I've changed the name
+to avoid confusion with the convertible bonds.)  As before, Fed will
+rig this market so the prices reflect a 100\% per week interest rate.
+
+
+\section{VI. Initial endowment} %
+You start with \$100 of money, ten shares, ten convertible bonds,
+no call options, and no Treasury Bills.
+
+\section{VII. Limits on size and number of orders}%
+As before, you may place no more than ten orders (market plus limit)
+in the ``free'' markets---stocks, convertible bonds, and call
+options.  You may place up to 100 orders in the Treasury Bill market.
+See the handout for the first market game (under section VII), if you
+aren't sure about how I count orders placed.
+
+The largest market order you may place is one for fifty units of any
+security.  The largest limit order you may place is one for 150 units
+of any security.  
+
+\section{VIII. Grading}%
+Grading works the same as last time.%
+\note{You start at a B+.  For every 1/2 standard deviation above
+(below) the mean you gain (lose) 1/3 of a grade.}
+
+As an added incentive for rational play, I hereby pledge to include,
+in the final exam, the following questions that relate to this round
+of the game.  ``Draw the payoff diagram for the stock.''  ``What
+combination of call options would be equivalent to a share of
+stock?''  ``Compare the convertibility option to the simple call
+option; should they have been worth the same?''  ``Draw a binomial
+tree to value the stock.  Explain how you would proceed.''  ``Draw a
+binomial tree to value the call option.''  ``Draw a payoff diagram for
+the convertible bond.''
+
+\section{IX. Strategy hints}%
+First, review the strategy hints from last time; they all apply.
+Beyond that, think about the exam questions above.  James and I will
+be glad to help you grapple with them.
+
+\section{X. Poisson}%
+Our noise-trader friend will continue as before, trading in each market.
+
+\section{XI. Timetable}%
+All times are Pacific coast times.
+\medskip
+\settabs 2 \columns
+\+11AM, Friday October 28     &trading begins.\cr
+\smallskip
+\+1PM Friday--Thursday   &NYSE trading ends, closing DJIA is determined.\cr
+\smallskip
+\+1PM, Thursday November 3    &Treasury Bills pay \$10.\cr
+\+                            &All in-the-money options are exercised.\cr
+\+                            &Unconverted convertible bonds pay \$10.\cr
+\+                            &Shares pay dividends.\cr
+\+                            &Your final wealth is your final money.\cr
+\+                            &Game ends.\cr
+
+\bye
+

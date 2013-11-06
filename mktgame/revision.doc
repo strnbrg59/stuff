@@ -1,0 +1,155 @@
+              REVISIONS SINCE UNIX VERSION OF BA133 MARKET GAME
+
+
+Steps in the conversion from AQC to CORPFIN.  The ultimate goal is to have
+  a single program that can handle several securities and keep track of
+  cash holdings in a single account.
+
+1. Use #ifndef __TURBOC__ to remove UNIX-specific features--curses,
+and communications with the server program.  DONE.
+
+2. Portfs is now global.  That's not good; we want to be able to track
+portfolios in several securities, and that means passing the respective
+portfs as a parameter. DONE.
+
+3. Time to try handling different securities.
+      Pass security name to all functions that read from or write to
+      files (.act, ordbook.dat, diary.out).  On the basis of the security
+      name, function knows which directory to look in.  (Each security
+      should have its own directory). DONE.
+
+4. Top-level menu1() selects security, calls menu2() which offers the usual
+bstoch services. DONE.
+
+5. Make the various markets "aware" of one another's cash holdings.
+You don't need to create a dummy market for money, complete with "trades",
+"orders" and "portfolios".  Just have a money file for each player; each
+record need be no more than a floating-point number.  Each time there's
+a transaction, open the appropriate file and update the money file.  Or
+to be a little fancier (and make debugging easier) have the money file
+include info on the security whose transaction resulted in the money flow,
+and the TRADE structure that goes with it. DONE.
+
+6. Now get rid of the money field in all the other markets; we don't need
+it any more.
+  a. eliminate the money field in the typedefs. DONE.
+  b. eliminate any reference to money in the code. DONE.
+
+7. Write a function to display the CASH file.
+  a. Have the CASH structure contain a whole TRADE, not just a pointer to
+     one.  DONE.
+  b. Write display code. DONE.
+
+8. Forced sales: when a buy order executes, and it costs more cash than
+someone has, we force a sale in the one-week bond (bond1) market. DONE.
+
+9. Let's not pass best_limbid and best_limask to handle_order().  After all,
+one of the first things handle_order() does is free the order book, and
+load the latest version from disk.  Likewise cancel_order() and everything
+else called from menu2(). DONE.
+
+10. Short sale constraints.  We have the perfect method to deal with short
+sales--forced purchases.  I.e., if we want to limit short positions, we don't
+have to check anything when orders are placed--that's hard for limit orders,
+and even harder with multiple markets.  Instead, just wait until someone's
+holdings drop below zero, and then force a _purchase_ in the same market.
+That's going to impose a penalty, in the form of the bid-ask spread, but
+that's ok; people should follow the rules.
+
+11. American options: implemented.
+
+12. Avoid loading everyone's portfolio, when it's only one or two player's
+that you need.
+
+  a. Rewrite update_portf().  It's only used twice, both times in cross().
+     DONE.
+    i. No need to pass portfs to cross() anymore.  DONE.
+   ii. ...so no need to load_portfs() in handle_order(). DONE.
+
+  b. Do away altogether with update_portfint().  It only time-stamps. DONE.
+
+13. Discwind.exe: discount window program.  DONE.
+
+14. Fwddeliv.exe: execute delivery of forward contracts.  DONE.
+
+15. Integrate the client-server communications into the DOS version, just to
+check that we're raising the server's attention when we need to (between all
+that complicated stuff with forced sales, option exercise, and futures
+contract delivery).  The client functions (in dosclien.c) do nothing but
+announce their existence when invoked.  DONE.
+
+16. Keep track of class section in the players.dat file and NAMES structure.
+DONE.
+
+17. When you need to delete the order books (such as before a joint
+dividend/investment/capital structure decision is to be made in class), delete
+them under program control, recording individual order cancellations in
+players' *.act files.  Advantage to doing this: it will become possible to
+reconstruct all order books, from the *.act files alone.  Also, players won't
+wonder what happened to their orders.  DONE.
+
+18. Get everything running under Watcom.  Watcom is more like UNIX C, what
+with the 32-bit bytes and the makefiles.  Porting from Watcom C to UNIX C
+will be a smaller step than from Turbo C.  DONE.  Everything checked (except
+fwddeliv.exe).  See watcom.doc.  We use the same C and H files for Turbo C
+and for Watcom C; everything specific is taken care of with conditional
+compilation. DONE.
+
+19. The # menu option prints out z-scores, too. DONE.
+
+.
+.   /* lots of stuff, including forex (see forex.doc) */
+.
+
+20. Automated the menus, so they're set up from the information in
+security.par alone; there's no need whatsoever to go into the source
+code and recompile when you want to change the security offerings. DONE.
+
+21. Get fwddeliv working again (we've changed all sorts of structures and
+access functions since we last worked on fwddeliv).  Fix up the forward
+market program itself to reflect improvements such as size and price limits
+on orders. DONE.
+
+22. Automatic action-counting.  We already have the numactions program,
+but I have to run that, and it catches violators after the fact.  We need
+to keep track of how many actions a person has taken, right in a header to
+his .act file, and when he's at his limit, don't let him place any new orders.
+We count limit and market orders placed personally, so we don't
+count forced sales, option exercise, forward deliveries, or order cancel-
+lations.  This is accomplished by incrementing the order counter in
+handle_order(), and then only when it's been called with call_server set
+to YES.  DONE.
+
+23. Get Poisson working in the forward market.  You'll be able to use
+the standard poisson.c code except...
+  a. In the poisson.par file, the "security" line won't have any purpose.
+  b. When poisson will call handle_order(), it will pass fewer parameters.
+DONE.
+
+24. Label orders with 'C' for cancelled, 'F' for forced-sale, 'E' for
+option exercise, and 'D' for forward delivery. DONE.
+
+25. Limit sell orders may not be placed in front of those by any player
+with section number 0.  (Section 0 is reserved for prof, poisson and
+the firm(s).) The purpose is to allow the firm to make a security offering
+without creating the possibility for saboteurs to step in front of the
+firm and force it into insolvency.
+    Even the firm can't place an order in front of the firm.  So a two-
+tiered offer has to be placed in increasing order of price.
+
+26. Moved everything over to Gnu C++ (g++ compiler).
+
+27. Ceased converting names and passwords to lower case; now we're taking
+them as they are.
+
+28. The "master" account is now know as Fed (used to be prof).
+
+29. Introduced some defenses.  load_players() now checks for knicknames
+and passwords that are too long, and knicknames that are anything but
+alphanumeric.  load_securities() makes sure there are subdirectories
+to hold the .act files.
+
+30. At entry to aqc, check if server is up.  If not, warn user.  This becomes
+important now that we're regulating connect time. DONE.
+
+31. Connect time is monitored.  The code is in cncttime.c.
