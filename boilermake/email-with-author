@@ -1,0 +1,64 @@
+>
+> 1. Why does it install the libraries in the home directory?
+>>
+>
+The final products are normally output to "${TARGET_DIR}" (a Boilermake
+special variable). By default, this is set to the root of the source tree
+(or, as you say, the "home" directory). You can change this by simply
+setting "TARGET_DIR" to a different value.
+
+
+> 2. I'm trying to generate one of my source files, and though it's
+>> getting generated all right, it gets deposited in the home directory,
+>> rather than in the directory where I list it among "SOURCES".
+>>
+>
+It's important to always remember that there is only one "make" process
+(because this is a non-recursive makefile) and its working directory is set
+to the home directory. The way your "hello.mk" is written,
+"generate_source.sh" is run with the home directory as its working directory
+because you don't "cd" to the "hello" directory before you run the script.
+Hence, "hello.c" is generated in the home directory.
+
+There is a Boilermake special variable that is undocumented, but that you
+will find useful. The variable is named "DIR" and it is always set to the
+directory that contains the current submakefile. So, in "hello.mk" you can
+use "${DIR}" and it will refer to the "hello" directory. In some future
+version, I will most likely document this variable.
+
+I have made some modifications to your example to illustrate how it can be
+used to make this work correctly:
+
+- I changed "hello.mk" to "cd" to the "hello" directory before running the
+script.
+
+- In "hello.mk", "hello.c" must be prefixed with "${DIR}" so that it knows
+that the "hello.c" you want to make should be located in the "hello"
+directory. I also made "generate_source.sh" a prerequesite of "hello.c"
+(this way, if you change the script, "hello.c" must be remade).
+
+- I added ".DEFAULT_GOAL := all" to your "main.mk". If you define your own
+goals without using the "TARGET" special variable, then you need to be
+careful about which goal "make" will see first (the first goal it encounters
+will become the default goal). In this case, you define "hello.c" as a goal,
+and this will be the first goal that "make" will encounter (the goals
+defined using the "TARGET" variable are not added to the makefile until
+after all submakefiles have been parsed). Consequently, running just "make"
+will mean that it will only make "hello.c" and then stop. This change tells
+"make" to use "all" as the default goal, regardless of which goal it
+encounters first while parsing the makefile ("all" is a goal defined by
+boilermake which will make all of the TARGETs).
+
+- Also in "main.mk", I changed TARGET_DIR to "output". This is because you
+have a directory named "hello", but your target is also named "hello".
+Because the names clash, the linker cannot generate the executable. This
+change simply puts the executable in a directory named "output".
+
+- I modified the "generate_source.sh" script because on my system it wasn't
+generating the source file correctly.
+
+I hope this helps.
+
+Cheers,
+
+-- Dan
