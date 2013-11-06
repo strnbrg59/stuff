@@ -10,6 +10,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cstdlib>
+using namespace std;
 
 
 /** Arg digits is, for example, "111221".  Break it up into "111","22","1".
