@@ -1,0 +1,33 @@
+to triangle :s
+repeat 3 [
+   forward :s
+   right 120
+]
+end
+
+to spiro :angle_offset :n_iters :poly
+repeat :n_iters [
+   map :poly 100
+   right :angle_offset
+]
+end
+
+to tree :s :angle :factor
+if :s < 2 [stop]
+make "color 2
+setpencolor :color
+forward :s
+right :angle
+tree :s/:factor :angle :factor
+right -2*:angle
+tree :s/:factor :angle :factor
+setpencolor :color
+right :angle
+back :s
+end
+
+to dandelion :s :angle :factor
+if :angle < 10 [stop]
+tree :s :angle :factor
+dandelion :s (:angle-10) :factor
+end

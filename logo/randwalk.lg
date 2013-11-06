@@ -1,0 +1,22 @@
+to walk :n
+    ;; draw axes and tickmarks  
+    setxy :n 0
+    setxy -:n 0
+
+    setyy -50
+    repeat 11 [ pu
+               setxy -:n :yy
+               pd
+               setxy -:n+10 :yy
+
+               setyy :yy + 10 ]
+
+    pu setxy -:n 0 pd
+    dowalk -:n 0 :n
+end
+
+to dowalk :i :net :n
+    if :i = :n [stop]
+    setxy :i :net
+    dowalk :i + 1   :net - 1 + 2 * random 2   :n
+end

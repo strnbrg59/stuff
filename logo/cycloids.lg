@@ -1,0 +1,19 @@
+make "last_r 100
+
+to followarc :theta :new_r
+penup
+forward :last_r - :new_r
+pendown
+setlast_r :new_r
+arc :theta :new_r
+right :theta
+end
+
+to twirl
+repeat forever [
+   make "radius 20 + random 20
+   make "theta  random 90
+   followarc :theta :radius
+   wait 10
+]
+end
