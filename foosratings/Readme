@@ -1,0 +1,27 @@
+1. Install the Gnu Scientific Library, libgsl.
+
+2. Run bootstrap and configure.
+
+3. The executable you want is install/bin/foosrater.  Try it like this:
+$ ./install/bin/foosrater games_file=./foosratings/src/realgames.txt
+
+The executable has command-line options; look at
+foosratings/src/pingpong.sh for how to set options appropriate to
+Ping-Pong.
+
+4. Miscellaneous
+    a. We only use a little bit of the stuff in utils.  Utils is just a grab-bag
+       of utilities I've written for my own entertainment, over the years.  The
+       code quality reflects various phases of my skill with C++.  Best just not
+       to look there.
+
+    b. If you're looking for the core rating algorithm, look at the MLE()
+       function in foosratings/src/regression.cpp.
+
+    c. Running the foosrater program leaves behind cruft that I don't try to
+       clean up.  Sorry.
+
+5. Explanation of the algorithm: foosratings/web/theory.html.
+
+Ted Sternberg
+4/9/2010
