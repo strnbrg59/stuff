@@ -1,0 +1,438 @@
+#ifndef INCLUDE_TEMPLATE_FUNCTIONS_CC
+#define INCLUDE_TEMPLATE_FUNCTIONS_CC
+
+#include <iostream>
+#include "rcm-util.h"
+using namespace std;
+
+template<class T>
+std::ostream& operator<<( std::ostream& out, const M<T>& mat )
+{
+    for( int i=0;i<mat.rows();i++ )
+    {
+        for( int j=0;j<mat.cols();j++ )
+        {
+            out << mat[i][j] << " ";
+        }
+        out << '\n';
+    }
+
+    return out;
+}
+
+template<class T>
+std::ostream& operator<<( std::ostream& out, const V<T>& vect )
+{
+    for( int i=0;i<vect.size();i++ )
+    {
+        out << vect[i];
+        if( vect.getOrientation() == horizontal )
+            cout << " ";
+        else
+            out << '\n';
+    }
+
+    return out;
+}
+
+template<class T> V<T> diag( const M<T>& mat )
+{
+#if RCM_DEBUG==1
+    if( mat.rows() != mat.cols() )
+        rcmError( "diag(const M<T>& mat): argument is not square." );
+#endif
+
+    V<T> result(mat.rows(), horizontal);
+    for( int i=0;i<mat.rows();i++ )
+        result[i] = mat[i][i];
+    return result;
+}
+
+template<class T> M<T> transp(const M<T>& mat)
+{
+    M<T> result(mat.cols(), mat.rows());
+    for( int i=0;i<mat.cols();i++ )
+        for( int j=0;j<mat.rows();j++ )
+            result[i][j] = mat[j][i];
+
+    return result;
+}
+
+template<class T> V<T> transp(const V<T>& vect)
+{
+    int n = vect.size();
+    VectorOrientation newOrientation;
+    if( vect.getOrientation() == horizontal )
+        newOrientation = vertical;
+    else
+        newOrientation = horizontal;
+    V<T> result(n, newOrientation);
+    for( int i=0;i<n;i++ )
+        result[i] = vect[i];
+
+    return result;
+}
+
+/** Generalized monadic function */
+template<class T,class U> M<U> 
+apply( U (*func)(T), const M<T>& mat )
+{
+    M<U> result(mat.rows(), mat.cols());
+
+    for( int i=0;i<mat.rows();i++ )
+        for( int j=0;j<mat.cols();j++ )
+            result[i][j] = func(mat[i][j]);
+
+    return result;
+}
+
+/** Generalized diadic function */
+template<class T,class U> M<U> 
+apply( U (*func)(T,T), const M<T>& mat1, const M<T>& mat2 )
+{
+    M<U> result(1,1);
+
+    if( mat1.rows()==1 && mat1.cols()==1 )          // scalar mat1
+    {
+        result = M<U>(mat2.rows(), mat2.cols());
+
+        for( int i=0;i<mat2.rows();i++ )
+            for( int j=0;j<mat2.cols();j++ )
+                result[i][j] = func(mat1[0][0], mat2[i][j]);
+    }
+    else
+    if( mat2.rows()==1 && mat2.cols()==1 )          // scalar mat2
+    {
+        result = M<U>(mat1.rows(), mat1.cols());
+
+        for( int i=0;i<mat1.rows();i++ )
+            for( int j=0;j<mat1.cols();j++ )
+                result[i][j] = func(mat1[i][j], mat2[0][0]);
+    }
+    else
+    if( mat1.rows()==mat2.rows() && mat1.cols()==mat2.cols() )  // dims match
+    {
+        result = M<U>(mat1.rows(), mat1.cols());
+
+        for( int i=0;i<mat1.rows();i++ )
+            for( int j=0;j<mat1.cols();j++ )
+                result[i][j] = func(mat1[i][j], mat2[i][j]);
+    }
+    else
+        rcmError( "apply: matrix dimensions are incompatible." );
+
+    return result;
+}
+
+/** Generalization of matrix multiplication.  Like APL's +.*  (where + 
+ *  and * may be replaced by any other operations -- in this case they 
+ *  are func1 and func2.
+*/
+template<class T> M<T> 
+innerProduct( T (*func1)(T,T), T (*func2)(T,T), 
+              const M<T>& mat1, const M<T>& mat2 )
+{
+#if RCM_DEBUG==1
+    if( mat1.cols()!=mat2.rows() )
+        rcmError( "innerProduct: matrix dimensions are incompatible." );
+#endif
+
+    M<T> result(mat1.rows(), mat2.cols());
+
+    result = result*M<T>(zero(result[0][0]));  
+    // You need a zero() defined for type T.
+
+    for( int i=0;i<mat1.rows();i++ )
+        for( int j=0;j<mat2.cols();j++ )
+            for( int k=0;k<mat1.cols();k++ )
+                result[i][j] = func1(result[i][j], 
+                                     func2(mat1[i][k], mat2[k][j]));
+
+    return result;
+
+} // innerProduct()
+
+/** Inner product of transp(mat1) with mat2.  An optimization for avoiding
+ *  a transp.
+ */
+template<class T> M<T> 
+innerProduct_xpy( T (*func1)(T,T), T (*func2)(T,T), 
+                  const M<T>& mat1, const M<T>& mat2 )
+{
+#if RCM_DEBUG==1
+    if( mat1.rows()!=mat2.rows() )
+        rcmError( "innerProduct: matrix dimensions are incompatible." );
+#endif
+
+    M<T> result(mat1.cols(), mat2.cols());
+
+    result = result*M<T>(zero(result[0][0]));  
+    // You need a zero() defined for type T.
+
+    for( int i=0;i<mat1.cols();i++ )
+        for( int j=0;j<mat2.cols();j++ )
+            for( int k=0;k<mat1.rows();k++ )
+                result[i][j] = func1(result[i][j], 
+                                     func2(mat1[k][i], mat2[k][j]));
+
+    return result;
+
+} // innerProduct_xpy()
+
+/** Inner product of mat1 with transp(mat2).  An optimization for avoiding
+ *  a transp.
+*/
+template<class T> M<T> 
+innerProduct_xyp( T (*func1)(T,T), T (*func2)(T,T), 
+                  const M<T>& mat1, const M<T>& mat2 )
+{
+#if RCM_DEBUG==1
+    if( mat1.cols()!=mat2.cols() )
+        rcmError( "innerProduct: matrix dimensions are incompatible." );
+#endif
+
+    M<T> result(mat1.rows(), mat2.rows());
+
+    result = result*M<T>(zero(result[0][0]));  
+    // You need a zero() defined for type T.
+
+    for( int i=0;i<mat1.rows();i++ )
+        for( int j=0;j<mat2.rows();j++ )
+            for( int k=0;k<mat1.cols();k++ )
+                result[i][j] = func1(result[i][j], 
+                                     func2(mat1[i][k], mat2[j][k]));
+
+    return result;
+
+} // innerProduct()
+
+/** Given a matrix m, and for all rows i:
+ *    result[i][0] = m[i][0]
+ *    result[i][j] = f( m[i][j-1], m[i][j] ), for j>0
+ *  Like APL's backslash (laminate) operator.
+ *  Useful for finding cumulative sums.
+*/
+template<class T> M<T> laminate( T (*f)(T,T), const M<T>& mat )
+{
+    M<T> result(mat.rows(), mat.cols());
+
+    for( int i=0;i<mat.rows();i++ )
+    {
+        result[i][0] = mat[i][0];
+        for( int j=1;j<mat.cols();j++ )
+        {
+            result[i][j] = f(result[i][j-1], mat[i][j]);
+        }
+    }
+
+    return result;
+}
+
+/** Given a matrix m, with C columns: result is a column vector, with 
+ *  result[i] = f(f(f(f...(f([i][0],[i][1]),[i][2]),[i][3]),...)[i][C-1])
+ *  Like APL's / operator, e.g. /+ yields the sum of each row.
+ */
+template<class T> V<T> scan( T (*f)(T,T), const M<T>& mat )
+{
+    V<T> result(mat.rows(), vertical);
+
+    for( int i=0;i<mat.rows();i++ )
+    {
+        result[i] = mat[i][0];
+        for( int j=1;j<mat.cols();j++ )
+        {
+            result[i] = f(result[i], mat[i][j]);
+        }
+    }
+
+    return result;
+}
+
+//----------------------------------------
+// catcols and catrows family
+//
+template<class T> M<T> catcols( const M<T>& mat1, const M<T>& mat2 )
+{
+#if RCM_DEBUG==1
+    if( mat1.rows() != mat2.rows() )
+        rcmError( "catcols: nonmatching number of rows." );
+#endif
+
+    M<T> result( mat1.rows(), mat1.cols()+mat2.cols() );
+    for( int i=0;i<mat1.rows();i++ )
+    {
+        int j;
+        for( j=0;j<mat1.cols();j++ )
+        {
+            result[i][j] = mat1[i][j];
+        }
+        for( int k=0;k<mat2.cols();k++ )
+        {
+            result[i][j+k] = mat2[i][k];
+        }
+    }
+
+    return result;
+} // catcols(M,M)
+
+template<class T> M<T> catcols( const V<T>& vect, const M<T>& mat )
+{
+    return catcols( M<T>(vect), mat );
+} // catcols(V,M)
+    
+template<class T> M<T> catcols( const M<T>& mat, const V<T>& vect )
+{
+    return catcols( mat, M<T>(vect) );
+} // catcols(V,M)
+
+/** catcols(V,V).  We'd like to return a V if both arguments are row vectors,
+ *  and return an M if they're column vectors.  We could do that if we made
+ *  row and column vectors subclasses of class V.    
+*/
+template<class T> M<T> catcols( const V<T>& vect1, const V<T>& vect2 )
+{
+    return catcols( M<T>(vect1), M<T>(vect2) );
+}
+
+template<class T> M<T> catrows( const M<T>& mat1, const M<T>& mat2 )
+{
+#if RCM_DEBUG==1
+    if( mat1.cols() != mat2.cols() )
+        rcmError( "catrows: nonmatching number of columns." );
+#endif
+
+    M<T> result( mat1.rows()+mat2.rows(), mat1.cols() );
+    for( int j=0;j<mat1.cols();j++ )
+    {
+        int i;
+        for( i=0;i<mat1.rows();i++ )
+        {
+            result[i][j] = mat1[i][j];
+        }
+        for( int k=0;k<mat2.rows();k++ )
+        {
+            result[i+k][j] = mat2[k][j];
+        }
+    }
+
+    return result;
+} // catrows(M,M)
+
+template<class T> M<T> catrows( const V<T>& vect, const M<T>& mat )
+{
+    return catrows( M<T>(vect), mat );
+} // catrows(V,M)
+    
+template<class T> M<T> catrows( const M<T>& mat, const V<T>& vect )
+{
+    return catrows( mat, M<T>(vect) );
+} // catrows(V,M)
+
+/** catrows(V,V).  We'd like to return a V if both arguments are row vectors,
+ *  and return an M if they're column vectors.  We could do that if we made
+ *  row and column vectors subclasses of class V.    
+*/
+template<class T> M<T> catrows( const V<T>& vect1, const V<T>& vect2 )
+{
+    return catrows( M<T>(vect1), M<T>(vect2) );
+}
+
+/** Turn a matrix into a row vector. */
+template<class T> V<T> ravel( const M<T>& x )
+{
+    int xr( x.rows() );
+    int xc( x.cols() );
+    V<T> result( xr*xc, horizontal );
+    
+    for( int i=0;i<xr;i++ ) for( int j=0;j<xc;j++ )
+    {
+        result[ i*xc + j ] = x[i][j];
+    }
+
+    return result;
+}
+
+
+/** Identity matrix of order r. */
+template<class T> M<T> ident( int r )
+{
+    M<T> result( r,r );
+    for( int i=0;i<r;++i ) result[i][i] = 1;
+    return result;
+}
+
+
+/** Usage: drho(n,m,x).  Constructs an n-by-m matrix, filling it with
+ *  the elements of ravel(x).  If we get to the end of x, and we need
+ *  more numbers, we go back to the beginning of x.
+*/
+template<class T> M<T> drho( int rows, int cols, const M<T>& x )
+{
+    M<T> result( rows, cols );
+    V<T> ravelx( ravel(x) );
+
+    for( int i=0;i<rows;i++ ) for( int j=0;j<cols;j++ )
+    {
+        result[i][j] = ravelx[ (i*cols + j)%(ravelx.size()) ];
+    }
+
+    return result;
+}
+
+/** Return a subset of the rows or columns of mat.  If the subset
+ *  is a row vector, we return columns.  If subset is a column vector,
+ *  we return rows.
+*/
+template<class T> M<T> take( const M<T>& mat, const V<int>& subset )
+{
+    M<T> result(0.0);
+    if( subset.getOrientation() == horizontal )
+    {
+        result = M<T>(mat.rows(), subset.size());
+        for( int i=0;i<mat.rows();i++ )
+        {
+            for( int j=0;j<subset.size();j++ )
+            {
+                result[i][j] = mat[i][subset[j]];
+            }
+        }
+    }
+    else
+    {
+        result = M<T>( subset.size(), mat.cols());
+        for( int i=0;i<subset.size();i++ )
+        {
+            for( int j=0;j<mat.cols();j++ )
+            {
+                result[i][j] = mat[subset[i]][j];
+            }
+        }
+    }        
+
+    return result;
+} // take()
+
+/** Conversion between M templates of different template variables. */
+template<class FROM, class TO> M<TO> convertM( const M<FROM>& mat )
+{
+    M<TO> result(mat.rows(), mat.cols());
+    for( int i=0;i<mat.rows();i++ ) for( int j=0;j<mat.cols();j++ )
+    {
+        result[i][j] = TO(mat[i][j]);
+    }
+
+    return result;
+}
+
+/** Conversion between M templates of different template variables. */
+template<class FROM, class TO> V<TO> convertV( const V<FROM>& vect )
+{
+    V<TO> result(vect.size(), vect.getOrientation());
+    for( int i=0;i<vect.size();i++ )
+    {
+        result[i] = TO(vect[i]);
+    }
+    return result;
+}
+
+#endif

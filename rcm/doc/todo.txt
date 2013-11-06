@@ -1,0 +1,27 @@
+1. Why does the setter version of operator[] get called when we say
+   something like "cout << mat[i][j]" ?
+
+2. We have to reference-count class V as well.  If not, then
+   reference-counting class M doesn't do much good.  For example, even
+   getter M::operator[] returns a V.  We do have to give V its own
+   reference count; we can't rely on that of the M our V is a part of,
+   because V gets involved in copy-constructor operations (such as the
+   return of a V from M::operator[]) that don't construct any M's.
+   DONE
+
+3. Use the DEBUG environment variable to enable and disable bounds checking.
+   DONE
+4. Use the RCM_MANUAL_COW env var to disable and enable automatic copy-on-write.
+   DONE
+5. Inline the operator[] functions. 
+   DONE
+
+6. Why aren't we getting automatic conversions from Vd to Md?  And
+while looking into that, figure out what happens in the implementation
+of the existing conversions, where you call the constructor of
+M<double> or V<double>.  Which conversion functions do you need, and
+which don't you need?  The current situation is not clean.
+
+7. More generalized operations, like APL's scan, lamination, inner and outer product.
+
+8. V should "know" if it's a row or a column.

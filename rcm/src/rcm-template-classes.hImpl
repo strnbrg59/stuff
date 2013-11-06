@@ -1,0 +1,296 @@
+#ifndef INCLUDE_TEMPLATE_CLASSES_CC
+#define INCLUDE_TEMPLATE_CLASSES_CC
+
+#include <iostream>
+#include <string>
+using std::string;
+#include "rcm.h"
+#include "rcm-util.h"
+
+template<class T> 
+Mrep<T>::Mrep(int r, int c) :
+m_rows(r), m_cols(c)
+{
+    V<T>::emptyCtorArg = m_cols;
+    data = new V<T>[r];
+
+    refCount = 1;
+}
+
+template<class T>
+Vrep<T>::Vrep( int size, VectorOrientation ori ):
+m_size(size), orientation(ori)
+{
+    data = new T[size];
+    for( int i=0;i<size;i++ )
+        data[i] = zero(data[i]);
+    refCount = 1;
+}
+
+template<class T>
+Vrep<T>::~Vrep()
+{
+    delete[] data;
+    refCount = -1;
+}
+
+template<class T> 
+Mrep<T>::~Mrep()
+{
+  delete[] data;
+  refCount = -1;
+}
+
+template<class T> 
+M<T>::M(int r, int c)
+{
+    rep = new Mrep<T>(r,c);
+}
+
+template<class T> 
+M<T>::M(const M<T>& other)
+{
+    rep = other.rep;
+    rep->refCount++;
+}
+
+/** Convert V to one-column or one-row M.
+*/
+template<class T>
+M<T>::M(const V<T>& v)
+{
+    int n = v.size();    
+
+    if( v.getOrientation() == horizontal )
+    {
+        rep = new Mrep<T>(1,n);
+        for( int i=0;i<n;i++ )
+            rep->data[0][i] = v[i];
+    }
+    else
+    {
+        rep = new Mrep<T>(n,1);
+        for( int i=0;i<n;i++ )
+            rep->data[i][0] = v[i];
+    }
+}
+
+/** Convert T to scalar M.
+*/
+template<class T>
+M<T>::M(T scalar)
+{
+    rep = new Mrep<T>(1,1);
+    rep->data[0][0] = scalar;
+}
+    
+
+template<class T> 
+M<T>::~M()
+{
+    if( --rep->refCount == 0 )
+        delete rep;
+}
+
+template<class T> M<T>& 
+M<T>::operator=(const M<T>& other)
+{
+  if( &other == this )
+  {
+	return *this;
+  }
+  else
+  {
+    if( --rep->refCount == 0 )
+        delete rep;
+
+	rep = other.rep;
+	rep->refCount++;
+  }
+
+  return *this;
+}
+
+/** M[] getter
+  * Checks range bounds.
+*/
+template<class T> inline const V<T>&
+M<T>::operator[](int r) const
+{
+#if RCM_DEBUG==1
+    if( outOfBounds(r) ) rcmError("M[] getter:out of bounds");    
+#endif
+    return rep->data[r];
+}
+
+/** V copy ctor
+  * Copies all class T elements.
+*/
+template<class T> 
+V<T>::V(const V<T>& other)
+{
+    rep = other.rep;
+    rep->refCount++;
+}
+
+/** V(M) ctor
+  * Works only if M is a column or a row.
+*/
+template<class T> 
+V<T>::V(const M<T>& mat)
+{
+    if( mat.rows() == 1 )
+    {
+        rep = mat[0].rep;
+        rep->refCount++;
+    } 
+    else if( mat.cols() == 1 )
+    {
+        rep = new Vrep<T>(mat.rows());
+        setOrientation( vertical );
+        for( int i=0;i<mat.rows();i++ )
+        {
+            rep->data[i] = mat[i][0];
+        }
+    }
+    else
+    {
+        rcmError
+            ( string("V<T>(const M<T>&) ctor called with arg that has ") + 
+              string("more than one row and more than one column.") );
+    }
+}
+
+/** Construct V all of whose elements equal the argument. */
+template<class T>
+V<T>::V(const T& scalar )
+{
+    rep = new Vrep<T>(1);
+    rep->data[0] = scalar;
+}
+
+/** V::operator= 
+  * Assigns rep and bumps its refCount.
+*/
+template<class T> V<T>& 
+V<T>::operator=(const V<T>& other)
+{
+    if( other.rep == rep )
+        return *this;
+    else
+    {
+        if( --rep->refCount == 0 )
+            delete rep;
+
+        rep = other.rep;
+        rep->refCount++;
+    }
+
+    return *this;
+}
+
+/** Setter.  Copy on write. */
+template<class T> inline V<T>& 
+M<T>::operator[](int r)
+{
+#if RCM_DEBUG==1
+    if( outOfBounds(r) ) rcmError("M[] setter: out of bounds");
+#endif
+
+#if RCM_MANUAL_COW == 0
+    // Copy on write.  You can't just leave copy-on-write to
+    // rep->data[r] (the one V we're going to change), because
+    // in M(const M&) and M::operator=, we just assigned an M::rep
+    // to another, so this M and the one it was constructed from
+    // or assigned from) share literally the same row V's!
+    if( rep->refCount > 1 )
+    {
+        Mrep<T>* oldRep = rep;
+
+        rep = new Mrep<T>(oldRep->m_rows, oldRep->m_cols);
+        for( int i=0;i<rep->m_rows;i++ )
+            rep->data[i] = oldRep->data[i];
+
+        oldRep->refCount --;
+    }
+#endif
+
+    return rep->data[r];
+}
+
+template<class T>
+bool M<T>::outOfBounds( int r ) const
+{
+    if( r<0 || r>=rep->m_rows ) return true;
+    else                        return false;
+}
+
+template<class T>
+bool V<T>::outOfBounds( int i ) const
+{
+    if( i<0 || i>=rep->m_size ) return true;
+    else                        return false;
+}
+
+template<class T>
+V<T>::V()
+{
+    rep = new Vrep<T>(emptyCtorArg);
+}
+
+/** Construct V of indicated size.  Don't be tempted to make the second
+ *  argument optional (or default); if you do that, you'll create confusion
+ *  between this ctor and the V(const T&) ctor.
+*/
+template<class T>
+V<T>::V(int size, VectorOrientation orientation)
+{
+    rep = new Vrep<T>(size, orientation);
+}
+
+template<class T>
+V<T>::~V()
+{
+    if( --rep->refCount == 0 )
+        delete rep;
+}
+
+/** Getter */
+template<class T> inline const T&
+V<T>::operator[](int i) const
+{
+#if RCM_DEBUG==1
+    if( outOfBounds(i) ) rcmError("V[] getter: out of bounds");
+#endif
+    return rep->data[i];
+}
+
+/** Setter.  Copy on write. */
+template<class T> inline T& 
+V<T>::operator[](int i)
+{
+#if RCM_DEBUG==1
+    if( outOfBounds(i) ) rcmError("V[] setter: out of bounds");
+#endif
+
+#if RCM_MANUAL_COW == 0
+    // Copy on write
+    if( rep->refCount > 1 )
+    {
+        Vrep<T>* oldRep = rep;
+        oldRep->refCount --;
+
+        rep = new Vrep<T>(oldRep->m_size);
+        for( int i=0;i<rep->m_size;i++ )
+            rep->data[i] = oldRep->data[i];
+    }
+#endif
+
+    return rep->data[i];
+}
+
+template<class T> int V<T>::emptyCtorArg = 0;
+template<class T> typename M<T>::FormatMode M<T>::m_formatMode = plain;
+//-------------------------------------
+
+#endif
