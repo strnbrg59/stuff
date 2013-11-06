@@ -1,0 +1,24 @@
+#
+# If you edit this file while the mailserver is running, the mailserver
+# will reread this file and reset its params accordingly.  Beware, though,
+# that if you started mailserver with params set on the command-line, those
+# will be overridden by any changes you make to this file.  (Perhaps a little
+# counter-intuitive; at start-up, the command line overrides this config file,
+# but later this config file overrides whatever was on the command line.)
+#
+# Note that the smtp_port param can't be changed at runtime.
+#
+smtp_port               int     25      "Has to be 25, for real deployment"
+seconds_timeout         int     20        "How long to wait on recv() calls."
+max_message_size        int     2000      "kilobytes"
+max_mailbox_size        int     50000     "kilobytes"
+users                   string  "strnbrg,robin,tes"  "If mail comes for someone else, it goes to default_user's mailbox"
+default_user            string  "strnbrg"   ""
+mailbox                 string  "mail-box"  "Where to save mail, under /home/<userid>/"
+
+# Here are some things that go on the mailclient command line:
+from                   string   ""       ""
+to                     string   ""       ""
+subject                string   ""       ""
+msg_file               string   ""       ""
+connect_time_out       int      5        "seconds"
