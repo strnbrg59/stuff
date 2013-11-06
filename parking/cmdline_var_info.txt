@@ -1,0 +1,4 @@
+# name        type     default      comment
+n_iterations  int     20            "Of the entire simulation, -1=>forever"
+curb_length   double 100            "obvious"
+srand         int      0            "seed"
