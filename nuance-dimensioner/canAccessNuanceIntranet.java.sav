@@ -1,0 +1,48 @@
+// This was an unsuccessful attempt to determine at run-time if this applet
+// can open pages on the Nuance intranet.
+//
+// I ran into several problems:
+// 1. URL.openConnection() doesn't throw an exception even if it's called
+//    on a nonexistent url.
+// 2. URL.getInputStream() works on http://tehachapi/~strnbrg/index.html
+//    (I'm running Netscape on tehachapi), but it throws an exception on
+//    http://intranet/provisioning/results.html, even though that's a
+//    valid web page and indeed elsewhere in the FrontEndForApplet class
+//    we even load pages from that directory (in response to the Info button).
+//    The exception I get when I try getInputStream() on intranet etc is
+//    "netscape.security.AppletSecurityException: security.  Couldn't connect 
+//    to 'intranet' with origin from 'tehachapi.nuance.com'".  I tried this on
+//    another machine and got the same result.
+
+    private boolean canAccessNuanceIntranet()
+    {
+        boolean result = true;
+
+        try
+        {
+//        URL testUrl = new URL( "http://tehachapi/~strnbrg/index.html" );
+          URL testUrl = new URL( "http://intranet/provisioning/results.html" );
+
+          URLConnection dummy = testUrl.openConnection();
+          InputStream is = dummy.getInputStream();
+          JOptionPane.showMessageDialog( 
+            new JFrame(), 
+            "Connected to foo.bar.baz and obtained input stream" + testUrl,
+            "unfound-url-error", 
+            JOptionPane.ERROR_MESSAGE );
+
+        }
+        catch( Exception e )
+        {
+            JOptionPane.showMessageDialog( 
+              new JFrame(), 
+              e.toString(),
+              "unfound-url-error", 
+              JOptionPane.ERROR_MESSAGE );
+
+            result = false;
+        }
+
+        return result;
+    }
+

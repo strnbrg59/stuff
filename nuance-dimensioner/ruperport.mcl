@@ -1,0 +1,42 @@
+#!/bin/sh
+# the next line restarts using mclsh \
+exec mclsh "$0" "$@"
+source /home/strnbrg/scripts/mcl.tcl
+
+set data [fload "ruperport.dat"]
+#set data [fload "bhcv_over_4999.dat"]
+set bhcv  [take $data 0]
+set hold  [take $data 1]
+set ports [take $data 2]
+set ru    [take $data 3]
+set ones [drho [llength $bhcv] 1 1.0 ]
+
+#set rhs_for_ports [catcols $ones [catcols $hold [catcols [log $hold] [catcols [log [log $hold]] [catcols $bhcv [catcols [log $bhcv] [log [log $bhcv]]]]]]]]
+#set rhs_for_ports [catcols [times $hold $bhcv] [catcols $ones [catcols [log $hold] [catcols [log [log $hold]] [catcols [log $bhcv] [log [log $bhcv]]]]]]]
+
+set rhs_for_ports [catcols $ones [catcols [divide [times $hold $bhcv] 1000000.0 ] [catcols [divide [pow [times $hold $bhcv] 2.0] 1000000000.0] [catcols [pow [times $hold $bhcv] 0.5] [catcols [log $hold] [catcols [log [log $hold]] [catcols [log $bhcv] [log [log $bhcv]]]]]]]]]
+
+set rhs_for_ru    [catcols $ones [log $bhcv]]
+
+olsFactory portsReg [log $ports] $rhs_for_ports
+puts "ports regression:"
+putm stdout [portsReg displayAll] 5
+putm [portsReg r2]
+
+olsFactory ruReg [log $ru] $rhs_for_ru
+puts "ru regression:"
+putm stdout [ruReg displayAll] 5
+putm [ruReg r2]
+puts ""
+
+olsFactory ratioReg [divide $ru $ports] $rhs_for_ports
+puts "ratio regression:"
+putm stdout [ratioReg displayAll] 5
+putm [ratioReg r2]
+#puts ""
+#puts "ratio-res vs bhcv"
+#putm [catcols $bhcv [catcols $hold [ratioReg res]]]
+#puts ""
+
+
+

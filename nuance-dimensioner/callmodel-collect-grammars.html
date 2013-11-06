@@ -1,0 +1,261 @@
+<html>
+<head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<FONT SIZE=-1>
+<title> Requests-per-call Calculation </title>
+<center><H2> Requests-per-call Calculation </H2></center>
+<hr>
+
+When filling out the "grammar model" panel of the dimensioner, you are
+asked to provide the "average requests per call" for each grammar as
+you add it.  This means the expected number of times, per call, that
+the recognizer will expect to be dealing with an utterance from that
+grammar.  Getting this number right is very important -- as important as
+any of the other inputs you are asked to enter into the dimensioner.
+
+<P>
+If your application is already up and running for some time, your task
+is relatively easy.  Look at the log files and calculate the frequency
+of utterances from each grammar.  But if you don't have those data
+yet, you'll have to make some estimates based on your understanding of
+the dialog.  That's where this page will help you.
+
+<P>
+Let's start with a simple example, a dialer.  A typical dialog might
+go like this:
+
+<P>
+<EM>
+prompt: Who would you like to call?<BR>
+caller: Ron Croen, car phone<BR>
+prompt: Do you want to make this call?<BR>
+caller: Yes<BR>
+</EM>
+
+<P>
+There are two grammars involved here: let's call them <EM>name</EM>
+and <EM>confirm</EM>.  The initial grammar is <EM>name</EM> and the
+second grammar is always <EM>confirm</EM>.  However, <EM>confirm</EM>
+only comes up 50% of the time; the other 50% of the time either the
+system does not ask for confirmation or the user hangs up before
+responding to the confirmation prompt.
+
+<P>
+This is an easy case: it takes no calculating or deep thinking to
+realize that the expected number of requests is 1.0 for <EM>name</EM>
+and 0.5 for <EM>confirm</EM>.  You enter those numbers in the
+dimensioner and move on.
+
+<P>
+But suppose there's a 20% chance the first prompt is repeated (perhaps
+because the recognizer had trouble understanding <EM>name</EM>).  And
+suppose that the chance that the second time the <EM>name</EM> prompt
+is played there's once again a 20% chance its prompt will have to be
+repeated, and so forth.  Then the expected number of requests for
+<EM>name</EM> is 1 + 0.2 + 0.2*0.2 + 0.2*0.2*0.2 + ... = 1.25.
+Meanwhile, the expected number of requests for <EM>confirm</EM> is now
+higher because there is more than one way to get to the
+<EM>confirm</EM> prompt; it can come after the first <EM>name</EM>
+utterance, but it can also come after the second <EM>name</EM>
+utterance, etc.  Thus 0.5*(1 + 0.2 + 0.2*0.2 + 0.2*0.2*0.2 + ...) =
+0.625 is the expected number of requests for <EM>confirm</EM>.
+
+<!-- 1. Allow for <100% chance of reaching initial grammar.
+     2. What if user might be more likely to hang up after being
+        asked the second time.  Or chance of being asked a third
+        time is higher than chance of being asked a second time
+        because if you were asked a second time that's a sign you
+        may well have a hard accent.
+-->
+
+<P>
+Well, it's already getting more complicated than you may have thought,
+and this is still a very simple dialog.  We'll move on to more complex
+dialogs soon, but first let's see how the computer can solve this simple
+case for us.
+
+<P>
+In the text area below, enter the names of your grammars
+(<EM>name</EM> and <EM>confirm</EM>) , one per row.  Then press the
+"submit" button and follow the instructions on the next page.  When
+you are done with that (or if you have trouble) return to this page.
+
+<form action="/~strnbrg/cgi-bin/dimensioner/callmodel-collect-grammars.tcl" method="POST">
+<textarea name="grammar_list" rows="10" cols="10">
+</textarea>
+<input type="submit" value="submit">
+</form>
+
+<P>
+The page you went to when you hit the "submit" button presented you with
+a array to fill out.  If you filled it out correctly (i.e. consistently
+with the assumptions we made above about the probability of transitions
+between the <EM>name</EM> and <EM>confirm</EM> grammars), you got it to
+look like this...
+
+<P>
+<table border="1" cellpadding="0">
+<tr>
+<td></td> <td>name</td> <td>confirm</td> </tr>
+<BR>
+<tr><td>name</td>
+<td>0.2</td>
+<td>0.5</td>
+</tr>
+<BR>
+<tr><td>confirm</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<BR>
+</table>
+
+<P>
+If that's not how you filled it out, please go back there and enter these
+numbers.  Then, when you press submit on that page you should see the
+correct results for requests-per-call -- the results we calculated by hand.
+They will look like this:
+
+<P>
+<PRE>
+Loaded the following transition prob matrix:
+0.2 0.5 
+0.0 0.0 
+
+Expected number of requests for each grammar:
+name : 1.25
+confirm : 0.625
+</PRE>
+
+<P>
+Feel free to play with the probability matrix a bit, to get a feel for
+the thing.  Maybe build in the following new assumption: if the user
+replies "no" to <EM>confirm</EM> then he's prompted for <EM>name</EM>
+again, and this happens with probability 0.6 (so put 0.6 in the lower
+left-hand element of the probability matrix).  If you want to consider
+dialogs with more grammars, just enter those grammar names in the text
+area above and proceed as before.  There's nothing qualitatively
+different about dealing with more than two grammars; it just requires
+more thinking about the flow of the dialog and the associated
+probabilities.
+
+<P>
+It doesn't matter if you don't know the exact probabilities.  This is
+a planning tool and as with all planning, you guess and you estimate.
+But guess and estimate you must; if you are lazy and just accept the
+dimensioner's default of 1.0 requests-per-call, for every grammar, you
+will make wildly wrong provisioning decisions.
+
+<P>
+<H2>Extra for experts</H2>
+
+As you think about transition probabilities, you will find examples
+where you are not happy about assuming a certain transition
+probability is always fixed.  For example, in the dialer it's not
+quite realistic to assume that the probability of being asked to
+repeat the name is always 0.2.  It may be 0.2 after the first attempt,
+but if someone has been asked to repeat what he said, chances are that
+person is harder to understand than average.
+
+<P>The way to deal with this problem is to posit a second "name" grammar:
+let's call it <EM>name_again</EM>.  Let's suppose the probability of being asked a third time is 0.4.  Then you will fill out a transition matrix that looks like this:
+
+<P>
+<table border="1" cellpadding="0">
+<tr>
+<td></td> <td>name</td> <td>confirm</td> <td>name_again</td> </tr>
+<BR>
+<tr><td>name</td>
+<td>0.0</td>
+<td>0.5</td>
+<td>0.2</td>
+</tr>
+<BR>
+<tr><td>confirm</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<BR>
+<tr><td>name_again</td>
+<td>0.0</td>
+<td>0.4</td>
+<td>0.4</td>
+</tr>
+<BR>
+</table>
+
+<P>
+Press the submit button and you discover the following request frequencies:
+
+<PRE>
+Expected number of requests for each grammar:
+grammar[0] : 1.0
+grammar[1] : 0.633
+grammar[2] : 0.333
+</PRE>
+
+<P>
+The total number of <EM>name</EM> utterances is now higher than before
+-- 1.333 versus 1.25.
+
+<P>
+Another common problem is dealing with the possibility that the caller
+hangs up before saying anything at all.  In this case, multiply all
+the results by the probability of reaching the first utterance.  In
+our first worked example above, a 0.9 probability of reaching the
+first utterance would change the correct request frequencies from 1.25
+and 0.625 to 1.13 and 0.56.  If you are working with a large grammar
+model and repeated multiplications of this sort seem tedious,
+the computer can perform them for you: just introduce a dummy
+"grammar" to represent the start of the call.  Like this:
+
+<P>
+<table border="1" cellpadding="0">
+<tr>
+<td></td> <td>start</td> <td>name</td> <td>confirm</td> </tr>
+<tr><td>start</td>
+<td>0.0</td>
+<td>0.9</td>
+<td>0.0</td>
+</tr>
+<BR>
+<BR>
+<tr><td>name</td>
+<td>0.0</td>
+<td>0.2</td>
+<td>0.5</td>
+</tr>
+<BR>
+<tr><td>confirm</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<BR>
+</table>
+
+<P>
+<H2>Under the covers</H2>
+
+Think of the dialog as a Markov chain whose states, s<SUB>i</SUB>, i=0,1,...n,
+are requests for recognition of utterances from the various grammars
+i.  State 0 is defined as the initial state.  Now let p<SUB>ij</SUB> be the
+probability of a transition from state i to state j.  Let q<SUB>it</SUB> be
+the probability of the system being in state i at time t, t=0,1,....
+
+<P> Then
+    
+<P>
+q<SUB>it</SUB> = <FONT SIZE=+2>&#931</FONT><SUB>k</SUB> p<SUB>ki</SUB>q<SUB>k,t-1</SUB>
+
+<P>
+Now let c<SUB>i</SUB> be the expected number of visits to state i.  We calculate
+this from
+
+<P>
+c<SUB>i</SUB> = <FONT SIZE=+2>&#931</FONT><SUB>t</SUB> q<SUB>it</SUB>
+
+</html>

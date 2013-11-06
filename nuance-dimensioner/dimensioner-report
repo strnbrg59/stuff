@@ -1,0 +1,103 @@
+#!/usr/local/bin/perl
+
+#  File:        dimensioner-report.pl
+#  Author:      Dave Peters, with minor modifications by Ted Sternberg
+#  Date:
+#  Description: Receives data from the text fields of the Dimensioner GUI,
+#  then formats those data into html format.
+#  It takes either 1 or 2 command-line arguments.  
+#
+#  $ARGV[0] is a (usually long) string that encodes in it all the dimensioning 
+#  data that this script is expected to turn into a web page.  
+#  $ARGV[1] is optional, and indicates the file to write to.  When $ARGV[1]
+#  is not given, we write to STDOUT.
+#
+#  The dimensioner applet treats this script as a CGI program, and so the
+#  intent is to get its output on stdout.  The output is directed to a file
+#  when this script is called by the dimensioner in standalone mode.
+#
+#  Usage: dimensioner-report.pl string-with-dimensioner-data  [outfilename]
+# 
+
+# $Id: dimensioner-report,v 1.1.1.1 2008/02/22 22:53:29 strnbrg Exp $
+
+use CGI qw(:all);
+use IO::Handle;
+
+#
+# See if command line indicates an outfile.
+#
+my $outfile = new IO::Handle;
+my $nuanceIcon = "/icons/nuance2.jpg";
+if (@ARGV == 2) {
+    $outfilename = pop;
+    open $outfile, ">$outfilename" or die "can't open '$outfilename': $!\n";
+    $nuanceIcon = "./nuance2.jpg";
+}
+elsif (@ARGV <= 1) {
+    open $outfile, ">&STDOUT" or die "can't dup STDOUT: $!\n";
+}
+else {
+    print STDERR "Usage: dimensioner-report.pl string [outfilename]\n";
+    exit 1;
+}
+
+#
+# Use Perl's CGI package to parse $ARGV[0].
+#
+sub nl() { "\n"; }
+sub nbsp() { '&nbsp;'; }
+
+my $version = param('version');
+my $busy_hr_calls = sprintf "%d",param('bhca');
+my $call_holding_secs = sprintf "%.2f",param('chts');
+my $prob_blocking = sprintf "%.1f%%",param('prbb');
+my $speech_channels = sprintf "%d",param('spch');
+my $ep_on_recserver = uc param('rsep');
+my $latency_threshold_sec = sprintf "%.2f",param('lats');
+my $prob_latency = sprintf "%.1f%%",param('prbl');
+my $ru_needed = sprintf "%.1f",param('recp');
+my $ru_per_server = sprintf "%.2f",param('mnru');
+my @grammar_names = param('grnm');
+my @grammar_lus = param('grlu');
+my @durations = param('gdur');
+my @requests_per_call = param('greq');
+
+print $outfile header,start_html('-title' => 'Nuance Dimensioner Report',
+			'-author' => 'dave@nuance.com',
+			'-bgcolor' => '#ffffff',
+			'-link' => '#ff8888',
+			'-vlink' => '#ff8888',
+			'-alink' => '#ff0000'),nl,
+  table({'width' => 640},
+	TR(td(img({'border' => 0,
+		   'src' => $nuanceIcon,
+		   'alt' => '*Nuance Logo*'})),nl,
+	   td(center(b('Nuance Dimensioner ',
+		       $version,
+		       ' with Genone models',br,scalar localtime)))),nl,
+	TR(td({'colspan' => 2},
+	      center(h1('** NUANCE CONFIDENTIAL **')),nl,
+	      table(TR(td(b('Busy hour call attempts:')),td($busy_hr_calls)),nl,
+		    TR(td(b('Call holding time (sec):')),td($call_holding_secs)),nl,
+		    TR(td(b('Probability of blocking:')),td($prob_blocking)),nl,
+		    TR(td(b('SpeechChannels:')),td($speech_channels)),nl,
+		    TR(td(b('Endpointer runs on RecServer?')),td($ep_on_recserver)),nl,
+		    TR(td(b('Latency Threshold (sec):')),td($latency_threshold_sec)),nl,
+		    TR(td(b('Prob (Latency&lt;Threshold):')),td($prob_latency)),nl,
+		    TR(td(b('Call Model:')),td(nbsp)),nl,
+		    TR(td({'colspan' => 2},
+			  table(TR(td(nbsp x 10),
+				   td(b('Reqs')),nl,
+				   td(b('LU')),nl,
+				   td(b('Dur')),nl,
+				   td(b('Grammar Name'))),nl,
+				(map { TR(td(nbsp),
+					  td($requests_per_call[$_]),nl,
+					  td($grammar_lus[$_]),nl,
+					  td($durations[$_]),nl,
+					  td($grammar_names[$_])).nl } 0..$#grammar_names)))),nl,
+		    TR(td(b('Recognition Power (RU):')),td($ru_needed)),nl,
+		    TR(td(b('Minimum RU per server:')),td($ru_per_server))),nl,
+	     ))),
+  end_html,nl;

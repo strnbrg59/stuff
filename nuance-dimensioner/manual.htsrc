@@ -1,0 +1,163 @@
+<HTML>
+
+<TITLE>How to use the Nuance Dimensioner </TITLE>
+<CENTER><FONT SIZE = +2> How to use the Nuance Dimensioner </FONT></CENTER>
+
+<H1> Quick Start </H1>
+
+This section gets you a quick answer with a minimum of theory,
+explanations or fuss.  If all you want to do is figure out how many
+speech channels you need, just follow the instructions in section 1.1.
+If you also care about recognizer provisioning then please follow the
+instructions in section 1.2 as well.
+
+<H2> Speech channel provisioning </H2>
+
+Enter the number of calls you expect during your "busy hour", next to
+"busy hour call attempts".  Then, next to "Mean call holding time"
+enter the average length of a call, in seconds.  Now press the "Speech
+channels" button: the number that now appears next to that button
+tells you how many channels you need, to ensure that only 2% of your
+incoming calls get blocked (i.e. fail to find a free channel).
+
+<H2> Recognition unit provisioning </H2>
+
+First follow the instructions above, for speech channel provisioning.
+
+<P> Consider the different types of utterances you expect to throw at
+your Nuance recognition server.  Make a list (on a sheet of paper,
+perhaps) of the top-level grammars from which those utterances come.
+Next to each grammar, write down the average number of times you
+expect to see that grammar represented in a typical dialog.
+Fractional numbers are fine.  What you now have is a <em> grammar
+model. </em>
+
+<P> You will now "copy" your grammar model to the text area that the
+dimensioner has dedicated to that purpose.  For each of your top-level
+grammars, find it (or another grammar that's similar) in the drop-down
+menu.  Enter the appropriate number in the "avg requests/call" field.
+Press "Add grammar".  Do this for each grammar in the grammar model.
+
+<P> Press the "Find recognition power" button.  Above it, read off
+your answer: "Total RU required" tells you how many recognition units
+you need to ensure that the server recognizes with a delay of two
+seconds or less, 95% of the time.
+
+<H2> Memory provisioning </H2>
+
+Enter the RU of your average recserver host.  Click "Find" to obtain
+an estimate for the average memory usage of each recserver.  Recserver
+memory usage is typically some constant plus about 8MB per
+simultaneous client connection.  That's why the RU per recserver host
+matters; powerful hosts will handle more simultaneous clients.
+
+<H1> Further details </H1>
+
+<H2> Speech channel provisioning panel </H2>
+
+You can change the probability of blocked calls.  You'll need more
+speech channels if you reduce that probability.  You can also find the
+busy hour call attempts that are consistent with a given blocking
+probability and number of speech channels (by pressing the "Busy hour
+call attempts" button).  Or you can set busy hour call attempts and
+speech channels and solve for blocking probability.
+
+<H2> Recognition unit provisioning panel </H2>
+
+Whereas "Total RU required" refers to the RU of your entire system
+(comprising possibly more than one machine), "Minimum RU per CPU"
+indicates the RU your slowest CPU should have.  A CPU of that RU will
+recognize an utterance from the highest-LU grammar in your grammar
+model in exactly real-time.  ("Minimum RU per CPU" is a little more
+than the LU of your hardest grammar, to account for the fact that
+recognition begins some time after the start of speech.)
+
+<P> If your slowest CPU falls short of that minimum, that's not
+necessarily a crisis.  For example, if 99.9% of your utterances come
+from grammars that your slowest CPU <EM>can</EM> handle in real time,
+you are all right.
+
+<P> If your entire system's RU falls short of "Total RU required", the
+consequences range from mild to severe.  A small RU shortfall means a
+slightly greater average recognition latency.  You can try different
+numbers in the "Latency Threshold" box and experimentally discover the
+correspondence between performance and total RU.  
+
+<P> There comes a point, however, beyond which something like total
+breakdown occurs.  That point is where the system's RU is just enough
+to finish one utterance before the next one comes in (on average).
+Incoming calls start queueing up, and the expected length of the queue
+(as well as the recognition latency) would be infinite were it not for
+the fact that speech channels and callers' lifetimes are finite.
+
+<P> It is easy to calculate this "breakdown" point.  For each grammar
+in the grammar model, multiply its LU by its average requests, and
+multiply that by the average duration of an utterance from that
+grammar.  Add up over all the grammars.  Multiply by "busy hour call
+attempts" and divide by 3600.  
+
+<P> If you do this exercise, you'll notice that the dimensioner's
+answer for "Total RU required" equals about two or three times the
+breakdown point.  Consider the factor of two or three a safety margin.
+An RU equal to the breakdown point would be ok if calls arrived at
+precisely regular intervals (one every 3600 divided by
+busy-hour-call-attempts seconds).  In reality, the arrival times are
+irregular; the safety margin ensures you'll have snappy service (95%
+of the time...) even when several calls arrive bunched together.
+
+<H2> RUs and LUs </H2>
+
+RU is a unit of computer speed, like MIPS or megahertz.  LU is a unit
+of "grammar recognition difficulty"; distinguishing between "yes" and
+"no" is alot easier than distinguishing between "E. Nakamichi" and
+"Enoch Amici".
+
+<P> Nuance has selected a certain grammar -- what is in that grammar
+does not matter here -- and designated its LU as exactly 1.0.  Nuance
+also has an "official" set of utterances from that grammar.  Any
+machine that can go through those utterances and recognize them in
+real time is designated a 1.0-RU machine.  A 500-MHz Pentium III can
+recognize them 17.0 times faster than real time, and is therefore
+designated a 17.0-RU machine.
+
+<P> If another grammar so taxes a 1.0-RU machine that it can recognize
+utterances at only about one-half real time, then that grammar's LU is
+defined as 2.0.  Of course, these days, we use faster machines to rate
+grammars; we'll define that grammar's LU as 2.0 if a 500-MHz Pentium
+III recognizes it 8.5 times faster than real time.
+
+<P> To summarize: everything is scaffolded on top of that
+arbitrarily-designated 1.0-LU grammar.  If it is a little difficult at
+first to understand RU and LU, that is because the definitions are
+interdependent and ultimately rest on one arbitrary point of
+reference.  
+
+<P> Differences in operating systems and machine architectures ensure
+that the LU ratings obtained from different machines are not quite the
+same.  Nonetheless, this is a second-order effect, well behind the
+choice of acoustic model, the sample of utterances, and options such
+as rec.Pruning in its influence on relative LUs.  In practice, our LUs
+have (lately) been determined on 400-MHz, single-CPU Pentium II
+machines running Solaris 2.6.
+
+<P> The benchmark grammar-cum-utterances is available for anyone, <A
+HREF="http://extranet.nuance.com/planning/benchmark.html"> right
+here. </A> Use that benchmark to determine your machine's RU rating.
+Then you can rate your own grammars' LUs with batchrec, if you wish.
+
+<H2> The queueing model </H2>
+
+The dimensioner assumes (1) call inter-arrival times are exponentially
+distributed, (2) service times are a mixture of exponential
+distributions (one exponential distribution for each grammar in the
+model), (3) there is one server, (4) if a call arrives when all the
+speech channels are busy, that call is lost (i.e. the caller doesn't
+necessarily try again).
+
+The properties of such a system have been worked out in D. Gross and
+C.M. Harris' <EM>Fundamentals of Queueing Theory</EM>, Wiley 1998.
+See also J.E. Flood's <EM>Telecommunications Switching, Traffic and
+Networks</EM>, chapter 4, however Flood always assumes exponential
+service times.
+
+</HTML>

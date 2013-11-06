@@ -1,0 +1,170 @@
+# This is stuff that gets processed by buildCGIForm-java.sh and then
+# inserted into CGIForm.java.
+#
+# It's meant to be compiled on Tehachapi, and installed on Intranet.  (Has 
+# to be a machine with full connectivity; Yucatan won't do.)
+#
+# The stuff here gets placed inside System.out.println(), for the most part.
+# However, buildCGIForm-java.sh understands three escape sequences:
+#  1. Lines beginning with # are comments; they are discarded.
+#  2. Text within a pair of !| and |! is understood to be the name
+#     of a program variable or something that has a toString() method,
+#     i.e. something that will print inside a System.out.println().
+#     That something also has to be visible inside CGIForm.printPage().
+#     We cannot handle more than one set of !|...|! on a single line.
+#  3. Lines beginning with !! are passed through with no modifications
+#    (except the ^!! is removed).  Such lines are presumably embedded
+#    code.
+#
+<HTML>
+<TITLE> Nuance Dimensioner </TITLE>
+<P ALIGN=CENTER><FONT SIZE=12> Nuance Dimensioner </FONT></P>
+
+<P ALIGN=RIGHT>
+  <A HREF="http://intranet/~strnbrg/dimensioner-manual.html">Help</A> &nbsp&nbsp&nbsp 
+</P>
+<FORM ACTION="http://localhost:8080/~strnbrg/cgi-bin/dimensioner/dimensioner-cgi.sh" METHOD="POST">
+
+<CENTER><TABLE BORDER=1 CELLPADDING=10 CELLSPACING=1 WIDTH=80%>
+<TR>
+<TD VALIGN=TOP>
+<TABLE>
+<TR BGCOLOR=#F0F000>
+<TD>
+<CENTER><FONT SIZE=+2> Speech channel provisioning</FONT></CENTER>
+</TD>
+</TR>
+<TR><TD><HR></TD></TR>
+<TR>
+<TD>
+<INPUT TYPE="submit" NAME="submit" VALUE="Busy hour call attempts">
+<INPUT TYPE="text" NAME="bhcv" VALUE=!|tp.get_bhcv()|! SIZE=7><BR>
+
+Mean call holding time <INPUT TYPE="text" NAME="holdingTime" VALUE=!|tp.get_holding_time()|! SIZE=7> sec <BR>
+
+<INPUT TYPE="submit" NAME="submit" VALUE="Probability of blocked calls">
+<INPUT TYPE="text" NAME="blockProb" VALUE=!|tp.get_block_prob()|! SIZE=7><BR>
+
+Carried calls: <B>!|tp.get_carried_calls()|!</B><BR>
+<INPUT TYPE="hidden" NAME="carriedCalls" VALUE=!|tp.get_carried_calls()|!>
+
+Offered traffic: <B>!|tp.get_offered_traffic()|!</B> <BR>
+<INPUT TYPE="hidden" NAME="offeredTraffic" VALUE=!|tp.get_carried_calls()|!>
+
+<INPUT TYPE="submit" NAME="submit" VALUE="Speech channels">
+<INPUT TYPE="text" NAME="speechChannels" VALUE=!|tp.get_speech_channels()|! SIZE=7><BR>
+</TD>
+</TR>
+</TABLE>
+</TD>
+
+<TD VALIGN=TOP>
+<TABLE><TR BGCOLOR=#F0F000><TD>
+<CENTER><FONT SIZE=+2> Recognition unit provisioning </FONT></CENTER> 
+</TD></TR>
+<TR><TD><HR></TD></TR>
+<TR><TD>
+Latency threshold, T <INPUT TYPE="text" NAME="latencyThreshold" VALUE=!|tp.get_latency_threshold()|! SIZE=6> sec <BR>
+
+Prob(Latency&lt T) <INPUT TYPE="text" NAME="latencyProb" VALUE=!|tp.get_latency_prob()|! SIZE=6> <BR>
+
+Total RU required: <B>!|tp.get_required_ru()|!</B><BR>
+<INPUT TYPE="hidden" NAME="totalRuRequired" VALUE=!|tp.get_required_ru()|!>
+
+Minimum RU per CPU: <B>!|tp.get_min_ru_per_cpu()|!</B><BR>
+<INPUT TYPE="hidden" NAME="minRuPerCPU" VALUE=!|tp.get_min_ru_per_cpu()|!><BR>
+<BR><BR>
+<INPUT TYPE="submit" NAME="submit" VALUE="Find recognition power requirements">
+
+</TD></TR></TABLE>
+</TD>
+
+<TD VALIGN=TOP>
+<TABLE><TR BGCOLOR=#F0F000><TD>
+<CENTER><FONT SIZE=+2><A HREF="http://intranet/~strnbrg/memory-provisioning.html">Memory provisioning</A> </FONT></CENTER> 
+</TD></TR>
+<TR><TD><HR></TD></TR>
+<TR><TD>
+<INPUT TYPE="checkbox" NAME="twopass" VALUE="true" !|checkboxTruthAdaptor(tp.get_twopass())|! > two-pass model <BR>
+RU per recserver <INPUT TYPE="text" NAME="ruPerServer" VALUE=!|tp.get_ru_per_server()|! SIZE=5> <BR>
+
+<BR><BR>
+
+Megabytes per recserver: <B>!|Math.round(tp.get_memory())|!</B><BR>
+<INPUT TYPE="hidden" NAME="memoryRequired" VALUE=!|tp.get_memory()|!>
+
+<BR><BR>
+<INPUT TYPE="submit" NAME="submit" VALUE="Find memory requirements">
+
+</TD></TR></TABLE>
+</TD>
+
+</TR>
+<TR>
+<TD COLSPAN=2>
+<TABLE><TR BGCOLOR=#F0F000><TD COLSPAN=2>
+<CENTER><FONT SIZE=+2> Grammar model </FONT></CENTER> 
+</TD></TR>
+<TR><TD COLSPAN=2><HR></TD></TR>
+<TR><TD>
+<INPUT TYPE="submit" NAME="submit" VALUE="Add grammar">
+<INPUT TYPE="submit" NAME="submit" VALUE="Delete grammar">
+<BR>
+<INPUT TYPE="submit" NAME="submit" VALUE="Clone grammar">
+#<INPUT TYPE="submit" NAME="submit" VALUE="Grammar info">
+<BR>
+
+<A HREF="http://intranet.nuance.com/provisioning/callmodel-collect-grammars.html">Avg requests/call </A><INPUT TYPE="text" NAME="requestsPerCall" VALUE=!|tp.get_requests_per_call()|! SIZE=7> <BR>
+
+<INPUT TYPE="checkbox" NAME="verification" VALUE="true" !|checkboxTruthAdaptor(m_verification)|! > verification <BR>
+</TD>
+
+<TD>
+!!        m_grammar_choice.toHtml();
+
+!!        if( (m_cgi_query_hash == null)
+!!        ||  (m_cgi_query_hash.get("Grammar Model Hidden Field") == null) )
+!!        {
+!!           m_grammar_list.addElement( GrammarDatabase.elementAt(12),1.0, false);
+!!        }
+
+<BR>
+!!        m_grammar_list.toHtml();
+</TD></TR>
+
+<TR><TD COLSPAN=2>
+<INPUT TYPE="submit" NAME="submit" VALUE="New grammar">
+!! String new_gram_name, new_gram_lu, new_gram_dur;
+!! new_gram_name = new_gram_lu = new_gram_dur = new String(" ");
+!! if( m_cgi_query_hash == null ) 
+!!     ;
+!! else if( ((String)m_cgi_query_hash.get("submit")).equals("New grammar") )
+!! {
+!!     new_gram_name = 
+!!       new String((String)m_cgi_query_hash.get("newGrammarName"));
+!!     new_gram_lu = 
+!!       new String((String)m_cgi_query_hash.get("newGrammarLU"));
+!!     new_gram_dur = 
+!!       new String((String)m_cgi_query_hash.get("newGrammarDur"));
+!! }
+!! else if( ((String)m_cgi_query_hash.get("submit")).equals("Clone grammar") )
+!! {
+!!     new_gram_name = m_grammar_choice.getSelectedGrammar().name;
+!!     new_gram_lu = 
+!!       new Double( m_grammar_choice.getSelectedGrammar().load).toString();
+!!     new_gram_dur = 
+!!       new Double( m_grammar_choice.getSelectedGrammar().duration).toString();
+!! }
+
+Name: <INPUT TYPE="text" NAME="newGrammarName" VALUE="!|new_gram_name|!" SIZE=12>
+LU: <INPUT TYPE="text" NAME="newGrammarLU" VALUE="!|new_gram_lu|!" SIZE=12>
+Duration: <INPUT TYPE="text" NAME="newGrammarDur" VALUE="!|new_gram_dur|!" SIZE=12>
+
+</TD></TR></TABLE></TD></TR>
+</CENTER></TABLE>
+
+# Save all the new grammars that the user has defined.
+<INPUT TYPE="hidden" NAME="extraGrammars" VALUE="!|extraGrammars|!">
+
+</FORM>
+</HTML>

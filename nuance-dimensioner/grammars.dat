@@ -1,0 +1,140 @@
+# This list of grammars gets inserted into the Java source code.
+# See the indicated URLs for documentation.
+# Although we don't use the URLs anymore in the program (the CGI version used
+# to let you jump to the page, but that created too many complications for
+# the non-CGI version) we'll leave the URLs in anyway, just for documentation.
+#
+# It's ok to edit this file as long as you retain the existing format,
+# and in particular:
+# 1. Put an exclamation mark between fields.
+# 2. Do not put exclamation marks anywhere else.
+# 3. Put comments (such as this line) after a # sign.
+#
+# Name                                       LU      ave. duration   url
+#
+"Cantonese 8-digit number strings"!           1.19!     10.83! "http://intranet/provisioning/cantonese/digit8.html"
+"Cantonese dates"!                            1.32!      3.03! "http://intranet/provisioning/cantonese/date.html"
+"Cantonese place names"!                      2.79!      2.72! "http://intranet/provisioning/cantonese/place.html"
+"Cantonese 655 company names"!                2.10!      3.10! "http://intranet/provisioning/cantonese/company.html"
+
+"Dutch 1590 cities"!    3.95!    3.68! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Dutch dates"!    1.66!    5.38! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Dutch money"!    2.08!    4.73! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Dutch broad yes/no"!    0.89!    2.81! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Dutch zip codes"!      2.39!    5.27!  "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Dutch variable digits"!    1.55!    8.30! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Dutch fixed digits"!    1.42!    8.25! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+
+"English.America Narrow yes/no"!                  0.92!     1.01!  "http://intranet/provisioning/yes-no-narrow.html"
+"English.America Broad yes/no"!                   1.42!     1.09!  "http://intranet/provisioning/yes-no-broad.html"
+
+"English.America 4-digit strings"!                1.12!     2.90!  "http://intranet/provisioning/4-digits.html"
+"English.America 8-digit strings"!                1.12!     4.93!  "http://intranet/provisioning/8-digits.html"
+
+"English.America 3-letter, 2-number strings"!     3.57!     3.20!  "http://intranet/technical/research/tech-dev/parameters.html"
+# From GE-appliance.  Ave duration in testset was actually 4.08, but that can't be right.  Settings are as recommended
+# in the documentation page (tech-dev/parameters.html).
+
+"English.America 2-letter, 5-number strings"!     3.03!     4.71!  "http://intranet/technical/research/tech-dev/parameters.html"
+# AAdvantage numbers. Settings are as recommended in the tech-dev/parameters.html page above.
+
+#11-character alphadigit strings""!            1.29!     9.00!  "http://intranet/provisioning/barcode.html"
+#18-character alphadigit strings""!            1.29!    13.60!  "http://intranet/provisioning/barcode.html"
+
+#"English.America 50 town names"!                  1.69!     1.70!  "http://intranet/provisioning/50-towns.html"
+
+"English.America Dates"!                          2.18!     1.88!  "http://intranet/provisioning/date.html"
+"English.America Time of day"!                    1.91!     1.85!  "http://intranet/provisioning/none_yet.html"
+
+"English.America Dollar amounts"!                 2.39!     2.82!  "http://intranet/provisioning/dollars.html"
+
+"English.America 500 stock names"!                3.49!     2.15!  "http://intranet/provisioning/quotes-500.html"
+"English.America 2,000 stock names"!              4.03!     2.02!  "http://intranet/provisioning/quotes-2000.html"
+"English.America 14,995 stock names"!             4.67!     2.11!  "http://intranet/provisioning/quotes.html"
+"English.America 5,000 fund names"!               2.77!     2.88!  "http://intranet/provisioning/mutual-funds.html"
+"English.America TickerTalk complete orders"!     5.79!     4.38!  "http://intranet/provisioning/tickertalk.html"
+
+"English.America Air travel departure cities"!    4.25!     2.17!  "http://intranet/provisioning/city-dept.html"
+"English.America Air travel destination cities"!  4.50!     1.88!  "http://intranet/provisioning/city-dest.html"
+
+"English.America Dialer with 50 names"!           1.73!     1.83!  "http://intranet/provisioning/people-names-50.html"
+#"English.America Dialer with 100 names"!          2.05!     1.83!  "http://intranet/provisioning/people-names-100.html"
+#"English.America Dialer with 200 names"!          2.84!     1.83!  "http://intranet/provisioning/people-names-200.html"
+"English.America Dialer with 500 names"!          3.36!     1.83!  "http://intranet/provisioning/people-names-500.html"
+#"English.America Dialer with 1,000 names"!        4.03!     1.83!  "http://intranet/provisioning/people-names-1000.html"
+#"English.America Dialer with 2,000 names"!        4.33!     1.83!  "http://intranet/provisioning/people-names-2000.html"
+"English.America Dialer with 5,000 names"!        5.76!     1.83!  "http://intranet/provisioning/people-names-5000.html"
+#"English.America Dialer with 10,000 names"!       6.72!     1.83!  "http://intranet/provisioning/people-names-10000.html"
+#"English.America Dialer with 20,000 names"!       7.63!     1.83!  "http://intranet/provisioning/people-names-20000.html"
+"English.America Dialer with 50,000 names"!       8.84!     1.83!  "http://intranet/provisioning/people-names-50000.html"
+#"English.America Dialer with 65,000 names"!       9.58!     1.83!  "http://intranet/provisioning/people-names-65000.html"
+"English.America Dialer with 100,000 names"!      9.78!     1.83!  "http://intranet/provisioning/people-names-100000.html"
+
+"English.America MsgCen Main Menu"!               3.34!     1.89!  "http://intranet/provisioning/msgctrl/mainmenu.html"
+"English.America MsgCen DispatchRecording"!       2.14!     1.48!  "http://intranet/provisioning/msgctrl/dispatch_recording.html"
+
+"English.SouthAfrica digits"!    1.63!    4.66! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica 160 cities"!    2.30!    1.84! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica natural numbers"!    2.24!    1.93! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica money"!    4.25!    2.48! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica 690 companies"!    3.39!    2.72! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica dates"!    2.50!    2.69! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica credit card numbers"!    2.18!    8.10! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica telephone numbers"!    3.00!    4.05! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"English.SouthAfrica broad yes/no"!    2.42!    1.78! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+
+"English.UK narrow yes/no"!                   1.08!     1.10!   "http://intranet.nuance.com/provisioning/uk/narrow-yes-no.html"
+"English.UK 9-long discrete digit strings"!   1.37!     5.61!  "http://intranet.nuance.com/provisioning/uk/nine-digit.html"
+
+"French.Canada 7-digit strings"!              1.24!     3.64!  "http://intranet/provisioning/quebec/digits.html"
+"French.Canada 10-digit strings"!             1.24!     5.40!  "http://intranet/provisioning/quebec/digits.html"
+"French.Canada 16-digit strings"!             1.24!     8.32!  "http://intranet/provisioning/quebec/digits.html"
+"French.Canada narrow oui/non"!               1.09!     1.11!  "http://intranet/provisioning/quebec/oui-non.html"
+"French.Canada wide-coverage dates"!          1.62!     1.95!  "http://intranet/provisioning/quebec/date.html"
+"French.Canada 760 cities"!                   4.71!     1.98!  "http://intranet/provisioning/quebec/city.html"
+"French.Canada 6,985 companies"!              7.84!     2.33!  "http://intranet/provisioning/quebec/company.html"
+
+"German 436 names"!                           2.34!     3.35!  "http://intranet/provisioning/germany/name.html"
+"German 16-digit natural numbers"!            1.77!    10.83!  "http://intranet/provisioning/germany/digit16.html"
+
+"Italian 238 cities"!                         1.84!     3.40!  "http://intranet.nuance.com/provisioning/italian/cities.html"
+"Italian 9300 cities"!                        7.18!     3.09!  "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Italian dates"!                              1.34!     5.37!  "http://intranet.nuance.com/provisioning/italian/date.html"
+"Italian money"!                              1.77!     4.86!  "http://intranet.nuance.com/provisioning/italian/money.html"
+"Italian broad yes/no"!                       0.72!     3.02!  "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+
+"Japanese broad yes/no"!                      1.08!     1.02!  "http://intranet/provisioning/japanese/yesno.html"
+"Japanese 10-digit phone numbers"!            2.22!     7.88!  "http://intranet/provisioning/japanese/phonenumbers.html"
+"Japanese dates"!                             1.39!     3.44!  "http://intranet/provisioning/japanese/date.html"
+"Japanese 11,000 family names"!               5.74!     1.59!  "http://intranet.nuance.com/provisioning/japanese/people-names.html"
+"Japanese 3875 train station names"!    4.95!    1.76!        "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Japanese 1690 company names"!    3.70!    1.61!              "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Japanese credit card numbers"!    1.47!    7.92!             "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+
+"Mandarin broad yes/no"!                      1.00!     1.09!  "http://intranet.nuance.com/provisioning/mandarin/yesno.html"
+"Mandarin 7-long discrete digit strings"!     2.49!     2.38!  "http://intranet.nuance.com/provisioning/mandarin/digit-7.html"
+"Mandarin dates"!                             1.31!     2.56!  "http://intranet.nuance.com/provisioning/mandarin/date.html"
+"Mandarin 466 place names"!                   2.50!     1.19!  "http://intranet.nuance.com/provisioning/mandarin/place.html"
+
+"Norwegian 30 command words"!     1.07!    2.47! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+"Norwegian 1020 cities     "!     3.75!    2.58! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+"Norwegian dates           "!     3.05!    4.91! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+#"Norwegian digits         "!     1.73!   11.68! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+#"Norwegian misc numbers   "!     7.13!    5.91!  (phone, credit card, natural 3,4&5-digit numbers)
+"Norwegian single digits   "!     0.92!    2.24! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+"Norwegian broad yes/no    "!     0.61!    2.44! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+"Norwegian telephone numbers "!   3.83!    6.59! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"    
+
+"Portuguese.Brazil 16-long discrete digit strings"!   2.31!     9.26!  "http://intranet.nuance.com/provisioning/brazil/discrete-digit16.html"
+"Portuguese.Brazil dates"!                1.80!     2.26!  "http://intranet.nuance.com/provisioning/brazil/date.html"
+"Portuguese.Brazil 1470 company names"!   4.45!     2.06!  "http://intranet.nuance.com/provisioning/brazil/company.html"
+
+"Swedish 16 digits, landline"!    1.92!   10.96! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish 16 digits, cellular"!    2.45!   10.66! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish broad yes/no, landline"!    1.13!    4.55! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish broad yes/no, cellular"!    1.51!    1.77! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish 1000 companies, landline"!    2.66!    5.55! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish 1000 companies, cellular"!    2.43!    2.93! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish 260 cities"!   13.42!    1.92! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+"Swedish dates"!    3.89!    1.91! "http://intranet.nuance.com/provisioning/rosaria-benchmarks.txt"
+
