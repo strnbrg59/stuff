@@ -1,0 +1,203 @@
+<HTML>
+<BODY BGCOLOR="DDDDEE">
+<H2><CENTER>Turtle3d</CENTER></H2>
+
+Turtle3d is a 3-dimensional turtle graphics package with your choice
+of Logo, Python or Tcl interface.  Download it <A
+HREF="http://trhj.homeunix.net/~strnbrg/turtle3d.tar.gz">here.</A>
+
+<A><IMG SRC="images/turtle_spiral.gif" ALIGN="right" HSPACE=20></A>
+
+<P> To build, check that the X11_HOME and OPENGL_HOME variables at the
+top of Makefile are correct for your system, and then type "gmake".
+It's been tested on Linux and FreeBSD.
+
+<P>
+To start the Python version, type this at the shell prompt:
+<PRE>
+% python -i turtle.py
+</PRE>
+
+<P>
+A window should pop up now, with a pointy triangle (the "turtle") in
+the middle of that window.
+
+<P>
+And then a sample session might look like this:
+<PRE>
+>>> fd(50)
+>>> rt(90)
+>>> fd(45)
+>>> up(120)
+>>> rl(45)
+>>> fd(60)
+</PRE>
+
+<P>
+The names of the commands are inspired by Logo's -- fd=forward,
+bk=backward, rt=right, lt=left, pu=pen-up, pd=pen-down.  In addition,
+you can pitch the turtle up (up) or down (dn), and roll it (rl --
+there's no "left roll", just roll by a negative number of degrees).
+
+<P> Use your mouse to rotate (left button + drag), pan (middle button)
+and zoom (right button) the image.
+
+<H3> Walking on a sphere </H3>
+
+The turtle can be constrained to the surface of a sphere.  To do that,
+use <TT>sfd</TT> instead of <TT>fd</TT> and <TT>sbk</TT> instead of
+<TT>bk</TT> (and don't use <TT>rl</TT>, <TT>up</TT> or <TT>dn</TT> at
+all!)  The units of <TT>sfd</TT> and <TT>sbk</TT> are degrees.
+
+<A><IMG SRC="images/sphere.gif" ALIGN="right" HSPACE=20></A>
+
+<P> There is no "sphere mode"; you can type <TT>sfd</TT> and then
+<TT>fd</TT> anywhere and anytime you want.  However, <TT>sfd</TT>
+always assumes the turtle is currently on the surface of a sphere.
+So, in a sequence of commands such as
+
+<PRE>
+>>> sfd(90)
+>>> fd(100)
+>>> sfd(90)
+</PRE>
+
+the first and second <TT>sfd</TT>'s will each trace one quarter of a
+great circle, but they will not lie on the same sphere.
+
+<P> If you want to see a shaded blue sphere like the one at right,
+give the following commands:
+
+<PRE>
+>>> sphere(1)
+>>> lighting(1)
+</PRE>
+
+<H2> Other interfaces </H2>
+
+<H3> Tcl </H3>
+
+To start the Tcl version, start tclsh and then your first command to
+the Tcl interpreter should be "source turtle.tcl".  At this point, the
+commands look just like the Python commands except instead of
+parentheses use spaces, i.e. "fd 50", "rt 90", etc.
+
+<H3> minimalistic </H3>
+
+<P> The executable you have built -- <TT>draw</TT> -- reads Logo-style
+turtle commands from standard input.  Thus the following could be
+considered the minimal interface:
+
+<PRE>
+% cat | ./draw
+fd 50
+lt 120
+pu
+</PRE>
+
+<P> And less minimal but still quite spare:
+
+<PRE>
+% sh | ./draw
+for i in 1 2 3 4 5
+do
+echo fd 50
+echo rt 75
+done
+</PRE>
+
+<H3> Logo </H3>
+
+I've saved this part for last because getting to a Logo interface
+takes some doing.
+
+<UL>
+
+<LI> Grab the source code to <A
+HREF="http://trhj.homeunix.net/~strnbrg/ucblogo-5.1.tar.gz"> ucblogo
+5.1</A> and unpack it.  (I'm storing it here because the most <A
+HREF="http://www.cs.berkeley.edu/~bh/logo.html">recent version</A> is
+now up to 5.3 and I'm not inclined to try tracking that.)
+
+<LI> Apply the patchfile -- that's the file readline-popen-patchfile you
+find in turtle3d.tar.gz.  (Copy the patchfile to the ucblogo directory and
+type "patch < readline-popen-patchfile".)  The patchfile does two things, one
+just a convenience, the other essential:
+
+  <UL>
+
+  <LI> It puts GNU readline support into ucblogo.  That's the
+convenience.  If you don't want readline, or you don't have the
+readline library and header files on your development system, or you
+do but there's some problem, you can delete from
+readline-popen-patchfile the sections that refer to the file "parse.c"
+and the file "configure".
+
+  <LI> It introduces a popen function into ucblogo.  This is the essential
+       part.
+  </UL>
+
+<LI> Build the patched ucblogo with the standard "./configure; make;
+make install" sequence.  (Note it won't start if you don't say "make
+install"; not sure why this is...)
+
+<LI> With "turtle3d" as your current working directory and "logo" on your PATH,
+start up like this:
+<PRE>
+logo turtle3d.lg
+</PRE>
+
+This should bring up the OpenGL window -- not Logo's graphics window
+but the window that's produced by the "draw" executable.  You're now
+off and running.  You have the standard Logo turtle commands <TT> fd,
+bk, rt, lt, pu, pd, ht, st </TT> as well as the 3-D ones <TT> up, dn,
+rl </TT> and the spheroidal <TT> sfd and sbk. </TT> To bring up the
+blue sphere type <TT> lighting 1 sphere 1. </TT>
+
+</UL>
+
+<H3> Further features of the Python interface </H3>
+
+You can write a file of Python functions that use the turtle commands.
+The file examples.py shows how this might be done.  To use the
+functions from examples.py, it's necessary to start up a little
+differently.  Your shell command should no longer be "python -i
+turtle.py" but rather
+
+<PRE>
+% python
+</PRE>
+
+and then, at the Python interpreter prompt, type
+
+<PRE>
+>>> from turtle import *
+>>> turtleInit()
+>>> import examples
+</PRE>
+
+then execute one of the functions from examples.py as follows:
+
+<PRE>
+>>> examples.randwalk3d()
+</PRE>
+
+And we can go even more automated than that.  Have a look at the file
+callexamples.py, and then, at the shell prompt, type
+
+<PRE>
+% python callexamples.py
+</PRE>
+
+
+<H3> Reference </H3>
+
+Abelson, Harold and Andrea diSessa, Turtle geometry : the computer as
+a medium for exploring mathematics, Cambridge, MA : MIT Press,
+1981.
+
+<HR>
+<P>
+Author: Ted Sternberg <IMG SRC="email.gif">
+
+</HTML>

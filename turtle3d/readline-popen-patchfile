@@ -1,0 +1,199 @@
+*** /foobear/parse.c	Wed Jun 16 11:29:21 2004
+--- ./parse.c	Fri Oct 15 14:59:11 2004
+***************
+*** 46,51 ****
+--- 46,54 ----
+  #include <disp.h>
+  #endif
+  
++ #include <readline/readline.h>
++ #include <readline/history.h>
++ 
+  FILE *readstream;
+  FILE *writestream;
+  FILE *loadstream;
+***************
+*** 154,160 ****
+  	lsplitscreen(NIL);
+  #endif
+  
+!     ndprintf(stdout,"%t",str);
+  #if defined(__RZTC__) && !defined(WIN32) /* sowings */
+      zflush();
+  #endif
+--- 157,163 ----
+  	lsplitscreen(NIL);
+  #endif
+  
+! /*    ndprintf(stdout,"%t",str); */
+  #if defined(__RZTC__) && !defined(WIN32) /* sowings */
+      zflush();
+  #endif
+***************
+*** 189,194 ****
+--- 192,213 ----
+      NODETYPES this_type = STRING;
+      NODE *ret;
+  
++     /* readline stuff by Ted Sternberg */
++     if (strm == stdin && *prompt && interactive ) {
++         char * readline_return;
++         int i, n;
++         readline_return = readline("? ");
++         add_history( readline_return );
++         n = strlen(readline_return);
++         ungetc( '\n', stdin );
++         for( i=n; i>=0; --i )
++         {
++             ungetc( readline_return[i], stdin );
++         }
++         free( readline_return );
++     }
++     /* end of readline stuff by Ted */
++ 
+      if (!strcmp(prompt, "RW")) {	/* called by readword */
+  	    prompt = "";
+  	    contin = 0;
+*** /foobear/configure	Sat Dec  2 12:32:39 2000
+--- ./configure	Fri Oct 15 14:59:11 2004
+***************
+*** 1331,1337 ****
+    echo $ac_n "(cached) $ac_c" 1>&6
+  else
+    ac_save_LIBS="$LIBS"
+! LIBS="-ltermcap  $LIBS"
+  cat > conftest.$ac_ext <<EOF
+  #line 1337 "configure"
+  #include "confdefs.h"
+--- 1331,1337 ----
+    echo $ac_n "(cached) $ac_c" 1>&6
+  else
+    ac_save_LIBS="$LIBS"
+! LIBS="-ltermcap -lreadline $LIBS"
+  cat > conftest.$ac_ext <<EOF
+  #line 1337 "configure"
+  #include "confdefs.h"
+***************
+*** 1361,1367 ****
+    cat >> confdefs.h <<\EOF
+  #define HAVE_LIBTERMCAP 1
+  EOF
+!  LIBS="$LIBS -ltermcap" tcap=yes
+  else
+    echo "$ac_t""no" 1>&6
+  fi
+--- 1361,1367 ----
+    cat >> confdefs.h <<\EOF
+  #define HAVE_LIBTERMCAP 1
+  EOF
+!  LIBS="$LIBS -ltermcap -lreadline" tcap=yes
+  else
+    echo "$ac_t""no" 1>&6
+  fi
+*** /foobear/files.c	Mon Jul 16 13:29:45 2001
+--- ./files.c	Tue Sep 28 10:57:17 2004
+***************
+*** 54,62 ****
+--- 54,110 ----
+  #endif
+  #endif
+  
++ #include <assert.h>
++ 
+  NODE *file_list = NULL;
+  NODE *reader_name = NIL, *writer_name = NIL, *file_prefix = NIL;
+  
++ /*
++  * Support for controlling popen'd children.
++ */
++ static FILE * popened_stream;
++ 
++ /* Converts a NODE* that contains a single string, into a malloc'ed
++  * char*.  Client then owns the return value.
++ */
++ char * NODE2charstr( NODE * arg ) {
++     char *fnstr;
++     arg = car(arg);
++     arg = cnv_node_to_strnode(arg);
++     if (arg == UNBOUND)
++     {
++         fprintf( stderr, "cnv_node_to_strnode() returned UNBOUND\n" );
++         return(NULL);
++     }
++     
++ 	fnstr = (char *) malloc((size_t)getstrlen(arg) + 1);
++     if (fnstr == NULL) {
++     	err_logo(FILE_ERROR, make_static_strnode(message_texts[MEM_LOW]));
++ 	    return NULL;
++     }
++ 	noparity_strnzcpy(fnstr, getstrptr(arg), getstrlen(arg));
++     return fnstr;
++ }
++ 
++ NODE *lpopen(NODE *arg ) {
++     char * str = NODE2charstr( arg );
++     popened_stream = popen(str, "w");
++     free(str);
++     return(UNBOUND);
++ }
++ 
++ /* Write to popened_stream.  We'll call this from all the procedures
++  * that need to communicate with the popen'd child.
++ */
++ NODE * lpopenwrite( NODE *arg ) {
++     char * str = NODE2charstr( arg );
++     fprintf( popened_stream, "%s\n", str );
++     fflush( popened_stream );
++     free( str );
++     return(UNBOUND);
++ }
++ 
++ 
+  NODE *lsetprefix(NODE *args) {
+      NODE *arg;
+  
+*** /foobear/globals.h	Mon Jul 16 14:30:28 2001
+--- ./globals.h	Tue Sep 28 10:57:23 2004
+***************
+*** 430,435 ****
+--- 430,437 ----
+  extern NODE *lpenpaint(NODE *);
+  extern NODE *lpenerase(NODE *);
+  extern NODE *lpenreverse(NODE *);
++ extern NODE *lpopen(NODE *);
++ extern NODE *lpopenwrite(NODE *);
+  extern NODE *lsetpencolor(NODE *);
+  extern NODE *lsetbackground(NODE *);
+  extern NODE *lsetpalette(NODE *);
+*** /foobear/init.c	Mon Jul 16 14:28:55 2001
+--- ./init.c	Tue Sep 28 10:57:20 2004
+***************
+*** 232,237 ****
+--- 232,239 ----
+      {"plist?", 1, 1, 1, PREFIX_PRIORITY, lplistp},
+      {"plists", 0, 0, 0, PREFIX_PRIORITY, lplists},
+      {"po", 1, 1, 1, PREFIX_PRIORITY, lpo},
++     {"popen", 1, 1, 1, PREFIX_PRIORITY, lpopen},
++     {"popenwrite", 1, 1, 1, PREFIX_PRIORITY, lpopenwrite},
+      {"pos", 0, 0, 0, PREFIX_PRIORITY, lpos},
+      {"pot", 1, 1, 1, PREFIX_PRIORITY, lpot},
+      {"power", 2, 2, 2, PREFIX_PRIORITY, lpower},
+*** foobear/makefile.in	2001-07-25 10:29:35.000000000 -0700
+--- ./makefile.in	2008-02-02 09:06:41.000000000 -0800
+***************
+*** 24,30 ****
+  	$(CC) $(CFLAGS) -O0 -c mem.c
+  
+  logo:	$(OBJS)
+! 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -o logo
+  
+  tags:	$(SRCS)
+  	ctags --format=1 -N $(SRCS) $(HDRS)
+--- 24,30 ----
+  	$(CC) $(CFLAGS) -O0 -c mem.c
+  
+  logo:	$(OBJS)
+! 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -lreadline -o logo
+  
+  tags:	$(SRCS)
+  	ctags --format=1 -N $(SRCS) $(HDRS)

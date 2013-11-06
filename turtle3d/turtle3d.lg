@@ -1,0 +1,87 @@
+;;setloadnoisily "true
+setredefp "true
+
+erase "fd
+erase "bk
+erase "sfd
+erase "sbk
+erase "rt
+erase "lt
+erase "up
+erase "dn
+erase "rl
+erase "pd
+erase "pu
+erase "ht
+erase "st
+erase "clean
+erase "setpencolor
+
+popen("./draw)
+
+to fd :r
+    popenwrite( (WORD "fd\  r) )
+    end
+
+to bk :r
+    popenwrite( (WORD "bk\  r) )
+    end
+
+to sfd :r
+    popenwrite( (WORD "sfd\  r) )
+    end
+
+to sbk :r
+    popenwrite( (WORD "sbk\  r) )
+    end
+
+to rt :r
+    popenwrite( (WORD "rt\  r) )
+    end
+
+to lt :r
+    popenwrite( (WORD "lt\  r) )
+    end
+
+to up :r
+    popenwrite( (WORD "up\  r) )
+    end
+
+to dn :r
+    popenwrite( (WORD "dn\  r) )
+    end
+
+to rl :r
+    popenwrite( (WORD "rl\  r) )
+    end
+
+to pd
+    popenwrite( (WORD "pd) )
+    end
+to pu
+    popenwrite( (WORD "pu) )
+    end
+
+to st
+    popenwrite( (WORD "st) )
+    end
+to ht
+    popenwrite( (WORD "ht) )
+    end
+
+to clean
+    popenwrite( (WORD "clean) )
+    end
+
+to sphere :b
+    popenwrite( (WORD "sphere\  b) )
+    end
+
+to lighting :b
+    popenwrite( (WORD "lighting\  b) )
+    end
+
+to setpencolor :r :g :b
+    setrgb r*255*256*256 + g*255*256 + b*255
+    popenwrite( (WORD "setpencolor\  rgb) )
+    end

@@ -1,0 +1,23 @@
+1. Turtle that looks different on top than on bottom, so we can better
+determine its orientation.  (If its top looks like its bottom, it's
+impossible to guess which way is "right" without tracing through the
+path to its current position).
+
+2. Pen-up and pen-down.
+Done
+
+3. Fog
+Done.
+
+4. Change pencolor for just one segment.
+Done
+
+5. Tubes instead of line segments.
+
+6. Logo driver (see ucblogo-patches subdirectory).
+
+7. Turtle that walks on a sphere.
+Done
+
+8. Use stored whatchamacallits instead of retracing the whole route
+each call to Drawing::Redraw().
