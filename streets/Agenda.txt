@@ -1,0 +1,17 @@
+1. Take some of the #defines (like ANNCTIME) and make them static
+members of class Car.  Initialize them from a response file, using
+the load_var() function from rpnprog/misc_util.hpp.
+DONE
+
+2. Take the code in the big ctrlvars() function and break it up into
+member functions for class Car.
+DONE
+
+3. Rename class Car to class Vehicle, and derive Car and Truck from
+it.  Give trucks weaker acceleration and deceleration.  
+DONE (kept Car as abstract base class, created derived classes Porsche and Bus).
+
+4. Make the function that displays a pixel a virtual member of class
+Vehicle.  Give class Truck a bigger pixel.
+DONE
+
