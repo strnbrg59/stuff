@@ -1,0 +1,61 @@
+#
+# Have to call this metamakefile because CMake produces something
+# called "Makefile", which calls sub-makes, so if I called this file
+# "makefile" or "GNUmakefile", those would call this file.
+#
+
+EVERYTHING = $(HOME)/usr/src/ChomboVis-4.16.9-and-everything
+PATH := $(EVERYTHING)/usr/bin:$(PATH)
+LD_LIBRARY_PATH := $(EVERYTHING)/usr/lib:$(LD_LIBRARY_PATH)
+NON_VTK_TARGETS = unittest orbitlength random_turns
+CXXFLAGS=-O3
+
+all : rubic $(NON_VTK_TARGETS)
+
+rubic : Makefile
+	PATH=$(PATH) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) make -f Makefile
+
+%.o : %.cpp
+	g++ -c $(CXXFLAGS) $<
+
+unittest : unittest.o
+	g++ -o unittest unittest.o
+
+orbitlength : orbitlength.o
+	g++ $(CXXFLAGS) -o orbitlength orbitlength.o
+
+random_turns : random_turns.o rubic.o primes.o
+	g++ -o random_turns random_turns.o rubic.o primes.o
+
+
+CMAKE_FLAGS = -DCMAKE_CXX_FLAGS:STRING='-g' \
+              -DCMAKE_C_FLAGS:STRING='-g'
+#             -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE
+
+
+Makefile :
+	cmake $(CMAKE_FLAGS) .
+
+clean :
+	rm -f $(NON_VTK_TARGETS) $(patsubst %,%.o,$(NON_VTK_TARGETS)) primes.o
+	make -f Makefile clean
+
+realclean : clean
+	rm -rf $(CMAKE_DERIVED_FILES)
+
+CMAKE_DERIVED_FILES = CMakeCache.txt \
+                      CMakeCCompiler.cmake \
+                      cmake.check_cache \
+                      cmake.check_depends \
+                      CMakeCXXCompiler.cmake \
+                      cmake.depends \
+                      CMakeOutput.log \
+                      CMakeSystem.cmake \
+                      Makefile \
+                      VTKRubicInstantiator.cxx \
+                      VTKRubicPythonInit.cxx \
+                      VTKRubicConfigure.h \
+                      VTKRubicInstantiator.h \
+                      vtkRubicPythonIfacePython.cxx \
+                      bin \
+                      CMakeTmp

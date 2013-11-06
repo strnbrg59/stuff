@@ -1,0 +1,7 @@
+To build, type "make -f metamakefile".
+Why did I call it "metamakefile" and not "GNUmakefile"?  Because
+cmake generates "Makefile", which invokes sub-makes, and those will
+call my GNUmakefile, rather than Makefile.
+
+
+To run the python interface, invoke gopython.sh.

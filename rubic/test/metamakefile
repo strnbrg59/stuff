@@ -1,0 +1,46 @@
+#
+# Have to call this metamakefile because CMake produces something
+# called "Makefile", which calls sub-makes, so if I called this file
+# "makefile" or "GNUmakefile", those would call this file.
+#
+
+EVERYTHING = $(HOME)/usr/src/ChomboVis-4.16.9-and-everything
+PATH := $(EVERYTHING)/usr/bin:$(PATH)
+LD_LIBRARY_PATH := $(EVERYTHING)/usr/lib:$(LD_LIBRARY_PATH)
+
+all : testme
+
+testme : Makefile
+	PATH=$(PATH) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) make -f Makefile
+
+CMAKE_FLAGS = -DCMAKE_CXX_FLAGS:STRING='-g' \
+              -DCMAKE_C_FLAGS:STRING='-g'
+#             -DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE
+
+
+Makefile :
+	cmake $(CMAKE_FLAGS) .
+
+clean :
+	rm -f $(NON_VTK_TARGETS) $(patsubst %,%.o,$(NON_VTK_TARGETS))
+	make -f Makefile clean
+
+realclean : clean
+	rm -rf $(CMAKE_DERIVED_FILES)
+
+CMAKE_DERIVED_FILES = CMakeCache.txt \
+                      CMakeCCompiler.cmake \
+                      cmake.check_cache \
+                      cmake.check_depends \
+                      CMakeCXXCompiler.cmake \
+                      cmake.depends \
+                      CMakeOutput.log \
+                      CMakeSystem.cmake \
+                      Makefile \
+                      VTKTestmeInstantiator.cxx \
+                      VTKTestmePythonInit.cxx \
+                      VTKTestmeConfigure.h \
+                      VTKTestmeInstantiator.h \
+                      vtkTestmePythonIfacePython.cxx \
+                      bin \
+                      CMakeTmp

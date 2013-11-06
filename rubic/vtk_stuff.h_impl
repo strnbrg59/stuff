@@ -1,0 +1,156 @@
+#ifndef VTK_STUFF_H_IMPL
+#define VTK_STUFF_H_IMPL
+
+#include "vtkPoints.h"
+#include "vtkCellArray.h"
+#include "vtkCellData.h"
+#include "vtkCellPicker.h"
+#include "vtkFloatArray.h"
+#include "vtkPolyData.h"
+#include "vtkPolyDataMapper.h"
+#include "vtkLookupTable.h"
+#include "vtkShrinkPolyData.h"
+#include "vtkRenderWindow.h"
+
+template<int N>
+void initGeometry(vtkPoints* points, vtkCellArray* polys)
+{
+    for (int axis=0; axis<3; ++axis)
+    {
+        for (int end=0; end<2; ++end)
+        {
+            for (int i=0;i<N;++i)
+            {
+                for (int j=0;j<N;++j)
+                {
+                    insertFacePointsPermuted(points,axis,end*N, i,   j);
+                    insertFacePointsPermuted(points,axis,end*N, i+1, j);
+                    insertFacePointsPermuted(points,axis,end*N, i+1, j+1);
+                    insertFacePointsPermuted(points,axis,end*N, i,   j+1);
+                }
+            }
+        }
+    }
+
+    for (int i=0; i<6*N*N; ++i)
+    {
+        vtkIdType pt[4] = {i*4, i*4+1, i*4+2, i*4+3};
+        polys->InsertNextCell(4,pt);
+    }
+}
+
+template<int N> CubeColoring<N>&
+CubeColoring<N>::permute(Permutation<N> const& perm)
+{
+    Permutation<N> self(rep_);
+    Permutation<N> newself(self*perm);
+    rep_ = newself.rep_;
+
+    for (int i=0;i<3*2*N*N;++i)
+    {
+        getVtkScalars()->InsertValue(i, CubeColoring<N>::instance()[i]);
+    }
+    getCube()->GetCellData()->SetScalars(getVtkScalars());
+    return *this;
+}
+
+template<int N> std::ostream&
+CubeColoring<N>::print(std::ostream& out) const
+{
+    for (int i=0;i<6*N*N;++i) {
+        out << rep_[i];
+    }
+}
+
+
+template<int N> void
+MyPickCommand<N>::Execute(vtkObject* obj, long unsigned int eventid, void* data)
+{
+    static Picks2Turn<N> picks2turn;
+
+    assert( (vtkCellPicker*)obj == getPicker());
+    vtkIdType id = getPicker()->GetCellId();
+    CubeColoring<N>::instance().permute(picks2turn.getPermutation(id));
+
+    forcePipelineUpdate();
+}
+
+template<int N> vtkCommand* getPickCommand()
+{
+    static vtkCommand* thing = new MyPickCommand<N>;
+    return thing;
+}
+
+
+
+template<int N> Picks2Turn<N>::Picks2Turn()
+  : prevPick_(-1)
+{
+    initTurnMap();
+}
+
+template<int N> Permutation<N> const&
+Picks2Turn<N>::getPermutation(CellIdT id)
+{
+    std::cout << "(prevPick_, curr)=(" << prevPick_ << ", " << id << ")\n";
+    if ((id == -1) || (id >= 6*N*N))
+    {
+        prevPick_ = -1;
+    } else
+    {
+        if (prevPick_ == -1)
+        {
+            prevPick_ = id;
+        } else
+        {
+            CellIdPairT cellPair(std::make_pair(prevPick_, id));
+            prevPick_ = -1;
+            typename TurnMapT::const_iterator i = turnMap_.find(cellPair);
+            if (i != turnMap_.end())
+            {
+                return i->second;
+            }
+        }
+    }
+    return I;
+}
+
+// Provide a generic one, so we can run for any N (we just won't have mouse-
+// pick-manipulation functionality).
+// The specializations are in rubic.cxx.
+template<int N> void
+Picks2Turn<N>::initTurnMap()
+{
+    std::cerr << "No mouse-picked-turn capability for "
+         << N << 'x' << N << 'x' << N << " cubes\n";
+}
+
+template<int N> void
+Picks2Turn<N>::addInverseTurns()
+{
+    std::map< Permutation<N>, Permutation<N> > inverseTurnMap;
+    inverseTurnMap[turns_.F] = turns_.f;
+    inverseTurnMap[turns_.B] = turns_.b;
+    inverseTurnMap[turns_.R] = turns_.r;
+    inverseTurnMap[turns_.L] = turns_.l;
+    inverseTurnMap[turns_.U] = turns_.u;
+    inverseTurnMap[turns_.D] = turns_.d;
+
+    TurnMapT extraTurnMap;
+    for (typename TurnMapT::const_iterator i = turnMap_.begin();
+        i != turnMap_.end(); ++i)
+    {
+        extraTurnMap.insert(
+            std::make_pair(std::make_pair(i->first.second,
+                                          i->first.first),
+                           inverseTurnMap[i->second]));
+    }
+    for (typename TurnMapT::const_iterator i = extraTurnMap.begin();
+         i != extraTurnMap.end(); ++i)
+    {
+        turnMap_[i->first] = i->second;
+    }
+    std::cout << "turnMap_.size()=" << turnMap_.size() << '\n';
+}
+
+#endif

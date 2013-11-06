@@ -1,0 +1,352 @@
+#ifndef RUBIC_H_IMPL
+#define RUBIC_H_IMPL
+
+#include "rubic.h"
+#include <cstdlib>
+#include <cassert>
+#include <iostream>
+#include <fstream>
+
+template<int N> Permutation<N> TurnProbe()
+{
+    int const n = 6*N*N;
+    std::vector<int> newrep;
+    for (int i=0;i<n;++i) newrep.push_back(N*N*(i%N*N));
+    return Permutation<N>(newrep);
+}
+
+template<int N> Permutation<N> Turns<N>::forwardFacingTurn(
+    FaceName selfFace, FaceName otherFaces[4][2]) const
+{
+    Faces<N> oldFaces, newFaces;
+    
+    for (int i=0; i<N; ++i)
+    {
+        newFaces[otherFaces[0][0]][N-1][i] =
+            oldFaces[otherFaces[0][1]][i][N-1];
+        newFaces[otherFaces[1][0]][N-1][i] =
+            oldFaces[otherFaces[1][1]][i][N-1];
+        newFaces[otherFaces[2][0]][i][N-1] =
+            oldFaces[otherFaces[2][1]][N-1][N-1-i];
+        newFaces[otherFaces[3][0]][i][N-1] =
+            oldFaces[otherFaces[3][1]][N-1][N-1-i];
+    }
+    newFaces[selfFace] = oldFaces[selfFace];
+    newFaces[selfFace].turn();
+
+    return Permutation<N>(newFaces);
+}
+
+template<int N> Permutation<N> Turns<N>::backwardFacingTurn(
+    FaceName selfFace, FaceName otherFaces[4][2]) const
+{
+    Faces<N> oldFaces, newFaces;
+    
+    for (int i=0; i<N; ++i)
+    {
+
+        newFaces[otherFaces[0][0]][0][i] =
+            oldFaces[otherFaces[0][1]][N-1-i][0];
+        newFaces[otherFaces[1][0]][0][i] =
+            oldFaces[otherFaces[1][1]][N-1-i][0];
+        newFaces[otherFaces[2][0]][i][0] =
+            oldFaces[otherFaces[2][1]][0][i];
+        newFaces[otherFaces[3][0]][i][0] =
+            oldFaces[otherFaces[3][1]][0][i];
+    }
+    newFaces[selfFace] = oldFaces[selfFace];
+    newFaces[selfFace].turn().turn().turn();
+
+    return Permutation<N>(newFaces);
+}
+
+
+template<int N> Permutation<N> Turns<N>::TurnF() const
+{
+    FaceName otherFaces[4][2] = {{faceD, faceR},
+                                 {faceU, faceL},
+                                 {faceL, faceD},
+                                 {faceR, faceU}};
+    return forwardFacingTurn(faceF, otherFaces);
+}
+
+template<int N> Permutation<N> Turns<N>::TurnU() const
+{
+    FaceName otherFaces[4][2] = {{faceR, faceB},
+                                 {faceL, faceF},
+                                 {faceF, faceR},
+                                 {faceB, faceL}};
+    return forwardFacingTurn(faceU, otherFaces);
+}
+
+template<int N> Permutation<N> Turns<N>::TurnR() const
+{
+    FaceName otherFaces[4][2] = {{faceF, faceD},
+                                 {faceB, faceU},
+                                 {faceU, faceF},
+                                 {faceD, faceB}};
+    return forwardFacingTurn(faceR, otherFaces);
+}
+
+template<int N> Permutation<N> Turns<N>::TurnB() const
+{
+    FaceName otherFaces[4][2] = {{faceU, faceR},
+                                 {faceD, faceL},
+                                 {faceR, faceD},
+                                 {faceL, faceU}};
+    return backwardFacingTurn(faceB, otherFaces);
+}
+
+template<int N> Permutation<N> Turns<N>::TurnD() const
+{
+    FaceName otherFaces[4][2] = {{faceL, faceB},
+                                 {faceR, faceF},
+                                 {faceF, faceL},
+                                 {faceB, faceR}};
+    return backwardFacingTurn(faceD, otherFaces);
+}
+
+template<int N> Permutation<N> Turns<N>::TurnL() const
+{
+    FaceName otherFaces[4][2] = {{faceB, faceD},
+                                 {faceF, faceU},
+                                 {faceU, faceB},
+                                 {faceD, faceF}};
+    return backwardFacingTurn(faceL, otherFaces);
+}
+
+
+template<int N> Permutation<N>::Permutation(Faces<N>& faces)
+{
+    for (int axis=0; axis<3; ++axis)
+    {
+        for (int end=0; end<2; ++end)
+        {
+            for (int i=0; i<N; ++i)
+            {
+                for (int j=0; j<N; ++j)
+                {
+                    rep_.push_back(faces[axis*2+end][i][j]);
+                }
+            }
+        }
+    }
+}
+
+template<int N> Permutation<N>&
+Permutation<N>::permute(std::string moves)
+{
+    char const* c = moves.c_str();
+    static Turns<N> t; // static is a big optimization -- very costly to
+                       // to construct a Turns<N> each time.
+    while (c[0]) {
+        switch(c[0])
+        {
+            case 'F' : *this *= t.F; break;
+            case 'f' : *this *= t.f; break;
+            case 'B' : *this *= t.B; break;
+            case 'b' : *this *= t.b; break;
+            case 'R' : *this *= t.R; break;
+            case 'r' : *this *= t.r; break;
+            case 'L' : *this *= t.L; break;
+            case 'l' : *this *= t.l; break;
+            case 'U' : *this *= t.U; break;
+            case 'u' : *this *= t.u; break;
+            case 'D' : *this *= t.D; break;
+            case 'd' : *this *= t.d; break;
+            case 'p' : *this *= TurnProbe<N>(); break;
+            default :
+            {
+                std::cerr << "Illegal operation: " << c[0] << '\n';
+                exit(3);
+            }
+        }
+        ++c;
+    }
+    return *this;
+}
+
+template<int N> void
+permuteColoring(std::string moves)
+{
+    CubeColoring<N>& coloring(CubeColoring<N>::instance());
+    Permutation<N> permutation;
+    permutation.permute(moves);
+    coloring.permute(permutation);
+}
+
+template<int N> Permutation<N>::Permutation()
+{
+    for (int i=0;i<6*N*N;++i)
+    {
+        rep_.push_back(i);
+    }
+}
+
+template<int N> Permutation<N>::Permutation(std::vector<int> const& rep)
+  : rep_(rep)
+{ }
+
+template<int N> void
+Permutation<N>::operator*=(Permutation<N> const& that)
+{
+    Permutation<N> result((*this)*that);
+    this->rep_ = result.rep_;
+}
+
+template<int N> Permutation<N>
+Permutation<N>::operator*(Permutation<N> const& that) const
+{
+    Permutation<N> result;
+    for (int i=0;i<6*N*N;++i)
+    {
+        result.rep_[i] = this->rep_[that.rep_[i]];
+    }
+    return result;
+}
+
+
+template<int N> bool
+Permutation<N>::operator==(Permutation<N> const& that) const
+{
+    return rep_ == that.rep_;
+}
+template<int N> bool
+Permutation<N>::operator!=(Permutation<N> const& that) const
+{
+    return rep_ != that.rep_;
+}
+
+template<int N> bool
+Permutation<N>::operator<(Permutation<N> const& that) const
+{
+
+    return this->rep_ < that.rep_;
+}
+
+template<int N> std::ostream&
+Permutation<N>::print(std::ostream& out) const
+{
+    for (std::vector<int>::const_iterator i = rep_.begin();
+         i != rep_.end(); ++i) {
+        out << *i << ' ';
+    }
+    return out;
+}
+
+template<int N> Permutation<N> pow(Permutation<N> const& p, int k)
+{
+    assert(k>=0);
+    Permutation<N> result;
+    for (int i=0;i<k;++i)
+    {
+        result *= p;
+    }
+    return result;
+}
+
+
+// Unscrambled initial state
+template<int N> CubeColoring<N>::CubeColoring()
+{
+    for (int axis=0; axis<3; ++axis)
+    {
+        for (int end=0; end<2; ++end)
+        {
+            for (int i=0;i<N*N;++i)
+            {
+                rep_.push_back(axis*2 + end);
+            }
+            // Make one facet a little darker, to aid debugging.          
+            // rep_.back() = axis*2 + end + 6;
+        }
+    }
+}
+
+
+/*static*/ template<int N> CubeColoring<N>&
+CubeColoring<N>::instance()
+{
+    static CubeColoring thing;
+    return thing;
+}
+
+template<int N> bool
+CubeColoring<N>::operator==(CubeColoring<N> const& that) const
+{
+    return this->rep_ == that.rep_;
+}
+
+template<int N> bool cubeIsUnscrambled()
+{
+    CubeColoring<N> current(CubeColoring<N>::instance());
+    CubeColoring<N> unscrambled = CubeColoring<N>();
+    return current.operator==(unscrambled);
+}
+
+template<int N> Face<N>::Face()
+{
+    for (int i=0;i<N;++i)
+    {
+        rep_.push_back(std::vector<int>());
+        for (int j=0;j<N;++j)
+        {
+            rep_[i].push_back(0);
+        }
+    }
+}
+
+template<int N> Face<N>& Face<N>::turn()
+{
+    std::vector< std::vector<int> > temp(rep_);
+    for (int i=0;i<N;++i)
+    {
+        for (int j=0;j<N;++j)
+        {
+            rep_[i][j] = temp[N-1-j][i];
+        }
+    }
+    return *this;
+}
+
+
+//
+// Assign numbers corresponding to the elements of a Permutation::rep_.
+// in its initial, unscrambled, state.
+template<int N> Faces<N>::Faces()
+{
+    for (int axis=0; axis<3; ++axis)
+    {
+        for (int end=0; end<2; ++end)
+        {
+            Face<N> face;
+            for (int i=0;i<N;++i)
+            {
+                for (int j=0;j<N;++j)
+                {
+                    face[i][j] = axis*2*N*N + end*N*N + i*N + j;
+                }
+            }
+            rep_.push_back(face);
+        }
+    }
+}
+
+template<int N>
+Turns<N>::Turns()
+  : L(TurnL()),
+    R(TurnR()),
+    D(TurnD()),
+    U(TurnU()),
+    B(TurnB()),
+    F(TurnF()),
+    l(pow(L,3)),
+    r(pow(R,3)),
+    d(pow(D,3)),
+    u(pow(U,3)),
+    b(pow(B,3)),
+    f(pow(F,3))
+{
+}
+
+#endif
