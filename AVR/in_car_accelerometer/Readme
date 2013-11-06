@@ -1,0 +1,9 @@
+This project is an +-3g accelerometer, an LCD panel, and an Atmega168.
+It's meant for use in a car.
+
+Unlike ../accelerometer here we don't use an audio speaker, and we're
+not concerned with clever hairtrigger mechanisms for starting the
+accelerometer (we're assuming that in a car electrical power is
+plentiful), and we're not concerned with storing data in the eeprom.
+Also, ../accelerometer uses an Attiny.
+

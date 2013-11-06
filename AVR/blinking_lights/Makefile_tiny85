@@ -1,0 +1,17 @@
+PRG            = blinky_tiny85
+OBJ            = $(PRG).o
+ATTINY_NUM     = 85
+MCU_TARGET     = attiny$(ATTINY_NUM)
+
+OPTIMIZE       = -Os
+
+DEFS           =
+LIBS           =
+
+include ../make.generic.C
+
+burn: $(PRG).hex
+	avrdude -P$(TTY) -pt$(ATTINY_NUM) -v -cstk500v2 -Uflash:w:./$(PRG).hex
+
+erase:
+	avrdude -P$(TTY) -e -pt$(ATTINY_NUM) -v -cstk500v2

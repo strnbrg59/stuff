@@ -1,0 +1,21 @@
+Typical usage (from command-line -- we have a gui now -- "python gui.py"):
+
+1. uC sends (TMR0,voltage) pairs over uart; compile ../adc.cpp with
+   DEFS=-DNDEBUG to get raw output.
+2. serialport (~/usr/local/src/serialport) traps that data, storing it to
+   a file.
+3. adc2txt converts to human-readable form.
+4. plots.py displays it.
+
+E.g.
+
+[Run this as long as you want to record data:]
+$ ./serialport -r -b 38400 > ~/serial.out 2>&1 
+$ ./serialport -r -b 38400 -x start
+$ ./serialport -r -b 38400 -x <nchannels>
+...wait a while...
+$ ./serialport -r -b 38400 -x stop
+
+$ cat ~/serial.out | ../AVR/adc/linux/adc2txt > adc.const.38400baud
+
+$ python plots.py adc.const.38400baud 
