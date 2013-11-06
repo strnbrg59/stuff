@@ -1,0 +1,3 @@
+8/6/08: Started project.  Started from turtle3d's draw.cpp and mouse.cpp.
+Cut out reader.cpp and instead of drawing the turtle, I'm drawing a wavy
+surface.

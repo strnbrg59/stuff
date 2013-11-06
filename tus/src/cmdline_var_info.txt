@@ -1,0 +1,9 @@
+# This file is used by generate_config.py to produce C++ code for the config facility.
+# Each line gives information on one config variable.  The format is:
+# name         type     default      comment
+fake_scenery   bool     true        "something nice"
+scenery_file   string   "/dev/nawl" "SRTM file"
+grid_size      int      100         "on a side"
+grid_start_x   int      0           "lower left-hand corner"
+grid_start_y   int      0           "lower left-hand corner"
+coarsening     int      1           "scenery coarsening factor"
