@@ -1,0 +1,9 @@
+# make file for test401.c
+
+test401.exe:	test401.obj io401.obj
+    tlink l:\c0s test401 io401,test401,,l:\cs
+
+test401.obj:	test401.c
+    tcc -c test401
+
+

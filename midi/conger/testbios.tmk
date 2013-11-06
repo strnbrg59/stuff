@@ -1,0 +1,9 @@
+# testbios.mak  TURBOC make file for testbios
+
+testbios.exe:	testbios.obj
+    tlink l:\c0s testbios,testbios,,bioscall.lib l:\cs
+
+testbios.obj:	testbios.c
+    tcc -c -DTURBOC=1 testbios
+
+

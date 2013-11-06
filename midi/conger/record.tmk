@@ -1,0 +1,18 @@
+#reacord.mak  TurboC make file for record
+
+record.exe:	record.obj inputf.obj chain.obj writscrn.obj
+    tlink l:\c0s record inputf chain writscrn io401,record,,l:\cs l:\maths \
+          l:\emu bioscall.lib
+
+record.obj:	record.c
+   tcc -c -DTURBOC=1 record
+
+inputf.obj:	inputf.c
+   tcc -c -DTURBOC=1 inputf
+
+chain.obj:	chain.c
+   tcc -c -DTURBOC=1 chain
+
+writscrn.obj:	writscrn.c
+   tcc -c -DTRUBCO=1 writscrn
+

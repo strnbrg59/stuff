@@ -1,0 +1,15 @@
+# testwrit.mak  TURBOC make file for testwrit.c
+
+testwrit.exe:	testwrit.obj chain.obj writscrn.obj
+    tlink l:\c0s testwrit chain writscrn,testwrit,,bioscall.lib l:\cs
+
+testwrit.obj:	testwrit.c
+    tcc -c -DTURBOC=1 testwrit
+
+writscrn.obj:	writscrn.c
+    tcc -c -DTURBOC=1 writscrn
+
+chain.obj:	chain.c
+    tcc -c -DTURBOC=1 chain
+
+

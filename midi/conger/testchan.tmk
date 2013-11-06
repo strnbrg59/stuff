@@ -1,0 +1,11 @@
+# testchan.mak  TURBOC make file for testchan
+
+testchan.exe:	testchan.obj  chain.obj
+    tlink /x l:\c0s testchan chain,testchan,,l:\cs
+
+testchan.obj:	testchan.c
+    tcc -c -DTURBOC=1 testchan
+
+chain.obj:	chain.c
+    tcc -c -DTURBOC=1 chain
+

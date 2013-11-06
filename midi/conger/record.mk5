@@ -1,0 +1,18 @@
+# make file for record.c
+
+record.obj:	record.c
+    cl /c record.c
+
+inputf.obj:	inputf.c
+    cl /c inputf.c
+
+chain.obj:	chain.c
+    cl /c chain.c
+
+writscrn.obj:	writscrn.c
+    cl /c writscrn.c
+
+record.exe:	record.obj inputf.obj 
+    link record+inputf+io401+writscrn+chain,,,bioscall.lib;
+
+

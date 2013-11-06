@@ -1,0 +1,15 @@
+# testwrit.mmk  Microsoft Make file for testwrit.c
+
+chain.obj:	chain.c
+    cl /c chain.c
+
+writscrn.obj:	writscrn.c
+    cl /c writscrn.c
+
+testwrit.obj:	testwrit.c
+    cl /c testwrit.c
+
+testwrit.exe:	testwrit.obj chain.obj writscrn.obj
+    link testwrit+chain+writscrn,,,bioscall.lib;
+
+

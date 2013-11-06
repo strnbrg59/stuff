@@ -1,0 +1,12 @@
+# testchan.mmk  Microsoft Make file for testchan.c
+
+testchan.obj:	testchan.c
+    cl /c testchan.c
+
+chain.obj:	chain.c
+    cl /c chain.c
+
+testchan.exe:	testchan.obj
+    link testchan.obj+chain.obj;
+
+

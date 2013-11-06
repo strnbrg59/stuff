@@ -1,0 +1,13 @@
+LOW FREQENCY OCCILATOR
+  (VIBRATO EFFECTS)        DCO          VCF 
+                            ณ            ณ
+                        ษอออฯอออป        ณ
+                        บ  LFO  วฤฤฤฤฤฤฤฤู
+                        ศอออออออผ
+
+
+
+LFO RATE  =            0 - 127  Sets the rate of low frequency occilation.
+LFO DELAY =            0 - 127  Sets the time needed from keypress before
+                                  LFO starts.
+RETURN                 Go back to primary edit diagram (all changes saved).

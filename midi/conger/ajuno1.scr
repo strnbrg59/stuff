@@ -1,0 +1,19 @@
+                    PATCHLIB - PATCH LIBRARIAN & EDITOR
+                                               
+
+Commands:                                                 Current Settings:
+
+    DRIVE       Select a drive or directory.
+    LIBRARY     Display list/load a patch file from disk.
+    SELECT      Choose a patch to edit.
+    EDIT        Edit the selected patch.
+    NAME        Name or rename the selected patch.
+    SAVE        Save 64 patches to disk as a library file.
+    UPLOAD      Send 64 patches from the computer to the synth.
+    DOWNLOAD    Send 64 patches from the synth to computer for saving/edits.
+    PRINT       Print a set of patch parameters on line printer.
+    CLEAR       Set all patch parameters to zero (only on patch being edited).
+    MOVE        Relocate a patch within a library.  Overwrites old patch.
+    IMPORT      Insert a patch from another library into current library.
+
+    QUIT        Return to DOS

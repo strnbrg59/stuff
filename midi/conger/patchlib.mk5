@@ -1,0 +1,31 @@
+#patchlib.mmk - Microsoft Make file to compile and link patchlib.c 
+
+patchut1.obj:	patchut1.c
+    CL /c patchut1.c
+
+patchut2.obj:	patchut2.c
+    CL /c patchut2.c
+
+patchprt.obj:	patchprt.c
+    CL /c patchprt.c
+
+writscrn.obj:	writscrn.c writscrn.h
+    CL /c writscrn.c
+
+patchlod.obj:	patchlod.c
+    CL /c patchlod.c
+
+patched.obj:	patched.c patched.h
+    CL /c patched.c
+
+chain.obj:	chain.c chain.h
+    CL /c  chain.c
+
+patchlib.obj:	patchlib.c patchlib.h
+    CL /c patchlib.c
+
+patchlib.exe:	patchlib.obj patchut1.obj patchut2.obj patchprt.obj io401.obj\
+		patched.obj patchlod.obj writscrn.obj chain.obj 
+    LINK patchlib+patchut1+patchut2+patchprt+patched+patchlod+writscrn+chain+io401,,,bioscall.lib;
+
+

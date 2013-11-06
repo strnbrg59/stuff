@@ -1,0 +1,5 @@
+modes: major
+keys: C
+inversions: fivethree, sixthree, sixfour
+arpeggiate: NO
+device: PIANO

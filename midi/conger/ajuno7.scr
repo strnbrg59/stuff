@@ -1,0 +1,20 @@
+ENVELOPE CONTROL
+
+A         |---- T1 ----|-T2|T3|                 |- T4-|                     
+M         |            | _ |_ |_ _ _ _ _ _ _ _ _|_ _ _|_ _ _ _ _ _ _ _     
+P         |            /\  |  |                 |     |              ^
+L         |          /    \|_ | _  _  _  _  _  _| _ _ | _  _  _  _             
+I         |        /        \ |                 |     |          ^
+T         |      /            \컴컴컴컴컴컴컴컴컴  - -|- - - -     
+U         |    /                                | \   |      L3  L2 L1
+D         |  /                                      \ |      v   v   v
+E  컴컴컴컴/                                    |     \컴컴컴컴컴컴컴컴
+           ^Key On                              ^Key off
+                           Time --->
+
+T1 =             L1 = 
+T2 =             L2 =               (All values are limited 0 - 127)
+T3 =             L3 =
+T4 =
+ENVELOPE KEY FOLLOW =          0 - 15, Shortens envelope time on higher notes.
+RETURN

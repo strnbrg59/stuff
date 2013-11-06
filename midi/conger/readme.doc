@@ -1,0 +1,109 @@
+readme.doc - 
+
+This is the source code and demo disk for 'C Programming For MIDI'.  See also 
+the file CONTENTS.DOC. 
+
+This disk contains copyrighted material.  Copies of 'C Programming For MIDI' 
+and the source code disk are available from:
+
+         M&T Publishing
+         501 Galveston Drive
+         Redwood City, California
+         94063
+         415 - 366 - 3600
+
+
+Demo Programs:
+
+All of the programs in the book are provided in both source code and executable 
+form.  You can run any of the .EXE files by setting the default drive to the 
+drive containing this disk and typing in the program name (without the .EXE at 
+the end). It is a good idea to MAKE A COPY OF THIS DISK before using it or 
+modifying the programs. 
+
+For compatibility reasons the demo programs use the safe but slow BIOS routines 
+for displaying screen images.  See section 3.8 of the book for notes on how to 
+use the faster (direct video memory access) functions. 
+
+
+Assembly Language:
+
+There are two assembly language files on the disk, BIOSCALL.ASM and IO401.ASM.  
+If you do not want to use assembly language, you can use the assembled versions 
+BIOSCALL.LIB and IO401.OBJ.  These are ready to be linked with any C program, 
+including the examples in this book. Both assume the small memory model is 
+being used (default for most compilers). 
+
+
+Source Code:
+
+All source code is provided ready to be compiled with the Microsoft C compiler. 
+There are minor differences between Turbo and Microsoft names for several 
+library files and library functions. To get around these differences five 
+programs compile differently if the TURBOC keyword is TRUE (non-zero). For 
+Microsoft C the TURBOC keyword should either be set equal to 0, or not be 
+defined. Users of Turbo C will need to activate TURBOC. There are two ways to 
+do this. One is to use the command line option during compilation. For example 
+when compiling chain.c enter: 
+
+tcc -c -dTURBOC=1 chain
+
+The "-c" means just compile, do not link yet. The "-dTURBOC=1" means define 
+TURBOC to be equal to 1. Within the program if TURBOC is defined = 1 the Turbo 
+library and function names will be used. If it is not defined or defined == 0 
+the Microsoft names will be used. 
+
+The alternate way to activate the TURBOC define is to modify one line in each 
+affected file. There is a line near the top: 
+               
+/* for Turbo C insert line "#define TURBOC 1" */ 
+
+in the files chain.c, chain2.c, record.c, patchut1.c and patchut2.c.
+
+The "/*  */" surrounding the #define line turns this line into a comment which 
+the compiler will ignore, so the TURBOC keyword is not defined.  If you are 
+using Turbo C, insert the line as follows: 
+
+#define TURBOC 1          
+
+and compile the files without the "-d" command line option.
+
+You can also take advantage of the supplied MAKE files which define TURBOC on 
+the command line. These are for the command line version of MAKE supplied 
+with Turbo C, not the project make that resides inside the Turbo C 
+environment shell. 
+
+
+MAKE Files:
+
+Both Microsoft and Turbo MAKE files are included. These allow programs with 
+multiple modules to be compiled and linked using a single command. Compilation 
+is started from DOS with a command line like: 
+
+make patchlib.mmk        (Microsoft Ver 4.0)
+make patchlib.mk5        (Microsoft Ver 5.0) 
+make -fpatchlib.tmk      (Turbo C)
+
+Only the modules that have been edited or which lack .OBJ files will be 
+compiled. The make files do NOT include conditional reassembly of the two 
+assembly language programs BIOSCALL.ASM and IO401.ASM. The TURBOC key word is 
+defined in the .TMK MAKE files, so Turbo C users do not need to edit the three 
+files mentioned above if the .TMK MAKE files are used to control compilation. 
+
+The Turbo linker TLINK command lines within the MAKE files assume that the 
+library files c0s and cs are in a subdirectory called " L:". See appendix 6 for 
+directions as to how to set up a "L:" pseudo drive with the DOS SUBST command. 
+
+The Microsoft MAKE files assume that library locations are determined by 
+SETting environment variables LIB, TEMP, etc. using the DOS SET command. This 
+is explained in the first section of the Microsoft compiler user's manual and 
+in appendix 6 of 'C Programming For MIDI'. 
+
+If you want to compile all programs in single batch run, execute the included 
+MMAKEALL.BAT (Microsoft Ver 4.0), M5MAKEAL.BAT (Microsoft Ver 5.0)  or 
+TMAKEALL.BAT (Turbo) batch files by typing MMAKEALL, M5MAKEAL or TMAKEALL at 
+the DOS command line. These batch files also assume that the library files are 
+accessible via either the L: drive (Turbo) or the DOS SET command (Microsoft). 
+
+jlc 3/88
+
