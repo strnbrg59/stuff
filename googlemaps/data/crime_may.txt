@@ -1,0 +1,357 @@
+FREMONT CRIME STATS - MAY 1 -MAY 31,                                                                 
+                                                                                                              
+              Location                                      Reported Date Received                   
+                                                                                                     
+            AUTO BURGLARY                                                                            
+115 WOODCREEK CO                                                05/12/2006 14:33:04                  
+1400 WASHO DR                                                   05/05/2006 12:07:04                  
+1401 RED HAWK CI                                                05/11/2006  0:00:00                  
+1873 BERRY CT                                                   05/13/2006  0:00:00                  
+2000 STEVENSON BL                                               05/02/2006  0:00:00                  
+2000 STEVENSON BL                                               05/08/2006  0:00:00                  
+2000 STEVENSON BL                                               05/11/2006  0:00:00                  
+2000 STEVENSON BL                                               05/12/2006  0:00:00                  
+2000 STEVENSON BL                                               05/20/2006  0:00:00                  
+2000 STEVENSON BL                                               05/22/2006  0:00:00                  
+2000 STEVENSON BL                                               05/28/2006  0:00:00                  
+2878 PRUNE AV                                                   05/11/2006  0:00:00                  
+2999 SEQUOIA TR                                                 05/30/2006 10:53:24                  
+3101 W WARREN AV                                                05/09/2006  8:05:40                  
+3400 STEVENSON BL                                               05/07/2006  0:00:00                  
+3400 STEVENSON BL                                               05/10/2006  0:00:00                  
+3426 EDISON WY                                                  05/14/2006  0:00:00                  
+34384 WELLMAN TR                                                05/23/2006  0:00:00                  
+34524 BLUESTONE CO                                              05/11/2006  0:00:00                  
+35 WENATCHEE CO                                                 05/17/2006  0:00:00                  
+35521 CABRILLO DR                                               05/06/2006  0:00:00                  
+35699 NILES BL                                                  05/03/2006  0:00:00                  
+35725 LINDA DR                                                  05/01/2006  0:00:00                  
+3577 MADISON CO                                                 05/30/2006  0:00:00                  
+35995 FREMONT BL                                                05/11/2006  0:00:00                  
+36000 FREMONT BL                                                05/11/2006  0:00:00                  
+3695 STEVENSON BL                                               05/31/2006  0:00:00                  
+37200 PASEO PADRE PK                                            05/25/2006  0:00:00                  
+37200 PASEO PADRE PK                                            05/25/2006  7:46:26                  
+37200 PASEO PADRE PK                                            05/29/2006  0:00:00                  
+375 SERRAMONTE TR                                               05/29/2006  0:00:00                  
+3750 TAMAYO ST                                                  05/02/2006  0:00:00                  
+37711 FREMONT BL                                                05/16/2006  0:00:00                  
+37731 MADERA CT                                                 05/07/2006  0:00:00                  
+3777 MOWRY AV                                                   05/26/2006  0:00:00                  
+38 SEA CREST TR                                                 05/13/2006  8:59:00                  
+38660 LEXINGTON ST                                              05/13/2006  0:00:00                  
+38860 EMROL AV                                                  05/28/2006  0:00:00                  
+38870 LE COUNT WY                                               05/04/2006  0:00:00                  
+39001 FREMONT HUB                                               05/25/2006  0:00:00                  
+39191 ARGONAUT WY                                               05/01/2006  0:00:00                  
+39195 FARWELL DR                                                05/18/2006  0:00:00                  
+39207 SUNDALE DR                                                05/18/2006 19:42:12                  
+39241 RED HAWK TR                                               05/08/2006  0:00:00                  
+39300 PASEO PADRE PK                                            05/25/2006  0:00:00                  
+39439 PASEO PADRE PK                                            05/01/2006  0:00:00                  
+39476 FREMONT BL                                                05/12/2006  0:00:00                  
+39493 GALLAUDET DR                                              05/24/2006  0:00:00                  
+39515 ROSS CO                                                   05/22/2006 22:59:23                  
+39517 GALLAUDET DR                                              05/22/2006  0:00:00                  
+39639 LESLIE ST                                                 05/25/2006  2:15:57                  
+39655 TRINITY WY                                                05/13/2006  0:00:00                  
+39663 LESLIE ST                                                 05/17/2006  1:18:33                  
+39737 PASEO PADRE PK                                            05/12/2006  0:00:00                  
+39877 SUNDALE DR                                                05/30/2006  0:00:00                  
+39939 STEVENSON CO                                              05/08/2006  0:00:00                  
+40147 SAN CARLOS PL                                             05/11/2006  0:00:00                  
+4067 DARWIN DR                                                  05/31/2006  0:00:00                  
+4101 EGGERS DR                                                  05/06/2006  7:09:35                  
+4101 EGGERS DR                                                  05/06/2006  0:00:00                  
+4141 STEVENSON BL                                               05/06/2006  0:00:00                  
+4141 STEVENSON BL                                               05/15/2006  0:00:00                  
+41492 ALICE ST                                                  05/12/2006  0:00:00                  
+4162 CRESTWOOD ST                                               05/24/2006  0:00:00                  
+4212 LORREN DR                                                  05/08/2006  0:00:00                  
+4338 MOCKINGBIRD WY                                             05/29/2006  0:00:00                  
+43555 GRIMMER BL                                                05/22/2006  0:00:00                  
+43555 GRIMMER BL                                                05/12/2006 14:10:36                  
+4378 GIBRALTAR DR                                               05/01/2006 22:08:07                  
+4471 AMADOR RD                                                  05/18/2006 18:14:08                  
+4555 THORNTON AV                                                05/08/2006  0:00:00                  
+4567 ENTERPRISE ST                                              05/20/2006  0:00:00                  
+46100 LANDING PK                                                05/26/2006  0:00:00                  
+46100 LANDING PK                                                05/30/2006  0:00:00                  
+4664 CAPITAN DR                                                 05/08/2006  0:00:00                  
+46645 MISSION BL                                                05/02/2006  0:00:00                  
+46710 CRAWFORD ST                                               05/03/2006  1:55:04                  
+4678 CERRITOS AV                                                05/02/2006  0:00:00                  
+4737 THORNTON AV                                                05/11/2006 13:29:32                  
+4804 LOUISE CT                                                  05/04/2006  0:00:00                  
+4832 BALBOA WY                                                  05/11/2006  0:00:00                  
+4918 HYDE PARK DR                                               05/08/2006  0:00:00                  
+4936 SCHELBERT TR                                               05/05/2006  0:00:00                  
+5005 BRANDIN CT                                                 05/30/2006  0:00:00                  
+5053 SHALIMAR CI                                                05/29/2006  0:00:00                  
+5071 JUSTIN TR                                                  05/26/2006  0:00:00                  
+5071 JUSTIN TR                                                  05/26/2006  0:00:00                  
+5551 COSMOS CO                                                  05/24/2006 10:49:20                  
+6120 STEVENSON BL                                               05/10/2006  0:00:00                  
+919 MOWRY AV                                                    05/17/2006  0:00:00                  
+969 ILIMA CT                                                    05/09/2006 11:03:31                  
+CORONADO DR/ NICOLET AV                                         05/12/2006  7:26:21                  
+COUGAR DR/ TROUT CT                                             05/05/2006  0:00:00                  
+DUNHILL DR/ SHATTUCK AV                                         05/04/2006  6:44:00                  
+EGGERS DR/ FREMONT BL                                           05/31/2006  0:00:00                  
+ENTERPRISE ST/ GRIMMER BL                                       05/07/2006  8:37:14                  
+FARWELL DR/ MOWRY AV                                            05/02/2006  0:00:00                  
+FREMONT BL/ WALNUT AV                                           05/18/2006  0:00:00                  
+GUARDINO DR/ LITCHFIELD AV                                      05/06/2006  0:00:00                  
+HAMPSHIRE WY/ VICTORIA AV                                       05/02/2006 22:23:42                  
+LAKE CHAMPLAIN ST/ LAKE MEAD DR                                 05/09/2006 11:12:19                  
+LESLIE ST/ SUNDALE DR                                           05/25/2006  0:00:00                  
+MARION AV/ TROYER AV                                            05/11/2006  0:00:00                  
+MISSION BL/ SULLIVAN UNDERPASS                                  05/02/2006 21:07:48                  
+PASEO PADRE PK/ WALNUT AV                                       05/30/2006  0:00:00                  
+RANCHO ARROYO PK/ SERENO CO                                     05/30/2006  0:00:00                  
+SUNDALE DR/ WALTERS CT                                          05/12/2006 11:37:11                  
+                                                                                                     
+RESIDENTIAL BURGLARY                                                                                 
+1440 STONE PINE TR                                              05/01/2006 18:23:01                  
+1775 KERN LP                                                    05/24/2006 18:53:46                  
+2253 KALENDA CO                                                 05/18/2006 14:44:27                  
+3166 LUBBOCK PL                                                 05/31/2006 21:19:05                  
+32739 TULE LAKE LN                                              05/24/2006 22:44:55                  
+32783 BUCKS LAKE LN                                             05/24/2006 21:41:19                  
+33995 FREDERICK LN                                              05/16/2006 12:35:02                  
+34351 MIMOSA TR                                                 05/28/2006 21:11:27                  
+34368 BARNFIELD CT                                              05/17/2006 13:46:04                  
+34421 MONTGOMERY PL                                             05/15/2006 11:22:26                  
+34432 WELLMAN TR                                                05/13/2006 14:28:27                  
+34542 FELIX TR                                                  05/14/2006 17:19:44                  
+34765 HEMET CO                                                  05/27/2006  9:00:26                  
+34793 ARDENTECH CT                                              05/29/2006 15:45:08                  
+35378 LUCIA ST                                                  05/27/2006 14:47:35                  
+35601 NILES BL                                                  05/22/2006 23:30:16                  
+35858 ALCAZAR CT                                                05/09/2006 15:27:28                  
+363 STARLITE WY                                                 05/16/2006 15:14:21                  
+3631 DUNBAR CT                                                  05/26/2006  0:00:00                  
+36543 SAN PEDRO DR                                              05/27/2006 20:59:00                  
+36789 SAN PEDRO DR                                              05/27/2006 19:56:29                  
+37200 PASEO PADRE PK                                            05/23/2006 14:42:36                  
+3725 JAMESTOWN RD                                               05/18/2006 11:05:30                  
+37643 CANTERBURY ST                                             05/10/2006 22:42:26                  
+38369 GRANVILLE DR                                              05/21/2006 14:58:01                  
+38548 GRANVILLE DR                                              05/18/2006  8:34:13                  
+38725 HUNTINGTON CI                                             05/31/2006  7:35:46                  
+38831 GARIBALDI CO                                              05/01/2006 13:53:39                  
+39124 SUNDALE DR                                                05/12/2006 20:52:03                  
+39440 CIVIC CENTER DR                                           05/31/2006 18:05:07                  
+39901 LINDSAY MCDERMOTT LN                                      05/09/2006 21:03:19                  
+40640 HIGH ST                                                   05/30/2006 11:42:34                  
+40640 HIGH ST                                                   05/30/2006 13:51:51                  
+4101 MOWRY AV                                                   05/05/2006 11:14:45                  
+4140 IRVINGTON AV                                               05/11/2006  6:30:07                  
+41448 TIMBER CREEK TR                                           05/17/2006  7:13:00                  
+41472 TIMBER CREEK TR                                           05/13/2006 17:30:41                  
+41557 PATTON TR                                                 05/10/2006 18:53:01                  
+41893 CHADBOURNE DR                                             05/11/2006 13:12:38                  
+4200 BAY ST                                                     05/05/2006 12:25:47                  
+4200 BAY ST                                                     05/09/2006 10:57:56                  
+42010 BLACOW RD                                                 05/01/2006 19:42:16                  
+4250 CENTRAL AV                                                 05/25/2006 11:22:28                  
+4325 SEDGE ST                                                   05/26/2006 14:36:23                  
+4326 CALYPSO TR                                                 05/18/2006  8:02:06                  
+43677 ELLSWORTH ST                                              05/26/2006 12:11:51                  
+4457 DOANE ST                                                   05/26/2006 14:30:59                  
+4629 ROTHBURY CO                                                05/07/2006 14:31:25                  
+4664 PIPER ST                                                   05/18/2006  9:14:46                  
+4709 DEADWOOD DR                                                05/03/2006  0:00:00                  
+4719 WESTWOOD AV                                                05/31/2006 17:53:57                  
+4727 VICTORIA AV                                                05/09/2006  1:07:08                  
+48203 SAWLEAF ST                                                05/16/2006 18:30:22                  
+48498 URSA DR                                                   05/16/2006 16:33:16                  
+49 EAGLE GR                                                     05/30/2006 14:30:17                  
+4905 DEEP CREEK RD                                              05/22/2006 16:34:47                  
+5137 GLACIER PARK CT                                            05/31/2006 17:03:23                  
+5231 TACOMA CO                                                  05/29/2006 20:34:07                  
+5232 TACOMA CO                                                  05/29/2006 10:49:31                  
+5300 TACOMA CO                                                  05/29/2006 20:34:07                  
+5309 SHAMROCK CO                                                05/03/2006 22:17:48                  
+5355 FARWELL PL                                                 05/20/2006 22:23:41                  
+5389 RESEDA CI                                                  05/04/2006 23:59:02                  
+5432 SHATTUCK AV                                                05/04/2006 16:58:01                  
+5578 MAGNOLIA TR                                                05/15/2006 13:55:47                  
+640 NAVAJO WY                                                   05/23/2006 16:46:16                  
+83 BLAISDELL WY                                                 05/08/2006 12:14:58                  
+                                                                                                     
+IDENTITY THEFT                                                                                       
+1696 ORO DR                                                     05/17/2006  0:00:00                  
+2000 STEVENSON BL                                               05/03/2006  0:00:00                  
+2000 STEVENSON BL                                               05/05/2006  0:00:00                  
+2000 STEVENSON BL                                               05/08/2006  0:00:00                  
+2000 STEVENSON BL                                               05/08/2006  0:00:00                  
+2000 STEVENSON BL                                               05/08/2006  0:00:00                  
+2000 STEVENSON BL                                               05/10/2006  0:00:00                  
+2000 STEVENSON BL                                               05/09/2006  0:00:00                  
+2000 STEVENSON BL                                               05/11/2006  0:00:00                  
+2000 STEVENSON BL                                               05/11/2006  0:00:00                  
+2000 STEVENSON BL                                               05/15/2006  0:00:00                  
+2000 STEVENSON BL                                               05/15/2006  0:00:00                  
+2000 STEVENSON BL                                               05/16/2006  0:00:00                  
+2000 STEVENSON BL                                               05/16/2006  0:00:00                  
+2000 STEVENSON BL                                               05/16/2006  0:00:00                  
+2000 STEVENSON BL                                               05/18/2006  0:00:00                  
+2000 STEVENSON BL                                               05/20/2006  0:00:00                  
+2000 STEVENSON BL                                               05/22/2006  0:00:00                  
+2000 STEVENSON BL                                               05/23/2006  0:00:00                  
+2000 STEVENSON BL                                               05/24/2006  0:00:00                  
+2000 STEVENSON BL                                               05/30/2006  0:00:00                  
+2001 WAYCROSS RD                                                05/16/2006  0:00:00                  
+2080 RANCHO HIGUERA CT                                          05/08/2006 11:26:58                  
+33124 LAKE GARRISON ST                                          05/16/2006  0:00:00                  
+33125 LAKE CHAMPLAIN ST                                         05/06/2006  0:00:00                  
+345 SCHOOL ST                                                   05/15/2006  0:00:00                  
+34768 HEMET CO                                                  05/21/2006  0:00:00                  
+34880 BUSBY WY                                                  05/15/2006  0:00:00                  
+35602 CHAPLIN DR                                                05/26/2006  0:00:00                  
+35629 DEE PL                                                    05/27/2006  0:00:00                  
+3584 HART CO                                                    05/11/2006  0:00:00                  
+3691 BEARD RD                                                   05/12/2006  0:00:00                  
+37542 WILBURN PL                                                05/09/2006  0:00:00                  
+38865 ARGONAUT WY                                               05/17/2006  0:00:00                  
+39072 LOGAN DR                                                  05/22/2006  0:00:00                  
+39100 ARGONAUT WY                                               05/27/2006  0:00:00                  
+39102 DELANO CT                                                 05/24/2006  0:00:00                  
+39120 FREMONT BL                                                05/30/2006  0:00:00                  
+39134 BUD CT                                                    05/05/2006  8:07:22                  
+39265 PASEO PADRE PK                                            05/18/2006  0:00:00                  
+3948 WASHINGTON BL                                              05/17/2006  0:00:00                  
+39550 PASEO PADRE PK                                            05/20/2006  0:00:00                  
+39939 STEVENSON CO                                              05/23/2006 13:48:12                  
+39962 BARBARA ST                                                05/17/2006  0:00:00                  
+40226 CROCKETT ST                                               05/11/2006  0:00:00                  
+40663 PALATINO ST                                               05/18/2006  0:00:00                  
+40892 INGERSOLL TR                                              05/02/2006  0:00:00                  
+43900 ICE HOUSE TR                                              05/03/2006  0:00:00                  
+48535 SPOKANE RD                                                05/26/2006  0:00:00                  
+49080 MEADOWFAIRE CO                                            05/06/2006  0:00:00                  
+5166 MOWRY AV                                                   05/15/2006  0:00:00                  
+5400 FARWELL PL                                                 05/30/2006  9:07:46                  
+696 ORANGEWOOD DR                                               05/26/2006 13:20:40                  
+824 SNAPPER TR                                                  05/06/2006  0:00:00                  
+851 KENSINGTON DR                                               05/10/2006  0:00:00                  
+BRETT CT/ OMAR ST                                               05/28/2006 12:22:43                  
+                                                                                                     
+STOLEN VEHICLE                                                                                       
+1346 OCASO CAMINO                                               05/10/2006  5:53:47                  
+172 KERRY CO                                                    05/19/2006 11:31:39                  
+193 WENATCHEE CO                                                05/01/2006 13:35:35                  
+2760 MOWRY AV                                                   05/05/2006 17:50:22                  
+3061 LANGHORN DR                                                05/05/2006  2:37:53                  
+32480 LAKE TEMESCAL LN                                          05/23/2006  7:02:30                  
+33745 CASSIO CI                                                 05/02/2006 23:31:28                  
+34047 FREMONT BL                                                05/21/2006 14:40:13                  
+34047 FREMONT BL                                                05/23/2006  4:45:05                  
+34091 WHITEHEAD LN                                              05/15/2006 11:30:19                  
+34153 FREDERICK LN                                              05/06/2006  9:30:14                  
+34584 BLUESTONE CO                                              05/17/2006 18:22:34                  
+34762 SIWARD DR                                                 05/25/2006 14:59:59                  
+34831 DORADO CO                                                 05/02/2006  7:05:45                  
+3545 SUTTON LP                                                  05/23/2006  9:01:43                  
+35488 CABRAL DR                                                 05/30/2006  7:59:25                  
+35880 KILLORGLIN CO                                             05/22/2006  6:32:39                  
+35995 FREMONT BL                                                05/22/2006 13:39:04                  
+36000 FREMONT BL                                                05/23/2006  8:48:45                  
+36099 CARNATION WY                                              05/26/2006  8:27:54                  
+36543 SAN PEDRO DR                                              05/03/2006 22:37:38                  
+36543 SAN PEDRO DR                                              05/26/2006  6:14:35                  
+36832 SAN PEDRO DR                                              05/04/2006 14:56:01                  
+36873 FREMONT BL                                                05/19/2006 11:19:48                  
+37260 FREMONT BL                                                05/16/2006  8:30:45                  
+37454 PARISH CI                                                 05/04/2006  6:43:01                  
+3750 TAMAYO ST                                                  05/13/2006 15:05:11                  
+3750 TAMAYO ST                                                  05/03/2006  8:21:15                  
+37643 CANTERBURY ST                                             05/09/2006  0:57:59                  
+37643 CANTERBURY ST                                             05/09/2006  0:57:59                  
+3807 OXFORD CO                                                  05/30/2006 10:59:28                  
+38324 GLENVIEW DR                                               05/08/2006 21:34:07                  
+38498 CANYON HEIGHTS DR                                         05/11/2006  8:01:27                  
+38665 FREMONT BL                                                05/05/2006 12:44:40                  
+39124 SUNDALE DR                                                05/12/2006 20:52:03                  
+39150 SUNDALE DR                                                05/22/2006 17:46:56                  
+39150 SUNDALE DR                                                05/26/2006  8:40:25                  
+39206 GUARDINO DR                                               05/30/2006  8:57:39                  
+39441 FREMONT BL                                                05/12/2006 15:06:40                  
+39451 GALLAUDET DR                                              05/24/2006  8:59:35                  
+39500 LIBERTY ST                                                05/25/2006 17:22:45                  
+39505 TRINITY WY                                                05/13/2006 13:03:35                  
+39639 LESLIE ST                                                 05/08/2006 17:09:30                  
+39644 WALL CO                                                   05/11/2006 16:50:49                  
+39800 FREMONT BL                                                05/06/2006  2:28:14                  
+39800 FREMONT BL                                                05/29/2006  3:57:13                  
+39939 STEVENSON CO                                              05/23/2006  8:51:07                  
+4001 NICOLET AV                                                 05/30/2006 19:15:59                  
+40374 BLACOW RD                                                 05/10/2006  6:16:52                  
+40532 ROBIN ST                                                  05/01/2006  5:09:56                  
+40550 CHAPEL WY                                                 05/09/2006  8:37:05                  
+40645 FREMONT BL                                                05/24/2006  0:08:39                  
+40800 GRIMMER BL                                                05/30/2006  7:15:31                  
+4086 DEEP CREEK RD                                              05/04/2006 11:55:55                  
+41 EAGLE GR                                                     05/04/2006 14:32:43                  
+4120 MARGERY DR                                                 05/13/2006  3:19:04                  
+41222 MALCOLMSON ST                                             05/07/2006 11:55:04                  
+41650 CHRISTY ST                                                05/22/2006  7:31:13                  
+4200 BAY ST #180                                                05/06/2006 11:43:00                  
+4241 PERALTA BL                                                 05/22/2006 16:26:05                  
+42606 CHRISTY ST                                                05/12/2006 11:54:41                  
+4261 STEVENSON BL                                               05/20/2006 16:02:08                  
+42654 ROBERTS AV                                                05/25/2006  7:54:52                  
+42680 CHRISTY ST                                                05/15/2006  9:42:48                  
+4291 STEVENSON BL                                               05/01/2006 11:48:00                  
+43136 MAYFAIR PARK AV                                           05/01/2006  7:55:18                  
+4318 CASTANOS ST                                                05/26/2006  7:47:37                  
+43538 PUESTA DEL SOL                                            05/22/2006  7:43:42                  
+43555 GRIMMER BL                                                05/06/2006 20:18:21                  
+43555 GRIMMER BL                                                05/24/2006 13:57:49                  
+4444 CENTRAL AV                                                 05/19/2006 10:43:51                  
+44511 S GRIMMER BL                                              05/12/2006 10:33:54                  
+4461 PERALTA BL                                                 05/19/2006 15:56:50                  
+44788 OLD WARM SPRINGS BL                                       05/02/2006  8:37:40                  
+4541 BIANCA DR                                                  05/10/2006  4:46:38                  
+45500 FREMONT BL                                                05/23/2006 15:54:34                  
+45961 WARM SPRINGS BL                                           05/25/2006  8:21:16                  
+46610 LANDING PK                                                05/09/2006 18:20:59                  
+46728 CRAWFORD ST                                               05/09/2006 21:57:58                  
+4673 THORNTON AV                                                05/18/2006 13:57:36                  
+469 WASHINGTON BL                                               05/30/2006  9:18:51                  
+47060 HAVASU ST                                                 05/03/2006  8:00:58                  
+4741 GRANADO AV                                                 05/13/2006  7:22:30                  
+47652 MARDIS ST                                                 05/09/2006 16:37:34                  
+47669 FREMONT BL                                                05/05/2006  0:32:40                  
+47688 MARDIS ST                                                 05/09/2006  7:37:56                  
+4770 BEECHWOOD AV                                               05/21/2006 18:11:02                  
+4780 VALPEY PARK AV                                             05/25/2006  5:38:03                  
+48087 PURPLELEAF ST                                             05/09/2006  7:39:20                  
+4833 THORNTON AV                                                05/01/2006 15:28:52                  
+5048 CONDE CT                                                   05/24/2006  7:43:47                  
+5465 VALPEY PARK AV                                             05/30/2006 15:36:23                  
+551 BROWN RD                                                    05/30/2006  8:36:42                  
+5548 ROOSEVELT PL                                               05/24/2006 15:44:47                  
+5780 CUSHING PK                                                 05/04/2006 16:09:19                  
+8000 PATTERSON RANCH RD                                         05/22/2006 18:05:11                  
+AMBERWOOD DR/ SHAMROCK CO                                       05/21/2006 17:01:43                  
+BRUNING ST/ SUNDALE DR                                          05/03/2006  0:56:59                  
+CENTRAL AV/ LOGAN DR                                            05/31/2006 19:06:22                  
+CIVIC CENTER DR/ WALNUT AV                                      05/02/2006 15:42:37                  
+DECOTO RD/ OZARK RIVER WY                                       05/11/2006 17:39:46                  
+                                                                                                     
+ROBBERY                                                                                              
+1401 RED HAWK CI                                                05/02/2006 23:49:30                  
+35680 FREMONT BL                                                05/03/2006 20:22:29                  
+35750 FREMONT BL                                                05/01/2006 20:35:21                  
+35955 FREMONT BL                                                05/29/2006 22:41:12                  
+3860 LAKE ARROWHEAD AV                                          05/28/2006 22:54:59                  
+38995 FARWELL DR                                                05/27/2006 11:25:19                  
+41700 GRIMMER BL                                                05/21/2006 23:04:59                  
+4193 CENTRAL AV                                                 05/19/2006  1:50:08                  
+43250 GRIMMER BL                                                05/18/2006  7:56:04                  
+43800 OSGOOD RD                                                 05/24/2006 13:40:10                  
+ALVARADO BL/ LAKE ARROWHEAD AV                                  05/16/2006 11:59:57                  
+CHERRY BLOSSOM WY/ ROYAL ANN DR                                 05/24/2006 18:46:46                  
+MISSION BL/ NILES BL                                            05/23/2006 15:51:28                  

@@ -1,0 +1,307 @@
+FREMONT COMMUNITY CRIME STATS                   
+NOVEMBER 1, 2006 - NOVEMBER 30, 20              
+                                                
+HOMICIDE                                        
+             Location             Reported Date     Time     
+4279 OTHELLO DR                       11/21/2006     16:13:01
+34047 FREMONT BL                      11/28/2006     11:19:55
+                                                
+AUTO BURGLARY                                   
+             Location             Reported Date     Time     
+41299 PASEO PADRE PK                  11/01/2006      0:00:00
+2000 STEVENSON BL                     11/01/2006      0:00:00
+41040 LINCOLN ST                      11/02/2006      0:00:00
+3321 HOWARD CO                        11/02/2006      0:00:00
+40910 FREMONT BL                      11/03/2006      0:00:00
+4062 EUGENE ST                        11/04/2006     13:04:10
+46650 LANDING PK                      11/03/2006      0:00:00
+46650 LANDING PK                      11/05/2006      0:00:00
+4067 SUNSET TR                        11/06/2006      8:48:39
+39125 FREMONT HUB                     11/05/2006      0:00:00
+39001 FREMONT HUB                     11/06/2006      0:00:00
+46711 CRAWFORD ST                     11/07/2006     15:06:38
+823 STINGRAY TR                       11/07/2006      0:00:00
+40640 HIGH ST                         11/07/2006      0:00:00
+38660 LEXINGTON ST                    11/07/2006      0:00:00
+40606 BLACOW RD                       11/08/2006      0:00:00
+3695 STEVENSON BL                     11/08/2006      0:00:00
+37491 PARISH CI                       11/08/2006      0:00:00
+4973 CENTRAL AV                       11/08/2006      0:00:00
+47370 WARM SPRINGS BL                 11/08/2006      0:00:00
+4042 CLIPPER CT                       11/08/2006      0:00:00
+3326 RED CEDAR TR                     11/09/2006      0:00:00
+381 DE SALLE TR                       11/10/2006      9:53:18
+387 DE SALLE TR                       11/10/2006      8:07:10
+393 DE SALLE TR                       11/10/2006     10:11:21
+38730 LEXINGTON ST                    11/10/2006      0:00:00
+39125 FREMONT HUB                     11/12/2006     12:49:01
+39125 FREMONT HUB                     11/12/2006     12:49:01
+43269 OSGOOD RD                       11/11/2006      0:00:00
+43269 OSGOOD RD                       11/11/2006      0:00:00
+2000 STEVENSON BL                     11/12/2006      0:00:00
+117 EL DORADO CO                      11/12/2006      0:00:00
+5200 MOWRY AV                         11/12/2006      0:00:00
+156 OBISPO CT                         11/12/2006      0:00:00
+2000 STEVENSON BL                     11/12/2006      0:00:00
+39370 CIVIC CENTER DR                 11/13/2006      0:00:00
+4247 WARBLER LP                       11/13/2006      0:00:00
+34445 NYLANDER TR                     11/14/2006      3:00:39
+4299 BAY ST                           11/15/2006     22:20:50
+36163 FREMONT BL                      11/16/2006      0:00:00
+4686 EGGERS DR                        11/16/2006      0:00:00
+7150 STEVENSON BL                     11/17/2006      0:00:00
+4263 BAY ST                           11/19/2006      0:00:00
+37813 LOS ARBOLES DR                  11/20/2006      9:13:05
+35603 MORLEY PL                       11/21/2006      0:00:00
+35625 BROOKVALE CT                    11/21/2006      0:00:00
+35417 MORLEY PL                       11/21/2006      0:00:00
+35630 MORLEY PL                       11/21/2006      0:00:00
+38149 GLENMOOR DR                     11/21/2006      0:00:00
+46101 RESEARCH AV                     11/22/2006      0:00:00
+4250 CENTRAL AV                       11/22/2006      0:00:00
+40990 GRIMMER BL                      11/22/2006      0:00:00
+2481 NIGHT SHADE LN                   11/23/2006      0:00:00
+2090 LOCKWOOD AV                      11/23/2006      0:00:00
+38329 BRONSON ST                      11/25/2006      0:00:00
+2000 STEVENSON BL                     11/24/2006      0:00:00
+46312 MISSION BL                      11/24/2006      0:00:00
+34309 KENWOOD DR                      11/24/2006      0:00:00
+39160 PASEO PADRE PK                  11/23/2006      0:00:00
+620 PINOT BLANC WY                    11/25/2006      0:00:00
+4883 DAVENPORT PL                     11/26/2006      0:00:00
+44257 OLD WARM SPRINGS BL             11/27/2006      8:00:10
+39800 FREMONT BL                      11/27/2006      0:00:00
+43555 GRIMMER BL                      11/27/2006      0:00:00
+39900 BLACOW RD                       11/27/2006      0:00:00
+4425 BIDWELL DR                       11/27/2006      0:00:00
+35386 ROCA DR                         11/27/2006      0:00:00
+35386 ROCA DR                         11/27/2006      0:00:00
+42010 BLACOW RD                       11/28/2006      0:00:00
+59 SEA CREST TR                       11/28/2006      0:00:00
+43612 PACIFIC COMMONS BL              11/29/2006     12:32:24
+200 BROWN RD                          11/29/2006     19:16:41
+46080 FREMONT BL                      11/29/2006      0:00:00
+4145 CRESTWOOD ST                     11/29/2006      0:00:00
+39663 LESLIE ST                       11/29/2006      0:00:00
+                                                
+RESIDENTIAL BURGLARY                            
+             Location             Reported Date     Time     
+33590 QUAIL RUN RD                    11/01/2006     12:46:01
+38322 LOGAN DR                        11/02/2006     19:01:38
+42233 FORSYTHIA DR                    11/03/2006     10:43:25
+34744 BOWIE CO                        11/03/2006     22:21:07
+46855 SHALE CO                        11/04/2006     22:44:26
+46863 SHALE CO                        11/04/2006     22:44:26
+47017 PALO AMARILLO DR                11/05/2006     17:32:02
+46380 SENTINEL DR                     11/06/2006     10:15:59
+38674 CHRISHOLM PL                    11/06/2006     16:14:11
+1101 SAGUARE CT                       11/06/2006     19:40:28
+42625 LERWICK ST                      11/07/2006      7:59:43
+34749 FAIRCHILD CO                    11/08/2006     11:19:44
+41223 ROBERTS AV                      11/08/2006     15:25:48
+470 TUMBLEWEED CT                     11/08/2006     18:04:12
+5431 TWILIGHT CO                      11/08/2006     21:46:34
+860 DRISCOLL RD                       11/09/2006      8:00:35
+5978 CAPRIANA CO                      11/10/2006     22:24:11
+41717 GIFFORD ST                      11/12/2006     11:09:58
+835 YAKIMA DR                         11/12/2006     12:27:24
+34414 ALBERTA TR                      11/12/2006     18:56:07
+111 OBISPO CT                         11/12/2006     19:00:40
+981 PEPYS WY                          11/13/2006      8:46:30
+38843 STONINGTON TR                   11/13/2006      8:46:30
+43512 EXCELSO DR                      11/13/2006     14:54:36
+47731 ANSEL CT                        11/13/2006     16:20:09
+46357 PASEO PADRE PK                  11/13/2006     16:33:49
+4986 CRYSTAL TR                       11/12/2006      0:00:00
+4875 MOWRY AV                         11/14/2006     21:18:33
+4615 PARDEE AV                        11/15/2006     11:59:43
+2879 CUTLER AV                        11/15/2006     21:54:52
+5063 HORAT TR                         11/16/2006     18:19:08
+4883 KNOWLSON TR                      11/16/2006     19:34:32
+42624 PHILADELPHIA PL                 11/17/2006     11:35:02
+4205 SEDGE ST                         11/17/2006     22:11:29
+42332 TROYER AV                       11/18/2006      8:28:47
+2045 WAYCROSS RD                      11/20/2006     10:01:26
+4206 SEDGE ST                         11/20/2006     10:50:46
+421 CRYSTALLINE DR                    11/20/2006     15:10:21
+42170 CAMINO SANTA BARBARA            11/20/2006     16:18:47
+40986 CANYON HEIGHTS DR               11/20/2006     19:45:42
+432 CRYSTALLINE DR                    11/21/2006     10:35:32
+405 RANCHO ARROYO PK                  11/21/2006     16:02:02
+3777 FOXSWALLOW TR                    11/23/2006     21:24:09
+34372 DUNHILL DR                      11/23/2006     23:25:12
+3772 FULMAR TR                        11/23/2006     23:49:54
+47142 CRUCILLO CT                     11/24/2006      0:15:09
+1150 BEETHOVEN CO                     11/24/2006     13:46:25
+1010 BEETHOVEN CO                     11/24/2006     19:22:08
+3920 HAVEN AV                         11/25/2006      8:13:13
+3101 W WARREN AV                      11/25/2006     13:12:42
+35638 CABRILLO DR                     11/25/2006     11:23:05
+41777 GRIMMER BL                      11/26/2006      9:18:40
+46895 CHEMULT CO                      11/24/2006      0:00:00
+39359 SUTTER DR                       11/27/2006     13:19:53
+4894 MURPHY CT                        11/27/2006     18:33:29
+49049 MEADOWFAIRE CMN                 11/27/2006     18:02:45
+3668 CORMORANT TR                     11/28/2006     14:18:36
+4336 BURNEY WY                        11/28/2006     17:39:27
+42940 CORTE HABANA                    11/28/2006     18:11:53
+34623 GLADSTONE PL                    11/29/2006      9:10:56
+44869 VISTA DEL SOL                   11/29/2006      9:38:01
+36163 FREMONT BL                      11/30/2006     20:34:24
+                                                
+IDENTITY THEFT                                  
+             Location             Reported Date     Time     
+1900 SPRINGWATER DR                   11/01/2006      0:00:00
+39233 FREMONT BL                      11/01/2006      0:00:00
+1963 83RD AV                          11/02/2006      0:00:00
+000 UNKNOWN                           11/04/2006      0:00:00
+??? FREMONT BL                        11/04/2006      0:00:00
+4824 BRYCE CANYON PARK DR             11/07/2006      0:00:00
+38000 CAMDEN ST                       11/07/2006      0:00:00
+37139 DENNING TR                      11/07/2006      0:00:00
+2500 MOWRY AV                         11/08/2006     13:53:38
+1087 MURRIETA BL                      11/07/2006      0:00:00
+4200 BUSINESS CENTER DR               11/07/2006      0:00:00
+39300 FREMONT BL                      11/08/2006      0:00:00
+4241 NERISSA CI                       11/08/2006      0:00:00
+40590 ROBIN ST                        11/09/2006      0:00:00
+40119 SAN CARLOS PL                   11/10/2006      0:00:00
+3400 STEVENSON BL                     11/10/2006      0:00:00
+4117 STEVENSON BL                     11/10/2006      0:00:00
+34538 SHENANDOAH PL                   11/11/2006      0:00:00
+32728 SHAVER LAKE ST                  11/13/2006      0:00:00
+3248 BRUCE DR                         11/13/2006      0:00:00
+36848 FREMONT BL                      11/15/2006      0:00:00
+56 VALAIS CT                          11/16/2006      0:00:00
+2000 STEVENSON BL                     11/16/2006      0:00:00
+43600 MISSION BL                      11/16/2006      0:00:00
+4231 PECOS AV                         11/17/2006      0:00:00
+4824 BRYCE CANYON PARK DR             11/19/2006      0:00:00
+38660 LEXINGTON ST                    11/20/2006      0:00:00
+38660 LEXINGTON ST                    11/20/2006      0:00:00
+4380 DELAWARE DR                      11/20/2006      0:00:00
+44009 OSGOOD RD                       11/20/2006      0:00:00
+5515 AUTO MALL PK                     11/21/2006      0:00:00
+1162 BONNER AV                        11/22/2006      0:00:00
+2000 STEVENSON BL                     11/24/2006      0:00:00
+36163 FREMONT BL                      11/23/2006      0:00:00
+42792 PALM AVE                        11/27/2006      0:00:00
+42809 SARATOGA PARK ST                11/27/2006      0:00:00
+2000 STEVENSON BL                     11/28/2006      0:00:00
+2000 STEVENSON BL                     11/28/2006      0:00:00
+39615 LOGAN DR                        11/28/2006      0:00:00
+2000 STEVENSON BL                     11/29/2006      0:00:00
+34782 OSAGE RIVER PL                  11/29/2006      0:00:00
+                                                
+STOLEN VEHICLE                                  
+             Location             Reported Date     Time     
+3009 EGGERS DR                        11/01/2006     10:37:59
+43750 AUTO MALL CI                    11/01/2006     11:46:52
+38863 FREMONT BL                      11/03/2006      7:50:43
+39080 ARGONAUT WY                     11/03/2006     14:13:12
+44200 OSGOOD RD                       11/04/2006     21:56:07
+4442 ARDO ST                          11/06/2006      1:49:34
+41400 BOYCE RD                        11/06/2006      6:56:47
+37232 BLACOW RD                       11/06/2006      6:58:54
+6000 STEVENSON BL                     11/06/2006     12:15:18
+4643 PORTOLA DR                       11/07/2006      0:00:42
+43096 CHRISTY ST                      11/07/2006     12:08:12
+38800 HASTINGS ST                     11/07/2006     13:18:11
+48133 WARM SPRINGS BL                 11/07/2006     13:40:51
+3939 MONROE AV                        11/08/2006      5:07:57
+39450 ALBANY CO                       11/08/2006      9:27:56
+41350 CHRISTY ST                      11/08/2006     10:15:37
+46959 SHALE CO                        11/09/2006      7:57:06
+1230 BEETHOVEN CO                     11/09/2006      8:45:13
+4101 EGGERS DR                        11/10/2006      6:33:47
+4227 TECHNOLOGY DR                    11/10/2006      8:04:45
+35995 FREMONT BL                      11/10/2006      6:48:53
+43555 GRIMMER BL                      11/12/2006      4:49:48
+35995 FREMONT BL                      11/12/2006     10:41:23
+4200 BAY ST                           11/12/2006     13:35:37
+41200 BLACOW RD                       11/12/2006     19:11:11
+4731 CORTEZ AV                        11/13/2006      8:09:45
+43770 S GRIMMER BL                    11/13/2006      8:04:22
+2000 WALNUT AV                        11/14/2006      7:39:33
+4312 CAHILL ST                        11/14/2006     18:09:57
+4455 GLIDDEN WY                       11/15/2006      7:42:27
+43074 CHARLESTON WY                   11/15/2006     11:12:48
+37891 2ND ST                          11/16/2006      9:56:20
+42982 OSGOOD RD                       11/17/2006     10:35:58
+291 BRYANT CO                         11/17/2006     12:00:59
+4914 WHEELER DR                       11/18/2006      9:39:10
+4997 STEVENSON BL                     11/18/2006     11:00:17
+HACKBERRY ST/ MAYTEN WY               11/18/2006     17:24:28
+39594 TRINITY WY                      11/19/2006      9:17:01
+39294 SUNDALE DR                      11/19/2006     11:47:32
+4725 BOONE DR                         11/19/2006     16:51:11
+39448 SUNDALE DR                      11/19/2006     23:19:31
+44454 ARAPAHO AV                      11/20/2006      7:23:41
+37853 LOS ARBOLES DR                  11/20/2006      9:13:05
+HANCOCK PL/ WOLCOTT PL                11/20/2006      8:32:57
+41353 ALBRAE ST                       11/20/2006     10:21:50
+48815 KATO RD                         11/20/2006     10:29:55
+34212 ABERDEEN TR                     11/20/2006     12:03:01
+40255 DAVIS ST                        11/20/2006     19:44:38
+35784 LINDA DR                        11/21/2006      9:33:45
+6700 STEVENSON BL                     11/22/2006      8:57:42
+45646 WARM SPRINGS BL                 11/22/2006     14:05:06
+39800 FREMONT BL                      11/22/2006      5:55:59
+33411 SANDERLING CT                   11/22/2006     14:34:20
+43555 GRIMMER BL                      11/22/2006     16:19:59
+6700 STEVENSON BL                     11/22/2006      8:57:42
+3750 TAMAYO ST                        11/24/2006      8:37:30
+38455 BRONSON ST                      11/24/2006     11:28:44
+46200 LANDING PK                      11/26/2006     13:11:33
+FREMONT BL/ MARGERY DR                11/26/2006     22:41:11
+44257 OLD WARM SPRINGS BL             11/27/2006      8:00:10
+42700 BOYCE RD                        11/27/2006     11:49:56
+38002 DOVER CO                        11/28/2006      5:55:01
+4768 WHEELER DR                       11/28/2006      7:30:39
+42700 BOYCE RD                        11/28/2006     14:28:16
+37096 SHASTA ST                       11/28/2006     16:16:52
+BALBOA WY/ THORNTON AV                11/28/2006     21:16:55
+4227 TECHNOLOGY DR                    11/29/2006      6:54:57
+43306 GRIMMER BL                      11/29/2006      9:40:07
+44262 FREMONT BLVD                    11/29/2006     12:48:17
+4715 PORTER ST                        11/29/2006     22:19:38
+39567 LOGAN DR                        11/29/2006     23:17:38
+43621 PACIFIC COMMONS BL              11/30/2006      0:01:40
+4224 OGDEN DR                         11/30/2006      6:05:47
+43486 LINDENWOOD ST                   11/30/2006     20:00:28
+                                                
+ROBERRY                                         
+             Location             Reported Date     Time     
+4673 THORNTON AV                      11/01/2006     13:04:10
+GUARDINO DR/ WALNUT AV                11/01/2006     17:56:30
+43250 GRIMMER BL                      11/01/2006     20:29:58
+5168 MOWRY AV                         11/02/2006     22:25:55
+39939 STEVENSON CO                    11/03/2006      0:58:34
+39430 CIVIC CENTER DR                 11/03/2006     21:47:39
+122 GABLE DR                          11/04/2006      0:26:39
+DARWIN DR/ GAINSBOROUGH TR            11/05/2006     12:08:39
+3902 WASHINGTON BL                    11/05/2006     21:02:12
+3902 WASHINGTON BL                    11/05/2006     21:02:12
+EGGERS DR/ FABIAN CO                  11/06/2006      2:20:43
+35820 FREMONT BL                      11/06/2006     13:46:28
+44948 OSGOOD RD                       11/06/2006     16:05:55
+CRANDALLWOOD DR/ HILDASUE TR          11/08/2006     20:21:19
+43472 GRIMMER BL                      11/08/2006     20:35:47
+43600 MISSION BL                      11/09/2006     16:34:15
+34460 FREMONT BL                      11/11/2006     23:36:57
+ALDER AV/ LAREDO DR                   11/12/2006     17:36:57
+3601 THORNTON AV                      11/12/2006     22:17:35
+39201 FREMONT BL                      11/13/2006     14:41:04
+39877 SUNDALE DR                      11/13/2006     16:58:00
+40677 FREMONT BL                      11/14/2006     19:07:39
+39441 FREMONT BL                      11/15/2006     17:30:32
+4200 BAY ST                           11/15/2006     22:20:50
+5000 MOWRY AV                         11/15/2006     23:20:37
+46583 MISSION BL                      11/18/2006     10:11:09
+3990 DECOTO RD                        11/19/2006      1:59:32
+34444 FREMONT BL                      11/20/2006     11:21:56
+39001 FREMONT HUB                     11/22/2006     18:00:21
+39200 PASEO PADRE PK                  11/22/2006     18:48:53
+160 FREMONT HUB COURTYAR              11/27/2006     10:42:06
+38860 FREMONT BL                      11/29/2006     18:12:29
+40500 FREMONT BL                      11/30/2006     13:53:38

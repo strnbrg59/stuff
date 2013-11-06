@@ -1,0 +1,634 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Fremont Home Burglaries</title>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA_UDgKGWyYuE0YHl4H0WTHhT4gZ6bPW9nPZnWiuOURMVI7YQk4xTl22ZUpiHksJnJe-8xrfEO1aXE9g"
+      type="text/javascript"></script>
+    <script type="text/javascript">
+
+g_coords = new Array();
+
+g_coords['May'] = new Array(
+new Array(37.560344, -121.977017),
+new Array(37.468654, -121.901854),
+new Array(37.540322, -121.950649),
+new Array(37.569932, -122.013896),
+new Array(37.587115, -122.057210),
+new Array(37.588356, -122.056623),
+new Array(37.570478, -122.053017),
+new Array(37.558025, -122.059297),
+new Array(37.580721, -122.033583),
+new Array(37.579073, -122.033556),
+new Array(37.564753, -122.049993),
+new Array(37.564623, -122.046814),
+new Array(37.563147, -122.044918),
+new Array(37.550652, -122.057331),
+new Array(37.562727, -122.033452),
+new Array(37.581841, -122.001572),
+new Array(37.563226, -122.026328),
+new Array(37.474533, -121.916798),
+new Array(37.563506, -122.011681),
+new Array(37.551778, -122.024796),
+new Array(37.550632, -122.022726),
+new Array(37.563261, -122.004600),
+new Array(37.515819, -121.950303),
+new Array(37.558708, -121.997953),
+new Array(37.535387, -122.010986),
+new Array(37.534513, -122.009281),
+new Array(37.563351, -121.972453),
+new Array(37.559953, -121.974370),
+new Array(37.543160, -121.981775),
+new Array(37.553029, -121.973431),
+new Array(37.537000, -121.977660),
+new Array(37.538434, -121.961124),
+new Array(37.538434, -121.961124),
+new Array(37.547292, -121.989565),
+new Array(37.530848, -121.961846),
+new Array(37.534866, -121.951692),
+new Array(37.535442, -121.952279),
+new Array(37.526560, -121.958855),
+new Array(37.535879, -121.944090),
+new Array(37.533027, -121.963763),
+new Array(37.533027, -121.963763),
+new Array(37.523794, -121.959659),
+new Array(37.553859, -122.005889),
+new Array(37.579539, -122.060693),
+new Array(37.566685, -122.036720),
+new Array(37.526185, -121.919166),
+new Array(37.513100, -121.960031),
+new Array(37.552196, -122.016298),
+new Array(37.530070, -121.977894),
+new Array(37.549050, -122.014032),
+new Array(37.545780, -122.008520),
+new Array(37.526852, -121.973513),
+new Array(37.473029, -121.918092),
+new Array(37.471343, -121.912652),
+new Array(37.510760, -121.961719),
+new Array(37.569047, -122.053298),
+new Array(37.514410, -121.971564),
+new Array(37.560568, -122.049778),
+new Array(37.560559, -122.049803),
+new Array(37.560227, -122.050655),
+new Array(37.563500, -122.056028),
+new Array(37.533220, -122.002158),
+new Array(37.524321, -121.983095),
+new Array(37.560902, -122.055392),
+new Array(37.525246, -121.986310),
+new Array(37.488739, -121.921236),
+new Array(37.582687, -121.988895));
+
+g_coords['June'] = new Array(
+new Array(37.524345, -121.931442),
+new Array(37.553029, -121.973431),
+new Array(37.579635, -122.034693),
+new Array(37.569932, -122.013896),
+new Array(37.533181, -121.959705),
+new Array(37.561682, -121.972264),
+new Array(37.533582, -121.951104),
+new Array(37.515991, -121.972569),
+new Array(37.580503, -122.035048),
+new Array(37.572730, -122.039991),
+new Array(37.489996, -121.923925),
+new Array(37.560795, -122.059044),
+new Array(37.579971, -122.031539),
+new Array(37.534543, -121.943879),
+new Array(37.543217, -121.976186),
+new Array(37.537322, -121.964663),
+new Array(37.513805, -121.970867),
+new Array(37.526358, -121.980939),
+new Array(37.486578, -121.922152),
+new Array(37.559616, -122.053050),
+new Array(37.583208, -122.048213),
+new Array(37.530560, -121.973679),
+new Array(37.557962, -122.058057),
+new Array(37.514748, -121.967614),
+new Array(37.489894, -121.921473),
+new Array(37.568041, -122.056737),
+new Array(37.579073, -122.033556),
+new Array(37.512262, -121.930384),
+new Array(37.560704, -122.049438),
+new Array(37.565977, -122.039470),
+new Array(37.583587, -122.059751),
+new Array(37.490423, -121.924450),
+new Array(37.570941, -122.039248),
+new Array(37.486578, -121.922152),
+new Array(37.486578, -121.922152),
+new Array(37.556790, -122.012593),
+new Array(37.561269, -121.975877),
+new Array(37.563469, -122.050142),
+new Array(37.534295, -121.944412),
+new Array(37.570463, -122.051882),
+new Array(37.546587, -122.019695),
+new Array(37.577244, -122.038381),
+new Array(37.485101, -121.926187),
+new Array(37.577250, -122.038709),
+new Array(37.486407, -121.923439),
+new Array(37.538434, -121.961124),
+new Array(37.522345, -121.985042),
+new Array(37.465626, -121.911819),
+new Array(37.567174, -122.049606),
+new Array(37.558478, -121.970469),
+new Array(37.504069, -121.929261),
+new Array(37.535795, -121.947529),
+new Array(37.532820, -121.924525));
+
+g_coords['July'] = new Array(
+new Array(37.473696, -121.914456),
+new Array(37.487653, -121.924374),
+new Array(37.565203, -122.043575),
+new Array(37.540436, -121.946922),
+new Array(37.587340, -122.063290),
+new Array(37.553877, -122.017030),
+new Array(37.473938, -121.893261),
+new Array(37.556725, -121.994337),
+new Array(37.558833, -121.973467),
+new Array(37.516099, -121.972627),
+new Array(37.564407, -122.025574),
+new Array(37.564450, -122.025669),
+new Array(37.528141, -121.954811),
+new Array(37.560578, -121.996506),
+new Array(37.553749, -122.005974),
+new Array(37.541865, -121.986060),
+new Array(37.530835, -121.974735),
+new Array(37.560033, -122.055652),
+new Array(37.540969, -121.973657),
+new Array(37.489082, -121.927320),
+new Array(37.534839, -121.982025),
+new Array(37.513376, -121.933678),
+new Array(37.485837, -121.927111),
+new Array(37.554114, -122.005690),
+new Array(37.554114, -122.005690),
+new Array(37.489894, -121.921473),
+new Array(37.563927, -122.048422),
+new Array(37.525914, -121.954582),
+new Array(37.554114, -122.005690),
+new Array(37.554114, -122.005690),
+new Array(37.565053, -122.042369),
+new Array(37.578359, -121.968094),
+new Array(37.494742, -121.917953),
+new Array(37.564679, -122.028765),
+new Array(37.579091, -122.036738),
+new Array(37.550150, -121.990377),
+new Array(37.564288, -122.057477),
+new Array(37.565666, -122.021659),
+new Array(37.557675, -122.060406),
+new Array(37.525035, -121.976699),
+new Array(37.564174, -122.045047),
+new Array(37.525115, -121.988809),
+new Array(37.573999, -122.036030),
+new Array(37.556271, -121.968218),
+new Array(37.528119, -121.955043),
+new Array(37.556050, -122.057641),
+new Array(37.578354, -122.036836),
+new Array(37.503255, -121.918741));
+
+g_coords['August'] = new Array(
+new Array(37.500660, -121.924926),
+new Array(37.513825, -121.960815),
+new Array(37.568388, -122.049112),
+new Array(37.541449, -121.962677),
+new Array(37.587535, -122.062818),
+new Array(37.526058, -121.974764),
+new Array(37.584703, -122.058813),
+new Array(37.568823, -122.058258),
+new Array(37.557981, -122.057908),
+new Array(37.528741, -121.997015),
+new Array(37.580144, -122.035728),
+new Array(37.554922, -122.000714),
+new Array(37.587291, -122.003971),
+new Array(37.561917, -122.020928),
+new Array(37.538527, -121.951713),
+new Array(37.520685, -121.971026),
+new Array(37.542599, -121.976495),
+new Array(37.552902, -121.986563),
+new Array(37.561917, -122.020928),
+new Array(37.572235, -122.056005),
+new Array(37.547237, -121.977217),
+new Array(37.585988, -121.999405),
+new Array(37.470525, -121.917184),
+new Array(37.497456, -121.912818),
+new Array(37.517841, -121.966234),
+new Array(37.515088, -121.971966),
+new Array(37.551746, -121.987509),
+new Array(37.540214, -121.972295),
+new Array(37.580196, -122.032639),
+new Array(37.536488, -121.933607),
+new Array(37.520769, -121.965566),
+new Array(37.525297, -121.959059),
+new Array(37.554414, -122.058332),
+new Array(37.529964, -121.966733),
+new Array(37.520362, -121.969402),
+new Array(37.561485, -122.024535),
+new Array(37.585224, -122.046299),
+new Array(37.587714, -122.061587),
+new Array(37.546189, -122.044711),
+new Array(37.589669, -122.056113),
+new Array(37.512040, -121.963999),
+new Array(37.550827, -122.022146),
+new Array(37.522559, -121.973423),
+new Array(37.479778, -121.914492),
+new Array(37.517244, -121.975974),
+new Array(37.545315, -121.976460),
+new Array(37.477874, -121.916894),
+new Array(37.559338, -122.051935),
+new Array(37.562127, -122.035165),
+new Array(37.537322, -121.964663),
+new Array(37.553824, -122.008495));
+
+g_coords['September'] = new Array(
+new Array(37.567997, -122.050424),
+new Array(37.570590, -122.038980),
+new Array(37.586378, -122.061842),
+new Array(37.565876, -122.024855),
+new Array(37.585023, -122.057969),
+new Array(37.520723, -121.967287),
+new Array(37.540916, -121.952522),
+new Array(37.555309, -122.057944),
+new Array(37.528294, -121.970637),
+new Array(37.521880, -121.973939),
+new Array(37.490969, -121.909697),
+new Array(37.580189, -122.046104),
+new Array(37.554980, -122.000583),
+new Array(37.524345, -121.931442),
+new Array(37.563529, -122.044608),
+new Array(37.577209, -122.040107),
+new Array(37.527642, -121.960121),
+new Array(37.553338, -122.059549),
+new Array(37.583572, -122.040476),
+new Array(37.527333, -121.959784),
+new Array(37.565261, -121.977386),
+new Array(37.515088, -121.971966),
+new Array(37.530395, -121.966673),
+new Array(37.526331, -121.959620),
+new Array(37.583602, -122.033913),
+new Array(37.527563, -121.968385),
+new Array(37.554368, -122.026663),
+new Array(37.556886, -122.019447),
+new Array(37.556720, -122.018753),
+new Array(37.470289, -121.917418),
+new Array(37.524519, -121.984623),
+new Array(37.544660, -121.952827),
+new Array(37.555977, -122.060935),
+new Array(37.525915, -121.924359),
+new Array(37.532995, -121.972492),
+new Array(37.583572, -122.040476),
+new Array(37.514750, -121.948000),
+new Array(37.555129, -121.994011),
+new Array(37.574332, -122.032570),
+new Array(37.560709, -122.023650),
+new Array(37.512692, -121.955987),
+new Array(37.542224, -122.009842),
+new Array(37.581053, -121.994248),
+new Array(37.553877, -122.017030),
+new Array(37.556506, -121.995768),
+new Array(37.560430, -122.050147),
+new Array(37.577409, -122.040227),
+new Array(37.572797, -122.048706),
+new Array(37.572789, -122.048746),
+new Array(37.505100, -121.924327),
+new Array(37.557206, -122.059867),
+new Array(37.465936, -121.901476),
+new Array(37.523969, -121.961743),
+new Array(37.559246, -122.018458),
+new Array(37.522292, -121.956137),
+new Array(37.553877, -122.017030),
+new Array(37.557472, -122.061139),
+new Array(37.569995, -122.025473),
+new Array(37.552987, -121.973666),
+new Array(37.558691, -121.995888),
+new Array(37.568209, -122.031638),
+new Array(37.514169, -121.942956),
+new Array(37.480537, -121.916691));
+
+g_coords['October'] = new Array(
+new Array(37.515733, -121.970692),
+new Array(37.560848, -122.025509),
+new Array(37.520419, -121.981248),
+new Array(37.530039, -121.975006),
+new Array(37.523975, -121.982504),
+new Array(37.505819, -121.924429),
+new Array(37.532161, -121.970079),
+new Array(37.571294, -122.040196),
+new Array(37.505589, -121.929405),
+new Array(37.556210, -121.967905),
+new Array(37.564318, -122.048333),
+new Array(37.562551, -122.028404),
+new Array(37.560095, -122.050962),
+new Array(37.466200, -121.898794),
+new Array(37.531802, -121.972444),
+new Array(37.583904, -121.994612),
+new Array(37.579014, -122.058568),
+new Array(37.519239, -121.969782),
+new Array(37.560263, -122.060250),
+new Array(37.562911, -122.013539),
+new Array(37.573173, -121.989771),
+new Array(37.521814, -121.984820),
+new Array(37.563153, -122.004667),
+new Array(37.555010, -121.994254),
+new Array(37.562878, -122.020624),
+new Array(37.519508, -121.958507),
+new Array(37.564351, -122.042809),
+new Array(37.564297, -122.042854),
+new Array(37.572122, -122.028384),
+new Array(37.583877, -121.999424),
+new Array(37.583924, -121.999367),
+new Array(37.578652, -122.027341),
+new Array(37.548969, -121.947826),
+new Array(37.553877, -122.017030),
+new Array(37.557758, -122.060502),
+new Array(37.569176, -122.019367),
+new Array(37.588999, -122.056368),
+new Array(37.520440, -121.968040),
+new Array(37.549535, -121.936684),
+new Array(37.569221, -122.049141),
+new Array(37.543217, -121.976186),
+new Array(37.551177, -122.015911),
+new Array(37.515725, -121.961224),
+new Array(37.542454, -121.945192),
+new Array(37.559654, -122.018164),
+new Array(37.490523, -121.926133),
+new Array(37.538698, -122.006704),
+new Array(37.556299, -121.968328),
+new Array(37.559157, -122.056679),
+new Array(37.541865, -121.986060),
+new Array(37.518380, -121.976490),
+new Array(37.510678, -121.970059),
+new Array(37.477320, -121.916065),
+new Array(37.511952, -121.957244),
+new Array(37.538434, -121.961124),
+new Array(37.551850, -122.004921),
+new Array(37.513907, -121.959896),
+new Array(37.500896, -121.908424),
+new Array(37.563501, -121.977517),
+new Array(37.570256, -122.023218),
+new Array(37.549288, -122.010883),
+new Array(37.556438, -122.022163),
+new Array(37.564021, -122.027258),
+new Array(37.490963, -121.905521),
+new Array(37.487225, -121.924091),
+new Array(37.486633, -121.922183),
+new Array(37.499189, -121.907918),
+new Array(37.559822, -122.052528));
+
+g_coords['November'] = new Array(
+new Array(37.582116, -122.046828),
+new Array(37.546993, -122.001958),
+new Array(37.539054, -121.935003),
+new Array(37.564253, -122.044216),
+new Array(37.488466, -121.928033),
+new Array(37.488433, -121.928016),
+new Array(37.493442, -121.910993),
+new Array(37.498842, -121.908121),
+new Array(37.573639, -121.960701),
+new Array(37.500175, -121.907686),
+new Array(37.534246, -121.932286),
+new Array(37.562806, -122.045728),
+new Array(37.531495, -121.956469),
+new Array(37.501116, -121.916217),
+new Array(37.561795, -122.056668),
+new Array(37.545484, -121.944036),
+new Array(37.558065, -122.061840),
+new Array(37.525630, -121.962188),
+new Array(37.493044, -121.917432),
+new Array(37.561245, -122.053300),
+new Array(37.559956, -121.952630),
+new Array(37.563165, -121.974928),
+new Array(37.563901, -121.970162),
+new Array(37.526569, -121.925680),
+new Array(37.479582, -121.918845),
+new Array(37.499034, -121.914355),
+new Array(37.562082, -122.046032),
+new Array(37.537769, -121.997354),
+new Array(37.537467, -121.988625),
+new Array(37.573441, -122.014629),
+new Array(37.564094, -122.050207),
+new Array(37.565539, -122.046856),
+new Array(37.522955, -121.953024),
+new Array(37.581744, -122.061172),
+new Array(37.533527, -121.941213),
+new Array(37.537744, -121.942377),
+new Array(37.581710, -122.061164),
+new Array(37.500660, -121.924926),
+new Array(37.540324, -121.929881),
+new Array(37.552253, -121.939134),
+new Array(37.500206, -121.925097),
+new Array(37.579974, -121.993809),
+new Array(37.579661, -122.045610),
+new Array(37.558084, -122.056443),
+new Array(37.580006, -122.046242),
+new Array(37.490433, -121.910385),
+new Array(37.531583, -121.928307),
+new Array(37.531583, -121.928307),
+new Array(37.526465, -121.957036),
+new Array(37.483355, -121.938250),
+new Array(37.561678, -122.029703),
+new Array(37.521905, -121.969025),
+new Array(37.488641, -121.926250),
+new Array(37.536499, -121.991910),
+new Array(37.536340, -121.992237),
+new Array(37.529888, -121.927187),
+new Array(37.580176, -122.044706),
+new Array(37.537961, -121.980188),
+new Array(37.537299, -121.922531),
+new Array(37.577755, -122.031159),
+new Array(37.514709, -121.911073),
+new Array(37.564815, -122.019930));
+
+g_coords['December'] = new Array(
+new Array(37.495033, -121.908488),
+new Array(37.508965, -121.914032),
+new Array(37.567947, -122.038074),
+new Array(37.566648, -122.044146),
+new Array(37.537461, -121.971440),
+new Array(37.570751, -122.048377),
+new Array(37.535057, -121.943376),
+new Array(37.578285, -121.961457),
+new Array(37.520423, -121.925998),
+new Array(37.536983, -121.939637),
+new Array(37.563399, -122.058404),
+new Array(37.558407, -122.057036),
+new Array(37.565666, -122.021659),
+new Array(37.488984, -121.927598),
+new Array(37.515077, -121.923602),
+new Array(37.475058, -121.917300),
+new Array(37.564554, -122.051085),
+new Array(37.576021, -122.013299),
+new Array(37.528112, -122.041703),
+new Array(37.579974, -121.993809),
+new Array(37.580231, -122.002123),
+new Array(37.587284, -122.056963),
+new Array(37.547299, -121.995570),
+new Array(37.559654, -122.018164),
+new Array(37.513389, -121.975470),
+new Array(37.465447, -121.902359),
+new Array(37.563326, -122.047116),
+new Array(37.494164, -121.926476),
+new Array(37.484426, -121.923166),
+new Array(37.562962, -122.057201),
+new Array(37.586963, -122.040864),
+new Array(37.484585, -121.915448),
+new Array(37.584550, -122.045740),
+new Array(37.502923, -121.917960),
+new Array(37.506398, -121.916968),
+new Array(37.572367, -122.050384),
+new Array(37.572706, -122.049146),
+new Array(37.557977, -122.057938),
+new Array(37.513530, -121.961626),
+new Array(37.567882, -122.050699),
+new Array(37.512476, -121.955026),
+new Array(37.486149, -121.924647),
+new Array(37.552591, -121.987399),
+new Array(37.558787, -121.953953),
+new Array(37.496155, -121.918377),
+new Array(37.491999, -121.906762),
+new Array(37.514984, -121.977419),
+new Array(37.523178, -121.954224),
+new Array(37.528174, -121.972275),
+new Array(37.564885, -122.046069),
+new Array(37.564727, -122.050221),
+new Array(37.512213, -121.966848),
+new Array(37.584209, -122.040723),
+new Array(37.584070, -122.040826),
+new Array(37.569306, -122.056850),
+new Array(37.547181, -121.989426),
+new Array(37.557756, -121.999067),
+new Array(37.542058, -121.985310),
+new Array(37.560578, -121.996506),
+new Array(37.567950, -122.046890),
+new Array(37.515395, -121.951798),
+new Array(37.516612, -121.916689),
+new Array(37.563851, -122.052700),
+new Array(37.556529, -121.974138),
+new Array(37.537358, -121.926507),
+new Array(37.535197, -121.925305),
+new Array(37.540121, -121.929355),
+new Array(37.525976, -121.922108),
+new Array(37.577756, -122.043251),
+new Array(37.558774, -122.056595),
+new Array(37.552640, -122.019177),
+new Array(37.488463, -121.925921),
+new Array(37.494339, -121.912019),
+new Array(37.553349, -122.057247),
+new Array(37.498123, -121.913150),
+new Array(37.561512, -122.057197),
+new Array(37.585429, -121.999806),
+new Array(37.557457, -121.992044),
+new Array(37.562264, -122.030776));
+
+var g_map;
+
+function initMap()
+{
+    g_map = new GMap2(document.getElementById("map"));
+    //GMap2.addMapType(G_HYBRID_MAP);
+    g_map.addControl(new GLargeMapControl());
+    g_map.addControl(new GMapTypeControl());
+    g_map.setCenter(new GLatLng(37.543217, -121.976186), 12);
+}
+
+/* Returns a GIcon object. */
+function initBaseIcon()
+{
+    var baseIcon = new GIcon();
+    baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+    baseIcon.image="http://labs.google.com/ridefinder/images/mm_20_blue.png"
+    baseIcon.iconSize = new GSize(20, 34);
+    baseIcon.color = new GSize(20, 34);
+    baseIcon.shadowSize = new GSize(37, 34);
+    baseIcon.iconAnchor = new GPoint(9, 34);
+    baseIcon.infoWindowAnchor = new GPoint(9, 2);
+    baseIcon.infoShadowAnchor = new GPoint(18, 25);
+
+    return baseIcon;
+}
+
+var g_overlayMarkers = new Array();
+  
+function placeOneMarker( month, i, baseIcon )
+{
+    g_overlayMarkers[month][i] = new GMarker(
+        new GLatLng(g_coords[month][i][0], g_coords[month][i][1]),
+        baseIcon);
+    g_map.addOverlay( g_overlayMarkers[month][i] );
+}
+
+function loadMonth( month, object )
+{
+    var baseIcon = initBaseIcon();
+
+    if( object.checked )
+    {
+        g_overlayMarkers[month] = new Array();
+        pushin = function() {
+            if (object.checked) {
+                if (!("i" in this)) {
+                    this.i = 0;
+                }
+                placeOneMarker(month, this.i, baseIcon);
+                this.i += 1;
+                if (i < g_coords[month].length) {
+                    setTimeout(pushin, 123);
+                }
+            } 
+        };
+        setTimeout(pushin, 123);
+        this.i = 0
+    } else
+    {
+        for( i=0; i<g_coords[month].length; ++i )
+        {
+            g_map.removeOverlay( g_overlayMarkers[month][i] );
+        }
+    }
+}
+
+</script>
+</head>
+
+<body
+
+onload="initMap()"
+onunload="GUnload()"
+BGCOLOR="#DDDDEE">
+<CENTER><H2>Home burglaries in Fremont, California, by month</H2></CENTER>
+Thanks, FPD, for the raw data. <BR>
+
+I'm sorry to report that since January 2007, the Fremont Police
+Department refuses to supply the information -- street addresses of
+burglaries -- that I need to update this page.  So unless and until I
+find the time to make a formal request under the California Public
+Records Act, I won't be updating this page.  I may, however, improve
+it in various ways.
+
+<BR> Meanwhile, for the latest information,
+<A HREF="http://gisweb.fremont.gov/cs/fpd_crimestats.cfm"> see <A>
+what the Fremont
+Police Department's "GIS Department" has put together.
+
+As a long-term goal, we could try imitating what <A
+HREF="http://berkeleyca.crimelog.org/all/limit/7days">Berkeley</A> or
+<A HREF="http://mapping.arjis.org/main.aspx">San Diego</A> have (their
+on-line crime maps, that is -- not their crime problems.)
+<BR> <HR> <BR>
+
+<TABLE>
+<TR>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="May 2006" onclick=loadMonth("May",this) > May 2006 <BR> </TD>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="June 2006" onclick=loadMonth("June",this) > June 2006 <BR>   </TD>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="July 2006" onclick=loadMonth("July",this) > July 2006 <BR>   </TD>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="August 2006" onclick=loadMonth("August",this) > August 2006 <BR> </TD>
+</TR>
+
+<TR>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="September 2006" onclick=loadMonth("September",this) > September 2006 <BR> </TD>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="October 2006" onclick=loadMonth("October",this) > October 2006 <BR> </TD>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="November 2006" onclick=loadMonth("November",this) > November 2006 <BR> </TD>
+<TD> &nbsp;&nbsp;&nbsp;    <INPUT TYPE="checkbox" NAME="Months" VALUE="December 2006" onclick=loadMonth("December",this) > December 2006 <BR> </TD>
+</TR>
+
+</TABLE>
+    <div id="map" style="width: 800px; height: 700px"></div>
+  </body>
+</html>
