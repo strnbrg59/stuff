@@ -1,0 +1,6 @@
+Nodes need not have more than one child; for f(t) given, if f(t+1) is
+on the same string, then f(t+1) can be ruled correct.  If f(t+2) involves
+a shift, there's no advantage to shifting earlier, i.e. at t+1.
+Of course we'll have to modify this later, when we take account of rests
+and slurs.
+

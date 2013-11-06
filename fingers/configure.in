@@ -1,0 +1,42 @@
+AC_INIT(src/main.cpp)
+AC_CONFIG_HEADERS(config.h)         
+AM_INIT_AUTOMAKE(fingers, 1.0.0)
+AC_DISABLE_STATIC
+AC_PROG_CXX
+AC_PROG_LIBTOOL
+AC_PROG_INSTALL(fingers)
+
+#
+# Debug (-g) mode.  Default: off.
+#
+AC_ARG_ENABLE(debug,
+    [AC_HELP_STRING( [--enable-debug],
+                       [sets CFLAGS et al to -g, otherwise to -O2 -DNDEBUG [default\
+=no]] )],
+
+    [case "${enableval}" in
+      yes) [CXXFLAGS= ; CPPFLAGS="-g -O0"; CFLAGS="-g -O0"] ;;
+      no)  [CXXFLAGS= ; CPPFLAGS="-O2 -DNDEBUG"; CFLAGS="-O2 -DNDEBUG"\
+] ;;
+      *) AC_MSG_ERROR(bad value ${enableval} for --enable-unittests) ;;
+    esac],
+    [CXXFLAGS= ; CPPFLAGS="-O2 -DNDEBUG"; CFLAGS="-O2 -DNDEBUG"]
+)
+
+#
+# Profile (-pg) mode.  Default: off.
+#
+AC_ARG_ENABLE(profile,
+    [AC_HELP_STRING( [--enable-profile],
+                     [sets CFLAGS et al to -pg, so you can use gprof [default=no]])\
+],
+    [case "${enableval}" in
+      yes) [CXXFLAGS= ; CPPFLAGS="$CPPFLAGS -pg"; CFLAGS="$CFLAGS -pg\
+"] ;;
+      no)  ;;
+      *) AC_MSG_ERROR(bad value ${enableval} for --enable-unittests) ;;
+    esac]
+)
+
+
+AC_OUTPUT(src/Makefile test/Makefile Makefile)
