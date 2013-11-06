@@ -1,0 +1,356 @@
+/normalfont {
+	/TeX-charter findfont 11 scalefont setfont
+ } def
+/bigfont {
+	/TeX-charter findfont 17 scalefont setfont
+ } def
+/hugefont {
+	/TeX-charter findfont 60 scalefont setfont
+ } def
+/smallfont {
+	/TeX-charter findfont 7 scalefont setfont
+ } def
+normalfont
+/centerline {
+	dup stringwidth pop 640 exch sub 2 div 
+	currentpoint exch pop moveto	
+} def 
+/rightline {
+	dup stringwidth pop 550 exch sub 
+	currentpoint exch pop moveto	
+} def 
+/inch { 72 mul } def
+/box{
+	/boxsize exch def
+	0 setgray
+	boxsize 2 div -1 mul boxsize 2 div -1 mul rmoveto
+ 	boxsize 0 rlineto
+	0 boxsize rlineto
+	-1 boxsize mul 0 rlineto
+	closepath stroke} def
+/circle{
+	0 360 arc stroke} def
+ 11.5 inch 0.50 inch translate
+.3 .3 setlinewidth
+90 rotate
+72 8.5 mul 480 div   72 11 mul 640 div scale
+% Starting new box&whisker...
+% upper whisker...
+newpath 113.625 393.267 moveto
+126.375 393.267 lineto
+120 393.267 lineto
+120 393.267 lineto
+120 405.069 lineto
+ stroke
+% box...
+newpath 113.625 405.069 moveto
+126.375 405.069 lineto
+126.375 476.189 lineto
+113.625 476.189 lineto
+113.625 405.069 lineto
+ stroke
+% 50th percentile line
+newpath 113.625 441.144 moveto
+126.375 441.144 lineto
+ stroke
+% lower whisker...
+newpath 113.625 491.688 moveto
+126.375 491.688 lineto
+120 491.688 lineto
+120 476.189 lineto
+ stroke
+% Starting new box&whisker...
+% upper whisker...
+newpath 234.837 561.901 moveto
+247.587 561.901 lineto
+241.212 561.901 lineto
+241.212 561.901 lineto
+241.212 535.933 lineto
+ stroke
+% box...
+newpath 234.837 535.933 moveto
+247.587 535.933 lineto
+247.587 419.494 lineto
+234.837 419.494 lineto
+234.837 535.933 lineto
+ stroke
+% 50th percentile line
+newpath 234.837 476.88 moveto
+247.587 476.88 lineto
+ stroke
+% lower whisker...
+newpath 234.837 394.753 moveto
+247.587 394.753 lineto
+241.212 394.753 lineto
+241.212 419.494 lineto
+ stroke
+% Starting new box&whisker...
+% upper whisker...
+newpath 356.049 280.909 moveto
+368.799 280.909 lineto
+362.424 280.909 lineto
+362.424 280.909 lineto
+362.424 333.507 lineto
+ stroke
+% box...
+newpath 356.049 333.507 moveto
+368.799 333.507 lineto
+368.799 474.776 lineto
+356.049 474.776 lineto
+356.049 333.507 lineto
+ stroke
+% 50th percentile line
+newpath 356.049 430.149 moveto
+368.799 430.149 lineto
+ stroke
+% lower whisker...
+newpath 356.049 490.135 moveto
+368.799 490.135 lineto
+362.424 490.135 lineto
+362.424 474.776 lineto
+ stroke
+% Starting new box&whisker...
+% upper whisker...
+newpath 477.261 356.111 moveto
+490.011 356.111 lineto
+483.636 356.111 lineto
+483.636 356.111 lineto
+483.636 382.444 lineto
+ stroke
+% box...
+newpath 477.261 382.444 moveto
+490.011 382.444 lineto
+490.011 475.095 lineto
+477.261 475.095 lineto
+477.261 382.444 lineto
+ stroke
+% 50th percentile line
+newpath 477.261 434.671 moveto
+490.011 434.671 lineto
+ stroke
+% lower whisker...
+newpath 477.261 488.827 moveto
+490.011 488.827 lineto
+483.636 488.827 lineto
+483.636 475.095 lineto
+ stroke
+% Drawing Axes...
+% Drawing the box...
+newpath 80 590 moveto
+80 250 lineto
+520 250 lineto
+520 590 lineto
+80 590 lineto
+ stroke
+% Done drawing the box.
+% Drawing x-axis tick marks and labels...
+newpath 83.6364 250 moveto
+83.6364 247 lineto
+ stroke
+newpath 95.7576 250 moveto
+95.7576 247 lineto
+ stroke
+newpath 107.879 250 moveto
+107.879 247 lineto
+ stroke
+105 232 moveto (1) show
+newpath 120 250 moveto
+120 242 lineto
+ stroke
+newpath 132.121 250 moveto
+132.121 247 lineto
+ stroke
+newpath 144.242 250 moveto
+144.242 247 lineto
+ stroke
+newpath 156.364 250 moveto
+156.364 247 lineto
+ stroke
+newpath 168.485 250 moveto
+168.485 247 lineto
+ stroke
+165.606 232 moveto (1.5) show
+newpath 180.606 250 moveto
+180.606 242 lineto
+ stroke
+newpath 192.727 250 moveto
+192.727 247 lineto
+ stroke
+newpath 204.848 250 moveto
+204.848 247 lineto
+ stroke
+newpath 216.97 250 moveto
+216.97 247 lineto
+ stroke
+newpath 229.091 250 moveto
+229.091 247 lineto
+ stroke
+226.212 232 moveto (2) show
+newpath 241.212 250 moveto
+241.212 242 lineto
+ stroke
+newpath 253.333 250 moveto
+253.333 247 lineto
+ stroke
+newpath 265.455 250 moveto
+265.455 247 lineto
+ stroke
+newpath 277.576 250 moveto
+277.576 247 lineto
+ stroke
+newpath 289.697 250 moveto
+289.697 247 lineto
+ stroke
+286.818 232 moveto (2.5) show
+newpath 301.818 250 moveto
+301.818 242 lineto
+ stroke
+newpath 313.939 250 moveto
+313.939 247 lineto
+ stroke
+newpath 326.061 250 moveto
+326.061 247 lineto
+ stroke
+newpath 338.182 250 moveto
+338.182 247 lineto
+ stroke
+newpath 350.303 250 moveto
+350.303 247 lineto
+ stroke
+347.424 232 moveto (3) show
+newpath 362.424 250 moveto
+362.424 242 lineto
+ stroke
+newpath 374.545 250 moveto
+374.545 247 lineto
+ stroke
+newpath 386.667 250 moveto
+386.667 247 lineto
+ stroke
+newpath 398.788 250 moveto
+398.788 247 lineto
+ stroke
+newpath 410.909 250 moveto
+410.909 247 lineto
+ stroke
+408.03 232 moveto (3.5) show
+newpath 423.03 250 moveto
+423.03 242 lineto
+ stroke
+newpath 435.152 250 moveto
+435.152 247 lineto
+ stroke
+newpath 447.273 250 moveto
+447.273 247 lineto
+ stroke
+newpath 459.394 250 moveto
+459.394 247 lineto
+ stroke
+newpath 471.515 250 moveto
+471.515 247 lineto
+ stroke
+468.636 232 moveto (4) show
+newpath 483.636 250 moveto
+483.636 242 lineto
+ stroke
+newpath 495.758 250 moveto
+495.758 247 lineto
+ stroke
+newpath 507.879 250 moveto
+507.879 247 lineto
+ stroke
+% Done drawing x-axis tick marks and labels.
+% Drawing y-axis tick marks and labels...
+newpath 80 254.844 moveto
+77 254.844 lineto
+ stroke
+newpath 80 269.143 moveto
+77 269.143 lineto
+ stroke
+newpath 80 283.442 moveto
+77 283.442 lineto
+ stroke
+40 299.741 moveto (-100) show
+newpath 80 297.741 moveto
+72 297.741 lineto
+ stroke
+newpath 80 312.039 moveto
+77 312.039 lineto
+ stroke
+newpath 80 326.338 moveto
+77 326.338 lineto
+ stroke
+newpath 80 340.637 moveto
+77 340.637 lineto
+ stroke
+newpath 80 354.936 moveto
+77 354.936 lineto
+ stroke
+40 371.234 moveto (0) show
+newpath 80 369.234 moveto
+72 369.234 lineto
+ stroke
+newpath 80 383.533 moveto
+77 383.533 lineto
+ stroke
+newpath 80 397.832 moveto
+77 397.832 lineto
+ stroke
+newpath 80 412.131 moveto
+77 412.131 lineto
+ stroke
+newpath 80 426.43 moveto
+77 426.43 lineto
+ stroke
+40 442.728 moveto (100) show
+newpath 80 440.728 moveto
+72 440.728 lineto
+ stroke
+newpath 80 455.027 moveto
+77 455.027 lineto
+ stroke
+newpath 80 469.326 moveto
+77 469.326 lineto
+ stroke
+newpath 80 483.625 moveto
+77 483.625 lineto
+ stroke
+newpath 80 497.923 moveto
+77 497.923 lineto
+ stroke
+40 514.222 moveto (200) show
+newpath 80 512.222 moveto
+72 512.222 lineto
+ stroke
+newpath 80 526.521 moveto
+77 526.521 lineto
+ stroke
+newpath 80 540.82 moveto
+77 540.82 lineto
+ stroke
+newpath 80 555.119 moveto
+77 555.119 lineto
+ stroke
+newpath 80 569.417 moveto
+77 569.417 lineto
+ stroke
+40 585.716 moveto (300) show
+newpath 80 583.716 moveto
+72 583.716 lineto
+ stroke
+% Done drawing y-axis tick marks and labels.
+% Done drawing axes.
+
+hugefont
+214 400 moveto (Outline?) true charpath stroke
+
+bigfont
+214 620 moveto (Big Centered Caption) centerline true charpath stroke
+52 604 moveto (Right at the Top of the Page) centerline true charpath stroke
+
+smallfont
+233 214 moveto (This is a little note in the right margin.) rightline show
+ showpage
+quit
+
+

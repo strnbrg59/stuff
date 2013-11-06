@@ -1,0 +1,32 @@
+%/Nice-TeX findfont 12 scalefont setfont
+%/TeX-charter findfont 12 scalefont setfont
+/TeX-utopia findfont 12 scalefont setfont
+
+/inch {
+	72 mul
+} def
+
+% Labels are 3 1/16 inches wide, 1 1/16 inches high
+/labelwidth {
+	3.0625 inch
+} def
+/labelheight {
+	1.0625 inch
+} def
+
+/robin {
+	0   0 moveto (Robin S. Soffer, MD) show
+	0 -12 moveto (1309 Redwood Lake Court) show
+	0 -24 moveto (San Jose, CA  95131) show
+} def
+
+0.40 inch 10.85 inch translate robin
+labelwidth 0 translate robin
+labelwidth -1 mul labelheight -1 mul translate robin
+labelwidth 0 translate robin
+labelwidth -1 mul labelheight -1 mul translate robin
+labelwidth 0 translate robin
+
+showpage
+quit
+
