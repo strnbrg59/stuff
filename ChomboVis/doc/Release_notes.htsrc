@@ -1,0 +1,691 @@
+<HTML>
+
+<HEAD>
+<TITLE>Release Notes</TITLE>
+</HEAD>
+
+<body bgcolor="#111111" text="#FFFFFF" link="#AFE3EA" vlink="#D6B5E0" alink="#FFAD00">
+
+<CENTER><FONT SIZE=18> Release Notes, ChomboVis 4.16.9 </FONT></CENTER>
+<HR>
+
+<H1> New in release 4.16.9</H1>
+Faster startup, noticeable on datasets with >1000 boxes.
+
+<H1> New in release 4.16.8</H1>
+Minor build system simplifications.
+
+<H1> New in release 4.16.7</H1>
+Eliminated build dependency on glut.
+
+<H1> New in release 4.16.6</H1>
+Compatible with hdf5-1.6.5.
+
+<H1> New in release 4.16.5</H1>
+EntryScale widgets (for colormap and iso min/max) expand if you stretch
+dialog.
+
+<H1> New in release 4.16.4</H1>
+MacOSX portability fixes, and documentation for easier MacOSX install.
+
+<H1> New in release 4.16.3</H1>
+Better support for the --without-vtk option.
+
+<H1> New in release 4.16.2</H1>
+Grid clipping now available even before any components are loaded
+(i.e. slices_off=1 mode).
+
+<H1> New in release 4.16.1</H1>0
+Grid rendering rendered more efficient.
+
+<H1> New in release 4.16.0</H1>
+Databrowser responds to mouse cell picking even when no data component has
+been loaded.
+
+<H1> New in release 4.15.0</H1>
+Colormap editor.
+
+<H1> New in release 4.14.0</H1>
+Fog.  (Start with '-i' option and type c.misc.showFogScales() at Python prompt.)
+
+<H1> New in release 4.13.2</H1>
+Tubes around streamlines
+
+<H1> New in release 4.12.10</H1>
+Isosurface dialog colormap-constrained feature was slipping.  Fixed now.
+
+<H1> New in release 4.12.9</H1>
+GUI appearance issues.
+
+<H1> New in release 4.12.8</H1>
+Further tweaks to build system; user.make is now interpreted as a Bourne shell
+script.
+
+<H1> New in release 4.12.7</H1>
+Redistributed definitions and declarations of OstreamStdioAdaptor to avoid
+multiple-definition problem.
+
+<H1> New in release 4.12.6 </H1>
+Builds with gcc4.1.0.
+
+<H1> New in release 4.12.5 </H1>
+user.make supports shell-variable-like syntax
+
+<H1> New in release 4.12.4 </H1>
+Chombo bridge -- loading of Chombo libraries as modules (still experimental).
+
+<H1> New in release 4.11.7 </H1>
+New API function: c.reader.getLevelTime().  Makes possible timestamped
+movies -- see examples/timestamped_movie.py.
+
+<H1> New in release 4.11.6 </H1>
+Workaround for systems (like some Mac OSX gcc-4.x ones) that don't
+have isnan() and isinf().
+
+<H1> New in release 4.11.5 </H1>
+GUI control over EntryScale limits in scale mode (press shift-button1 on the
+scale/entry toggle button).
+
+<H1> New in release 4.11.4 </H1>
+Further tweak to clipping range.
+
+<H1> New in release 4.11.3 </H1>
+Bugfix: camera clipping range wasn't getting restored.  Took opportunity to
+impose a clean demarcation of responsibilities between vol_tk_interator.py and
+vtk_cameras.py.
+
+<H1> New in release 4.11.2 </H1>
+Upgraded from Boost 1.31 to 1.33.  Boost 1.31 didn't recognize, and complained
+about, gcc-4.x.
+
+<H1> New in release 4.11.1 </H1>
+Builds with gcc-4.0.1.
+
+<H1> New in release 4.11.0 </H1>
+The {hide,show}[All]Box[es]() feature now loads only those FABs that
+are needed, and promptly deletes FABs that are no longer needed.
+
+<H1> New in release 4.10.6 </H1>
+<UL>
+<LI> API change: moved slice_api {hide,show}[All]Box[es]() to reader_api.
+     Fixed bug whereby unwanted boxes were getting loaded.
+</UL>
+
+<H1> New in release 4.10.5 </H1>
+<UL>
+<LI> Removed termios restorer.  It was doing more harm than good.
+<LI> -and-everything build system now handles 64-bit Linux without requiring
+     any extra work from the user.
+</UL>
+
+<H1> New in release 4.10.4 </H1>
+Faster saving-to-hdf5.
+
+<H1> New in release 4.10.3 </H1>
+<UL>
+<LI> module_maker.py offers choice of debug or optimized compilation.
+<LI> examples/module_maker/stencil.{py,h,cpp} -- a more elaborate example
+     for how to use module_maker
+</UL>
+
+<H1> New in release 4.10.2 </H1>
+module_maker.py supports 0-arity functions.
+
+<H1> New in release 4.10.1 </H1>
+Sped up build by about 25%, by compiling some template code into libraries,
+and instantiating explicitly.
+
+<H1> New in release 4.10.0 </H1>
+Build system flexibility.  Introduced autoconf options --enable-debug,
+--enable-profile, --enable-unittests and --with-vtk.
+
+<H1> New in release 4.9.3 </H1>
+Cut down on unnecessary data-loading coming from streamlines initialization.
+
+<H1> New in release 4.9.2 </H1>
+Bug (TTPro #428), fixed in two stages.
+
+<H1> New in release 4.9.0 </H1>
+Implemented new memory management design.  No new user features.
+
+<H1> New in release 4.8.14 </H1>
+Can select cells in ghost region.  (TTPro defect#417)
+
+<H1> New in release 4.8.13 </H1>
+Further gcc3.4 fixes.
+
+<H1> New in release 4.8.10 </H1>
+Fixed EB multifluid clipping bug, for files that provide their own ghost cells.
+
+<H1> New in release 4.8.8 </H1>
+Fixed EB dialog hilighted levelset component bug.
+
+<H1> New in release 4.8.7 </H1>
+Fixed anisotropic streamlines bug.
+
+<H1> New in release 4.8.6 </H1>
+Fixed clipping bug for 2D multilevel old-style EB files.
+
+<H1> New in release 4.8.5 </H1>
+More details on Chombo HDF5 format.
+
+<H1> New in release 4.8.4 </H1>
+Fixed legend-maintext synchronization problems in databrowser.
+
+<H1> New in release 4.8.3 </H1>
+Smoother handling of files with very large finite numbers.
+
+<H1> New in release 4.8.2 </H1>
+show/hideBoxes(), plus regression tests.
+
+<H1> New in release 4.8.1 </H1>
+Bugfix: show/hideBox() coexistence with blankCoveredCells().
+
+<H1> New in release 4.8.0 </H1>
+Show/hide control at box granularity.  See SliceApi.
+
+<H1> New in release 4.7.10 </H1>
+Databrowser EB blanking when not using old-style (e.g. fraction-0, fraction-1)
+EB files.
+
+<H1> New in release 4.7.8 </H1>
+Fixed chombobrowser problem (TTPro #403)
+
+<H1> New in release 4.7.7 </H1>
+
+Clipping of slices and isocontours/isosurfaces at embedded boundaries.
+Embedded boundaries by the isocontour method.
+
+<H1> New in release 4.6.5 </H1>
+<UL>
+<LI> Fixed volume-rendering visible-levels bug.
+<LI> Documentation option looks for WWW_BROWSER env variable.
+</UL>
+
+<H1> New in release 4.6.4 </H1>
+Fixed volume-rendering component-selection bug (#399)
+
+<H1> New in release 4.6.3 </H1>
+<UL>
+<LI> Fixed solid-box-outline bug -- pipeline was getting broken by depthsorter.
+<LI> Fixed picking-on-generated-components bug (#400)
+</UL>
+
+<H1> New in release 4.6.2 </H1>
+Solid box outlines.
+
+<H1> New in release 4.6.1 </H1>
+Bugfixes
+
+<H1> New in release 4.6.0 </H1>
+Different grid color, by level.
+
+<H1> New in release 4.5.10 </H1>
+More robust handling of NaN and inf in data: ranges (for colormap,
+isosurfaces/contours, particles, etc) are computed ignoring all NaNs,
+infs and -infs.
+
+<H1> New in release 4.5.9 </H1>
+Control over databrowser font family, size and style.  See documentation
+for MiscAPI class.
+
+<H1> New in release 4.5.8 </H1>
+<UL>
+<LI> Control over resolution (smoothness) of particle glyphs.
+<LI> Better sanity-checking of hdf5 inputs.
+</UL>
+
+<H1> New in release 4.5.7 </H1>
+<UL>
+<LI> 3D annotation now shows up
+in off-screen mode (other annotation still doesn't).
+<LI> Particle (ordinary) filtering is disabled by default.
+</UL>
+
+<H1> New in release 4.5.6 </H1>
+Fixed isosurface cross-coloration bug -- cross-colorer wasn't getting updated
+on time.
+
+<H1> New in release 4.5.5 </H1>
+Render window size restricted to multiples of 16 pixels, unless overridden
+in MiscAPI.
+
+<H1> New in release 4.5.4 </H1>
+Particle images now show up, even in offscreen mode.
+
+<H1> New in release 4.5.3 </H1>
+Render widget height and width constrained to even number of pixels, to avoid
+trouble from mpeg2encode.
+
+<H1> New in release 4.5.2 </H1>
+Offscreen mode preserves render widget size saved in state file.
+
+
+<H1> New in release 4.5.1 </H1>
+<UL>
+<LI> ChomboVis will now build with gcc-3.4.2.
+<LI> Fixed EB memory corruption bug (that went unnoticed until the move to
+gcc-3.4.2).
+</UL>
+
+<H1> New in release 4.5.0 </H1>
+Off-screen rendering is back and unlike the bad old version of it,
+knows about texture mapping, and will not crash your X server.  See <A
+HREF="Command_line.html">here</A> for details.
+
+<H1> New in release 4.4.2 </H1>
+O3 optimization in Vtk directory.
+
+<H1> New in release 4.4.1 </H1>
+Control over width of colormap legend bar.
+
+<H1> New in release 4.4.0 </H1>
+Postscript output.
+
+<H1> New in release 4.3.0 </H1>
+Glyphs along isosurfaces, isocontours and embedded boundaries.  No GUI control
+yet -- only available through API.
+
+<H1> New in release 4.2.4 </H1>
+Clipping plane can be made visible.
+
+<H1> New in release 4.2.3 </H1>
+Taking note of time step and simulation time -- level dt and level time
+These now print out in data summaries, get picked up by ascii2hdf5, and are
+carried about in crop, slice and hdf5 dump operations.
+
+<H1> New in release 4.2.1 </H1>
+Finished transition to use, throughout, of boost smart pointers.
+(No new user-visible features though.)
+
+<H1> New in release 4.1.7 </H1>
+Got rid of that "Trying to delete object with nonzero reference count" error,
+by cooperating better with VTK's reference-counting scheme.
+
+<H1> New in release 4.1.6 </H1>
+Fixed bug related to cropping node-centered data.
+
+<H1> New in release 4.1.5 </H1> 
+Isosurface opacity.
+
+<H1> New in release 4.1.4 </H1> 
+Fixed long-standing but long-unnoticed bug with isocontours in reslice mode.
+
+<H1> New in release 4.1.3 </H1> 
+<UL>
+<LI> State restoration now works normally even when the state includes
+cell-granularity blanking of EB-covered cells.
+<LI> movie.py uses size in state file, and -x/-y override that.
+</UL>
+
+<H1> New in release 4.1.2 </H1>
+<UL>
+<LI> Saved state includes render window size, even if it got to where it is
+by the user stretching it with his mouse.
+<LI> Eliminated annoying "Bad table range" warning that was coming up when
+all the data in a box was constant.
+</UL>
+
+<H1> New in release 4.1.1 </H1>
+NaN warnings are suppressed if debug level < 3 (so put "debug_level=2"
+on your ChomboVis command line).
+
+<H1> New in release 4.1.0 </H1>
+
+Blanking of cells covered by an embedded boundary.  Blanking is at
+cell granularity; we aren't clipping exactly along the embedded
+boundary, yet.  See checkbutton on embedded boundary dialog, or
+EbApi.setBlankCoveredCells().
+
+<H1> New in release 4.0.2 </H1>
+Fixed bug whereby only one embedded boundary at a time could be rendered
+(bug entered with version 3.95.0 -- Update() works a little different in VTK 4.)
+
+<H1> New in release 4.0.1 </H1>
+Fixed install bug.
+
+<H1> New in release 4.0.0 </H1>
+<UL>
+
+<LI> The analysis framework is complete.  A while back (see below
+under "The 3.9x.y release series") we planned to bump the major
+version number to 4 upon completion of the analysis framework.  It's
+been pretty much complete for some time.  It will surely continue to
+evolve slowly.  In any case, it's time for 4.0.0 if only because we're
+running out of numbers under 3.9x.y.  So in fact the difference
+between this release and the last one is not huge; it consists of one
+new feature...
+
+<LI> Embedded boundary support in the databrowser.
+</UL>
+
+<H1> New in release 3.98.5 </H1>
+<UL>
+<LI> Control over streamline seed size.
+<LI> Direct control over scale ("slider") resolution.
+</UL>
+
+<H1> New in release 3.98.3 </H1>
+<UL>
+<LI> Three-dimensional annotation
+</UL>
+
+<H1> New in release 3.98.2 </H1>
+<UL>
+<LI> State files indicate the ChomboVis version that created them.
+<LI> Annotation
+</UL>
+
+<H1> New in release 3.97.0 </H1>
+<UL>
+<LI> Can load file with no field data at all (zero components).  Can load
+all other files without necessarily loading any component.
+</UL>
+
+<H1> New in release 3.96.3 </H1>
+<UL>
+<LI> Can build out-of-source.
+</UL>
+
+<H1> New in release 3.96.2 </H1>
+<UL>
+<LI> Works on 64-bit Linux.
+<LI> Ported to Mac OS X.  See <A HREF="Installation.html">installation
+guide</A> for details.
+</UL>
+
+<H1> New in release 3.95.0 </H1>
+<UL>
+<LI> First ChomboVis release that builds against VTK 4.
+<LI> Axis tick marks.
+<LI> Detects (and exits upon) modifications to loaded hdf5 file.
+</UL>
+
+<H1> New in release 3.94.4 </H1>
+<UL>
+<LI> Line width controls for grids, isocontours, streamlines and 2D
+embedded boundaries.
+<LI> Control over rake length (streamlines).
+</UL>
+
+<H1> New in release 3.94.3 </H1>
+<UL>
+<LI> <A HREF="network_api.html">Master and slave modes</A>
+</UL>
+
+<H1> New in release 3.93.0 </H1>
+
+<UL>
+<LI> Totally new build system, using GNU autotools.
+</UL>
+
+<H1> New in release 3.92.0 </H1>
+
+<UL>
+
+<LI> <A HREF="vtk_line_plot.html">Line plots</A> 
+
+<LI> User-defined C++ functions, for data manipulation, automatically compiled
+and linked into a Python module.  See <A HREF="module_maker.html">here.</A>
+
+<LI> Server mode.  ChomboVis can accept ChomboVis API (i.e. Python) commands
+from another process.  See comments in network/chombovis_client.cpp.
+
+</UL>
+
+
+<H1> New in release 3.91.0 </H1>
+
+<UL>
+<LI> Much expanded Analysis Framework: cropping, slicing, data access and
+manipulation, etc.  See VisualizableDataset and BoxLayoutData class
+documentation, in API.html.
+<LI> Improved API documentation, especially for Analysis Framework.
+<LI> Out-of-colormap values are, optionally, colored black.
+<LI> Colormap legend
+<LI> Bugfix: numbers typed into slider entries are no longer incorrectly 
+rejected.
+</UL>
+
+<H1> New in release 3.90.0 </H1>
+
+Release 3.90.0 introduces the first Analysis Framework feature, <A
+HREF="reader_api.html">on-the-fly creation of new data components.</A>
+
+<H1> The 3.9x.y release series </H1>
+ChomboVis 3.9x.y is the alpha releases leading up to 4.0.0.  The major
+new feature in ChomboVis 4 will be the "Analysis Framework" -- mostly
+non-graphical features for analyzing and modifying a Chombo/ChomboVis
+HDF5 dataset during a ChomboVis session.  To see what's coming up, see
+the <A
+HREF="http://davis.lbl.gov/NASA/data_api.html">specification.</A>
+
+
+<H1> ChomboVis 3.15.1 vs ChomboVis 3.15.0 </H1>
+
+Fixed colormap-restoration bug.
+
+<H1> Change since ChomboVis 3.14.3 </H1>
+
+Loads new files into the same VTK window (rather than creating a new
+one).
+
+<H1> Change since ChomboVis 3.14.2 </H1>
+
+Fixed memory corruption problem (was not initializing
+numParticleComponents in files with no particles).
+
+<H1> Changes since ChomboVis 3.14.1 </H1>
+
+<A HREF="Data_browser.html">Particle picking.</A>
+
+<H1> Changes since ChomboVis 3.13.0 </H1>
+
+<UL>
+<LI> <A HREF="Visualization.html">Particle visualization</A>
+<LI> Fixed isosurface cross-coloration bug.
+<LI> Colormap legend.
+</UL>
+
+<H1> Change since ChomboVis 3.12.0 </H1>
+
+Support for eight data centerings -- cell, x-face, y-face, z-face,
+x-edge, y-edge, z-edge, node.  ChomboVis previously accepted only
+cell-centered data.
+
+<H1> Change since ChomboVis 3.11.1 </H1>0
+
+<A HREF="Other_features.html">ascii2hdf5:</A> a utility to produce
+ChomboVis-legal hdf5 files from a simple ascii representation.
+
+<H1> Change since ChomboVis 3.11.0 </H1>
+
+Fixed isosurface coloration bug.
+
+<H1> Change since ChomboVis 3.10.1 </H1>
+
+<A href="Visualization.html">Ghost cells</A> can be turned on and off.
+
+
+<H1> Change since ChomboVis 3.9.0 </H1>
+
+<A href="Visualization.html">"Slice cells" grid option.</A>
+
+<H1> Change since ChomboVis 3.8.1 </H1>
+<A href="Other_features.html"> Anisotropic cell scaling.</A>
+
+<H1> Changes since ChomboVis 3.8.0 </H1>
+<UL>
+<LI> Panning works, in use_render_widget=0 mode.
+</UL>
+
+<H1> Changes since ChomboVis 3.7.0 </H1>
+
+<UL>
+<LI> Slices of multi-level data are integrated, rather than offset.
+<LI> use_render_widget=0 command-line option
+</UL>
+
+
+<H1> Changes since ChomboVis 3.6.4 </H1>
+
+<UL>
+<LI> Migrated to gcc 3.20.
+<LI> Multiple embedded boundaries.
+<LI> Embedded boundaries opacity control.
+<LI> Offscreen-mode output right-side up.
+<LI> Overhauled examples/movie.py.  Do "movie.py --help".
+<LI> Bug fix -- clipping angle drift.
+</UL>
+
+<H1> Changes since ChomboVis 3.6.3 </H1>
+
+Close-all-dialogs and reopen-dialogs (Options pull-down menu).
+
+<H1> Changes since ChomboVis 3.6.2 </H1>
+
+Fixed clipping bugs.
+
+<H1> Changes since ChomboVis 3.6.1 </H1>
+
+Fix for vtkTkRenderWidget bug (your milage may vary, still).
+
+<H1> Changes since ChomboVis 3.6.0 </H1>
+
+Fixed streamlines bug (TTPro#245).
+
+<H1> Changes since ChomboVis 3.5.1 </H1>
+
+Clipping of isosurfaces, 3D embedded boundaries and grids; rendered on
+one side of a plane, not rendered on the other side.
+
+<H1> Changes since ChomboVis 3.4.0 </H1>
+
+<UL>
+
+<LI> Can color one component's isosurface with another component's values.
+
+<LI> Big databrowser speedup.
+
+<LI> Texture mapping in 3D slice mode.
+
+</UL>
+
+<H1> Changes since ChomboVis 3.3.1 </H1>
+
+<UL>
+
+<LI> Texture mapping for 2D files.  Uses five times less memory (after
+the same large initial footprint).  Pans and zooms about 100 times
+faster (for large datasets).
+
+<LI> Embedded boundary enhancements.  Correct by-value coloring.  More
+continuous-looking surface in 3D.
+
+<LI> Can create and manipulate an unlimited number of parallel slices
+(3D).
+
+</UL>
+
+
+<H1> Changes since ChomboVis 3.2.11 </H1>
+
+<UL>
+
+<LI> <A HREF="Other_features.html">Off-screen rendering.</A>
+
+<LI> More efficient slicing (half the memory, 80% of the running time).
+
+<LI> Many other optimizations.
+
+<LI> Possible to execute <A HREF="API.html">user scripts</A> at any
+time during a ChomboVis session.  Python prompt <A
+HREF="Command_line.html">(optionally)</A> stays available.
+
+<LI> Better axis-orientation display.
+
+<LI> Data-only versions of chombovis -- <A
+HREF="Command_line.html">chombodata, chombobrowser.</A>
+
+<LI> Able to load multiple hdf5 files and handle multiple ChomboVis instances.
+
+</UL>
+
+
+<H1> Changes since ChomboVis 3.1.5 </H1>
+<UL>
+<LI> API changes
+  <UL>
+  <LI> In your scripts, change all calls <TT>chombovis.ChomboVis()</TT>
+       to <TT>chombovis.this()</TT>
+  <LI> If your script ends with a call to <TT>mainloop()</TT>, delete that.
+  <LI> Anything called <EM>variable</EM> or <EM>var</EM> is now called
+       <EM>component.</EM>
+  </UL>
+
+<LI> Smaller memory footprint (loads only those levels and components actively
+being viewed).
+<LI> Enhanced reslice mode: no segfaults, better databrowser and
+selector integration.
+<LI> Support for personal preferences file ~/.chombovisrc.
+<LI> More complete persistence (state saving/restoration).
+<LI> VTK configuration verifier.
+<LI> Data browser enhancements: component selection; synchronization
+with slice position, 3D cell picking.
+</UL>
+
+<H1> Changes since ChomboVis 3.1.4b </H1>
+<UL>
+<LI> Everything now compiles and builds against gcc 3.0.4.
+
+<LI> Higher resolution on colormap and iso scales.
+
+<LI> Bugfix in user API (embedded boundary coloring).
+</UL>
+
+<H1> Change since ChomboVis 3.1.3b </H1>
+
+Bug fix: state-restoration was working from scripts but not from GUI.
+
+
+<H1> Changes since ChomboVis 3.0 </H1>
+
+<UL>
+
+<LI> Closer integration between the spreadsheet and the
+mouse-activated selector.
+
+<LI> New command-line syntax.
+
+<LI> Bug fixes.
+</UL>
+
+
+<H1> Changes between ChomboVis 2.0 and ChomboVis 3.0 </H1>
+
+<UL>
+
+<LI> The Tcl/Tk layer was redesigned and rewritten in Python.
+
+<LI> Application programming interface (API).
+
+<LI> The state of the system can be saved to, and later restored from,
+a file.
+
+<LI> Alpha implementations of streamline, volume and embedded boundary
+visualization.
+
+<LI> Various changes in the look and feel.
+
+<LI> A fairly comprehensive test suite.
+
+<LI> Save-image no longer produces Postscript, but instead produces
+output in a variety of other formats.
+
+<LI> New command-line syntax.
+
+</UL>
+    <hr>
+    <address><a href="mailto:chombovis@davis.lbl.gov">ChomboVis Development Team</a></address>
+  </body>
+</html>

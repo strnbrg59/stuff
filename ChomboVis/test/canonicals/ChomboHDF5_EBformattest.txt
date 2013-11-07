@@ -1,0 +1,9 @@
+
+  Electric Fence 2.2.0 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Info: ParseCommandLine():cmd-line-option debug_level=4
+Info: ParseCommandLine():cmd-line-option infile=../../share/ChomboVis/data/newebformat2d.hdf5
+Info (main()): *** infile=../../share/ChomboVis/data/newebformat2d.hdf5
+Info (templatizedMain()): filetype = new_eb_chombo
+Info (templatizedMain()): Not ready for prime time.  EBChomboHDF5 ctor scans in a few things
+but then gags when it gets to 'Ghost'.  We'll return to this later.
+Exiting now.

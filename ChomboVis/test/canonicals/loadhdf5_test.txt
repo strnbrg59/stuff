@@ -1,0 +1,294 @@
+
+
+--- Loading node2dparticles.hdf5
+**Box info**
+level 0 : 2 boxes, 16 data points.
+level 1 : 1 boxes, 15 data points.
+level 2 : 1 boxes, 9 data points.
+All levels: 4 boxes, 40 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (2.0, 3.0, 0)
+
+**Component ranges** (at levels 0 through 2)
+phi (1.0, 25.0)
+
+**dx =(1.0, 0.5, 0.25)
+
+**Particles**
+    charge: [1.1000000000000001, 1.8]
+    mass: [1.0, 5.0]
+    particle_id: [121.0, 125.0]
+    position_x: [0.0, 1.3]
+    position_y: [0.0, 1.7]
+
+
+--- Loading ebtest.2d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 1024 data points.
+All levels: 1 boxes, 1024 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (1.0, 1.0, 0)
+
+**Component ranges** (at levels 0 through 0)
+phi (-0.056349560276005219, -0.00057209264592354171)
+fraction-0 (0.0, 1.0)
+xnormal-0 (-0.99863903768829332, 0.99863903768829332)
+ynormal-0 (-0.99863903768829332, 0.99863903768829332)
+distance-0 (-0.034636913574191436, 0.038151786506136917)
+
+**dx =(0.03125,)
+
+
+--- Loading ebtest.3d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 14400 data points.
+level 1 : 8 boxes, 38848 data points.
+All levels: 9 boxes, 53248 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (30.0, 30.0, 54.0)
+
+**Component ranges** (at levels 0 through 1)
+fraction-0 (0.0, 1.0)
+density-0 (-1.0, 5.0)
+xmomentum-0 (-2.8032393674471399, 7.4922037758946347)
+ymomentum-0 (-3.2904678582520011, 7.3127628358791501)
+zmomentum-0 (-5.8147714619296726, 7.9448509754492145)
+energy-0 (-138.88888888888889, 27.777777777777779)
+fraction-1 (0.0, 1.0)
+density-1 (-1.0, 5.0)
+xmomentum-1 (-0.447598760488643, 3.2871151639511713)
+ymomentum-1 (-0.45534549608429498, 3.2241149492982006)
+zmomentum-1 (-10.0, 2.0)
+energy-1 (-128.88888888888889, 25.777777777777779)
+xnormal-0 (-0.99989963901176571, 0.99991860199232419)
+ynormal-0 (-0.99982057469094454, 0.99995049112998702)
+znormal-0 (-0.28377890526204691, 1.0)
+distance-0 (-2.0612306089281174, 2.157684832675864)
+xnormal-1 (-0.078387350284017124, 0.99440307278082551)
+ynormal-1 (-0.074600678756927302, 0.99320013161281384)
+znormal-1 (-1.0, 0.99858686586854684)
+distance-1 (-1.1805302361494721, 2.4235330645745683)
+
+**dx =(1.5, 0.75)
+
+
+--- Loading ghosts.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 64 data points.
+All levels: 1 boxes, 64 data points.
+
+**Domain** : (1.1000000000000001, 2.2000000000000002, 3.2999999999999998), (3.1000000000000001, 7.2000000000000002, 13.300000000000001)
+
+**Component ranges** (at levels 0 through 0)
+phi (1.0, 9.0)
+
+**dx =(1.0,)
+
+
+--- Loading node2d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 2 boxes, 16 data points.
+level 1 : 1 boxes, 15 data points.
+level 2 : 1 boxes, 9 data points.
+All levels: 4 boxes, 40 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (2.0, 3.0, 0)
+
+**Component ranges** (at levels 0 through 2)
+phi (1.0, 25.0)
+
+**dx =(1.0, 0.5, 0.25)
+
+
+--- Loading test.3d.double.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 512 data points.
+level 1 : 1 boxes, 4096 data points.
+level 2 : 14 boxes, 5568 data points.
+All levels: 16 boxes, 10176 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (8.0, 8.0, 8.0)
+
+**Component ranges** (at levels 0 through 2)
+phi (-0.039193807322508545, -3.7033560616784762e-05)
+rhs (0.0, 0.75)
+
+**dx =(1.0, 0.5, 0.25)
+
+
+--- Loading particles2D.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 2 boxes, 16 data points.
+level 1 : 1 boxes, 15 data points.
+level 2 : 1 boxes, 9 data points.
+All levels: 4 boxes, 40 data points.
+
+**Domain** : (-1.0, -1.0, 0.0), (1.0, 2.0, 0)
+
+**Component ranges** (at levels 0 through 2)
+phi (1.0, 25.0)
+
+**dx =(1.0, 0.5, 0.25)
+
+**Particles**
+    charge: [1.1000000000000001, 1.8]
+    mass: [1.0, 5.0]
+    particle_id: [121.0, 125.0]
+    position_x: [0.0, 1.3]
+    position_y: [0.0, 1.7]
+
+
+--- Loading particles3d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 16 data points.
+level 1 : 1 boxes, 18 data points.
+All levels: 2 boxes, 34 data points.
+
+**Domain** : (0.10000000000000001, 0.20000000000000001, 0.29999999999999999), (1.0, 2.0, 3.0)
+
+**Component ranges** (at levels 0 through 1)
+phi (1.0, 18.0)
+
+**dx =(0.90000000000000002, 0.45000000000000001)
+
+**Particles**
+    charge: [0.00017855200000000001, 0.99986900000000001]
+    mass: [0.00037721299999999999, 0.99946100000000004]
+    particle_id: [0.00150135, 0.99886799999999998]
+    position_x: [0.0011254800000000001, 0.99999400000000005]
+    position_y: [0.0020230000000000001, 0.99944599999999995]
+    position_z: [0.0013200200000000001, 0.99986399999999998]
+
+
+--- Loading test.2d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 2 boxes, 1024 data points.
+level 1 : 24 boxes, 5632 data points.
+level 2 : 84 boxes, 31936 data points.
+All levels: 110 boxes, 38592 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (1.0, 0.25, 0)
+
+**Component ranges** (at levels 0 through 2)
+density (1.3999999999996167, 22.072439697414403)
+x-momentum (-6.5118501609446854e-10, 200.29758586165278)
+y-momentum (-43.753297364755078, 23.037466626543448)
+energy-density (2.4999999999990439, 2040.1328133733309)
+
+**dx =(0.015625, 0.00390625, 0.0009765625)
+
+
+--- Loading test.3d.float.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 512 data points.
+level 1 : 1 boxes, 4096 data points.
+level 2 : 14 boxes, 5568 data points.
+All levels: 16 boxes, 10176 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (8.0, 8.0, 8.0)
+
+**Component ranges** (at levels 0 through 2)
+phi (-0.039193805307149887, -3.7033561966381967e-05)
+rhs (0.0, 0.75)
+
+**dx =(1.0, 0.5, 0.25)
+
+
+--- Loading xedge3d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 12 data points.
+level 1 : 1 boxes, 18 data points.
+All levels: 2 boxes, 30 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (0.10000000000000001, 0.20000000000000004, 0.30000000000000004)
+
+**Component ranges** (at levels 0 through 1)
+phi (1.0, 18.0)
+
+**dx =(0.10000000000000001, 0.050000000000000003)
+
+
+--- Loading xface.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 2 boxes, 12 data points.
+level 1 : 1 boxes, 10 data points.
+level 2 : 1 boxes, 6 data points.
+All levels: 4 boxes, 28 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (2.0, 3.0, 0)
+
+**Component ranges** (at levels 0 through 2)
+phi (1.0, 20.0)
+
+**dx =(1.0, 0.5, 0.25)
+
+
+--- Loading yedge3d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 16 data points.
+level 1 : 1 boxes, 18 data points.
+All levels: 2 boxes, 34 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (0.10000000000000001, 0.20000000000000001, 0.30000000000000004)
+
+**Component ranges** (at levels 0 through 1)
+phi (1.0, 18.0)
+
+**dx =(0.10000000000000001, 0.050000000000000003)
+
+
+--- Loading yface.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 2 boxes, 8 data points.
+level 1 : 1 boxes, 12 data points.
+level 2 : 1 boxes, 6 data points.
+All levels: 4 boxes, 26 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (2.0, 3.0, 0)
+
+**Component ranges** (at levels 0 through 2)
+phi (1.0, 22.0)
+
+**dx =(1.0, 0.5, 0.25)
+
+
+--- Loading zedge3d.hdf5
+ERROR: In vtkObject.cxx, line 477
+
+**Box info**
+level 0 : 1 boxes, 18 data points.
+level 1 : 1 boxes, 18 data points.
+All levels: 2 boxes, 36 data points.
+
+**Domain** : (0.0, 0.0, 0.0), (0.10000000000000001, 0.20000000000000004, 0.30000000000000004)
+
+**Component ranges** (at levels 0 through 1)
+phi (1.0, 18.0)
+
+**dx =(0.10000000000000001, 0.050000000000000003)

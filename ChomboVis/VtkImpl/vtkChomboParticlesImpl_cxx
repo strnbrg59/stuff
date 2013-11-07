@@ -1,0 +1,540 @@
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+**
+*/
+/* provided as a modification from source material derived from
+   the VTK distribution.  In accordance with VTK software agreement
+   the following also holds:
+=========================================================================
+
+Copyright (c) 1993-2000 Ken Martin, Will Schroeder, Bill Lorensen 
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+ * Neither name of Ken Martin, Will Schroeder, or Bill Lorensen nor the names
+   of any contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+ * Modified source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=========================================================================*/
+
+#include <algorithm>
+#include "vtkChomboParticles.h"
+#include "vtkPolyData.h"
+#include "vtkPointData.h"
+#include "vtkPoints.h"
+#include "vtkCellArray.h"
+#include "vtkChomboReader.h"
+#include "../data_access/PointerHandleMap.h"
+#include "../utils/StatusCodes.h"
+#include "../utils/cmdline.h"
+#include "vtkArray.h" // In this directory
+
+
+//--------------------------------------------------------------------------
+
+template<class REAL_T>
+vtkChomboParticlesImpl<REAL_T>::vtkChomboParticlesImpl(vtkChomboReader * reader)
+  :
+    vtkChomboParticles(0),
+    m_chomboReader( reader ),
+    m_markersArePoints(1),
+    m_doScaleGlyphs(0),
+    m_doOrientGlyphs(0),
+    m_offsetFilterOffset(0.0),
+    m_decimationFactor(1),
+    m_numSelectedPoints(0),
+    m_glyphScaler(0)
+{
+    assert( reader );
+    m_dblBuf = new double[3];
+    m_polyData = vtkPolyData::New();
+
+    // m_selectionMap[i] gives the location, among all particles, of the i-th
+    // particle that makes it through our filters, i.e. is actually passed to
+    // VTK for rendering.
+    m_selectionMap = new int[ reader->GetNumParticles() ];
+}
+
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetChomboReader( vtkChomboReader * r )
+{
+    m_chomboReader = r;
+}
+
+
+template<class REAL_T>
+vtkChomboParticlesImpl<REAL_T>::~vtkChomboParticlesImpl()
+{
+    assert( m_chomboReader );
+//    m_chomboReader->UnRegister(this);
+    delete [] m_dblBuf;
+//  if(m_seedPoints)  m_seedPoints->UnRegister(this);
+    delete [] m_selectionMap;
+}
+
+
+/** Return the coordinates, along whatever components happen to be associated
+ *  with spatial directions x, y and z right now, of the particle_num-th
+ *  currently selected particle.
+ *  
+ *  Warning: returns a double[] data member that could soon be reused.  Client
+ *  should therefore immediately make a copy of the return value.
+*/
+template<class REAL_T> double *
+vtkChomboParticlesImpl<REAL_T>::GetParticleXYZCoordinates( int particle_num )
+  const
+{
+    assert( particle_num < m_numSelectedPoints );
+    m_dblBuf[0] = m_x[m_selectionMap[particle_num]];
+    m_dblBuf[1] = m_y[m_selectionMap[particle_num]];
+    if( m_chomboReader->GetNumDims() == 3 )
+    {
+        m_dblBuf[2] = m_z[m_selectionMap[particle_num]];
+    } else
+    {
+        m_dblBuf[2] = 0.0;
+    }
+    return m_dblBuf;
+}
+
+
+/** Return the value of the component we use to scale the glyphs, for the
+ *  particle_num-th rendered glyph.  Thus, arg particle_num is the ordinal
+ *  number among those particles that made it past our filters and were actually
+ *  passed on to VTK for rendering.
+*/
+template<class REAL_T> double
+vtkChomboParticlesImpl<REAL_T>::GetScalingScalarValue( int particle_num ) const
+{
+    return m_glyphScaler[ m_selectionMap[particle_num] ];
+}
+
+
+/** Returns the thing that becomes the source of the VTK pipeline for particles;
+*/
+template<class REAL_T> vtkPolyData *
+vtkChomboParticlesImpl<REAL_T>::GetParticleOutput()
+{
+    Trace t("vtkChomboParticlesImpl::GetParticleOutput()"); t.NoOp();
+
+    int numPoints( m_chomboReader->GetNumParticles() );
+
+    //
+    // Load the positional components.
+    //
+    m_x = SharedArrayHandleMap<REAL_T>::GetPointer(
+              m_chomboReader->GetParticleComponent( m_xComponent.c_str()));
+    m_y = SharedArrayHandleMap<REAL_T>::GetPointer(
+              m_chomboReader->GetParticleComponent( m_yComponent.c_str()));
+    m_z.reset( 0 );
+    if( m_chomboReader->GetNumDims() == 3 )
+    {
+        m_z = SharedArrayHandleMap<REAL_T>::GetPointer(
+                  m_chomboReader->GetParticleComponent( m_zComponent.c_str()));
+    }
+    if( m_chomboReader->IsSlicingMode() )
+    {
+        PermuteForSlicingMode( m_x,m_y,m_z,
+                               m_chomboReader->GetSlicingDirection() );
+    }
+
+
+    //
+    // Load the filtering component.
+    //
+    boost::shared_array<REAL_T> filterer(0);
+    bool isFiltered( m_filteringComponent != "" );
+    if( isFiltered )
+    {
+        filterer = SharedArrayHandleMap<REAL_T>::GetPointer(
+            m_chomboReader->GetParticleComponent(
+                m_filteringComponent.c_str()));
+        m_numSelectedPoints = std::count_if(
+        filterer.get(), filterer.get()+numPoints,
+        Filterer<REAL_T>(m_filterLimits.first, m_filterLimits.second,
+                         long(m_decimationFactor))
+        );
+    } else
+    {
+        m_numSelectedPoints = numPoints;
+    }
+
+    //
+    // Load the offset filtering component.
+    //
+    boost::shared_array<REAL_T> offsetFilterer(0);
+    bool isOffsetFiltered( m_offsetFilteringComponent != "" );
+    if( isOffsetFiltered )
+    {
+        offsetFilterer = SharedArrayHandleMap<REAL_T>::GetPointer(
+            m_chomboReader->GetParticleComponent(
+                m_offsetFilteringComponent.c_str()));
+    }
+
+
+    //
+    // Load the marker scaling component.  We'll fill it in the loop where we
+    // condition on satisfaction of the filter.
+    //
+    if( m_doScaleGlyphs )
+    {
+        m_glyphScaler = SharedArrayHandleMap<REAL_T>::GetPointer(
+            m_chomboReader->GetParticleComponent(
+                m_glyphScalingComponent.c_str() ));
+        int n = m_chomboReader->GetNumParticles();
+        m_glyphScalingComponentRange = std::pair<REAL_T,REAL_T>(
+            *std::min_element( m_glyphScaler.get(), m_glyphScaler.get() + n ),
+            *std::max_element( m_glyphScaler.get(), m_glyphScaler.get() + n ) ); 
+
+    }
+
+
+    //
+    // Load the components that determine which way the glyphs are oriented.
+    //
+    boost::shared_array<REAL_T> xOrientation(0);
+    boost::shared_array<REAL_T> yOrientation(0);
+    boost::shared_array<REAL_T> zOrientation(0);
+    if( m_doOrientGlyphs )
+    {
+        xOrientation = SharedArrayHandleMap<REAL_T>::GetPointer(
+            m_chomboReader->GetParticleComponent(
+                m_xGlyphOrientationComponent.c_str() ));
+        yOrientation = SharedArrayHandleMap<REAL_T>::GetPointer(
+                m_chomboReader->GetParticleComponent(
+            m_yGlyphOrientationComponent.c_str() ));
+        if( m_chomboReader->GetNumDims() == 3 )
+        {
+            zOrientation = SharedArrayHandleMap<REAL_T>::GetPointer(
+                m_chomboReader->GetParticleComponent(
+                    m_zGlyphOrientationComponent.c_str() ));
+        }
+        if( m_chomboReader->IsSlicingMode() )
+        {
+            PermuteForSlicingMode( xOrientation,yOrientation,zOrientation,
+                                   m_chomboReader->GetSlicingDirection() );
+        }
+    }
+
+
+    //
+    // Initialize vtkPoints -- the spatial coordinates for the particles.
+    //
+    vtkPoints * points = vtkPoints::New();
+    if( sizeof(REAL_T) == sizeof(float) )
+    {
+        points->SetDataTypeToFloat();
+    } else
+    {
+        points->SetDataTypeToDouble();
+    }
+    points->SetNumberOfPoints( m_numSelectedPoints );
+
+    // The vtkCellArray gives us the cheap alternative to glyphs.  There is
+    // a problem, however, in that with vtkCellArray we can't display just one
+    // point; we can display 2 or 200000 points, but not one.
+    // Factor of 2 in allocation reflects internal layout of vtkCellArray
+    // and fact each of the cells we construct has just one point in it.
+    vtkCellArray * cellArray( vtkCellArray::New() );
+    cellArray->Allocate( m_numSelectedPoints*2 );
+
+    Filterer<REAL_T> filteringFunctor( m_filterLimits.first,
+                                       m_filterLimits.second,
+                                       long(m_decimationFactor) );
+    Filterer<REAL_T> offsetFilterFunctor( m_offsetFilterLimits.first,
+                                          m_offsetFilterLimits.second,
+                                          1 );
+                    
+    //
+    // Assign points, scalars, etc -- subject to satisfaction of the filter.
+    //
+    vtkDataArray * scalars = vtkArray<REAL_T>::New();
+    vtkDataArray * vectors = vtkArray<REAL_T>::New();
+    vectors->SetNumberOfComponents(3);
+
+    REAL_T dx0[3];
+    REAL_T coords[3];
+    int dataCentering[3];
+    for( int i=0;i<3;++i ){
+        dx0[i] = m_chomboReader->GetLevelDx( 0 )[i];
+        dataCentering[i] = m_chomboReader->GetDataCentering()[i];
+    }
+    int j=0;
+    for( int i=0;i<numPoints;++i )
+    {
+        if( (!isFiltered)
+        || ( filteringFunctor( filterer[i] ) ) )
+        {
+            REAL_T offset =
+                offsetFilterFunctor(offsetFilterer[i])
+              * m_offsetFilterOffset;
+
+            coords[0] = (m_x[i] + offset) + 0.5*dx0[0]*dataCentering[0];
+            coords[1] = m_y[i] + 0.5*dx0[1]*dataCentering[1];
+            if( m_chomboReader->GetNumDims() == 3 )
+            {
+                if( m_chomboReader->IsSlicingMode() == 1 )
+                { // Gotta put all the particles in front of the slice, or else
+                  // some of them won't be visible.
+                    coords[2] = - 0.5 * dx0[2]; // That should do it.
+                } else
+                { // True 3D mode.
+                    coords[2] = m_z[i] + 0.5*dx0[2]*dataCentering[2];
+                }
+            } else
+            {
+                coords[2] = 0.0;
+            }
+            points->SetPoint( j, coords );
+            m_selectionMap[j] = i;
+            if( m_markersArePoints==1 )
+            {
+                cellArray->InsertNextCell(1);
+                cellArray->InsertCellPoint(j);
+            }
+
+            if( m_doScaleGlyphs )
+            {
+                ((vtkArray<REAL_T>*)scalars)->InsertValue(
+                    j, m_glyphScaler[i] );
+            }
+
+            if( m_doOrientGlyphs )
+            {
+                if( m_chomboReader->GetNumDims() == 2 )
+                {
+                    vectors->InsertTuple3(
+                        j, xOrientation[i], yOrientation[i], 0.0 );
+                } else
+                {
+                    vectors->InsertTuple3(
+                        j, xOrientation[i], yOrientation[i], zOrientation[i] );
+                }
+            }
+
+            ++j;
+        }
+    }
+
+
+    //
+    // Set up return value -- the vtkPolyData.
+    //
+    m_polyData->Delete();
+    m_polyData = vtkPolyData::New();
+    m_polyData->SetPoints( points );
+    if( m_markersArePoints==1 )
+    {
+        m_polyData->SetVerts( cellArray );
+    }
+    if( m_doScaleGlyphs )
+    {
+        m_polyData->GetPointData()->SetScalars( scalars );
+    }
+    if( m_doOrientGlyphs )
+    {
+        m_polyData->GetPointData()->SetVectors( vectors );
+    }
+    m_polyData->ComputeBounds();
+
+    //
+    // Clean up.
+    //
+    points->Delete();
+    cellArray->Delete();
+    scalars->Delete();
+    vectors->Delete();
+
+    return m_polyData;
+}
+
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetXComponent( char const * name )
+{
+    m_xComponent = name;
+}
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetYComponent( char const * name )
+{
+    m_yComponent = name;
+}
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetZComponent( char const * name )
+{
+    m_zComponent = name;
+}
+
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetXGlyphOrientationComponent(
+    char const * name )
+{
+    m_xGlyphOrientationComponent = name;
+}
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetYGlyphOrientationComponent(
+    char const * name )
+{
+    m_yGlyphOrientationComponent = name;
+}
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetZGlyphOrientationComponent(
+    char const * name )
+{
+    m_zGlyphOrientationComponent = name;
+}
+
+
+/** Set the component whose values determine the rendered sizes of the particle
+ *  markers.
+*/
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetGlyphScalingComponent( const char * name )
+{
+    m_glyphScalingComponent = name;
+}
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetDoScaleGlyphs( int yes_no )
+{
+    assert( (yes_no==0) || (yes_no==1) );
+    m_doScaleGlyphs = yes_no;
+}
+
+
+template<class REAL_T> char const *
+vtkChomboParticlesImpl<REAL_T>::GetFilteringComponent() const
+{
+    return m_filteringComponent.c_str();
+}
+
+template<class REAL_T> char const *
+vtkChomboParticlesImpl<REAL_T>::GetOffsetFilteringComponent() const
+{
+    return m_offsetFilteringComponent.c_str();
+}
+
+
+/** We use the "filtering component" to filter those particles that we really
+ *  want to render; we pass those particles whose filteringComponent values
+ *  fall between m_filterLimits.first and m_filterLimits.second.
+*/
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetFilteringComponent( char const * name )
+{
+    m_filteringComponent = string(name);
+}
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetFilterMinMax( double lo, double hi )
+{
+    m_filterLimits = std::pair<REAL_T,REAL_T>( lo, hi );
+}
+
+
+/** We use the "offset filtering component" to identify those particles 
+ *  whose apparent positions we want to render offset a little.
+*/
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetOffsetFilteringComponent( char const * name )
+{
+    m_offsetFilteringComponent = string(name);
+}
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::SetOffsetFilterMinMax( double lo, double hi )
+{
+    m_offsetFilterLimits = std::pair<REAL_T,REAL_T>( lo, hi );
+}
+
+
+/** Args x, y and z are component data.  In reslice mode we need to pretend
+ *  they're permuted, so that we may render things in the correct orientation.
+*/
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::PermuteForSlicingMode(
+    boost::shared_array<REAL_T> x,
+    boost::shared_array<REAL_T> y,
+    boost::shared_array<REAL_T> z,
+    char slicingDirection ) const
+{
+    Trace t("vtkChomboParticlesImpl::PermuteForSlicingMode()");
+    
+    int axisNum( (slicingDirection=='y') + 2*(slicingDirection=='z') );
+    boost::shared_array<REAL_T> xTemp( x );
+    boost::shared_array<REAL_T> yTemp( y );
+    boost::shared_array<REAL_T> zTemp( z );
+    boost::shared_array<REAL_T> indexPermutations[3][3] =
+        {{yTemp,zTemp,xTemp},{zTemp,xTemp,yTemp},{xTemp,yTemp,zTemp}};
+
+    x = indexPermutations[axisNum][0];
+    y = indexPermutations[axisNum][1];
+    z = indexPermutations[axisNum][2];
+}
+
+
+/** Arg n is a particle's ordinal number among those particles that made it past
+ *  our filters, i.e. were passed on to VTK for rendering.  The return value
+ *  is that particle's ordinal number among the entire set of particles.
+*/
+template<class REAL_T> int
+vtkChomboParticlesImpl<REAL_T>::GetSelectedParticleNumber( int n ) const
+{
+    assert( m_selectionMap );
+    return m_selectionMap[n];
+}
+
+
+template<class REAL_T> void
+vtkChomboParticlesImpl<REAL_T>::PrintSelf(ostream& os, vtkIndent indent)
+{
+    os << "Hello world." << endl; 
+}

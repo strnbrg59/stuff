@@ -1,0 +1,130 @@
+#
+# Example of legal input for ascii2hdf5.sh.
+# Usage: cat chomboascii.dat | ../ascii2hdf5.sh outfile=testme.hdf5
+#
+space_dim: 3                     # 2 or 3
+num_levels: 2                    # Number of levels of refinement
+num_components: 2                # Number of data components
+component_names: phi rhs         # If no components, say just "component_names:".
+
+data_centering: 0                # 0=cell, 1=x-face, 2=y-face, 3=z-face,
+                                 # 4=x-edge, 5=y-edge, 6=z-edge, 7=node.
+
+prob_domain: 0 0 0 1 1 1         # Extreme corners of the problem domain, in    
+                                 # units of level-0 cells.                      
+                                 # If space_dim==2, there should be only four   
+                                 # numbers -- integers -- here.                 
+
+origin: 1.1 2.2 3.3              # Spatial location of lower corner of [0,0,0] cell.
+anisotropic: 1.0 2.5 5.0         # Stretches dx along x, y and z axes.
+
+level_0:                         # Level 0 metadata and data.               
+    dx: 1.0                      # Size of the side of a cell.
+                                 # (See "anisotropic scaling" on this page).
+
+    dt: 0.3                      # Size of a time step
+
+    time: 10.2                   # Time at beginning (or, optionally end) of run.
+
+    output_ghost: 0 0 0          # Depth of ghost cells in x, y and (if space_dim  
+                                 # ==3) z directions.  output_ghost must be the    
+                                 # same for each level.  See under "Ghost cells"   
+                                 # <A HREF="Visualization.html"> here.</A>         
+
+    boxes:                       # Dimensions of the boxes, in cells (hence      
+        0 0 0 1 1 1              # integers).  If there is more than one box,    
+                                 # see under "level_1" below.  If space_dim==2,  
+                                 # box dimensions are just four integers.        
+                                 # This "0 0 0 1 1 1" indicates a 2x2x2 box.     
+
+    data:                        # This is the data itself.  Whitespace is not   
+        1 2   3 4                # significant, but we have provided it to help  
+        5 6   7 8                # with eyeball parsing.  There are sixteen      
+                                 # numbers here because we have one 2x2x2 box    
+        1.1 1.2   1.3 1.4        # and two data components.  If you have too     
+        2.5 2.6   2.7 2.8        # many or too few numbers here, ascii2hdf5      
+                                 # fails, though not very gracefully.  The       
+                                 # numbers are interpreted as double precision.  
+                                 #
+                                 # If there is no data (i.e. num_components==0)
+                                 # you still need to say "data:" here.
+
+level_1:                         # Level 1 metadata and data.  The conventions  
+    dx: 0.5                      # are the same for every level.                
+    dt: 0.1
+    time: 10.18
+    output_ghost: 0 0 0
+    boxes:                       # Two boxes, both 2x4x4.
+        0 0 0 1 3 3              
+        2 0 0 3 3 3              
+    data:                        # Two 2x4x4 boxes and two data components,  
+        1 2   3 4                # hence 128 numbers.                        
+        5 6   7 8
+                                 
+        1.1 1.2   1.3 1.4        
+        2.5 2.6   2.7 2.8        
+                                 
+        1 2   3 4                
+        5 6   7 8                
+                                 
+        1.1 1.2   1.3 1.4        
+        2.5 2.6   2.7 2.8
+                                 
+        1 2   3 4                
+        5 6   7 8
+                                 
+        1.1 1.2   1.3 1.4
+        2.5 2.6   2.7 2.8
+                                 
+        1 2   3 4                
+        5 6   7 8
+
+        1.1 1.2   1.3 1.4
+        2.5 2.6   2.7 2.8
+
+        1 2   3 4
+        5 6   7 8
+
+        1.1 1.2   1.3 1.4
+        2.5 2.6   2.7 2.8
+
+        1 2   3 4
+        5 6   7 8
+
+        1.1 1.2   1.3 1.4
+        2.5 2.6   2.7 2.8
+
+        1 2   3 4
+        5 6   7 8
+
+        1.1 1.2   1.3 1.4
+        2.5 2.6   2.7 2.8
+
+        1 2   3 4
+        5 6   7 8
+
+        1.1 1.2   1.3 1.4
+        2.5 2.6   2.7 2.8
+
+particles:                        # This section is optional.  If you don't have
+    num_components: 6             # particles, don't even say "particles:" here.
+    num_particles: 5
+    component_0:
+        name: position_x
+        values:  1.1 1.9 2.3 1.2 2.1
+    component_1:
+        name: position_y
+        values:  2.2 3.7 3.5 3.2 2.3
+    component_2:
+        name: position_z
+        values:  3.3 3.7 3.5 3.2 4.3
+    component_3:
+        name: particle_id
+        values: 121 122 123 124 125
+    component_4:
+        name: mass
+        values: 1 2 3 4 5
+    component_5:
+        name: charge
+        values: 1.1 1.2 1.3 1.5 1.8
+

@@ -1,0 +1,91 @@
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+**
+*/
+//
+// Author: Ted Sternberg
+// Created: March 19, 2004
+//
+
+#include <cassert>
+
+/** If the value t doesn't exist in the maps, insert it and create a new key
+ *  for it.  Keys start at 0 and each subsequent one is 1 higher.  We never
+ *  re-use keys (even though some of them disappear in RemoveByKey()).
+*/
+template<typename T> int
+SemiSymmetricMap<T>::GetKey( T value )
+{
+    int result(-1);
+    typename std::map<T, int>::iterator iter = m_valueKeyMap.find( value );
+    if( iter == m_valueKeyMap.end() )
+    {
+        m_valueKeyMap.insert( std::make_pair<T,int>( value, m_nextKey ) );
+        m_intKeyMap.insert( std::make_pair<int,T>( m_nextKey, value ) );
+        result = m_nextKey;
+    } else
+    {
+        result = iter->second;
+    }
+    ++m_nextKey;
+    return result;
+}
+
+
+/** If the key k doesn't exist in the maps, that's an error. */
+template<typename T> T
+SemiSymmetricMap<T>::GetValue( int k ) const
+{
+//  std::pair<int, T> * iter = m_intKeyMap.find( k );
+    typename std::map<int, T>::const_iterator iter = m_intKeyMap.find( k );
+    assert( iter != m_intKeyMap.end() );
+    if( iter == m_intKeyMap.end() )
+    {
+        return T();
+    } else
+    {
+        return iter->second;
+    }
+}
+
+
+/* Removes the element corresponding to the indicated key.
+ * Returns 0 on success, 1 on error.
+*/
+template<typename T> int
+SemiSymmetricMap<T>::RemoveByKey( int k )
+{
+    typename std::map<int,T>::iterator iter = m_intKeyMap.find( k );
+    if( iter == m_intKeyMap.end() )
+    {
+        return 1;
+    } else
+    {
+        m_valueKeyMap.erase( GetValue(k) );
+        m_intKeyMap.erase( k );
+        return 0;
+    }
+}

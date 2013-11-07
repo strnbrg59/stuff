@@ -1,0 +1,764 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Visualization</title>
+  </head>
+
+  <body bgcolor="#111111" text="#FFFFFF" link="#AFE3EA" vlink="#D6B5E0"
+    alink="#FFAD00">
+
+<CENTER><FONT SIZE=18> Visualization </FONT></CENTER>
+<HR>
+<TOC></TOC>
+<HR>
+
+<H1> Introduction </H1>
+
+Visualization is the core of ChomboVis.  Pull down the
+Visualization menu (at the top of the ChomboVis window) and you will
+see the various ways in which you can look at your Chombo data.  The
+items in that menu are also the main headings of this page of the
+documentation.
+
+<P> But first, you will want to know a few things about using the
+mouse.  Hold down the left mouse button and move the mouse to rotate
+the view (3D mode only).  Hold down the middle button (or
+shift-left-button if you have no middle button) and move the mouse to
+pan up, down, left and right.  Hold down the right button and move the
+mouse up (down) to zoom out (in).  (If you bring the scene in very
+close, some things may be clipped away.  In this case, pull down the
+"Tools" menu, choose "Camera parameters", and type right into the
+"clipping range" entries.)  On scale widgets, the right mouse button
+lets you move the slider without triggering (possibly expensive)
+callbacks along the way.  Other mouse tricks are covered in connection
+with the databrowser.
+
+<H1> Data selection </H1>
+
+<P>
+<image src="images/data_selection_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+This is about selecting those subsets of the data which you want to visualize.
+
+<H2> Component </H2>
+
+These are the data components (i.e. variables) found in your hdf5
+data.  Only one may be selected at a time.  Of the other visualization
+settings (discussed below), some are component-specific -- when set,
+they apply only to the component currently selected -- while others
+are "global".
+
+<H2> Visible levels </H2>
+
+These are levels in the sense of Chombo, that is levels of grid
+refinement.  Move the sliders to indicate the minimum (coarsest) and
+maximum (finest) levels you would like to see.  The "min=max"
+checkbutton is a convenience that locks the sliders, thus displaying a
+single level.  
+
+<P> If you select more than one level, the visualization of each level
+is displayed simultaneously and independently.  For example, if an
+isosurface is being displayed, where there is both coarse and fine
+data, two surfaces will be shown.
+
+<P> The number and refinement of the levels you choose is the most
+important influence on the computational load ChomboVis imposes on
+your system.
+
+<H2> Ghost cells </H2>
+
+Ghost cells are extra cells placed around the boundary of a box.  The
+"Use ghost cells" checkbutton determines if the visualization methods
+(grids, slices, isosurfaces, etc) all do or do not use ghost cells.
+For finer-grained control, "Use ghost cells" checkbuttons also appear
+on the individual visualization methods' dialogs.
+
+<P> ChomboVis' input hdf5 file may provide ghost cells.  When it does,
+the default behavior is for ChomboVis to use those ghost cells.  When
+the hdf5 file does not provide ghost cells, ChomboVis can generate
+ghost cells (useful for patching the gaps that otherwise appear in
+isosurfaces and isocontours at box boundaries) but the default is not
+to use ghost cells.  ChomboVis generates its ghost cells by copying
+cell values from the adjacent box (going to a coarser box when there
+is no adjacent box on the same level).
+
+<H2> Reslice </H2>
+
+You are in reslice mode if you pressed a reslice button in the Slice
+dialog, or started ChomboVis with the <EM>slice_axis</EM> and
+<EM>axis_position</EM> command-line arguments.
+
+<P> In reslice mode, you will see one more set of data controls.
+These allow you to move your slicing plane to where it is
+perpendicular to the axis labeled "direction", intersecting that axis
+at the indicated position.
+
+
+<H1> Clipping </H1>
+
+<P>
+<image src="images/clipping_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+From this dialog you can define a plane that separates rendered and
+unrendered regions of isosurfaces and 3D embedded boundaries (when the
+"Clipping" checkbutton of those respective dialogs is activated).
+
+<P> The plane is defined by a <EM>position</EM> along a
+<EM>direction</EM>, and then by two rotations.  <EM>Altitude</EM> and
+<EM>azimuth</EM> refer, respectively, to the number of degrees rotated
+around the horizontal axis and vertical axes (when the
+<EM>direction</EM> axis points out of your monitor).
+
+<P> The <EM>Inside-out</EM> checkbutton exchanges the rendered and
+unrendered zones.
+
+<P> Clipping is available only in 3D mode.
+
+
+<H1> Colormap </H1>
+
+<P>
+<image src="images/colormap_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+A colormap is a correspondence between data values and colors.  You
+may specify a colormap and then ChomboVis uses it to color-code your
+slices, isosurfaces/isocontours and embedded boundaries (see below).
+ChomboVis ships with several colormap files.  You may choose one of
+those or you may supply one of your own.
+
+<H2> Current colormap </H2>
+
+Your choices are a greyscale colormap ("Default greyscale"), a rainbow
+colormap ("Default color"), or some other colormap ("User") that you
+indicate.
+
+<H2> User colormap </H2>
+
+You load a "user" colormap by pressing the "User colormap:"
+button.  ChomboVis keeps track of at most one "user" colormap; if one
+has been loaded, its file name appears in the entry field.  The "user"
+colormap is not activated (i.e. used to color the display) until you
+select the "User" radio button above.
+
+
+<P>"User" colormaps have a very limited format at the moment.  This
+format lets you define a colormap but does not allow much other
+flexibility.  We hope to improve on this in the future.
+
+<P>The colormap file must begin with the line "RGBA", "rgba", "HSVA",
+or "hsva".  An RGBA or rgba file should contain 256 lines, each one
+supplying a red, green, blue, and alpha (opacity) value for the
+colormap.  An HSVA or hsva file should contain 256 lines indicating
+hue, saturation, value, and alpha.
+
+<P>Data values are mapped to colors as follows.  All data values less
+than or equal to the colormap minimum are mapped to the first color
+entry, all data values greater than or equal to the colormap maximum
+are mapped to the last color entry, and all values in between are
+linearly mapped to one of the intermediate color entries.
+
+<H2> Show color legend </H2>
+
+By default, ChomboVis renders a colored bar that shows the
+correspondence between colors and numerical values.  The colors come
+from the loaded colormap, and the top and bottom of the bar are
+determined by the colormap min and max (see below).  This checkbutton
+lets you toggle the color legend on and off.
+
+<H2> Black outliers </H2>
+
+A cell whose value lies outside the colormap range is, by default,
+colored black.  (Initially, no cells are black, as the default
+colormap range is the same as the component's entire visible range.
+Cells go black if you narrow the range.)
+
+<P> It is possible to arrange for outliers to be colored something
+other than black.  See the <TT>setOutlierColors</TT> function in the
+API.
+
+<H2> Colormap min and max </H2>
+
+Min is the data value which is mapped to the first color in the
+current colormap.  Max corresponds to the last color.
+
+<P> These controls are initially set to the data minimum and maximum
+values (globally, that is, over all levels of refinement).  The user
+can slide them around within those ranges.  Moving the colormap range
+is a nice way to focus in on fine gradations within a subset of your
+data's full range.
+
+<P> Occasionally, it is useful to set the min and max outside the
+data's range, for example if you are coloring one component's
+isosurface with another component's values.  You can broaden the
+colormap range with the "Colormap min" or "Colormap max" widgets in
+entry mode (but not in scale mode); press the button to switch between
+entry and scale mode.
+
+
+<H2>Background color</H2>
+
+This sets the background color (which is initially black).  You can
+click your mouse over a point on the color wheel, or type the (r,g,b)
+coordinates in the entry fields.
+
+<P> Background color is of course not really about color mapping, but
+this was the least bad place to put it.
+
+
+<H1> Grid detail </H1>
+
+<P>
+<image src="images/grid_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+Boxes at various levels of detail help you navigate around your data.
+
+<H2> Show </H2>
+
+In increasing order of clutter, you can display: nothing; wireframe
+outlines of all the visible boxes; the cell boundaries on the faces of
+the bounding boxes; or all the cell edges ("All cells").  "All cells"
+in 3D mode looks quite cluttered indeed, but you can zoom in with the
+right mouse button, or clip.
+
+<P> Independently of bounding-boxes/face-cells/all-cells, you can also show:
+<UL>
+
+<LI> a box around your problem domain;
+
+<LI> the intersection of the cell boundaries and the slicing planes
+("Slice cells");
+
+<LI> tick marks -- graduations showing position in world coordinates;
+
+<LI> solid boxes -- like "bounding boxes" above, but shaded in rather
+than as wireframes.  Scale widgets offer control over solid box
+opacity and a logarithmic shrinkage factor.
+
+</UL>
+
+<P> The slice cells feature is a bit kludgy; the grid lines aren't
+drawn right on the plane itself, but at a small distance to either
+side of it.  If you zoom in, this kludge will become all too
+visible. To improve appearances, use the "Slice cells offset" slider
+(pull down Visualization/Slices) to reduce the distance.  Conversely,
+if you zoom way out, you may notice annoying interference effects: in
+this case, increase the "slice cells offset".  (The "Box shrinkage"
+slider serves an analogous purpose.)
+
+<P> On 2D datasets you don't see the "Face cells" or "Slice cells"
+options as they would be redundant with "All cells".  There's no
+"solid boxes" option either, in 2D.
+
+<H2> Color </H2>
+
+Grids and solid boxes can be colored in various ways.  A click in the
+colorwheel will set the color of every grid line, tick mark and solid
+box.  Unless, that is, you have activated one of the two "Shade...by
+level" checkbuttons.  With either of those activated, box outlines (or
+solid boxes) are color-coded by the AMR level they belong to.  We hope
+you like the colors we've picked, but if not, you can exert total control
+from the <A HREF="API.html">grid</A> API.
+
+<H1> Slices </H1>
+
+<P>
+<image src="images/slice_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+On a 2D dataset all you can do is turn the slice on or off,
+i.e. render it or not render it.  
+
+<P> On a 3D dataset, you can slice through your data with three planes
+-- x constant, y constant, and z constant.  You can move the planes,
+anywhere within the data's domain.  You can make the planes invisible
+(they are all visible by default unless you type slices_off=1 on the
+command line).  And you can launch a new ChomboVis process to view a
+2D slice perpendicular to any axis at the current position of the
+slice.
+
+<P> The slices are colored according to the currently selected colormap.
+
+<P> When viewing more than one level of 3D data, the slices show the
+highest-level data at points where your dataset provides more than one
+level of data.  If you want to see all the levels of data, then move
+the "Offset between levels:" slider.
+
+<P> Slices are visible only where there is data on the selected
+levels. The rest of the slice's plane is completely transparent.
+
+
+<H1> Isosurfaces and isocontours </H1>
+
+<P>
+<image src="images/iso_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+It's isosurfaces for 3D datasets, isocontours for 2D.  Either way, the
+controls are the same.  By default, isosurfaces/contours are not
+displayed.  To see them, you need to click the "Make isosurfaces
+visible" checkbutton.
+
+<H2> Clip </H2>
+
+When activated, the "Clipping" checkbutton causes that part of the
+isosurface on one side of the clipping plane to not be rendered.
+
+<P> However, if you have activated the "Blank covered cells"
+checkbutton on the embedded boundaries dialog, "clipping" here comes
+to mean something else.  Your isocontour/surface, rather than being
+clipped against a plane, is clipped against the embedded boundary
+<EM>provided</EM> that under "Shading" you select the component that,
+in the embedded boundary dialog, you selected as your levelset.
+
+
+<H2> Use ghost cells </H2>
+
+Without ghost cells, the isosurfaces or isocontours of cell-centered
+data will show one-cell-wide gaps at the box boundaries.  Check this
+button to generate ghost cells or, if available, use the ghost cell
+data in your hdf5 file.  For more information, see the "Ghost cells"
+section under "Data selection" above.
+
+<H2> Num, Min and Max </H2>
+
+<P> "Num" is the number of isosurfaces/contours to display.  You see
+that number of isosurfaces/contours, with that number of isovalues
+distributed uniformly between the values indicated in the "Min" and
+"Max" widgets.  By default, in 3D you start with a single isosurface
+at the midpoint of the range, while in 2D you start with ten
+isocontours spread over the full range of the data.
+
+<P> By default, "Min" and "Max" are constrained by the range of the
+data.  Further constraining occurs if you narrow the colormap range
+<EM>and</EM> you have checked the "cmap constrains range" button just
+below: the minimum isovalue is not allowed to fall below the component
+value that maps to the top of the colormap, and analogously for the
+maximum isovalue.
+
+<P> By default, the "Min" and "Max" sliders can be moved
+independently.  If, however, you check the "range lock" button, then
+moving the "Min" slider drags the "Max" slider along, maintaining
+their current separation.
+
+<P> Your choices of "Num", "Min" and "Max" are specific to the
+currently selected component (see the "Data selection" control, above).
+If you switch components, "Num", "Min" and "Max" reset themselves to
+whatever you set them to last time you viewed that component (or to the
+defaults if this is the first time you have viewed that component).
+
+<H2> Shading </H2>
+
+You can color isocontours and surfaces with a constant color
+(selectable from the color wheel), or color them according to the
+value of a particular component, which you select from the list.
+
+<P> The choice "[self]" means you want to color by whatever the global
+component is (that's the component whose isocontour/surface you are
+looking at), and follow along if that changes.  In this mode, the
+entire isocontour/surface will, of course, be of a single color.  In
+2D, that's not so useful, as the isocontours will be almost invisible
+against the slice in the background.
+
+<P> Selecting a component other than the global one results in an
+isocontour/surface that is, in general, colored in various shades.
+However, if the range of values in the global component and the
+shading component are disjoint, then the isocontour/surface will be
+all red or blue (representing the ends of the colormapping range).  To
+obtain a more interesting color scheme, pull down
+Visualization-->ColorMap and adjust the colormap range.
+
+<H1> Streamlines </H1>
+
+<P>
+<image src="images/streamline_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+Streamlines are the paths that massless particles would take through a
+vector field.
+
+<H2> Computation options </H2>
+
+The default choices from "Algorithm" through "Integration directions"
+are probably appropriate for most users.  Points in the field get
+displayed if at least one of its (two or three) vector components
+exceeds what is entered next to "Field threshold".  "Relative
+stepsize" is the ratio of the integration step length taken, to the
+local cell spacing.  "Max points" is the maximum number of points that
+will be generated during numerical integration (and should not be
+confused with the number of seed points below).  You can choose to
+integrate forward, backward, or in both directions through the vector
+field starting at the seed points (see below).  If you want to
+integrate in neither direction, then just choose "Nothin" under
+"Algorithm", above.
+
+<H2> Vector components </H2>
+
+Under "Vector components", choose the two (or three) components you
+want to define your vector field.  You need to choose distinct
+components or you will not see any streamlines.  By default, the
+selected components are the first, second and (if necessary and
+available) third on your list.
+
+
+<H2> Max level </H2>
+
+This is the highest level of refinement which will be used when
+computing streamlines (i.e., integrating the vector field).  As the
+streamlines are computed, the highest resolution data not exceeding
+the "Max level" is used to perform the numerical integration of the
+vector field.
+
+
+<H2> New seed points </H2>
+
+Press this button and another window pops up.  It gives you control
+over the positions and number of seed points (these being the points
+from which your integration begins).  Initially, your seeds are lined
+up on one edge of your domain.  Often, you will not see anything
+interesting unless you move your seed points away from there.  The
+"x", "y" and "z" sliders translate your seeds.  "phi" rotates them in
+the x-y plane, while "rho" rotates them in the x-z plane.  Whatever
+you choose for x, y, z, phi or rho, your points will extend,
+equally-spaced, across your entire domain.  The "length" slider sets
+the length of the rake as a fraction of the domain's longest diagonal.
+
+<H2> Shading </H2>
+
+The default is white.  Click in the colorwheel to pick another color.
+Unlike isocontours, we do not (yet) offer value-coded coloring on
+streamlines.
+
+<H2> Caveats </H2>
+
+<P> Streamlines do not converge at second order, as they should for
+decreasing step size.  (Our ghost cell calculation is wrong.)
+
+<P> You will see no streamlines unless you select as many distinct
+vector components as the number of spatial dimensions in your data
+(i.e. two or three).
+
+<H1> Volume rendering </H1>
+
+<P>
+<image src="images/volume_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+Our volume rendering is still quite crude, and its usefulness, such as
+it is, starts and stops with single-level datasets because the opacity
+algorithm begins integrating anew at every box boundary.  Even with a
+single box, it has not been verified against renderings known to be
+accurate.  In addition, it may interact with other features of
+ChomboVis (e.g., slices, isosurfaces) in unusual ways because volume
+rendering is being mixed with geometry (often, to get this right
+everything needs to be generated in by volume rendering/ray casting).
+
+<P> You have control, independent of the global settings (the "Data
+selection" dialog), over the component and min/max levels.
+
+<P> "Transfer points" let you specify a function, pointwise, that
+defines the opacity of the rendered volume.  By default, this function
+has three points, but you can make room for more points by hitting the
+"Enter" (or "Return") key when your cursor is inside the
+lower-right-hand entry.  Legal values are 0-255 in the left column,
+0.0-1.0 on the right.  Press the "Read transfer" button to see the
+effect of new numbers.
+
+<P> To get the full benefit of volume rendering it is necessary to
+carefully set up your "Transfer points" to emphasize the data range(s)
+you are interested in.  This can be done by setting the opacity near
+1.0 in data ranges of interest and near 0.0 away from these ranges.
+Currently, it is possible to specify the opacity, but not the colors,
+of the volume rendering.  For now, we use a greyscale.
+
+
+<H1> Embedded boundaries </H1>
+
+We render embedded boundaries in 2D and 3D.  Within that world,
+ChomboVis version 4.7 represented a watershed of sorts.
+
+<P> Before ChomboVis 4.7, embedded boundaries were defined by a set of
+four (or, in 3D, five) special components named "fraction-n",
+"distance-n", "xnormal-n", "ynormal-n" and (in 3D) "znormal-n", where
+n was a nonnegative integer that identified the embedded boundary (in
+the event there was more than one).
+
+<P>
+Since release 4.7, while continuing to support hdf5 files conforming
+to the old system, we offer a new way of handling embedded boundaries.
+In the new way, the embedded boundary is defined by some isovalue
+(typically zero) of some component, which we will refer to from here
+on as the "levelset".  The new way offers several advantages: (1)
+blanking of covered cells is at the sub-cellular level; (2) we can
+blank covered cells without, as previously, rendering the colormap
+controls useless; (3) we clip away, in the covered regions, not just
+slices but also isocontours or (in 3D) isosurfaces.
+
+<P> The graphical interface is different, depending on which method
+you are going to use.  If your file has a "fraction-0" component,
+ChomboVis assumes you want to do embedded boundaries by the old
+method.  If that assumption is incorrect, then put "iso_eb=1" on your
+command line.  Below, the old interface can be seen on the left, the
+new one on the right.
+
+<P>
+<image src="images/eb_dialog.gif" ALIGN="left" HSPACE=20>
+<image src="images/iso_eb_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+We will discuss the interfaces in turn.
+
+<H2> Old interface </H2>
+
+<H3> Boundaries </H3>
+This refers to the different embedded boundaries in your
+data; you can display any subset of them.
+
+
+<H3> Clip </H3>
+When activated, this checkbutton causes that part of a 3D embedded
+boundary on one side of the clipping plane to not be rendered.  You
+position the clipping plane from the clipping dialog (which, like
+embedded boundaries, is also under the Visualization menu).
+
+<H3> Capping </H3>
+
+In 3D, it takes some extra action to avoid large, unsightly, gaps
+between the polygons that make up the embedded boundary.  Capping is
+that action, and it's best to leave it on (which is its default).
+
+<H3> Blank covered cells </H3>
+
+Activate this button and your slices will not show the covered cells.
+We are thus clipping along the embedded boundary, at cell granularity.
+
+<P> The implementation of this is somewhat of a hack, a fact that
+becomes clear if you try to narrow the colormap range.  Bring down the
+top of the colormap range and cells above that value turn black.  Pull
+up the bottom of the colormap range and cells below that value
+disappear.  The blank-covered-cells feature was implemented by
+creating an auxiliary component (you can see it at the end of the
+component list -- it's called "__blank") that is the same as the
+current component except the values of all the covered cells have been
+moved just a hair below the bottom end of the component's range.
+Having done that, we turn on the "black outlier" feature (that's a
+checkbutton on the colormap dialog) except that, for the lower end of
+the range, instead of black we use the color (r,g,b,alpha)=(0,0,0,0).
+
+<P> The workaround is to go to the colormap dialog and deactivate the
+"Black outliers" checkbutton.  Now your covered cells will appear
+solid red (or whatever represents the low end of whatever colormap
+file you are using).  Now you can slide the colormap range scales this
+way and that.  To obtain a presentation-quality picture, i.e. one
+where you have set the colormap range to your liking <EM>and</EM> the
+covered cells are invisible, you will need to turn to GIMP or
+PhotoShop or another similar program.
+
+<H3> Normal direction </H3>
+
+This is included for compatibility with older datasets produced when
+a certain Chombo convention was the reverse of what it is now.
+
+<H3> Shading </H3>
+
+"By value means" your embedded boundaries are colored according to the
+current colormap, to reflect the values.  "Constant" shading means
+white by default, or whatever you choose from the colorwheel.
+
+<H3> Opacity </H3>
+
+1.0 is totally opaque, 0.0 is invisible.
+
+<H2> New interface </H2>
+
+<H3> Use ghost cells </H3>
+
+For cell-centered data, this fills in the gaps where the embedded
+boundary crosses box boundaries.  See above under "Data selection" for
+more about where we get our ghost cells.
+
+<H3> Levelset </H3>
+
+The embedded boundary is defined as an isocontour/surface of the
+component you select here.  The isovalue you select with the "Clipping
+isovalue" widget below.
+
+<H3> Blank covered cells </H3>
+
+Activate this button and your slices are clipped away at the embedded
+boundary; the portions over the covered cells are not rendered.  In 2D
+this clipping is exact.  In 3D it is close but not exact.
+
+<P> You can, optionally, also clip your isocontours/surfaces against
+the embedded boundary.  For instructions on that, please see the
+"Isosurfaces and isocontours" section on this page.
+
+<H3> Clipping isovalue </H3>
+
+See under "Levelset", a couple inches up from here.
+
+<H3> Show fluid 2 </H3>
+
+Select a component for ChomboVis to render in the covered region that
+"blank covered cells" caused not to be rendered.  "Fluid 2" is
+rendered, or not, depending on whether its checkbutton has been
+activated.
+
+<P> This may be getting confusing.  We have three components in play
+at this point.  There is the component selected in the "Data
+selection" dialog: that is the component used to color slices in the
+regular region.  Next there is the component selected as your
+levelset: that defines the embedded boundary.  The third component is
+your "fluid 2"; that's what we render over the covered region.
+
+<H3> Shading, opacity and constant color </H3>
+
+These have the same meanings, and work the same, as in the old interface.
+
+
+<H2> A note concerning the databrowser </H2> The <A
+HREF="Data_browser.html">databrowser</A> offers some embedded
+boundary-specific features; it will, selectively, display or not
+display covered cells, regular cells, or irregular cells.  It will
+also, optionally, shade irregular cells.  For details, please go to <A
+HREF="Data_browser.html">that</A> section of the documentation.
+
+
+<H1> Particles </H1>
+
+ChomboVis datasets may, optionally, supply data on particles.  A
+particle is a point in a space of any number of dimensions.  To follow
+along, start ChomboVis with data/particles3d.hdf5 for its input.
+Under the <EM>Visualization</EM> menu, select <EM>Particles</EM> and a
+window should pop up.  We will now describe the particle visualization
+features made available by that window.
+
+<H2> Particle markers </H2>
+
+<P>
+<image src="images/particles_dialog.gif" ALIGN="right" HSPACE=20>
+<P>
+
+<EM>Nothing</EM> means particles are not shown at all.
+
+<P> <EM>Points</EM> means particles are shown as flat little squares
+that face right at you and cover the same number of pixels no matter
+how you orient or zoom the render window.
+
+<P> <EM>Circles</EM> means particles are shown as (2D) circles.
+
+<P> <EM>Spheres</EM> and <EM>cones</EM>, unlike <EM>points</EM> have a
+definite size and shape to them.  <EM>Cones</EM> have an orientation
+too: see below, under "orientational components".
+
+<P> Beware the <EM>spheres</EM> and <EM>cones</EM> options take
+thousands of times more CPU cycles (and a good deal more memory) than
+the <EM>points</EM> option.
+
+<H2> Marker size factor </H2>
+
+If the default range on this slider does not meet your needs, press
+the button and (just like all other sliders in ChomboVis) you can type
+a number of your choice.
+
+<H2> Marker scaling/coloring </H2>
+
+<H2> Component </H2>
+
+Particle markers can be sized and colored to reflect the values of the
+particle component of your choice.  Press the checkbutton to see a
+list of all the particle components.  Press it again to hide the list.
+(There are other such component lists in this dialog, and they all
+have this show/hide checkbutton.)
+
+<H2> Coloring/scaling options </H2>
+
+Markers can be color-coded or not, and scaled or not.
+
+<H4> Constant color, no scale </H4>
+
+The markers are all drawn to the same size, and colored per the color
+wheel.
+
+<H4> Color by component value </H4>
+
+Markers are all the same size, but their color reflects the value of
+the selected component.  The <EM>colormap</EM> dialog (under the
+<EM>Visualization</EM> menu) has no effect here; so far, we offer only
+one colormap -- the one that, in the colormap dialog, you can select
+by checking "Default color".
+
+<P> The colormap range min and max that you set in that dialog do not
+have any effect on particle coloring.  Hence if your particles
+component and field data component are, in some sense, the same and
+you want to color them consistently, then select "Default color" and
+set the colormap min and max to the particle's range (which you can
+determine by pulling down the "Tools" menu and selecting "Data
+summary").
+
+
+<H4> Color and scale by component value </H4>
+
+Marker colors <EM>and</EM> size reflect the value of the selected
+component.  Using both color and size to indicate the same thing is
+not terribly useful.  It would be much more useful if color could
+represent one component and size another.  Unfortunately, we do not
+know how to make VTK do that, yet.
+
+<H2> Filtering </H2>
+
+If you do not want to display all your particles, there are several
+ways to define a subset of them.  You can display particles whose
+values, along a component of your choosing (press the checkbutton to
+see the list), fall within a range (controllable with the <EM>Min</EM>
+and <EM>Max</EM> scales.  You can also restrict rendering to just
+every n-th particle: use the <EM>log decimation factor</EM> slider to
+select log10(n).
+
+<P> By default, the filtering ranges are set to plus and minus a very
+large number -- the equivalent of having filtering disabled.  Touch
+the min or max scale buttons, though, and the respective end of the
+range becomes the bottom or top of the actual range of values for the
+selected component.
+
+<H2> Log decimation factor </H2>
+
+If n is the total number of particles and d is the value on the "log
+decimation scale", then ChomboVis will display not all the particles
+but only every 10 to the d-th particle.
+
+<H2> Offset filtering </H2>
+
+You can shift subsets of the particles right and left along the x
+direction.
+
+<H2> Positional components </H2>
+
+You can select any two (or, for 3D datasets, 3) of the particle
+components for ChomboVis to interpret as the particles' spatial
+coordinates.  If your dataset contains particle components named
+<TT>position_x</TT>, <TT>position_y</TT> and <TT>position_z</TT>,
+ChomboVis chooses those for the default.  Otherwise it chooses the
+first two (or three) particle components listed in your hdf5 file.
+
+<H2> Orientational components </H2>
+
+Use these two (or, for 3D data, three) lists to determine the
+direction in which to points your cones (when you select that for your
+particle marker).
+
+<H2> Picking </H2>
+
+Using the mouse, you can pick an individual particle and obtain
+information about it.  For more details, see the <A
+HREF="Data_browser.html"> data browser</A> page.
+
+</P>
+    <hr>
+    <address><a href="mailto:chombovis@davis.lbl.gov">ChomboVis Development Team</a></address>
+  </body>
+</html>
+

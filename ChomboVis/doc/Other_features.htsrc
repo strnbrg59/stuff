@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Other features</title>
+  </head>
+
+  <body bgcolor="#111111" text="#FFFFFF" link="#AFE3EA" vlink="#D6B5E0"
+    alink="#FFAD00">
+
+<CENTER><FONT SIZE=18> Other features </FONT></CENTER>
+<HR>
+<TOC></TOC>
+<HR>
+
+<H1> Persistence (saving and reloading state) </H1>
+
+Under the "File" menu, select "Save state".  This brings up a dialog
+that lets you select a file into which ChomboVis will save its current
+state.  The file name you select will have a ".state" extension.
+
+<P> "Restore state" (again under the "File" menu) brings up a dialog
+from which you can select previously saved states (one state, one
+file).  Double click on the file name, or click once on the file name
+and then again on "Open", and ChomboVis will attempt to restore that
+state.  It is up to you, however, to make sure that state is
+meaningful for the currently-loaded hdf5 file.  The operation will
+fail if, say, the stored state was that of a dataset with a variable
+"foo", and your currently loaded dataset has no such variable.  It's a
+good idea to give your state files descriptive names that include the
+name of the associated dataset.
+
+<P> Everything about the saved state's VTK render window, and
+everything about the Visualization GUI controls, options menu and Data
+browser launcher window, should be restored exactly.  Some things,
+however, we do not attempt to restore: these include open Data browser
+windows, pink and green and dark red highlights around selected grids,
+and the positions, on your desktop, where you left the various GUI
+controls.
+
+
+<H1> <TT>.chombovisrc,</TT> your personal configuration </H1>
+
+At startup, ChomboVis looks for a file called <TT>.chombovisrc</TT>.
+It looks first in the home directory, then in the current working
+directory, and finally in the ChomboVis home directory.  If a
+<TT>.chombovisrc</TT> is found, then it is handed to Python for
+execution as a script.  Try, for example, copying
+<TT>examples/undo.py</TT> to <TT>~/.chombovisrc.</TT> Useful
+<TT>.chombovisrc</TT> files will typically make some calls to the
+ChomboVis API.  To learn about the ChomboVis API go <A
+HREF="API.html">here.</A>
+
+<P> ChomboVis executes your <TT>.chombovisrc</TT> before acting on the
+<TT>state_file</TT> and <TT>user_script</TT> command-line arguments.
+
+<P> To suppress execution of <TT>.chombovisrc</TT>, put
+<TT>ignore_rc=1</TT> on your command line.
+
+
+<H1> <TT>ascii2hdf5</TT> </H1>
+
+In libexec/ChomboVis (under the ChomboVis install tree), you will
+find a script ascii2hdf5.sh.  ascii2hdf5.sh will convert a file like
+examples/chomboascii.dat into the hdf5 format ChomboVis requires.  You
+do not need ascii2hdf5.sh if you use Chombo, as Chombo's output format
+is ChomboVis' input format.  ascii2hdf5.sh is useful if you do not use
+Chombo or you would like to just "test-drive" ChomboVis on some of
+your own data.
+
+<P> ascii2hdf5.sh reads from standard input.  Thus, to produce an hdf5
+version of our example file <TT>examples/chomboascii.dat,</TT> type
+
+<P>
+<PRE>
+    cat examples/chomboascii.dat | ascii2hdf5.sh outfile=test.hdf5
+</PRE>
+<P>
+
+<P>
+You may now view your data by typing "chombovis test.hdf5".
+
+<P> The data format accepted by ascii2hdf5.sh can be found <A
+HREF="File_format.html">here.</A>
+
+
+<H1> Hardcopy </H1>
+
+Under the "File" menu, select "Save image" and a dialog pops up.
+Here, you can select a file in which to save your currently rendered
+image.  You have a great many different formats to choose from.
+
+<P> If you choose eps (encapsulated Postcript), there are a few
+caveats to observe.
+<UL>
+<LI> You need to start chombovis with "texture=0" on the command line,
+e.g.  "% chombovis texture=0 vortex.hdf5".
+<LI> The output isn't very good at capturing light-dark shading, and
+completely unable to deal with partially transparent objects.
+<LI> The bottom line, clearly, is that Postscript output is best used for
+2D scenes.
+<LI> Previewing your output in, say, ghostview, you will see unsightly
+diagonal streaks.  Fortunately, these will not show up on your paper
+output.
+</UL>
+
+<P> "Magnification factor" refers to the length of a side, relative to
+its apparent size on your monitor.  You can go up to 10 (i.e. 100
+times by area) which produces large images and huge files.  If you
+need to go beyond a factor of 10 (for example, to generate rooftop
+murals visible from outer space), you can edit
+src_py/control_print.py: search for "from_ = 1, to = 10" to find the
+appropriate spot.  "Magnification factor" is relevant only for the
+ppm, bmp and tiff output formats.
+
+<P> When saving to ppm, bmp or tiff format, anything on top of your
+VTK render window gets included in your saved image.  In particular,
+this means you probably want to move the "Save image" dialog away
+before pressing its "OK" button.
+
+
+<H1> Off-screen rendering </H1>
+
+Off-screen rendering is back, as of ChomboVis 4.5.0.  See <A
+HREF="Command_line.html">here</A> for details.
+
+<H1> Anisotropic scaling </H1>
+
+ChomboVis looks for anisotropic scaling information in the hdf5 file
+-- see above under "ascii2hdf5" for the correct format.  If this
+information is absent from the hdf5 file, then all cells are assumed
+to be cubes.  To change that at runtime start ChomboVis with
+<TT>-i</TT> on the command line (the <TT>-i</TT> leaves you at a
+Python prompt).  And then type
+
+<P>
+<PRE>
+&gt&gt&gt c.reader.setAnisotropicFactors( <EM>x,y,z</EM> )
+</PRE>
+<P>
+substituting numbers of your choice for <TT><EM>x,y,z</EM></TT>.
+
+
+<H1> Loading new data files </H1>
+
+Under the "File" menu, "Load hdf5" loads a new data file into the same
+window you have been using.  The new file need not be related to the
+old one, except that they should be of the same dimensionality (i.e. 2
+or 3).  If, however, the new file is like the old one, you may choose
+the next option, "Load hdf5, preserving state".  This will load your
+new file into the same state (current component, currently visible
+levels, isosurface visible or not, etc) your old dataset was in.  The
+new file should have the same data components and though the number of
+levels need not be the same, the new file must have those levels that
+were visible in the old file.
+
+<H2> Caveat </H2>
+
+We have an unresolved memory leak problem here.  The leakage seems to
+be about 2.5 megabytes, regardless of the size of the hdf5 file.  For
+this reason, our movie-making utility (examples/movie.py) will, for
+the time being, rely on starting a new ChomboVis process for every
+frame.
+
+<H1> Saving to hdf5 </H1>
+
+Under the "File" menu, "Save to hdf5" saves the current dataset --
+including modifications you may have made to it, e.g. new components
+or modified data -- to an hdf5 file.  If you are in reslice mode,
+"Save to hdf5" will save a 2D dataset comprising the currently
+displayed slice.  The sliced dataset will not, however, include any
+particle data.
+
+<H1> Metamorphosing slider widgets </H1>
+
+You will see this sort of widget many times in ChomboVis.
+
+<P>
+<image src="images/slider1.gif">
+<P>
+
+A single mouse click to either side of this slider moves it left or
+right by 0.01.
+
+<H2> Slewing </H2>
+
+You can drag the slider with your left mouse button.  Occasionally, it
+will drag slowly, or hardly at all: this is when the rerendering
+operation, that normally happens at every step of the way, is
+expensive.  In these cases, a useful trick to know is that if you drag
+with your <EM>right</EM> mouse button, then no rerendering happens
+until you release the button.  This is called <EM>slewing.</EM>
+
+<H2> Typing </H2>
+
+If you click on the label (here, "Max"), the widget changes its
+appearance.  Instead of a slider you have an entry that you can type
+into.
+
+<P>
+<image src="images/slider2.gif">
+<P>
+
+This is useful if you have a specific number in mind, and it's
+difficult to drag or slew the slider over precisely there.  Should you
+type a number with many significant digits...
+
+<P>
+<image src="images/slider3.gif">
+<P>
+
+...hit Return and click again on the label,
+
+<P>
+<image src="images/slider4.gif">
+<P>
+
+you are back to the slider mode, but at a finer resolution.  Just
+don't forget to hit the return key.
+
+<H2> Resolution </H2>
+
+As mentioned above, the resolution adjusts to accomodate what you type
+in the entry.  But there is a more direct way to control the
+resolution.  Hold down the shift button and, with your mouse over the
+label button, press the left mouse button.  This is what you see:
+
+<P>
+<image src="images/slider5.gif">
+<P>
+
+Type another number (it has to be a power of 10) to change the
+resolution.  Another shift-button1 closes the resolution entry.
+
+<H2> Persistence </H2>
+
+Some people prefer sliders, others like to type, yet others prefer
+sliders in some places and entries elsewhere.  You can arrange for
+ChomboVis to come up with exactly your preferred combination of
+sliders and entries.  Just follow these steps:
+
+<UL>
+
+<LI> Start ChomboVis on any dataset whatsoever.
+
+<LI> Use the GUI to turn sliders into entries, wherever desired.
+
+<LI> Save the state to a file: pull down the file menu, select "Save
+state".  Remember the file name.
+
+<LI> Let's say the file you saved state to was called
+/home/jdoe/mysliders.state.  Then add this line to your
+~/.chombovisrc file:
+<P>
+<PRE> c.misc.restoreState( '/home/jdoe/mysliders.state', gui_only=1 )</PRE>
+
+</UL>
+
+The "gui_only=1" part limits restoration to GUI-specific features.
+The state of your metamorphosing slider/entry widgets is a
+GUI-specific feature.  So is the condition of your dialog boxes,
+i.e. whether they are open or closed.  Most everything else -- the
+currently displayed component, the parameters of the isocontours, etc
+-- is not considered GUI-specific.  If you didn't say "gui_only=1",
+ChomboVis would try to restore the entire saved state, and that would
+fail if you tried to restore it on a dataset that had, say, different
+component names or levels of refinement.
+
+
+<H1> Options menu </H1>
+
+<H2> Autorender </H2>
+
+By default, almost everything you do in ChomboVis causes the display
+to re-render itself.  Sometimes, this is expensive.  If it becomes
+annoyingly expensive for you, then uncheck the "autorender" button.
+How you will get a re-render only when you click your mouse inside the
+VTK render window.
+
+<P> Usually, the real reason behind slow performance is not rendering
+per se so much as the vtkUpdate operation, which most slider widgets
+trigger all along the way as you move them around -- moving slices,
+changing isosurface min/max settings, selecting different refinement
+levels in the "Data selection" control, etc.  You can speed all these
+slider operations by moving sliders with your right mouse button; this
+suppresses the callbacks that otherwise occur at every point along the
+slider's motion.
+
+<H2> Set debug level </H2>
+
+This is of interest if you want to hack on the ChomboVis source code.
+But debug level 5 may be entertaining for anyone, as it produces a
+trace of all the Python functions ChomboVis enters.  Beware that debug
+levels greater than 2 impose a performance penalty.
+
+<H2> Close, reopen and flash dialogs </H2>
+
+If you have more than one ChomboVis running, it is easy to get
+confused about which dialogs (windows) belong to which ChomboVis.  The
+"Close dialogs" option closes all the dialogs (of one ChomboVis).
+"Reopen dialogs" reopens the dialogs that were open the last time you
+selected "Close dialogs" (and thus after two consecutive presses of
+"Close", "Reopen" will not reopen anything).  "Flash dialogs" briefly
+closes all dialogs, then reopens them.
+
+<H2> Activate alpha features </H2>
+
+Volume and embedded boundary rendering are considered alpha stage.  By
+default, they are not available.  But checking this button makes them
+available (in the Visualization pull-down menu).
+
+<H1> Tools menu </H1>
+
+<H2> Data browsers </H2>
+
+See under <A HREF="Data_browser.html">here.</A>
+
+<H2> Data summary </H2>
+
+This pops up a dialog with (text) information about the number of
+levels (including number of boxes and cells per level); the dimensions
+of the problem domain; the ranges of the data components.
+
+<H2> Camera parameters </H2>
+
+This is of interest mostly if you want to write a script to position
+the display just so.  Please see the documentation on scripting.
+
+
+<H2> Annotation </H2>
+
+You can place any number of captions, wherever you like and in your
+choice of color, font, size, etc, on the image.  The widgets for these
+are self-explanatory.  What requires more explanation, however, are
+the radio buttons we call "static2d", "dynamic2d" and "dynamic3d".
+
+<P> Static2d captions are, in VTK terms, rendered in an overlay plane.
+This means, among other things, that the captions do not move around
+when you rotate, pan or zoom the rest of the scene.  Such captions are
+therefore ideal for making a nice title for your picture.
+
+<P> Dynamic2d captions look like static2d captions, until you use the
+mouse to move the camera around.  The captions will be seen to move
+with the scene.
+
+<P> Dynamic3d captions also move with the scene, but the letters
+themselves have a three-dimensional quality to them.  These captions,
+unlike the other kinds, come in only one font and face.
+
+<P> When positioning captions, note that the coordinate system for
+static2d captions is in fractions of the distance across and down the
+display, while the coordinate system for dynamic2d and dynamic3d
+captions is in "world" coordinates (the "physical" coordinates of your
+domain box -- the same ones used by the slicing planes).
+
+<P> In one respect, our annotation feature does not interact well with
+the feature (see under "File"-->"Save image") that saves a ppm picture
+of your scene: if you set the magnification factor to something other
+than 1, static2d and dynamic2d captions will appear multiple times.
+However, dynamic3d captions will appear, as one would hope, just once.
+So if you need a big picture, either stretch the window to fill your
+desktop, or use only dynamic3d captions.
+
+
+<H1> Customizable widget colors </H1>
+
+This version of ChomboVis is less colorful than version 2.  If you
+don't like basic grey, you can customize the colors of the Tk(inter)
+widgets that ChomboVis uses.  Just edit your ~/.Xdefaults file.  Here
+is an instructive, if esthetically unattractive, example of items you
+can put into your .Xdefaults:
+
+<P><PRE>
+Tk*foreground: red
+Tk*background: white
+Tk*Entry*background: #EEEEEE
+Tk*Radiobutton*background: #333333
+Tk*Scale*background: #00AA00
+Tk*Scale*foreground: #00AA00
+Tk*Label*foreground: #AAAA00
+</PRE>
+<P>
+
+Entry, Radiobutton and Scale are the names of Tk widgets.  Other Tk widgets
+used in ChomboVis are Checkbutton, Frame and Photo.
+
+
+<H1> Master and slave mode </H1>
+
+One ChomboVis can drive another.  Start two ChomboVis processes, and
+under "Options", choose "slave" for one ChomboVis, "master" for the
+other.  Now any rotation, zooming or panning you do in the master's
+window causes the slave to follow along.  All other settings,
+e.g. visible levels, isosurfaces, etc, in the two processes remain
+independent.
+
+
+<H1> Movies </H1>
+
+See examples/movie.py.  It prints examples and documentation if you
+execute it with <TT>-h</TT> on the command line.  (First, though,
+define CHOMBOVIS_HOME in your environment.  CHOMBOVIS_HOME should be
+/usr/local or whatever you put after <TT>--prefix</TT> when you
+invoked the <TT>configure</TT> script.)
+
+<P><P>
+
+<address><a href="mailto:chombovis@davis.lbl.gov">ChomboVis Development Team</a></address>
+  </body>
+</html>

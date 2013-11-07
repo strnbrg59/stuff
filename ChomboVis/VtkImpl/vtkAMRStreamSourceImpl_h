@@ -1,0 +1,174 @@
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+**
+*/
+/* provided as a modification from source material derived from
+   the VTK distribution.  In accordance with VTK software agreement
+   the following also holds:
+=========================================================================
+
+Copyright (c) 1993-2000 Ken Martin, Will Schroeder, Bill Lorensen 
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+ * Neither name of Ken Martin, Will Schroeder, or Bill Lorensen nor the names
+   of any contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+ * Modified source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=========================================================================*/
+// .NAME vtkAMRStreamSource
+// .SECTION Description
+// vtkAMRStreamSource is a vector feild  trace generation class that takes
+//   an AMR data structure represented by a ChomboReader object, and
+//   a set of points that are originating points.
+//
+//  IntegrationMode refers to the manner of discretely advancing a
+//  fiedline along a seed point.  0 fixed steps
+//                                1 fixed steps clipped for vector
+//                                  magnitude change
+//
+//                                2 Richardson extrapolation (3 point)
+//
+// .SECTION See Also
+// vtkPolyDataSource vtkChomboReader vtkPoints
+
+#ifndef __vtkAMRStreamSourceImpl_h
+#define __vtkAMRStreamSourceImpl_h
+
+#include <vtkPolyDataSource.h>
+#include <vtkPoints.h>
+#include "../utils/chomboSetGet.h"
+
+//class vtkPoints;
+class vtkChomboReader;
+
+template<class REAL_T> class vtkAMRStreamSourceImpl : public vtkAMRStreamSource
+{
+public:
+
+    //
+    // Ctors, dtor
+    //
+    vtkAMRStreamSourceImpl( vtkChomboReader * reader );
+    virtual ~vtkAMRStreamSourceImpl();
+
+    //
+    // Overridden VTK methods.
+    //
+    virtual vtkPolyData * GetOutput();
+    void PrintSelf(ostream& os, vtkIndent indent);
+    vtkTypeMacro(vtkAMRStreamSourceImpl,vtkPolyDataSource);
+    virtual unsigned long GetMTime();
+    virtual void Execute();
+    virtual void Modified();
+
+    //
+    // Interface for Python layer (vtk_stream.py).
+    //  
+    ChomboSetObjectMacro(m_chomboReader, ChomboReader, vtkChomboReader);
+
+    void SetUComponent( int b );
+    void SetVComponent( int b );
+    void SetWComponent( int b );
+    void SetMaxLevel( int i);
+
+    ChomboSetMacro(m_maxPointsPerLine,MaxPointsPerLine,int);
+    ChomboSetMacro(m_fieldThreshold,FieldThreshold,double);
+    ChomboSetMacro(m_relativeStepSize,RelativeStepSize,double);
+
+    // Valid value to this are 0, 1 or 2.  FIXME: use an enum.
+    ChomboSetMacro(m_integrationMode,IntegrationMode,int);
+
+    ChomboSetMacro(m_forward,Forward,int); // must be 0 or 1
+    ChomboSetMacro(m_backward,Backward,int); // must be 0 or 1
+
+    // Set points that we would use for seed
+    ChomboSetObjectMacro(m_seedPoints,SeedPoints,vtkPoints);
+
+private:
+    vtkChomboReader* m_chomboReader;
+    vtkPoints*       m_seedPoints;
+    int m_uComponent;
+    int m_vComponent;
+    int m_wComponent;
+    int m_maxLevel;
+    int m_forward;
+    int m_backward;
+    int m_integrationMode;
+    int m_maxPointsPerLine;
+    double m_fieldThreshold;
+    double m_relativeStepSize;
+
+    void BuildFieldLine(double current[3], int dim, int gain, 
+                        vtkPoints* points,
+                        vtkCellArray* lines);
+    int FindEnclosingBox( double const seed[3],
+                          int * level, int * box, double * dx,
+                          double boxExtents[6],
+                          int gdims[], int gorigin[], int nDims );
+    bool SeedIsInsideBox( double const seed[3], double boxExtents[6],
+                          int nDims );
+    void Weight( int * cellIndex,
+                 double * coeff1, double * coeff2,
+                 int axisNum,
+                 double const seed[3],
+                 int const gorigin[3],
+                 int const gdims[3],
+                 double dx );
+
+    void LoadLevel( int );
+    void LoadComponent( int );
+
+
+    // Deliberately unimplemented:
+    vtkAMRStreamSourceImpl(const vtkAMRStreamSourceImpl&);
+    vtkAMRStreamSourceImpl&  operator=(const vtkAMRStreamSourceImpl&);
+};
+
+#endif

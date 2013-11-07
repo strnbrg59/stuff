@@ -1,0 +1,1024 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+  <title> Architecture </title>
+</head>
+
+<body bgcolor="#111111" text="#FFFFFF" link="#AFE3EA" vlink="#D6B5E0"
+alink="#FFAD00">
+
+<CENTER><FONT SIZE=18> Architecture </FONT></CENTER>
+<HR>
+<TOC></TOC>
+<HR>
+
+<H1> Introduction </H1>
+
+This section is about the design and implementation of ChomboVis the
+computer program.  Reading this section will not help you become a
+more proficient ChomboVis user.  It will help you understand how
+ChomboVis works and prepare you to modify or extend it.
+
+<H1> The Big Picture </H1>
+
+<IMG SRC="images/big_picture.gif" ALIGN="right" HSPACE=20>
+
+<H2> Components </H2>
+
+ChomboVis is a program written in Python and C++.  The figure at right
+puts ChomboVis in context.  An arrow indicates that the component at
+the source of the arrow uses the component to which the arrow points.
+
+<P> The yellow components are what we ship as ChomboVis.  The grey
+components are third-party software it is up to the user to obtain:
+see the <A HREF="Installation.html">Installation</A> section for help
+with that.  The pink component at the top -- "user script" -- is
+optional; it can be any Python script that uses the <A
+HREF="API.html">ChomboVis API.</A>
+
+<P> ChomboVis starts executing after the Python interpreter loads all
+these components, some as .py Python scripts, the rest as shared
+object libraries.
+
+<H2> Directory structure </H2>
+
+Here is what you will find when you untar the ChomboVis distribution.
+
+<UL>
+
+<LI> <TT>EBLib:</TT> C++ code for embedded boundary visualization.
+Does not call VTK libraries.  Is called from
+Vtk/ChomboEmbeddedBoundaryFilter.h|cxx.
+
+<LI> <TT>Vtk:</TT> ChomboVis' C++ interface to the Vtk libraries.
+Discussed below under "C++ ChomboVis Component".
+
+<LI> <TT>canonicals:</TT> When we run our automated tests
+(api_test.sh, cmdline_test.sh, digraph_test.sh) we compare their
+output to files in this directory.
+
+<LI> <TT>data:</TT> HDF5 files for testing and demonstrating ChomboVis.
+
+<LI> <TT>doc:</TT> Documentation.
+
+<LI> <TT>examples:</TT> User scripts you can pass on the ChomboVis
+command line, after the user_script option.
+
+<LI> <TT>src_py:</TT> The Python part of the ChomboVis implementation.
+See below under "Python ChomboVis Component".
+
+<LI> <TT>utils:</TT> Miscellaneous C and C++ code.  Does not call VTK
+libraries.
+
+</UL>
+
+<H1> C++ ChomboVis Component </H1>
+
+The "C++ ChomboVis" box above expands out into the following diagram.
+
+<IMG SRC="images/cpp_big_picture.gif" ALIGN="right" HSPACE=20>
+
+The blue components are Vtk extensions, implemented in two of our
+directories, Vtk and VtkImpl.  The pink and yellow components actually
+bear the names of the directories where their code is found.  We'll
+now take on these components one color at a time.
+
+<H2> Vtk Extensions </H2>
+
+The vtkChomboReader is a Vtk source, that is, it can be the head of a
+Vtk visualization and rendering pipeline.  ChomboVis' pipeline
+building takes place in the Python layer.  There, vtkChomboReader's
+output is fed into Vtk filters.  Some of these filters fall into the
+"Other Vtk extensions" category, but most of the filters we use come
+straight from the Vtk distribution.  We show vtkChomboReader and
+"Other Vtk extensions" as separate categories in order to make the
+point that, of all our Vtk-ish code, vtkChomboReader alone knows about
+the data_access layer.
+
+<P> Not everything in "Other Vtk extensions" is a filter.  A few are
+sources, easily identified by the fact they have "Source" in their
+names (e.g. vtkAMRStreamSource).  Some are pretty big undertakings,
+while others constitute small hacks to some Vtk base class from which
+they otherwise inherit 99% of their functionality.
+
+<P> The arrow from "Other Vtk extensions" down to "vtkChomboReader"
+reflects the fact that some (a little under half) of the "Other Vtk
+extensions" classes hold a reference to vtkChomboReader.  They do not
+use vtkChomboReader as a true Vtk source (pipeline building taking
+place, as mentioned above, in our Python code) but rather as a portal
+into the raw data.  For example, vtkAMRStreamSource needs to follow
+streamlines across box boundaries.  A filter hooked up to
+vtkChomboReader is fed just one box of data at a time, and that's just
+not good enough for vtkAMRStreamSource with its need for a global view
+into the data.
+
+<H3> Python Wrapping and VtkImpl </H3>
+
+Vtk's wrapping mechanism makes every one of our Vtk extension classes
+accessible from the Python layer.  For example, a Python "shadow" of
+our class vtkChomboTexture (declared in vtkChomboTexture.h) can be had
+by the Python expression "libVTKChomboPython.vtkChomboTexture()".
+This call returns a Python class with all the public member functions
+of the vtkChomboTexture C++ class.  The file Vtk/CMakeLists.txt
+directs this wrapping process.
+
+<P> Our VtkImpl directory exists for one reason: that Vtk's Python
+wrapping technology does not understand C++ templates.  Chombo output
+is either all single-precision or double-precision floating point, and
+in the interest of saving space we do not want to convert everything
+to double.  And so we templatize on single-vs-double and put the
+template code in the VtkImpl directory.
+
+<P> The result is a modified "pimpl" (pointer-to-impl, also known as
+"handle/body" and "bridge") pattern.  The class vtkChomboReader
+(declared in Vtk/vtkChomboReader.h) holds a pointer to an instance of
+vtkChomboReaderImpl (declared in VtkImpl/vtkChomboReaderImpl.h).
+Because vtkChomboReader is not a template class, Vtk knows how to wrap
+it.  The real work, however, takes place in vtkChomboReaderImpl, which
+is templatized.
+
+<P> vtkChomboReader is also the base class of vtkChomboReaderImpl.  It
+didn't have to be, but one way or another vtkChomboReaderImpl had to
+be derived from <EM>some</EM> non-template class, so that
+vtkChomboReader could hold a pointer to it.  Of course, deriving
+vtkChomboReaderImpl from vtkChomboReader was the natural choice, since
+the interface (apart from template arguments) is, by design, the same.
+
+<P> As with vtkChomboReader and vtkChomboReaderImpl, so with
+vtkAMRStreamSource and vtkAMRStreamSourceImpl and a few more such
+pairs.
+
+<H2> data_access </H2>
+
+<H3> ChomboHDF5 </H3>
+
+The class ChomboHDF5 does our HDF5 I/O; it reads the hdf5 files that
+Chombo writes and ChomboVis looks to for all its data -- box layout,
+field, and particle data.
+
+<H3> VisualizableDataset </H3>
+
+VisualizableDataset sits on top of ChomboHDF5.  While ChomboHDF5, as a
+model of an hdf5 file, is unchanging, VisualizableDataset is
+modifiable at run time; through our <A HREF="API.html">Data API</A>,
+users can add new components, as well as transform existing ones, and
+crop the entire problem domain.
+
+<P> Of all our Vtk extension classes, only vtkChomboReader knows about
+VisualizableDataset.  (And not even vtkChomboReader knows about
+ChomboHDF5.)
+
+<P> Corresponding to the C++ class VisualizableDataset, there is a <A
+HREF="visualizable_dataset.html">Python class of the same name</A> (in
+src_py/visualizable_dataset.py).  The latter is a Python shadow of the
+C++ class.  That Python class is not used for ChomboVis visualization,
+as all visualization relies on Vtk pipelines headed (usually) by a
+vtkChomboReader.  The role of the Python VisualizableDataset class is,
+rather, to support, through the <A HREF="API.html">Data API,</A>
+interactive data exploration and manipulation.
+
+<P> The Python wrapping of VisualizableDataset is not done with Vtk's
+wrapping technology, but rather with home-grown, template-unshy,
+techniques that can be seen in the data_access/python directory.
+
+
+<H3> BoxLayoutData </H3>
+
+A VisualizableDataset holds pointers to instances of BoxLayoutData,
+one instance per field data component per AMR refinement level.
+BoxLayoutData is unknown above VisualizableDataset; none of our Vtk
+extensions know about it.  However, as with VisualizableDataset, there
+is direct access from <A HREF="box_layout_data.html">Python</A>, as
+part of the Data API.  Python wrapping of BoxLayoutData is
+accomplished by the same means used to wrap VisualizableDataset.
+
+
+<H2> EBLib </H2>
+
+The EBLib directory is for computational geometry algorithms useful
+for finding the location of embedded boundaries.  In the diagram
+above, the connection from "Other Vtk extensions" down to "EBLib" is
+due to a single class, vtkChomboEmbeddedBoundaryFilter.
+
+
+<H2> utils </H2>
+
+What's a software project without a miscellaneous utilities directory?
+This one is ours.
+
+<H3> utils/boost </H3>
+
+The <A HREF="http://www.boost.org">Boost</A> project is where we get
+our smart pointers.  The data_access directory makes heavy use of
+boost::shared_ptr and boost::shared_array, and, more sparingly,
+boost::intrusive_ptr.
+
+<H1> Python ChomboVis Component </H1>
+
+
+<H2> Introduction </H2>
+
+<IMG SRC="images/python_big_picture.gif" ALIGN="right" HSPACE=20>
+
+The figure at right shows the main components of ChomboVis' Python
+code; it is what lies behind the top yellow box in the previous
+figure.  After giving a brief overview, we discuss each component in
+depth in its own subsection.
+
+<P> The top level instantiates, owns and controls access to the
+components labeled "GUI controls" and "VTK interaction".  The top
+level includes a module, called "chombovis", that is the locus of the
+user scripting API.  In ordinary interactive (i.e. no user script)
+ChomboVis usage, the top level hands off control to the GUI.  In user
+script mode, the ChomboVis API (the interface to which the user script
+has been written) bypasses the GUI, calling directly to the Vtk
+interaction layer.
+
+<P> The GUI controls component is essentially a Python Tkinter
+application, whose widgets are bound to methods down in the Vtk
+interaction component.
+
+<P> The VTK interaction component is responsible for the actual
+loading and rendering of a Chombo dataset.  Function calls go to one
+of several standard VTK libraries or, when AMR-specific features
+become necessary, to the library built from the ChomboVis C++ code.
+
+<P> Utilities is a grab bag.  anag_megawidgets.py extends and
+aggregates Tkinter and Pmw widgets.  anag_utils provides debugging
+support.  notifier.py implements an event-driven facility that we use
+to let certain GUI and VTK interaction modules interact without
+needing to actually know about one another.  These are only a few of
+our utilities; we discuss them all in their own subsection below.
+
+
+<H2> GUI Control Layer </H1>
+
+The GUI control layer consists of menubar.py and all the files whose
+names match control_*.py.
+
+<P> Most of these modules implement the dialogs that pop up when the
+user selects one of the items under the "Visualization" pull-down
+menu.  Each mode of visualization -- slices, isosurfaces/contours,
+volume, streamlines, etc -- has its own dialog, e.g. control_slice,
+control_iso, etc.
+
+<P> Most of the code sets up widgets and binds them to methods down
+in the VTK interaction layer.  A module control_foo will have a
+counterpart module vtk_foo.  Click <A
+HREF="images/control_vtk.ps">here</A> to see how the modules of the
+GUI control layer depend on the modules of the VTK interaction layer
+below.  The convention is that the module at the source of the arrow
+uses the module to which the arrow points.  
+
+<P> Notice that none of the control_* modules depend, i.e. make
+function calls, on any other control_* modules.  This is important and
+any extensions to ChomboVis should maintain this discipline.  But if
+one control_* module never calls methods in another control_* module,
+that does not mean there can be no interaction.  There is, and it goes
+through an event-driven scheme: see module notifier, under the
+utilities section below.  Devotees of the "Gang of Four" book will
+recognize here a version of the "Model-View-Controller" design pattern
+(but note that, before ChomboVis 3.90.x and the defineNewComponent()
+methods, our "Model" never changed).
+
+<P> Each control_* module depends on its vtk_* counterpart, a
+dependency that is always unidirectional; no vtk_* module calls,
+indeed knows anything about, any control_* module.  It is this
+separation between (graphical) interface and implementation that lies
+behind ChomboVis' ability to run <EM>sans</EM> GUI.
+
+<P> These dialogs are instances of classes, and the naming convention
+is that in a file control_foo.py, the main class (if there are other
+classes there they are "private" helpers of the main one) is called
+ControlFoo.  The main classes all derive from
+anag_megawidgets.SelfDescribingDialog and self_control.SelfControl.
+
+<P> The SelfDescribingDialog is nothing but a Pmw.Dialog with a pair
+of methods getShortDescription() and getLongDescription() that are
+used to put a title on the dialog, label its element of the pull-down
+menu and provide the context-sensitive text that appears in the
+ChomboVis status bar.  Hence the "self-describing" part of the name.
+
+<P> SelfControl does many things and a full discussion of them is left
+to the Utilities section below. 
+
+
+<H2> VTK Interaction Layer </H1>
+
+The VTK interaction layer consists of all files that match vtk_*.py,
+plus selector.py and vol_tk_interactor.py.  Every one of these modules
+calls into a VTK library and/or the VTK extension library built from
+the ChomboVis C++ layer.  Conversely, these are also the only modules
+in ChomboVis that make VTK calls.  Most set up some sort of VTK
+pipeline, among their other actions.
+
+<P> Most of the vtk_* modules correspond to a control_* module --
+vtk_slice and control_slice, vtk_iso and control_iso, etc -- and (see
+<A HREF="images/control_vtk.ps">the graph</A>) get called by only that
+corresponding control_* module.  The user clicks, for example, on the
+"All cells" radiobutton of control_grid, and that widget calls into
+vtk_grid, which holds a vtkChomboOutlineFilter (our subclass of
+vtkStructuredPointsToPolyDataFilter), which finally draws the cell
+outlines.
+
+<P> Other vtk_* modules provide services to more than one control_*
+module, and even to other vtk_* modules.  vtk_data is often consulted
+when a module needs to know whether the active dataset is 2D or 3D, or
+to retrieve some actual numbers from the hdf5 file.  vtk_vtk, as the
+owner of the vtkRenderWindow and the vtkRenderer, has the much-used
+render() and addActor() methods.  vtk_cmap holds the
+colormap, which other modules need for colorcoding data values.
+vtk_data could, perhaps, profitably be broken into two modules -- one
+to support control_data, and another to provide those miscellaneous
+data services to the other modules.
+
+
+<H2> Utilities </H2>
+
+<H3> notifier </H3>
+
+Notifiers are the key to an event-driven style that makes it possible
+to greatly reduce the number of inter-module dependencies.  Some will
+recognize the "Observer" or "publish-subscribe" design pattern here.
+However, our notification is finer-grained than in the Gang of Four's
+Observer; our observers subscribe on a per-variable, not per-object
+basis.
+
+<P> A notifier holds a value and exposes an ordinary getter that
+returns that value.  There is also a setter which, besides setting the
+value, also does one other thing: it executes a list of functions that
+have been registered with it via a third method on notifier --
+addCallback().
+
+<P> Here is an example of how it works.  The control_iso module
+displays scale widgets, labelled "min" and "max", which the user can
+drag around to indicate the constant values which define the surfaces
+or contours.  The legal range of these values varies with the
+currently selected variable.  So when the user selects a new variable
+in the control_data module (i.e. the "Data selection" dialog),
+something needs to happen to control_iso's widgets.
+
+<P> What happens is this.  Control_data's variable-selection widget
+calls vtk_data's setCurComponent() method to indicate we have a new "current
+variable".  Now setCurComponent() is not just a setter.  It is the setter
+for a notifier variable.  Control_iso has, earlier, registered with
+that notifier; control_iso called the notifier's addCallback() method,
+passing it a method -- ControlIso.changeComponent().  Now the notifier's
+setter will call that method -- and any others so registered -- when
+the setter is called.
+
+<P> Stictly speaking, vtk_data is calling control_iso.  But logically
+there is no dependence here.  vtk_data does not "know" anything about
+control_iso; it only sees a list of functions to call one by one when
+VtkData.cur_var's setter is called.  If we wanted to remove
+control_iso from ChomboVis, no modifications to vtk_data (or to
+control_data) would be necessary.  And more importantly, we can add
+all sorts of new GUI controls and VTK pipelines that need to react to
+changes in the current variable, yet no change to vtk_data or
+control_data would be necessary.  <EM>All</EM> knowledge of what
+control_iso needs to do lies inside control_iso itself.
+
+<P> We have more to say about notifiers in the section on the
+self_control module.
+
+<H3> self_control </H3>
+
+A base class of most other ChomboVis classes, SelfControl is called
+that because it deals with the orderly management of instance,
+i.e. "self.", variables.  In Python, you can say
+<TT>self.foo=3.14</TT> in any class method and you have added a new
+symbol to the instance's namespace.  We can't prevent that, but the
+convention in ChomboVis is to "declare" all instance variables in the
+class constructor.  Let's take a walk through where this happens in
+vtk_cmap.VtkCmap:
+
+<P>
+<PRE>
+        SelfControl.__init__( self, dep_dict,
+          metadata = [ 
+            { 'name':'user_colormap_filename', 'save':1, 'get':1,
+              'initval':'None' },
+            { 'name':'default_colormap'},
+            { 'name':'default_greymap'},
+            { 'name':'user_colormap', 'get':1 },
+            { 'name':'active_colormap', 'get':1, 'notify':1 },
+            { 'name':'cmap_options', 'get':1 },
+            { 'name':'active_colormap_choice', 'get':1, 'save':1 },
+                # Default_grey, Default_color, User
+            { 'name':'num_colors'},
+            { 'name':'background_color', 'initval':'(0,0,0)', 'get':1, 'set':2,
+              'save':1, 'notify':1 }
+          ])
+</PRE>
+<P>
+
+This comes from VtkCmap's <TT>__init__</TT> method, that is, its
+constructor, and what we are doing is calling the constructor of
+VtkCmap's parent class, SelfControl.  The "metadata" argument of
+SelfControl's constructor is a list of dictionaries.  Each dictionary
+is a sort of declaration of one instance variable.  SelfControl's
+constructor (defined in self_control.py) goes through this metadata
+and takes various actions we now describe.
+
+<P> If you say 'get':1, then SelfControl generates a getter: for
+example there will be a getUserColormap() method.  By convention,
+requesting a getter means you make this variable available to other
+classes.  If you want a getter but you want it to have some special
+side effect, you'll need to write it yourself.  And then say 'get':2,
+as a matter of convention.
+
+<P> 'set':1 generates a setter.  'set':2 means you plan to hand-code
+your own setter.  For an example of a hand-coded setter, see
+setDoShowIsosurfaces() in vtk_iso.py.
+
+<P> 'initval' sets an initial value (which, note, must be indicated in
+quotes).
+
+<P> 'notify':1 identifies a Notifier variable (see above to read about
+Notifiers).  When it says 'notify':1, SelfControl generates a setter.
+It also generates a method that enables other parts of the program to
+register callbacks: for a Notifier called foo_bar, this auto-generated
+registration method would be called registerWithFooBar().  The main
+effect of registerWith* functions is to call the Notifier's
+addCallback() method.  Grep through *.py to see where registerWith*
+functions are invoked.
+
+<P> 'save':1 means this variable's value will be saved when we save
+the state of the system, and restored when we restore the state of the
+system.  (See under saved_states, below.)  There are many 'save':1
+variables in ChomboVis, almost all of them in the vtk_* layer.
+
+<P> A module in the control_* layer rarely needs 'save' variables
+because it can retrieve its state from the corresponding vtk_* module.
+For example, control_iso can find out from vtk_iso whether the
+isosurface was visible in the saved state.
+
+<P> The only legitimate use of 'save' variables in the control_* layer
+is to save aspects of the GUI that have no non-GUI counterpart.  At
+this writing, there is only one: the number format (e.g. "12.4E") of
+the data browser launcher widget (in control_fab_tables).
+
+<P>
+Don't try 'save':* on anything other than an atomic type, or a
+Notifier, or a collection (dictionary, list, or tuple) of atomic types
+or Notifiers.  So if you want to save a file, save the file name, not
+the file object itself.
+
+<P> This, then, is the approved way to introduce instance variables
+into ChomboVis objects.  Should you create an instance variable
+outside this system (whether from accidental misspelling or
+out-and-out rebelliousness), the variable auditing system (see under
+module anag_utils) will kill your ChomboVis process.
+
+<P>
+<P> SelfControl does a few other things.
+
+<P> It defines a triplet of methods, _initForFirstHDF5(),
+_initForSubsequentHDF5s() and _refresh().  SelfControl calls
+_initForFirstHDF5(), predictably enough, as soon as ChomboVis has
+loaded its first HDF5 file.  (SelfControl finds out about that event
+by registering with a Notifier variable.)  _initForSubsequentHDF5s()
+should be self-explanatory.  Finally, SelfControl calls _refresh()
+after ChomboVis loads a saved state.
+
+<P> Think of these three methods as "pure virtual"; each subclass of
+SelfControl (that is, almost everything in ChomboVis) must define its
+own versions that do the right thing in that class.  For example,
+ControlSlice._refresh() finds out, from VtkSlice, which slices should
+be visible, and then sets its "visible" checkbuttons accordingly.
+(ControlSlice does <EM>not</EM> actually make the slices visible or
+invisible; that's VtkSlice's job.)
+
+<P> The _refresh() method is only part of what each class must do to
+respond to the restoration of a saved state.  And doing those other
+things is the third and last of SelfControl's duties.
+SelfControl.registerForRestoration() registers with Notifiers that
+tell it when a state has been restored or saved.  What SelfControl
+actually registers with those Notifiers is its saveClassState() and
+restoreClassState() methods.  Both of these look for instance
+variables that were declared 'save':*.  saveClassState() collects all
+these "must-be-saved" variables and passes them to the saved_states
+module, which collects similar collections of variables from all other
+classes and then sees to pickling them.  restoreClassState() receives,
+from saved_states, one class'-worth of saved variables, and goes about
+restoring their values in memory.  And then it calls _refresh().  We
+have already discussed _refresh(), but now we can see its role in
+context: its job is to do whatever it takes to restore the system to a
+consistent state, <EM>after</EM> the 'save':* variables' values
+themselves have been restored.
+
+
+<H3> saved_states </H3>
+
+This is the module responsible for saving and retrieving the state of
+the ChomboVis system.  Most of this work is actually distributed among
+the other modules.  Each module is expected to know what to save and
+how to save (and restore) itself.  We had a good deal to say about
+this above, in the discussion of 'save':* variables and the _restore()
+method.
+
+<P> The work left for the saved_states module is to manage the
+pickling (data serialization and file I/O) and to trigger the save or
+restore operation at the individual class level.
+
+<P> The easiest way to do persistence in Python is via its shelve
+module, which in turn uses the pickle module.  Unfortunately, that
+technique produces binary files.  We prefer text files, so we work at
+a lower level, calling methods on Python's pickle module directly.
+
+<P> A state-save operation begins when the Notifier variable
+SavedStates.new_dict_name is set (to whatever the user wants to call
+the saved state).  This happens in one of two places -- in menubar
+(see the "File" pull-down menu), or in a user script that calls
+ChomboVis.misc.saveState().  Every class that has something to save
+has registered with that Notifier.  So when SavedStates.new_dict_name
+is set, it notifies over a dozen classes to collect their 'save':*
+variables and pass them to SavedStates.saveClassDict(), which creates
+the collection of collections that then gets pickled.  Grep on
+"registerWith" in self_control.py to see how the setup is done.
+
+<P> A restore-state operation begins when the Notifier
+SavedStates.restore_from_me is set (again, either from the GUI or from
+a user script).  All classes with something to restore have registered
+with SavedStates.restore_from_me, the callback, in every case, being
+SelfControl.restoreClassState().
+
+<P> To avoid infinite recursions and event storms generally, the
+restore-state process begins by unregistering all callbacks from all
+Notifier variables.  It is therefore necessary to reregister all
+callbacks after a state restoration.  This is accomplished by putting
+every class' registerWith* statements in its _refresh() method, and
+indeed that is why you will find them there.
+
+<P>
+There are really two ways to bring ChomboVis to a desired state
+automatically.  One is to restore a previously saved state.  The other
+one is to execute a user script.  
+
+<H3> anag_utils </H3>
+
+This is a miscellaneous assortment of non-GUI, non-mathematical
+utilities.
+
+<H4> Debug output </H4>
+
+The family of functions fatal(), error(), warning() and info() are for
+printing text messages of different degrees of urgency.  A
+module-level variable, g_debug_level (which comes with a getter and a
+setter for use from the outside), determines which, if any, of these
+functions actually print the message they were passed.  
+
+<P> funcTrace() is a special function that prints the name of the
+function from which it is called, plus the arguments to that function,
+plus a string of asterisks to indicate the depth of the function call
+stack.  Like fatal(), error(), warning() and info(), funcTrace()
+learns about its context by examining the Python interpreter's symbol
+tables.  Some of these tables are easy to get to.  Others, in
+particular the one that holds function local variables, force us to
+use undocumented features; see funcArgs() for example.
+
+<H4> Variable declarations </H4>
+
+Because Python does not require variable declarations, accidental
+misspelling poses a grave danger.  Intending to assign a new value to
+a variable foo_bar, the programmer accidentally writes
+<TT>foobar=4</TT> and instead creates a new variable.
+
+<P> The anag_utils.Declarations class helps catch such errors.  The
+constructor takes an unlimited number of string arguments.  At the end
+of a function, a call to Declarations.functionAudit() checks the
+symbol table for anything not "declared" in the constructor.
+Declarations.functionAudit() is one of a collection of auditing
+functions; the others are moduleAudit() and memberFunctionAudit().
+All work the same way, in principle.  In practice, there are some
+complications; there are cryptic symbols the function writer is not
+responsible for, and, as mentioned earlier, getting at a function's
+local-variable symbols requires resort to undocumented Python
+internals.
+
+
+<H3> anag_megawidgets </H3>
+
+As the name implies, these are compound GUI widgets written to serve
+ChomboVis' specialized needs.  Type "python anag_megawidgets.py" for a
+demonstration of many of the megawidgets.
+
+
+<H3> cmd_line </H3>
+
+This is where we parse ChomboVis' key=value command-line format.  The
+way it works is that the CmdLine class has an instance variable for
+every legal command-line key -- self.infile, self.debug_level,
+self.alpha_features, etc.  Each key, once extracted from the command
+line, is passed verbatim to Python's built-in exec() function in an
+expression that will throw an exception if the key is not in fact
+already an instance variable.  That is how we determine whether the
+command line is legal.
+
+<P> All of CmdLine's instance variables -- that is, the legal
+command-line argument keys -- are "declared" in the usual way, in the
+SelfControl base class' constructor, with 'get':1.  This lets any
+other module query the command line in a uniform way -- getInfile(),
+getDebugLevel(), getUserScript() etc.
+
+
+<H3> digraph </H3>
+
+This is a tool to aid in understanding the structure of ChomboVis.
+Unlike the utility modules we have discussed so far, digraph is not
+part of ChomboVis itself.  What it does is analyze the ChomboVis
+Python files (everything in the src_py directory) and summarize the
+dependencies in a format that <A TARGET="_parent"
+HREF="http://www.research.att.com/sw/tools/graphviz"> AT&T's Graphviz
+</A> can turn into nice colored graphs like <A
+HREF="images/vtk_util.ps">this one of the VTK layer and the utilities
+layer</A> and <A HREF="images/control_iso_focus.ps">this one of just
+the control_iso module and the modules directly connected to it.</A>
+Through command line options (type <TT>python digraph.py --help</TT>
+to see them), digraph.py can be instructed to produce dependency
+graphs for various interesting subsets of the ChomboVis modules.
+
+<P> Digraph prints to stdout.  To produce a picture: (1) install
+<A TARGET="_parent" HREF="http://www.research.att.com/sw/tools/graphviz"> AT&T's
+Graphviz</A> (the main executable is called "dot"); (2) do something
+like this:
+
+<P>
+<PRE>
+    $ python digraph.py [digraph options] > /tmp/digraph.out
+    $ dot /tmp/digraph.out -Tps -o picture.ps
+    $ gv picture.ps
+</PRE>
+
+<P> digraph.py sits in the doc directory.
+
+<H2> Initialization and the top layer </H1>
+
+The top layer of ChomboVis consists of main.py and chombovis.py.
+
+<H3> main </H3>
+
+ChomboVis starts when the user invokes the <TT>chombovis</TT> shell
+script, which in turn says
+
+<P><PRE>
+    python main.py $*.
+</PRE><P>
+
+Thus, main.py is the entry point into the Python code.  What main.py
+does is hand off control to the GUI, or to a user script if one was
+indicated on the command line.  In the first case, main constructs an
+instance of the ChomboVis class.  In the second, it is the user
+script's responsibility to construct a ChomboVis.
+
+<H3> chombovis </H3>
+
+Where main.py is short and simple, chombovis.py is somewhat long and
+complicated.  There are two fairly distinct parts to chombovis.  One
+of them deals with constructing one instance of each of the vtk_* and
+control_* classes.  The other part is the API for user scripts.
+
+<H4> initializations </H4>
+
+All the Vtk* and Control* classes (recall the convention that class
+VtkFoo is defined in file vtk_foo.py) are singletons; ChomboVis runs
+with only one of each -- one ControlSlice for the slicing GUI dialog,
+one VtkStream to draw streamlines, etc.  Class ChomboVis constructs
+and owns every instance of these classes.  Whereever one object holds
+a reference to another -- for example, ControlIso holds a VtkIso -- it
+was handed that reference in ChomboVis.
+
+<P> The sequence of initializations is set out very explicitly in
+ChomboVis' self.init_data variable, which we quote here:
+
+<P><PRE>
+        self.init_data = [
+            ('cmd_line',
+                []),
+            ('saved_states',
+                []),
+            ('vtk_vtk',
+                ['saved_states']),
+            ('vtk_data',
+                ['saved_states','cmd_line','vtk_vtk']),
+            ('vtk_fab_tables',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vtk_cmap',
+                ['saved_states', 'vtk_vtk']),
+            ('vtk_grid',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vtk_slice',
+                ['saved_states', 'vtk_vtk', 'vtk_data', 'vtk_cmap']),
+            ('vtk_stream',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vtk_vol',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vtk_eb',
+                ['saved_states', 'vtk_vtk', 'vtk_data', 'vtk_cmap']),
+            ('vtk_axes',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vtk_cameras',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vtk_iso',
+                ['saved_states', 'vtk_vtk', 'vtk_data', 'vtk_cmap']),
+            ('selector',
+                ['saved_states', 'vtk_vtk', 'vtk_data']),
+            ('vol_tk_interactor',
+                ['saved_states', 'vtk_vtk', 'vtk_data','vtk_cameras',
+                 'selector']),
+            ('vtk_print',
+                ['saved_states', 'vtk_vtk']),
+            ('control_fab_tables',
+                ['saved_states', 'vtk_data', 'vtk_vtk', 'vtk_fab_tables']),
+            ('control_data',
+                ['saved_states', 'cmd_line', 'vtk_data']),
+            ('control_cmap',
+                ['saved_states', 'vtk_cmap','vtk_data','vtk_vtk']),
+            ('control_grid',
+                ['saved_states', 'vtk_data','vtk_grid']),
+            ('control_slice',
+                ['saved_states', 'vtk_data','vtk_slice']),
+            ('control_iso',
+                ['saved_states', 'vtk_data','vtk_iso']),
+            ('control_stream',
+                ['saved_states', 'vtk_vtk', 'vtk_data','vtk_stream']),
+            ('control_vol',
+                ['saved_states', 'vtk_vtk', 'vtk_data','vtk_vol']),
+            ('control_eb',
+                ['saved_states', 'vtk_data', 'vtk_eb']),
+            ('control_cameras',
+                ['saved_states', 'vtk_vtk', 'vtk_cameras','vol_tk_interactor']),
+            ('control_print',
+                ['saved_states', 'vtk_print']),
+            ('menubar',
+                ['saved_states', 'cmd_line', 'vtk_vtk','vtk_data', 'vtk_axes',
+                 'control_print', 'control_fab_tables', 'control_data',
+                 'control_cmap', 'control_grid', 'control_slice', 'control_iso',
+                 'control_stream', 'control_vol', 'control_eb',
+                 'control_cameras'])
+        ]
+
+</PRE><P>
+
+What you see is a list of tuples that mention all VTK-level and
+Control-level classes (or, strictly speaking, the modules they reside
+in -- recall the foo_bar/FooBar naming convention).  The first
+component of each tuple indicates a class, while the second is a list
+that names all the classes which the first component depends on.
+Class A is said to depend on class B if A holds a reference to B and
+calls methods on it.  Thus, VtkGrid can call methods on SavedStates,
+VtkVtk and VtkData, but not on any other Vtk* (and certainly not any
+Control*) classes.  (Only through an ugly hack could any Vtk* or
+Control* class use any class other than the ones explicitly indicated
+here as being among its dependencies.  VtkGrid could certainly import
+control_grid and construct a ControlGrid, but that would not be the
+correct instance of ControlGrid anyway; it would not be the one which
+the user manipulates with his mouse.)
+
+<P> Right after defining this structure, ChomboVis traverses it in
+order, constructing first a CmdLine, then a SavedStates, then a VtkVtk
+(passing it the instance of SavedStates), then a VtkData (passing it
+the instances of SavedStates, CmdLine and VtkVtk), and so on.
+ChomboVis passes these dependencies in through class SelfControl's
+dep_dict constructor argument.
+
+<P> The main benefit of this initialization scheme is that it puts the
+entire dependency structure of ChomboVis out in the open.  It makes
+circular (even reciprocal) dependencies impossible.  No class can
+depend on a class beneath it; you couldn't make vtk_iso depend on
+control_iso even if you typed 'control_iso' in vtk_iso's dependency
+list, because there is no control_iso around yet, when vtk_iso is
+constructed.
+
+<P> Another benefit of this scheme is that it forces the developer of
+a new feature to think about, and hopefully minimize, inter-module
+dependencies.  The explicit dependency structure is also a road map to
+anyone approaching ChomboVis for the first time.
+
+<H4> The user script API </H4>
+
+In principle, user scripts could be written from calls to methods on
+the various Vtk* instances held by the ChomboVis class.  In practice,
+we chose to interpose an interface layer.  Doing so gives us the
+freedom to mess around with the Vtk* classes without breaking existing
+user scripts.  Also, every Vtk* class has "private" methods; sending
+script writing users straight there would sow needless confusion.
+
+<P> Hence the user script API consists of methods on special classes
+held by ChomboVis as components -- GridAPI, ReaderAPI, SliceAPI, etc.
+The componentization is not strictly necessary; it only provides
+namespaces.  In its absence we would have needed to devise a naming
+scheme that would have embedded the subsystem name in the function
+name anyway.
+
+
+<H3> Test mode </H3>
+
+Start ChomboVis with a command-line argument like
+"test_class=vtk_slice" and the system comes up in a minimal but still
+functional mode: the ChomboVis class, looking to its self.init_data
+(see above) constructs a VtkSlice and instances of only those classes
+it depends on (SavedStates, VtkVtk, VtkData and VtkCmap).  The
+ChomboVis window appears without a menubar but with the VTK render
+window.  If a dataset was loaded its slices will be visible (though it
+may take some panning in or out to see them).  User scripts will work
+as long as they do not call methods on classes other than VtkSlice and
+those below it in the dependency hierarchy.
+
+<P> Test mode can help isolate problems.  There are actually three
+test modes, selectable by the test_mode command line variable.
+test_mode=min (the default) constructs just the minimal set of classes
+as described above.  test_mode=med constructs more classes -- all
+those from the top of ChomboVis' self.init_data and down to the class
+indicated by the test_class option.  Finally, test_mode=max constructs
+all the classes; it differs from a normal ChomboVis run only in that
+it ends by calling the unitTest() method (if one exists) on the test
+class.
+
+
+<H2> More on class structure </H2>
+
+This section covers the use of inheritance and composition among the
+various ChomboVis Python classes.
+
+<H3> Inheritance </H3>
+
+ChomboVis' use of inheritance can be summarized quite simply by saying
+that two classes -- SelfControl and SelfDescribingDialog -- are the
+base of many other classes; that two other classes are the bases,
+each, of just one other class; and that most of our custom GUI widgets
+subclass Tkinter and Pmw classes.
+
+<P> SelfControl (defined in self_control.py) is a base class for all
+the Vtk* and Control* classes.  SelfControl has its own subsection on
+this page.
+
+<P> SelfDescribingDialog (defined in anag_megawidgets) is the base
+class for all the Control* classes.  SelfDescribingDialog is described
+elsewhere on this page.
+
+<P> VtkData is the base class of _LocalVtkData.  We have a fairly
+detailed description of what _LocalVtkData is for, in the comment
+section of _LocalVtkData's definition, in the ChomboVis source code,
+in vtk_data.py.
+
+<P> _Seeds is the base class of _LineSeeds.  Both are defined in
+vtk_stream.  _Seeds is an abstract rake (i.e. seed points for
+streamlines), and _LineSeeds is a particular kind of rake.  (We have
+not implemented other kinds of rakes; a circular pattern would be one
+possibility.)
+
+<P> Many of our custom widgets (defined in anag_megawidgets.py)
+inherit from Tkinter or Pmw widgets.  For example, our
+SelfDescribingDialog inherits from Pmw.Dialog, our Checkbutton
+inherits from Tkinter.Checkbutton, etc.
+
+
+<H3> Composition </H3>
+
+Some classes exist only to provide services to one other class, or to
+factor out, organize and compartmentalize one other class'
+functionality.  These "helper" or "component" classes are easily found
+as their names always begin with an underscore.
+
+<P> Class ControlData holds an instance of _ResliceWidget, which provides
+the widgets that appear when we are in reslice mode.
+
+<P> ControlFabTables builds up the databrowser widgets out of several
+classes: _LevelAndBoxScales, _Synchronizer, _DatabrowserAssembly and
+_Databrowser.  Every databrowser is made up of one
+_DatabrowserAssembly, which in turn is made up of numerous instances
+of _Databrowser.  The _Synchronizer class coordinates across
+databrowsers, and between databrowser planes and slice positions (see
+the "synchronized" checkbutton on the DataBrowser launcher).  Class
+_LevelAndBoxScales provides part of the DataBrowser launcher.
+
+<P> VtkFabTables holds one _OneVtkFabTable for every databrowser that
+has been launched, managing its data, its highlight box, and its
+tracer plane.
+
+<P> ControlIso holds a _MinMaxNum for managing the controls for
+isovalue range and the number of isovalues.
+
+<P> ControlSlice, holds one instance of class _SlicingPlane for every
+slicing plane -- three of them in 3D, and one in 2D mode.  VtkSlice
+holds instances of another class called _SlicingPlane -- again, one in
+2D, three in 3D mode (though, from the Python prompt or a user script
+you can construct as many as you like.)
+
+<P> ControlStream holds an instance of _SeedPointTransformations.
+_SeedPointTransformations is the smaller dialog that pops up when you
+press the "New seed points" button.
+
+<P> Selector holds: one _HiliteBox for outlining (AMR) boxes and one
+HiliteBox for outlining cells; one _Ray, which is the white "skewer";
+and one _BoxInfo, which manages information on which boxes are
+currently skewered.
+
+<P> VtkGrid uses _DomainBox and _Boxes to draw the various grids, and
+uses _ButtonTags as a namespace to organize the names of the various
+level-of-detail buttons ("Bounding boxes", "Face cells", etc).
+
+<P> VtkParticles uses three classes as namespaces:
+_DistinguishedComponentNames, _MarkerTypes, and _GlyphScaleModes.
+
+<P> VtkStream holds an instance of _LineSeeds, which manages the rake.
+
+
+<H1> User Scripts </H1>
+
+This subject gets its own major heading because user scripts figure so
+prominently in the "big picture" section.  But by this point,
+everything worth saying about user scripts has already been said.  How
+they are started was covered in the section on the <TT>main</TT>
+module (under "Initialization and the top layer").  The design of the
+user script API was covered in the section on the <TT>chombovis</TT>
+module (also under "Initialization and the top layer").  How to write
+user scripts is covered in a <A HREF="API.html">separate part</A> of
+the user's guide altogether.
+
+
+<H1> Automated Testing </H1>
+
+ChomboVis comes with two testing scripts and, orthogonal to these, a
+class-by-class unit testing mode.
+
+
+<H2> Integration tests </H2>
+
+<P> cmdline_test.sh fires off ChomboVis with various legal
+combinations of its command line options.  The text output goes to a
+temporary file.  If that file differs in any way from
+canonicals/cmdline_test.txt, then cmdline_test.sh reports that an
+error has occurred.  cmdline_test.sh also tests the off-screen
+rendering feature: it saves an image to a file and compares that file
+to a canonical.
+
+<P> api_test.sh tests most (ideally it should be <EM>all</EM>) the
+methods comprising the external API, that is the programming interface
+for <A HREF="API.html">user scripts.</A> In the process, it tests most
+of ChomboVis' visualization features.  api_test.sh does its work by
+launching ChomboVis on a number of files (2D, 3D, different data
+centerings, particles...) -- with the user_script option indicating
+examples/api_test.py.  It is api_test.py that actually calls the API
+methods.  Like cmdline_test.sh, api_test.sh compares its text output
+to the contents of a file in the canonicals directory.  In addition,
+api_test.sh records an image of the VTK window, and compares that to
+canonicals/api_test*.ppm.
+
+<P> If you have a ~/.chombovisrc, it will not affect these tests as
+cmdline_test.sh and api_test.sh say <EM>ignore_rc=1</EM> on their
+command lines.
+
+
+<H2> Unit tests </H2>
+
+Independently of cmdline_test.sh and api_test.sh, ChomboVis can be
+instructed, from the command line, to cause its own classes to test
+themselves.  The relevant command line options are <EM>test_class</EM>
+and <EM>test_mode.</EM>
+
+<P><EM>test_class</EM> indicates which class to test.  Any of the
+singleton classes (e.g. vtk_grid, vtk_slice, control_stream, etc) may
+be so tested.  (For the entire list, search for
+<TT>self.init_data</TT> in chombovis.py.)  What then happens is that
+if the indicated class has a method called <TT>UnitTest,</TT>
+ChomboVis will invoke it.  At this writing, we have not done much with
+the various classes' UnitTest methods.  Thus, the testing framework is
+there, but the tests are not.
+
+<P> When you invoke the <EM>test_class</EM> option, ChomboVis will
+print the names of all the classes it constructs, up to and including
+the one you indicated with <EM>test_class.</EM> This list comprises
+the minimal set of classes necessary to construct the "test class" you
+indicated.  Thus, if you say <EM>test_class=vtk_slice</EM>, you will
+see this:
+
+<P>
+<PRE>
+info:chombovis:_makeClasses():Constructing  saved_states 
+info:chombovis:_makeClasses():Constructing  vtk_vtk 
+info:chombovis:_makeClasses():Constructing  vtk_data 
+info:chombovis:_makeClasses():Constructing  vtk_cmap 
+info:chombovis:_makeClasses():Constructing  vtk_slice 
+********** vtk_slice:unitTest()
+</PRE>
+
+<P> It's worth comparing this list of classes to the overall <A
+HREF="images/vtk_util.ps">dependency graph.</A>
+
+<P> If you want ChomboVis to construct not the minimal set of classes
+but the entire set, then put <EM>test_mode=max</EM> on your command
+line.
+
+<P> If you have a ~/.chombovisrc, and you want to use
+<EM>test_class</EM>, then it is a good idea to add
+<EM>ignore_rc=1</EM> on your command line, lest your ~/.chombovisrc
+invoke functionality from some class that is higher-level than your
+"test class".
+
+
+<hr>
+<address><a href="mailto:chombovis@davis.lbl.gov">ChomboVis Development Team</a></address>
+</body>
+</html>

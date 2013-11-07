@@ -1,0 +1,75 @@
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+** 
+** Author: Ted Sternberg
+*/
+
+#ifndef INCLUDED_NEWCOMPONENTGENERATOR_CPP
+#define INCLUDED_NEWCOMPONENTGENERATOR_CPP
+
+template<class REAL_T> NewComponentGenerator<REAL_T>::NewComponentGenerator(
+    PyObject * callable )
+  : m_callable( callable )
+{
+}
+
+
+/** Returns computed numbers, or NULL on failure.  Typical failure: user
+ *  specifies a nonexecutable function, e.g. misspelled, inappropriate (log(-1))
+ *  etc.
+*/
+template<class REAL_T> boost::shared_array<REAL_T>
+NewComponentGenerator<REAL_T>::operator()(
+    vector<boost::shared_array<REAL_T> > args,
+    int length ) const
+{
+    int arity( args.size() );
+    boost::shared_array<REAL_T> resultFArray( new REAL_T[length] );
+
+    for( int i=0;i<length;++i )
+    {
+        PyObject * argTuple = PyTuple_New( arity );
+        for( int c=0; c<arity; ++c )
+        {
+            PyTuple_SetItem( argTuple, c,
+                             PyFloat_FromDouble( args[c][i] ) );
+        }
+        PyObject * resultElement = PyEval_CallObject( m_callable, argTuple);
+        if( ! resultElement )
+        {
+            resultFArray.reset(0);
+            return resultFArray;
+        }
+        resultFArray[i] = PyFloat_AsDouble( resultElement );
+        Py_DECREF( resultElement );
+        Py_DECREF( argTuple );
+    }
+
+    return resultFArray;
+}
+
+
+#endif // INCLUDED_NEWCOMPONENTGENERATOR_CPP

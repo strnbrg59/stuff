@@ -1,0 +1,105 @@
+warning:vtk_data:setDebugLevel():Can't set C++ debug level until hdf5 data has been loaded. 
+info:vtk_cmap:setBlackOutliers():No cmapped range yet. 
+info:vtk_slice:cleanup():Calling self.slicing_planes[k].cleanup() 
+info:vtk_slice:cleanup():self.slicing_planes.keys()= None 
+Info (AttributeScan()): attrName=num_components
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 2
+Info (AttributeScan()): attrName=num_levels
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 3
+Info (AttributeScan()): attrName=data_centering
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 7
+Info (AttributeScan()): attrName=origin
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found origin or anisotropic
+Info (AttributeScan()): attrName=anisotropic
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found origin or anisotropic
+Info (AttributeScan()): attrName=component_0
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |phi|
+Info (AttributeScan()): attrName=component_1
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |rhs|
+Info (AttributeScan()): attrName=filetype
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |VanillaAMRFileType|
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 1.000000
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000000
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000000
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.500000
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000000
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000000
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.250000
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000000
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000000
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (ChomboHDF5::LoadParticleMetadata()): No particles group.  OK.
+info:vtk_cmap:setBlackOutliers():No cmapped range yet. 
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!

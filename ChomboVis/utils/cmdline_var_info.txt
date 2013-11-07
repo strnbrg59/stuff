@@ -1,0 +1,5 @@
+infile           string        ""                             "impt that default be empty string!"
+outfile          string        "ascii2hdf5-output.hdf5"       "output"
+ascii2hdf5_inverse bool        false                          "for hdf52ascii"
+ascii2hdf5_raw_mode bool       false                          "field data comes in raw -- for use by VisDat::SaveToHDF5()"
+memory_leak_test bool          false                          "around & around"

@@ -1,0 +1,1110 @@
+warning:vtk_data:setDebugLevel():Can't set C++ debug level until hdf5 data has been loaded. 
+info:vtk_cmap:setBlackOutliers():No cmapped range yet. 
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 1, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 2, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 3, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 4, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 5, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 6, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 7, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 8, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 9, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 10, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 11, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 12, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 13, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 15, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 16, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 17, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 18, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 19, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 21, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 22, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 23, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 0, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 1, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 2, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 3, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 4, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 5, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 6, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 7, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 8, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 9, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 10, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 11, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 12, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 13, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 15, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 16, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 17, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 18, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 19, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 21, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 22, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 23, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 0, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 1, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 2, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 3, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 4, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 5, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 6, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 7, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 8, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 9, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 10, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 11, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 12, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 13, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 15, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 16, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 17, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 18, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 19, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 21, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 22, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 23, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 0, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 1, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 2, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 3, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 4, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 5, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 6, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 7, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 8, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 9, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 10, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 11, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 12, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 13, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 15, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 16, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 17, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 18, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 19, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 21, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 22, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 23, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 1, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 2, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 3, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 4, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 5, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 6, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 7, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 8, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 9, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 10, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 11, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 12, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 13, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 14, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 15, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 16, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 17, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 18, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 19, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 20, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 21, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 22, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 23, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 24, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 25, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 26, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 27, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 28, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 29, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 30, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 31, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 32, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 33, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 34, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 35, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 36, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 37, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 38, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 39, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 40, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 41, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 42, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 43, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 44, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 45, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 46, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 47, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 48, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 49, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 50, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 51, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 52, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 53, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 54, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 55, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 56, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 57, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 58, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 59, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 60, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 61, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 62, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 63, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 64, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 65, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 66, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 67, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 68, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 69, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 70, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 71, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 72, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 73, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 74, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 75, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 76, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 77, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 78, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 79, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 80, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 81, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 82, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 83, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 0, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 1, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 2, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 3, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 4, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 5, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 6, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 7, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 8, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 9, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 10, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 11, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 12, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 13, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 14, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 15, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 16, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 17, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 18, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 19, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 20, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 21, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 22, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 23, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 24, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 25, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 26, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 27, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 28, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 29, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 30, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 31, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 32, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 33, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 34, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 35, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 36, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 37, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 38, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 39, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 40, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 41, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 42, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 43, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 44, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 45, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 46, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 47, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 48, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 49, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 50, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 51, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 52, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 53, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 54, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 55, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 56, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 57, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 58, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 59, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 60, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 61, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 62, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 63, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 64, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 65, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 66, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 67, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 68, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 69, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 70, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 71, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 72, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 73, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 74, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 75, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 76, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 77, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 78, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 79, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 80, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 81, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 82, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 83, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 0, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 1, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 2, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 3, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 4, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 5, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 6, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 7, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 8, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 9, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 10, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 11, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 12, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 13, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 14, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 15, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 16, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 17, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 18, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 19, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 20, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 21, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 22, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 23, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 24, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 25, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 26, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 27, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 28, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 29, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 30, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 31, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 32, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 33, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 34, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 35, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 36, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 37, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 38, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 39, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 40, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 41, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 42, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 43, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 44, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 45, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 46, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 47, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 48, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 49, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 50, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 51, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 52, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 53, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 54, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 55, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 56, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 57, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 58, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 59, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 60, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 61, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 62, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 63, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 64, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 65, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 66, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 67, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 68, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 69, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 70, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 71, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 72, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 73, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 74, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 75, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 76, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 77, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 78, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 79, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 80, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 81, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 82, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 83, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 0, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 1, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 2, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 3, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 4, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 5, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 6, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 7, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 8, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 9, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 10, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 11, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 12, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 13, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 14, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 15, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 16, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 17, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 18, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 19, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 20, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 21, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 22, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 23, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 24, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 25, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 26, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 27, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 28, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 29, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 30, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 31, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 32, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 33, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 34, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 35, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 36, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 37, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 38, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 39, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 40, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 41, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 42, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 43, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 44, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 45, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 46, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 47, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 48, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 49, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 50, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 51, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 52, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 53, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 54, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 55, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 56, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 57, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 58, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 59, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 60, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 61, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 62, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 63, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 64, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 65, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 66, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 67, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 68, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 69, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 70, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 71, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 72, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 73, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 74, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 75, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 76, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 77, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 78, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 79, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 80, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 81, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 82, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 83, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 1
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 2
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 0
+Info (operator<<(VisDat)): No particles, returning.
+info:vtk_slice:cleanup():Calling self.slicing_planes[k].cleanup() 
+info:vtk_slice:cleanup():self.slicing_planes.keys()= None 
+Info (AttributeScan()): attrName=num_components
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 4
+Info (AttributeScan()): attrName=num_levels
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 3
+Info (AttributeScan()): attrName=data_centering
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 0
+Info (AttributeScan()): attrName=origin
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found origin or anisotropic
+Info (AttributeScan()): attrName=anisotropic
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found origin or anisotropic
+Info (AttributeScan()): attrName=component_0
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |density|
+Info (AttributeScan()): attrName=component_1
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |x-momentum|
+Info (AttributeScan()): attrName=component_2
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |y-momentum|
+Info (AttributeScan()): attrName=component_3
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |energy-density|
+Info (AttributeScan()): attrName=filetype
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |VanillaAMRFileType|
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.015625
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000585
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 7.100000
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.003906
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000146
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 7.090000
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000977
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 0.000037
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 7.089000
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (ChomboHDF5::LoadParticleMetadata()): No particles group.  OK.
+info:vtk_cmap:setBlackOutliers():No cmapped range yet. 
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 0, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 0, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 1, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 1, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 2, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 2, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 3, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 3, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 4, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 4, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 5, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 5, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 6, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 6, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 7, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 7, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 8, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 8, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 9, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 9, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 10, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 10, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 11, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 11, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 12, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 12, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 13, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 13, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 14, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 15, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 15, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 16, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 16, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 17, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 17, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 18, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 18, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 19, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 19, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 20, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 21, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 21, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 22, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 22, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 23, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 23, comp 0
+info:api_test:dataApiTest():BoxLayout dx = (0.00390625, 0.00390625) 
+info:api_test:dataApiTest():BoxLayout origin = (0.0, 0.0) 
+info:api_test:dataApiTest():BoxLayout at level 1 = (((4, 4), (31, 7)), ((4, 8), (31, 15)), ((16, 16), (31, 23)), ((24, 24), (31, 31)), ((32, 4), (63, 7)), ((32, 8), (63, 15)), ((32, 16), (47, 23)), ((32, 24), (39, 31)), ((40, 24), (47, 31)), ((48, 16), (63, 23)), ((48, 24), (55, 31)), ((56, 24), (63, 31)), ((64, 8), (71, 15)), ((64, 16), (79, 39)), ((80, 4), (111, 23)), ((80, 24), (95, 31)), ((80, 32), (87, 39)), ((96, 24), (111, 31)), ((112, 4), (143, 23)), ((112, 24), (127, 31)), ((128, 24), (143, 47)), ((136, 48), (143, 55)), ((144, 4), (151, 31)), ((144, 32), (167, 59))) 
+info:api_test:dataApiTest():output ghost = (0, 0) 
+info:api_test:dataApiTest():data centering = (0, 0) 
+info:api_test:dataApiTest():dimensionality= 2 
+info:api_test:dataApiTest():precision= 2 
+info:api_test:dataApiTest():component names = ('density', 'x-momentum', 'y-momentum', 'energy-density', 'comp0_squared') 
+info:api_test:dataApiTest():# components = 5 
+info:api_test:dataApiTest():origin = (0.0, 0.0) 
+info:api_test:dataApiTest():Problem domain at level 0 = ((0, 0), (63, 15)) 
+info:api_test:dataApiTest():Dx at level 0 = (0.015625, 0.015625) 
+info:api_test:dataApiTest():Dt at level 0 = 0.00058451848847 
+info:api_test:dataApiTest():Time at level 0 = 7.1 
+info:api_test:dataApiTest():Problem domain at level 1 = ((0, 0), (255, 63)) 
+info:api_test:dataApiTest():Dx at level 1 = (0.00390625, 0.00390625) 
+info:api_test:dataApiTest():Dt at level 1 = 0.000146129622118 
+info:api_test:dataApiTest():Time at level 1 = 7.09 
+info:api_test:dataApiTest():Problem domain at level 2 = ((0, 0), (1023, 255)) 
+info:api_test:dataApiTest():Dx at level 2 = (0.0009765625, 0.0009765625) 
+info:api_test:dataApiTest():Dt at level 2 = 3.65324055294e-05 
+info:api_test:dataApiTest():Time at level 2 = 7.089 
+info:api_test:dataApiTest():Box 0 = ((4, 4), (31, 7)) 
+info:api_test:dataApiTest():Summary statistics before lots of operations: 
+info:api_test:dataApiTestSummaryStatistics():min(clamped on 0)= 64.0 
+info:api_test:dataApiTestSummaryStatistics():max(clamped on 0)= 356.354936875 
+info:api_test:dataApiTestSummaryStatistics():sum(clamped on 0)= 23024.1400633 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares(clamped on 0)= 6404956.34762 
+info:api_test:dataApiTestSummaryStatistics():stdDev(clamped on 0)= 122.72514482 
+info:api_test:dataApiTestSummaryStatistics():getNumCells(clamped on 0)= 112 
+info:api_test:dataApiTestSummaryStatistics():min(clamped on all)= 1.96 
+info:api_test:dataApiTestSummaryStatistics():max(clamped on all)= 356.354936875 
+info:api_test:dataApiTestSummaryStatistics():sum(clamped on all)= 534124.882562 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares(clamped on all)= 101629465.415 
+info:api_test:dataApiTestSummaryStatistics():stdDev(clamped on all)= 94.2675167007 
+info:api_test:dataApiTestSummaryStatistics():getNumCells(clamped on all)= 4944 
+info:api_test:dataApiTestSummaryStatistics():getNumBoxes(clamped on all)= 24 
+info:api_test:dataApiTestSummaryStatistics():min()= 1.96 
+info:api_test:dataApiTestSummaryStatistics():max()= 356.354936875 
+info:api_test:dataApiTestSummaryStatistics():sum()= 534124.882562 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares()= 101629465.415 
+info:api_test:dataApiTestSummaryStatistics():stdDev()= 94.2675167007 
+info:api_test:dataApiTestSummaryStatistics():getNumCells()= 4944 
+info:api_test:dataApiTestSummaryStatistics():getNumBoxes()= 24 
+info:api_test:dataApiTestSummaryStatistics():bld.sum(clamped on ((17, 4), (31, 8)) )= 22459.1807799 
+info:api_test:dataApiTestSummaryStatistics():bld.sum(cropped to ((17, 4), (31, 8)) )= 22459.1807799 
+info:api_test:dataApiTestApplicator():Clamped on box# 0 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 0 ,(i,j,k)= (24, 1, 0) = 296.805650728 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.abs to () 
+info:api_test:dataApiTestApplicator():Value is now 296.805650728 
+info:api_test:dataApiTestApplicator():Clamped on box# 20 
+info:api_test:dataApiTestApplicator():Clamped on box# 21 
+info:api_test:dataApiTestApplicator():Clamped on box# 10 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 10 ,(i,j,k)= (7, 5, 0) = 63.997491912 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__iadd__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 66.497491912 
+info:api_test:dataApiTestApplicator():Clamped on box# 9 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 9 ,(i,j,k)= (0, 3, 0) = 246.32361989 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__iadd__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 492.64723978 
+info:api_test:dataApiTestApplicator():Clamped on box# 5 
+info:api_test:dataApiTestApplicator():Clamped on box# 13 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 13 ,(i,j,k)= (6, 22, 0) = 63.8100178253 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__isub__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 61.3100178253 
+info:api_test:dataApiTestApplicator():Clamped on box# 9 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 9 ,(i,j,k)= (14, 6, 0) = 460.527252127 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__isub__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 0.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 4 
+info:api_test:dataApiTestApplicator():Clamped on box# 1 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 1 ,(i,j,k)= (17, 7, 0) = 64.0 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__imul__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 160.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 20 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 20 ,(i,j,k)= (1, 9, 0) = 63.2696565033 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__imul__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 4003.04943404 
+info:api_test:dataApiTestApplicator():Clamped on box# 13 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 2 ,(i,j,k)= (0, 0, 0) = 65.0 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__idiv__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 26.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 21 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 21 ,(i,j,k)= (4, 3, 0) = 64.8471066288 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__idiv__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 1.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 2 ,(i,j,k)= (6, 6, 0) = 0.99197204219 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.exp to () 
+info:api_test:dataApiTestApplicator():Value is now 2.69654693675 
+info:api_test:dataApiTestApplicator():Clamped on box# 17 
+info:api_test:dataApiTestApplicator():Clamped on box# 5 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 2 ,(i,j,k)= (1, 1, 0) = 0.974292067001 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__ipow__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 0.936964024244 
+info:api_test:dataApiTestApplicator():Clamped on box# 9 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 9 ,(i,j,k)= (1, 4, 0) = 0.999000999001 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__ipow__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 0.999001996506 
+info:api_test:dataApiTestApplicator():Clamped on box# 4 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 4 ,(i,j,k)= (16, 3, 0) = 259.426361027 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.log to () 
+info:api_test:dataApiTestApplicator():Value is now 5.5584728898 
+info:api_test:dataApiTestApplicator():Clamped on box# 8 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 2 ,(i,j,k)= (6, 2, 0) = 0.936964024245 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.sin to () 
+info:api_test:dataApiTestApplicator():Value is now 0.805763799322 
+info:api_test:dataApiTestApplicator():Clamped on box# 22 
+info:api_test:dataApiTestApplicator():Clamped on box# 9 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 9 ,(i,j,k)= (8, 3, 0) = 0.999001996506 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.cos to () 
+info:api_test:dataApiTestApplicator():Value is now 0.541141827638 
+info:api_test:dataApiTestApplicator():Clamped on box# 12 
+info:api_test:dataApiTestApplicator():Clamped on box# 16 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 16 ,(i,j,k)= (7, 3, 0) = 64.0243614403 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.tan to () 
+info:api_test:dataApiTestApplicator():Value is now 2.51617326057 
+info:api_test:dataApiTestApplicator():Clamped on box# 19 
+info:api_test:dataApiTestApplicator():Clamped on box# 4 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 4 ,(i,j,k)= (16, 3, 0) = 0.885037106165 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.asin to () 
+info:api_test:dataApiTestApplicator():Value is now 1.08657371399 
+info:api_test:dataApiTestApplicator():Clamped on box# 19 
+info:api_test:dataApiTestApplicator():Clamped on box# 1 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 1 ,(i,j,k)= (18, 5, 0) = 0.00118292479451 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.acos to () 
+info:api_test:dataApiTestApplicator():Value is now 1.56961340172 
+info:api_test:dataApiTestApplicator():Clamped on box# 14 
+info:api_test:dataApiTestApplicator():Clamped on box# 12 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 12 ,(i,j,k)= (0, 4, 0) = 0.653395939571 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.atan to () 
+info:api_test:dataApiTestApplicator():Value is now 0.578758821065 
+info:api_test:dataApiTestApplicator():Clamped on box# 3 
+info:api_test:dataApiTestApplicator():Clamped on box# 0 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 0 ,(i,j,k)= (3, 1, 0) = 0.00255625427957 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.sinh to () 
+info:api_test:dataApiTestApplicator():Value is now 0.00255625706352 
+info:api_test:dataApiTestApplicator():Clamped on box# 21 
+info:api_test:dataApiTestApplicator():Clamped on box# 7 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 7 ,(i,j,k)= (4, 7, 0) = 0.999000998245 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.cosh to () 
+info:api_test:dataApiTestApplicator():Value is now 1.54190737657 
+info:api_test:dataApiTestApplicator():Clamped on box# 5 
+info:api_test:dataApiTestApplicator():Clamped on box# 22 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 22 ,(i,j,k)= (4, 4, 0) = 1.96 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.tanh to () 
+info:api_test:dataApiTestApplicator():Value is now 0.961089830864 
+info:api_test:dataApiTestApplicator():Clamped on box# 23 
+info:api_test:dataApiTestApplicator():Clamped on box# 15 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 15 ,(i,j,k)= (13, 4, 0) = 63.9342636207 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.asinh to () 
+info:api_test:dataApiTestApplicator():Value is now 4.85106376025 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Clamped on box# 9 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 9 ,(i,j,k)= (14, 3, 0) = 1.999000999 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.acosh to () 
+info:api_test:dataApiTestApplicator():Value is now 1.31638093127 
+info:api_test:dataApiTestApplicator():Clamped on box# 0 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 2 ,(i,j,k)= (11, 5, 0) = 0.955243009529 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.atanh to () 
+info:api_test:dataApiTestApplicator():Value is now 1.88851106104 
+info:api_test:dataApiTestApplicator():Clamped on box# 10 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 11 ,(i,j,k)= (3, 4, 0) = 63.9678041844 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.setDatum to (2.5, 11, 3, 4, 0) 
+info:api_test:dataApiTestApplicator():Value is now 2.5 
+info:api_test:dataApiTestApplicator():Clamped on box# 0 
+info:api_test:dataApiTestApplicator():Clamped on box# 8 
+info:api_test:dataApiTestApplicator():Clamped on box# 2 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 2 ,(i,j,k)= (4, 3, 0) = 1.88851106079 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__add__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 4.38851106079 
+info:api_test:dataApiTestApplicator():Clamped on box# 10 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 10 ,(i,j,k)= (3, 7, 0) = 0.998908302348 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__add__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 1.9978166047 
+info:api_test:dataApiTestApplicator():Clamped on box# 23 
+info:api_test:dataApiTestApplicator():Clamped on box# 18 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 18 ,(i,j,k)= (9, 6, 0) = 93.4308874751 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__sub__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 90.9308874751 
+info:api_test:dataApiTestApplicator():Clamped on box# 10 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 10 ,(i,j,k)= (7, 3, 0) = 0.993159767431 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__sub__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 0.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 13 
+info:api_test:dataApiTestApplicator():Clamped on box# 3 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 3 ,(i,j,k)= (4, 2, 0) = 0.999000999 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__mul__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 2.4975024975 
+info:api_test:dataApiTestApplicator():Clamped on box# 16 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 16 ,(i,j,k)= (2, 0, 0) = 2.91072405296 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__mul__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 8.47231451246 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Clamped on box# 19 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 19 ,(i,j,k)= (6, 6, 0) = 0.67605610027 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__div__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 0.270422440108 
+info:api_test:dataApiTestApplicator():Clamped on box# 10 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 10 ,(i,j,k)= (2, 1, 0) = 0.998708283127 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__div__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 1.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 4 
+info:api_test:dataApiTestApplicator():Clamped on box# 15 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 15 ,(i,j,k)= (15, 6, 0) = 4.85118422543 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__radd__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 7.35118422543 
+info:api_test:dataApiTestApplicator():Clamped on box# 20 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 20 ,(i,j,k)= (15, 1, 0) = 3.8416 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__radd__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 7.6832 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Clamped on box# 16 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 16 ,(i,j,k)= (1, 6, 0) = 2.3593049217 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rsub__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 0.1406950783 
+info:api_test:dataApiTestApplicator():Clamped on box# 23 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 23 ,(i,j,k)= (17, 22, 0) = 1.96 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rsub__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 0.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 23 
+info:api_test:dataApiTestApplicator():Clamped on box# 5 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 5 ,(i,j,k)= (15, 1, 0) = 0.700535524143 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rmul__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 1.75133881036 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 11 ,(i,j,k)= (7, 3, 0) = 63.8109630738 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rmul__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 4071.83900841 
+info:api_test:dataApiTestApplicator():Clamped on box# 17 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 11 ,(i,j,k)= (5, 7, 0) = 0.827746732978 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rdiv__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 3.0202474989 
+info:api_test:dataApiTestApplicator():Clamped on box# 5 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 5 ,(i,j,k)= (17, 6, 0) = 0.71322885237 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rdiv__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 1.0 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Clamped on box# 1 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 1 ,(i,j,k)= (13, 4, 0) = 0.999000999001 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__pow__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 0.997504368447 
+info:api_test:dataApiTestApplicator():Clamped on box# 10 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 10 ,(i,j,k)= (4, 0, 0) = 0.996757797994 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__pow__ to <box_layout_data.BoxLayoutData 
+info:api_test:dataApiTestApplicator():Value is now 0.996768292864 
+info:api_test:dataApiTestApplicator():Clamped on box# 3 
+info:api_test:dataApiTestApplicator():Clamped on box# 11 
+info:api_test:dataApiTestApplicator():Value at level 1 , comp 4 , box 11 ,(i,j,k)= (1, 2, 0) = 0.924570149931 
+info:api_test:dataApiTestApplicator():Applying BoxLayoutData.__rpow__ to (2.5,) 
+info:api_test:dataApiTestApplicator():Value is now 2.33304681517 
+info:api_test:dataApiTestApplicator():Clamped on box# 3 
+info:api_test:dataApiTest():Summary statistics after all these operations: 
+info:api_test:dataApiTestSummaryStatistics():min(clamped on 0)= 1.39001051251 
+info:api_test:dataApiTestSummaryStatistics():max(clamped on 0)= 1.999000999 
+info:api_test:dataApiTestSummaryStatistics():sum(clamped on 0)= 187.310273499 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares(clamped on 0)= 319.999732523 
+info:api_test:dataApiTestSummaryStatistics():stdDev(clamped on 0)= 0.246407829115 
+info:api_test:dataApiTestSummaryStatistics():getNumCells(clamped on 0)= 112 
+info:api_test:dataApiTestSummaryStatistics():min(clamped on all)= 0.00354340351065 
+info:api_test:dataApiTestSummaryStatistics():max(clamped on all)= 4246.58922583 
+info:api_test:dataApiTestSummaryStatistics():sum(clamped on all)= 1476296.26899 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares(clamped on all)= 5451394283.64 
+info:api_test:dataApiTestSummaryStatistics():stdDev(clamped on all)= 1006.81140505 
+info:api_test:dataApiTestSummaryStatistics():getNumCells(clamped on all)= 4944 
+info:api_test:dataApiTestSummaryStatistics():getNumBoxes(clamped on all)= 24 
+info:api_test:dataApiTestSummaryStatistics():min()= 0.00354340351065 
+info:api_test:dataApiTestSummaryStatistics():max()= 4246.58922583 
+info:api_test:dataApiTestSummaryStatistics():sum()= 1476296.26899 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares()= 5451394283.64 
+info:api_test:dataApiTestSummaryStatistics():stdDev()= 1006.81140505 
+info:api_test:dataApiTestSummaryStatistics():getNumCells()= 4944 
+info:api_test:dataApiTestSummaryStatistics():getNumBoxes()= 24 
+info:api_test:dataApiTestSummaryStatistics():bld.sum(clamped on ((17, 4), (31, 8)) )= 120.549930782 
+info:api_test:dataApiTestSummaryStatistics():bld.sum(cropped to ((17, 4), (31, 8)) )= 120.549930782 
+info:api_test:dataApiTest():Summary statistics for bld_clone (should match up)with summary statistics before the operations: 
+info:api_test:dataApiTestSummaryStatistics():min(clamped on 0)= 64.0 
+info:api_test:dataApiTestSummaryStatistics():max(clamped on 0)= 356.354936875 
+info:api_test:dataApiTestSummaryStatistics():sum(clamped on 0)= 23024.1400633 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares(clamped on 0)= 6404956.34762 
+info:api_test:dataApiTestSummaryStatistics():stdDev(clamped on 0)= 122.72514482 
+info:api_test:dataApiTestSummaryStatistics():getNumCells(clamped on 0)= 112 
+info:api_test:dataApiTestSummaryStatistics():min(clamped on all)= 1.96 
+info:api_test:dataApiTestSummaryStatistics():max(clamped on all)= 356.354936875 
+info:api_test:dataApiTestSummaryStatistics():sum(clamped on all)= 534124.882562 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares(clamped on all)= 101629465.415 
+info:api_test:dataApiTestSummaryStatistics():stdDev(clamped on all)= 94.2675167007 
+info:api_test:dataApiTestSummaryStatistics():getNumCells(clamped on all)= 4944 
+info:api_test:dataApiTestSummaryStatistics():getNumBoxes(clamped on all)= 24 
+info:api_test:dataApiTestSummaryStatistics():min()= 1.96 
+info:api_test:dataApiTestSummaryStatistics():max()= 356.354936875 
+info:api_test:dataApiTestSummaryStatistics():sum()= 534124.882562 
+info:api_test:dataApiTestSummaryStatistics():sumOfSquares()= 101629465.415 
+info:api_test:dataApiTestSummaryStatistics():stdDev()= 94.2675167007 
+info:api_test:dataApiTestSummaryStatistics():getNumCells()= 4944 
+info:api_test:dataApiTestSummaryStatistics():getNumBoxes()= 24 
+info:api_test:dataApiTestSummaryStatistics():bld.sum(clamped on ((17, 4), (31, 8)) )= 22459.1807799 
+info:api_test:dataApiTestSummaryStatistics():bld.sum(cropped to ((17, 4), (31, 8)) )= 22459.1807799 
+info:api_test:runTests():Grid Test: 
+info:api_test:runTests():Clipping Test: 
+info:api_test:runTests():Iso Test: 
+error:vtk_iso:setOpacity():Opacity works on isosurfaces, not contours. 
+info:api_test:runTests():Stream Test: 
+info:api_test:runTests():Cmap Test: 
+info:api_test:runTests():Slice Test: 
+info:api_test:runTests():Reader Test: 
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[2] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[3] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[4] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[5] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[6] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[7] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[8] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[9] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[10] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[11] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[12] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[13] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[14] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[15] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[16] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[17] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[18] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[19] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[20] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[21] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[22] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[23] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[2] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[3] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[4] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[5] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[6] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[7] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[8] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[9] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[10] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[11] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[12] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[13] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[14] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[15] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[16] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[17] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[18] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[19] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[20] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[21] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[22] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[23] reset!
+Info (SynthesizeFArray): Synthesizing FArray: level 0, box 0, comp 4
+Info (SynthesizeFArray): Synthesizing FArray: level 0, box 1, comp 4
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 0, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 0, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 1, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 1, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 2, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 2, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 3, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 3, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 4, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 4, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 5, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 5, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 6, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 6, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 7, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 7, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 8, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 8, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 9, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 9, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 10, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 10, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 11, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 11, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 12, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 12, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 13, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 13, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 14, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 15, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 15, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 16, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 16, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 17, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 17, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 18, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 18, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 19, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 19, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 20, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 21, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 21, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 22, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 22, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 23, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 23, comp 0
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[2] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[3] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[4] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[5] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[6] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[7] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[8] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[9] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[10] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[11] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[12] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[13] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[14] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[15] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[16] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[17] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[18] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[19] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[20] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[21] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[22] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[23] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 14, comp 1
+datum=116.057561655
+box extents={'i':(1, 31),'j':(1, 14)}
+Info (BoxLayoutData::FreeUnusedFABs()): fab[14] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[2] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[3] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[4] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[5] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[6] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[7] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[8] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[9] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[10] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[11] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[12] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[13] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[14] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[15] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[16] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[17] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[18] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[2] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[3] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[4] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[5] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[6] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[7] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[8] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[9] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[10] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[11] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[12] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[13] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[14] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[15] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[16] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[17] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[18] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[19] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[20] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[21] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[22] reset!
+c.reader.getDomainBounds()=((0.0, 1.0), (0.0, 0.25), (0.0, 0.015625))
+c.reader.is2DMode()=True
+components=['density', 'x-momentum', 'y-momentum', 'energy-density', 'comp0_squared']
+num levels =3
+num boxs at level 0=2
+num boxs at level 1=24
+num boxs at level 2=78
+info:api_test:runTests():Misc Test: 
+Exiting CmdlineBase::DebugLevel()
+****************** cmap_api:setBackgroundColor(rgb=(0.0, 0.900000000000...)
+******************** vtk_cmap:setBackgroundColor(rgb=(0.0, 0.900000000000...)
+********************** notifier:set(x=(0.0, 0.900000000000..., kw={})
+************************ vtk_iso:update2DColor(rgb=(0.0, 0.900000000000..., extra_info=None)
+************************** vtk_data:is2DMode()
+********************** vtk_vtk:render(notifier=None, extra_info=None)
+****************** anag_utils:setDebugLevel(n=4)
+********************** anag_utils:write(cmd='c.misc_api.setDebug...)
+******************** vtk_data:setDebugLevel(dl=4)
+Entering CmdlineBase::DebugLevel()
+Info (SynthesizeFArray): Synthesizing FArray: level 2, box 48, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 48, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 2, box 50, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 2, box 50, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 1, box 20, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 1, box 20, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 0, box 1, comp 4
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 0
+info:api_test:miscTest():lineplot( [0.44999998807907104, 0.026249998807907106] , [0.44999998807907104, 0.23624998927116395] )= ((0.0, 43.881208126362679), (0.25, 133.42435705955828), (0.5, 63.426080587090809), (0.75, 63.865551377533897), (1.0, 63.547119462679596)) 
+info:api_test:miscTest():About to make databrowser, and we have __covered-0 
+Info (SynthesizeFArray): Synthesizing FArray: level 0, box 0, comp 5
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (SynthesizeFArray): Synthesizing FArray: level 0, box 1, comp 5
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[1] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[0] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[20] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[20] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[23] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[48] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[50] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[48] reset!
+Info (BoxLayoutData::FreeUnusedFABs()): fab[50] reset!
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 3
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 0
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 1, comp 3

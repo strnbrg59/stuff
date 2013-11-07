@@ -1,0 +1,407 @@
+
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** vtkAMRVolumeImpl_cxx  
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+**
+*/
+
+/* provided as a modification from source material derived from
+   the VTK distribution.  In accordance with VTK software agreement
+   the following also holds:
+=========================================================================
+
+
+Copyright (c) 1993-2000 Ken Martin, Will Schroeder, Bill Lorensen 
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+ * Neither name of Ken Martin, Will Schroeder, or Bill Lorensen nor the names
+   of any contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+ * Modified source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=========================================================================*/
+
+#include <vtkAMRVolume.h>
+#include <vtkVolumeRayCastMapper.h>
+#include <vtkVolumeRayCastCompositeFunction.h>
+#include <vtkUnsignedCharArray.h>
+#include <vtkVolume.h>
+#include <vtkVolumeProperty.h>
+#include <vtkStructuredPoints.h>
+#include <vtkVolumeCollection.h>
+#include <vtkRenderer.h>
+#include <vtkPointData.h>
+#include <vtkVolumeRayCastFunction.h>
+#include <vtkVolumeCollection.h>
+#include <vtkLODProp3D.h>
+
+#include <algorithm>
+#include <iostream>
+#include "../utils/cmdline.h"
+#include "../data_access/FABAccess.h"
+#include "../data_access/PointerHandleMap.h"
+
+template<class REAL_T>
+vtkAMRVolumeImpl<REAL_T>::vtkAMRVolumeImpl( vtkChomboReader * reader ):
+  vtkAMRVolume(0),
+  m_maxLevel(0),
+  m_minLevel(0),
+  m_componentNum(0),
+  m_minScalarValue(0),
+  m_maxScalarValue(0),
+  m_sampleDistance(1.0),
+  m_chomboReader( reader ),
+  m_renderer(NULL),
+  m_rayCastFunction(NULL),
+  m_property(NULL)
+{
+  m_volumes = vtkVolumeCollection::New();
+  m_rayCastFunction = vtkVolumeRayCastCompositeFunction::New();
+  m_property = vtkVolumeProperty::New();
+}
+
+template<class REAL_T>
+vtkAMRVolumeImpl<REAL_T>::~vtkAMRVolumeImpl()
+{
+  ClearVolumes();
+  if(m_chomboReader!=NULL)    m_chomboReader->UnRegister(this);
+  if(m_renderer!=NULL)        m_renderer->UnRegister(this);
+  if(m_rayCastFunction!=NULL) m_rayCastFunction->UnRegister(this);
+  if(m_property!=NULL)        m_property->UnRegister(this);
+}
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::SetComponentNum( int c )
+{
+    if( m_componentNum != c )
+    {
+        m_chomboReader->SetCurrentComponentNum( c );
+        m_componentNum = c;
+    }
+    Modified();
+}
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::SetMaxLevel(int newMaxLevel)
+{
+    if( newMaxLevel == m_maxLevel) return;
+
+    if(m_chomboReader == NULL)
+    {
+        m_maxLevel = newMaxLevel;
+        vtkDebugMacro(<<"setting m_maxLevel, m_chomboReader==NULL");
+        return;
+    }
+    if( newMaxLevel >= m_chomboReader->GetNumLevels() )
+    {
+        vtkDebugMacro(<<"trying to set level higher than Max Level");
+        return;
+    }
+    if(newMaxLevel < 0) {
+        vtkDebugMacro(<<"trying to set Max Level < 0 ");
+    }
+
+    vtkDebugMacro(<<"setting m_maxLevel "<<newMaxLevel);
+
+
+    // Load and release FArrays.  Use ChomboReader's convenient services.
+    // We don't actually do anything with the FArrays here.  Our purpose is only
+    // to manage their refcounts.
+    for( int l=newMaxLevel+1; l<=m_maxLevel; ++l )
+    {
+        m_chomboReader->HideLevel(l);
+    }
+    for( int l=m_maxLevel+1; l<=newMaxLevel; ++l )
+    {
+        m_chomboReader->ShowLevel(l);
+    }
+  
+    m_maxLevel = newMaxLevel;
+    Modified();
+    BuildVolumes();
+}
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::SetMinLevel(int newMinLevel)
+{
+    if( newMinLevel == m_minLevel) return;
+
+    if(m_chomboReader == NULL)
+    {
+        m_minLevel = newMinLevel;
+        vtkDebugMacro(<<"setting m_minLevel, m_chomboReader==NULL");
+        return;
+    }
+    if( newMinLevel >= m_chomboReader->GetNumLevels() )
+    {
+        vtkDebugMacro(<<"trying to set min level higher than Max Level");
+        return;
+    }
+    if(newMinLevel < 0)
+    {
+        vtkDebugMacro(<<"trying to set min Level < 0 ");
+    }
+
+    vtkDebugMacro(<<"setting m_minLevel "<<newMinLevel);
+
+    // Load and release FArrays.  Use ChomboReader's convenient services.
+    // We don't actually do anything with the FArrays here.  Our purpose is only
+    // to manage their refcounts.
+    for( int l=m_minLevel; l<newMinLevel; ++l )
+    {
+        m_chomboReader->HideLevel(l);
+    }
+    for( int l=newMinLevel; l<m_minLevel; ++l )
+    {
+        m_chomboReader->ShowLevel(l);
+    }
+  
+    m_minLevel = newMinLevel;
+    Modified();
+    BuildVolumes();
+}
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::ClearVolumes()
+{
+  if(m_volumes->GetNumberOfItems() == 0) return;
+  
+  m_volumes->InitTraversal();
+  vtkVolume* vol = m_volumes->GetNextVolume();
+  if(m_renderer != NULL) while(vol != NULL)
+    {
+      m_renderer->RemoveVolume(vol);
+      vol = m_volumes->GetNextVolume();
+    }
+
+  m_volumes->InitTraversal();
+  vol = m_volumes->GetNextVolume();
+  while(vol != NULL)
+    {
+      vol->Delete();
+      vol = m_volumes->GetNextVolume();
+    }
+
+  m_volumes->RemoveAllItems();
+
+}
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::BuildVolumes()
+{
+    Trace t("vtkAMRVolumeImpl::BuildVolumes()"); t.NoOp();
+
+    ClearVolumes();
+    if(m_chomboReader == NULL)
+    {
+        vtkErrorMacro("<<trying to build M_Volumes without Reader");
+        return;
+    }
+    if(m_chomboReader->GetNumDims() == 2)
+    {
+        vtkErrorMacro("Trying to perform Volume Rendering on 2D data");
+        return;
+    }
+    if(m_minScalarValue >  m_maxScalarValue)
+    {
+        vtkErrorMacro(<<"m_minScalarValue >= m_maxScalarValue"<<
+        m_minScalarValue<<" > "<<m_maxScalarValue);
+        return;
+    }
+
+    int numgrids, gdims[3];
+    double minextent[3], maxextent[3];
+    float  fminextent[3], spacing[3];
+    int numBoxPts;
+    vtkStructuredPoints* points;
+    vtkVolume*  vol;
+    REAL_T rangeMin, rangeMax;
+    REAL_T scalarMult;
+
+    // Find the min and max of the range, over all levels selected *for volume
+    // rendering specifically*.
+    if(m_minScalarValue != m_maxScalarValue){
+        rangeMin = m_minScalarValue;
+        rangeMax = m_maxScalarValue;
+    } else
+    {
+        rangeMin =  HUGE_VAL;
+        rangeMax = -HUGE_VAL;
+        for( int l=0; l<=m_maxLevel; ++l )
+        {
+            double * minmax = m_chomboReader->GetLevelComponentRange(
+                l, m_componentNum );
+            rangeMin =  std::min( rangeMin, REAL_T(minmax[0]) );
+            rangeMax =  std::max( rangeMax, REAL_T(minmax[1]) );
+        }
+    }
+    if (rangeMin >= rangeMax){
+        vtkErrorMacro(<<" cannot volume render when rangeMin>=rangeMax");
+        return;
+    }
+    scalarMult = 255.0 / (rangeMax - rangeMin);
+
+    for(int level = m_minLevel; level<=m_maxLevel; level++)
+    {
+
+        numgrids = m_chomboReader->GetLevelNumBoxes( level );
+        double * temp = m_chomboReader->GetLevelDx(level); 
+        for( int m=0;m<3;++m ) spacing[m] = temp[m];
+
+        for(int grid=0; grid<numgrids; grid++)
+        {
+            double * dtemp = m_chomboReader->GetBoxExtentsXYZ( level, grid, 0 );
+            memcpy( minextent, dtemp,     3*sizeof(double) );
+            memcpy( maxextent, dtemp + 3, 3*sizeof(double) );
+
+            for( int m=0;m<3;++m ) fminextent[m]=minextent[m] + spacing[m]/2;
+
+            vtkUnsignedCharArray *scalars = vtkUnsignedCharArray::New();
+
+            int * boxDims = m_chomboReader->GetBoxDims( level, grid );
+            numBoxPts = boxDims[0] * boxDims[1] * boxDims[2];
+
+            scalars->SetNumberOfValues(numBoxPts);
+            unsigned char* array = (unsigned char*)malloc(numBoxPts);
+            assert( array );
+            boost::shared_array<REAL_T> fab(
+                SharedArrayHandleMap<REAL_T>::GetPointer(
+                    (m_chomboReader->GetFArray( level, grid, m_componentNum))));
+
+            ((vtkUnsignedCharArray * )scalars)->SetArray( array, numBoxPts, 0 );
+            for(int i=0; i<numBoxPts; i++, array++)
+            {
+                *array = (unsigned char)( ( fab[i] - rangeMin ) * scalarMult );
+            }
+
+            int * temp = m_chomboReader->GetBoxDims( level, grid );
+            memcpy( gdims, temp, 3*sizeof(int) );
+            points = vtkStructuredPoints::New();
+            points->SetDimensions(gdims);
+            points->SetOrigin(fminextent[0],fminextent[1],fminextent[2]);
+            points->SetSpacing(spacing[0],spacing[1],spacing[2]);
+            points->GetPointData()->SetScalars(scalars);
+            scalars->Delete();// remove local reference woo hoo;
+        
+            vtkVolumeRayCastMapper* mapper = vtkVolumeRayCastMapper::New();
+            mapper->SetVolumeRayCastFunction(m_rayCastFunction);
+            mapper->SetInput(points);
+            points->Delete(); // remove local reference
+            mapper->SetSampleDistance(m_sampleDistance);
+
+            vtkLODProp3D * lodProp = vtkLODProp3D::New();
+            lodProp->AddLOD( mapper, m_property, 0.0 );
+            // FIXME: Doesn't seem to have any effect.
+
+            vol = vtkVolume::New();
+            vol->SetProperty(m_property);
+            vol->SetMapper(mapper);
+            mapper->Delete(); //remove local reference
+            m_volumes->AddItem(vol);
+        }
+    }
+}
+
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::AddVolumesToRenderer()
+{
+  if(m_renderer==NULL){
+    vtkDebugMacro(<<"attempting to add m_volumes without m_renderer");
+    return;
+  }
+
+  if(m_volumes->GetNumberOfItems() == 0) return;
+
+  vtkVolumeCollection* rendererVolumes = 
+    m_renderer->GetVolumes();
+  m_volumes->InitTraversal();
+  vtkVolume* vol  = m_volumes->GetNextVolume();
+  while(vol != NULL)
+    {
+      if(!(rendererVolumes->IsItemPresent(vol)))
+        m_renderer->AddVolume(vol);
+
+      vol = m_volumes->GetNextVolume();
+    }
+}
+
+
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::RemoveVolumesFromRenderer()
+{
+  if(m_renderer==NULL){
+    vtkDebugMacro(<<"attempting to remove m_volumes without m_renderer");
+    return;
+  }
+
+  if(m_volumes->GetNumberOfItems() == 0) return;
+
+  m_volumes->InitTraversal();
+  vtkVolume* vol  = m_volumes->GetNextVolume();
+  while(vol != NULL)
+    {
+        m_renderer->RemoveVolume(vol);
+        vol = m_volumes->GetNextVolume();
+        
+    }
+}
+      
+template<class REAL_T> void
+vtkAMRVolumeImpl<REAL_T>::PrintSelf(ostream& os, vtkIndent indent)
+{
+  //blah
+}

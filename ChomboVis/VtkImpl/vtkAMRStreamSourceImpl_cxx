@@ -1,0 +1,691 @@
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+**
+*/
+/* provided as a modification from source material derived from
+   the VTK distribution.  In accordance with VTK software agreement
+   the following also holds:
+=========================================================================
+
+Copyright (c) 1993-2000 Ken Martin, Will Schroeder, Bill Lorensen 
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+ * Neither name of Ken Martin, Will Schroeder, or Bill Lorensen nor the names
+   of any contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+ * Modified source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=========================================================================*/
+
+#include <algorithm>
+#include <cstring>
+#include <iostream>
+#include "vtkAMRStreamSource.h"
+#include "../data_access/PointerHandleMap.h"
+#include "vtkPoints.h"
+#include "vtkPolyData.h"
+#include "vtkCellArray.h"
+#include "vtkChomboReader.h"
+#include "../utils/StatusCodes.h"
+#include "../utils/cmdline.h"
+#include "../utils/BoxFinder.h"
+#include "../data_access/FABAccess.h"
+
+//--------------------------------------------------------------------------
+
+template<class REAL_T>
+vtkAMRStreamSourceImpl<REAL_T>::vtkAMRStreamSourceImpl(
+    vtkChomboReader * reader ):
+  vtkAMRStreamSource(0),
+  m_chomboReader( reader ),
+  m_seedPoints(0),
+  m_uComponent(-1), // trapped by sanity check later
+  m_vComponent(-1),
+  m_wComponent(-1),
+  m_maxLevel(-1),
+  m_forward(1),
+  m_backward(1),
+  m_integrationMode(0),
+  m_maxPointsPerLine(1500),
+  m_fieldThreshold(1E-6),
+  m_relativeStepSize(0.25)
+{
+    assert( reader );
+}
+
+template<class REAL_T>
+vtkAMRStreamSourceImpl<REAL_T>::~vtkAMRStreamSourceImpl()
+{
+    cerr << "vtkAMRStreamSourceImpl dtor" << endl;
+    assert( m_chomboReader );
+    m_chomboReader->UnRegister(this);
+
+    if(m_seedPoints)  m_seedPoints->UnRegister(this);
+}
+
+/** Gotta define this here.  If we don't it'll call the version in its
+ *  immediate parent class, which is vtkAMRStreamSource, which calls back
+ *  into here, etc for an infinite recursion.
+ *  The version we really want to call is the one two levels up -- in class
+ *  vtkPolyDataSource.
+*/
+template<class REAL_T> vtkPolyData *
+vtkAMRStreamSourceImpl<REAL_T>::GetOutput()
+{
+    Trace t("vtkAMRStreamSourceImpl::GetOutput()"); t.NoOp();
+    return vtkPolyDataSource::GetOutput();
+}
+
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::Modified()
+{
+    Trace t("vtkAMRStreamSourceImpl::Modified()"); t.NoOp();
+    vtkPolyDataSource::Modified();
+}
+
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::Execute()
+{
+    Trace t("vtkAMRStreamSourceImpl::Execute()");
+    assert( m_chomboReader );
+    if(m_seedPoints == 0 )
+    {
+        t.Warning( "m_seedPoints == 0" );
+        return;
+    }
+
+    if( (m_integrationMode != 0) && (m_integrationMode != 1) )
+    {
+        return;
+    }
+
+    int nDims = m_chomboReader->GetNumDims();
+
+    //
+    // Sanity checking
+    //
+    assert( (nDims==2) || (nDims==3) );
+    if(nDims == 2)
+    {
+        if(m_uComponent == -1 || m_vComponent == -1)
+        {
+            t.Error( "2D velocity components not set." );
+            return;
+        }
+        if( m_uComponent == m_vComponent )
+        {
+            t.Warning( "Velocity components not all distinct. u=%d, v=%d",
+                m_uComponent, m_vComponent );
+            return ;
+        }
+    } else
+    {
+        if(m_uComponent == -1 || m_vComponent == -1 || m_wComponent == -1)
+        {
+            t.Error( "3D velocity components not set." );
+            return;
+        }
+        if(m_uComponent == m_vComponent || m_vComponent == m_wComponent || 
+           m_uComponent == m_wComponent)
+        {
+            t.Warning( "Velocity components not all distinct. u=%d, v=%d, w=%d",
+                m_uComponent, m_vComponent, m_wComponent );
+            return ;
+        }
+        // NOTE: Don't be tempted to move this distinct-component check out of
+        // the nDims==2 conditional, because at the python layer we set
+        // m_wComponent=2 (and skipping over all uses of the m_wComponent when
+        // in 2D mode would be introduce more special cases into the code than
+        // the one here.
+    }
+
+    
+
+    vtkPolyData * output = this->GetOutput();
+    vtkPoints * newPoints = vtkPoints::New();
+    vtkCellArray * newLines  = vtkCellArray::New();
+    vtkCellArray * newVerts  = vtkCellArray::New();  // Draws seed points.
+
+    //
+    // Loop over the seed points, calculating from each one a fieldline, i.e.
+    // streamline,
+    //
+    // NOTE: If we want to go multithread parallel, this is the loop to 
+    // distribute.  We'd need to decide if we want a separate fieldline Source
+    // per thread, or assemble these separate lines here in one object.
+    //
+    double seed[3];
+
+    int nSeeds = m_seedPoints->GetNumberOfPoints();
+    for(int i=0; i<nSeeds; ++i)
+    {
+        newVerts->InsertNextCell(1);
+        newVerts->InsertCellPoint( newPoints->GetNumberOfPoints() );
+
+        m_seedPoints->GetPoint(i, seed);
+        if(m_forward == 1)
+        {
+            BuildFieldLine(seed, nDims, 1, newPoints, newLines);
+        }
+
+        m_seedPoints->GetPoint(i, seed);
+        if(m_backward == 1)
+        {
+            BuildFieldLine(seed, nDims, -1, newPoints, newLines);
+        }
+    }
+
+    output->SetPoints(newPoints);
+    newPoints->Delete();
+
+    output->SetVerts(newVerts);
+    newVerts->Delete();
+
+    output->SetLines(newLines);
+    newLines->Delete();
+}
+
+
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::BuildFieldLine(
+    double seed[3],  // Gets modified here; is current position on field line.
+    int nDims,
+    int gain,
+    vtkPoints * points,
+    vtkCellArray * lines )
+{
+    Trace t("vtkAMRStreamSourceImpl::BuildFieldLine()");
+
+    int const biindex[8] = {0,0,1,1,0,0,1,1};
+    int const bjindex[8] = {0,1,0,1,0,1,0,1};
+    int const bkindex[8] = {0,0,0,0,1,1,1,1};
+
+    int level, box;
+    int gdims[3], gorigin[3];
+    double dx[3], delta[3]; 
+    double bx_old=-1, by_old=-1, bz_old=-1, bnorm_old;
+    double diff_x, diff_y, diff_z;
+    double bmax = 1;
+    if(nDims == 2) seed[2] = 0.0;
+    float graphpoint[3];
+    double boxExtents[6]; // {x_lo,y_lo,z_lo,x_hi,y_hi,z_hi}
+
+    for(int i=0; i<3; i++)
+    {   // step graphics down to float
+        graphpoint[i] = seed[i];
+    }
+
+    int pointid = points->GetNumberOfPoints();
+    points->InsertNextPoint(graphpoint);
+
+    int nPointsPerLine = 0;
+    while( (nPointsPerLine < m_maxPointsPerLine)
+        && (bmax >= m_fieldThreshold)
+        && ( 0 != FindEnclosingBox( seed, &level, &box, dx,
+                                    boxExtents, gdims, gorigin, nDims )))
+    {
+        boost::shared_array<REAL_T> uFArray(
+            SharedArrayHandleMap<REAL_T>::GetPointer(
+                ( m_chomboReader->GetFArray( level, box, m_uComponent )) ));
+        boost::shared_array<REAL_T> vFArray(
+            SharedArrayHandleMap<REAL_T>::GetPointer(
+                ( m_chomboReader->GetFArray( level, box, m_vComponent )) ));
+        boost::shared_array<REAL_T> wFArray(0);
+        if( m_wComponent != -1 ) // true in 2D case
+        {
+            wFArray = SharedArrayHandleMap<REAL_T>::GetPointer(
+                    (m_chomboReader->GetFArray( level, box, m_wComponent )) );
+        }
+        //t.Warning( "uFArray=%X, vFArray=%X", uFArray, vFArray );
+
+        int * temp = m_chomboReader->GetBoxDims( level, box );
+        int boxDims[3];
+        memcpy( boxDims, temp, 3*sizeof(int) );
+
+        while( ( SeedIsInsideBox( seed, boxExtents, nDims ) )
+            && ( nPointsPerLine < m_maxPointsPerLine )
+            && ( bmax >= m_fieldThreshold ) )
+        {
+            double stepsize;
+
+            //  Index of the cell we are in:
+            int ii = (int)(seed[0]/dx[0] - 0.5) - gorigin[0],
+                jj = (int)(seed[1]/dx[1] - 0.5) - gorigin[1],
+                kk = (int)(seed[2]/dx[2] - 0.5) - gorigin[2];
+    
+    
+            // Bilinear coefficients for this location:
+            double x[2], y[2], z[2]={1,1};
+
+            Weight( &ii, &x[0], &x[1], 0, seed, gorigin, gdims, dx[0] );
+            Weight( &jj, &y[0], &y[1], 1, seed, gorigin, gdims, dx[1] );
+            if(nDims == 3)
+            {
+                Weight( &kk, &z[0], &z[1], 2, seed, gorigin, gdims, dx[2] );
+            }
+
+            double weights[8];
+            for( int i=0;i<2;++i )
+            {
+                for( int j=0;j<2;++j )
+                {
+                    for( int k=0;k<2;++k )
+                    {
+                        weights[ 4*i + 2*j + k ] = x[j] * y[k] * z[i];
+                    }
+                }
+            }
+
+            // Now, get bx, by, and bz for location "seed".
+            double bx=0, by=0, bz=0, bnorm;
+
+            if(nDims==3)
+            {
+                for(int i=0; i<8; i++)
+                {
+                    bx+=weights[i] * FabAccess::GetArrayItemFast<REAL_T>(
+                            ii+biindex[i], jj+bjindex[i], kk+bkindex[i],
+                            boxDims[0], boxDims[1],
+                            uFArray.get() );
+                    by+=weights[i] * FabAccess::GetArrayItemFast<REAL_T>(
+                            ii+biindex[i], jj+bjindex[i], kk+bkindex[i],
+                            boxDims[0], boxDims[1],
+                            vFArray.get() );
+                    bz+=weights[i] * FabAccess::GetArrayItemFast<REAL_T>(
+                            ii+biindex[i], jj+bjindex[i], kk+bkindex[i],
+                            boxDims[0], boxDims[1],
+                            wFArray.get() );
+                }
+      
+            } else 
+            {
+                for(int i=0; i<4; i++)
+                {
+                    bx+=weights[i] * FabAccess::GetArrayItemFast(
+                        ii+biindex[i], jj+bjindex[i], 0,
+                        boxDims[0], boxDims[1],
+                        uFArray.get() );
+                    by+=weights[i] * FabAccess::GetArrayItemFast(
+                        ii+biindex[i], jj+bjindex[i], 0,
+                        boxDims[0], boxDims[1],
+                        vFArray.get() );
+                }
+            }
+
+            bmax = std::max( fabs(bx), fabs(by) );
+            if( nDims == 3 )
+            {
+                bmax = std::max( bmax, fabs(bz) );
+            }
+            if( bmax >= m_fieldThreshold ) 
+            {   // Else, possible singular point.
+                bnorm = sqrt(bx*bx+by*by+bz*bz);
+    
+                if(nPointsPerLine == 0)
+                {
+                    bx_old = bx;
+                    by_old = by;
+                    bz_old = bz;
+                    bnorm_old = bnorm;
+                }
+        
+                // 
+                // determine what delta should be for this [bx,by,bz] 
+                if(m_integrationMode == 0)
+                {
+                    stepsize = m_relativeStepSize*gain/bnorm;
+                    delta[0] = stepsize*bx*dx[0];
+                    delta[1] = stepsize*by*dx[1];
+                    delta[2] = stepsize*bz*dx[2];
+                } else if (m_integrationMode == 1)
+                {
+                    assert( (bx_old != -1) && (by_old != -1) && (bz_old != -1));
+                    diff_x = bx-bx_old;
+                    diff_y = by-by_old;
+                    diff_z = bz-bz_old;
+                    double ratio = 1 - sqrt( diff_x*diff_x +
+                                             diff_y*diff_y +
+                                             diff_z*diff_z ) / bnorm;
+                    if(ratio < 0)
+                    {
+                        stepsize = m_relativeStepSize*gain/bnorm;
+                    } else
+                    {
+                        stepsize = m_relativeStepSize * gain
+                                 / bnorm * (0.1 + ratio*0.3);
+                    }
+        
+                    delta[0] = stepsize*bx*dx[0];
+                    delta[1] = stepsize*by*dx[1];
+                    delta[2] = stepsize*bz*dx[2];
+        
+                } 
+    
+                // Update point and add a floating point reduced point to
+                // graphics set.
+                for(int i=0; i<3; ++i)
+                {
+                    seed[i] += delta[i];
+                    graphpoint[i] = seed[i];
+                    //cerr << "streamline point: [" << seed[0] << ", "
+                    //     << seed[1] << ", " << seed[2] << "]" << endl;
+                }
+                points->InsertNextPoint(graphpoint);
+                ++nPointsPerLine;
+            }
+        }
+    }
+  
+    if(nPointsPerLine == 0)
+    {   // SeedPoint was not inside any box; add no lines.
+        return;
+    }
+
+    // Points have been calculated, build the lines for the fieldline
+
+    // FIXME: There's a huge memory leak in the next four lines, when run
+    // on Ted's home machine that has Mesa.
+    lines->InsertNextCell(nPointsPerLine+1);
+    for(int i=0; i<=nPointsPerLine; i++, pointid++)
+    {
+        lines->InsertCellPoint(pointid); 
+    }
+}
+
+
+/** Find the level and box that arg seed is inside (starting from the highest
+ *  visible level), and set args level and box accordingly.
+ *  Return 0 if seed is not inside any box, 1 otherwise.
+*/
+template<class REAL_T> int
+vtkAMRStreamSourceImpl<REAL_T>::FindEnclosingBox(
+    double const seed[3],
+    int * level, int * boxNum,
+    double * dx, // including anisotropy
+    double boxExtents[6],
+    int gdims[],
+    int gorigin[],
+    int nDims )
+{
+    Trace t("vtkAMRStreamSourceImpl::FindEnclosingBox()"); t.NoOp();
+
+    *level = m_maxLevel+1;
+    *boxNum = -1;
+    while( ((*level) > 0) && ((*boxNum) == -1) )
+    {
+        -- (*level);
+        *boxNum = m_chomboReader->GetEnclosingBoxNumXYZ(
+            *level, seed[0], seed[1], seed[2] );
+    }
+    if( *boxNum == -1 ) // Seed is outside the entire domain.
+    {
+        return 0;
+    } else
+    {
+        double * dtemp = m_chomboReader->GetBoxExtentsXYZ( *level, *boxNum, 0 );
+        memcpy( boxExtents, dtemp, 6*sizeof(double) );
+
+        // We check SeedIsInsideBox() too.  Even though it looks redundant,
+        // we've seen roundoff error causing ChomboReader::GetEnclosingBoxNumXYZ
+        // to think it's found a box, while SeedIsInsideBox() disagrees.
+        if( ! SeedIsInsideBox( seed, boxExtents, nDims ) )
+        {
+            return 0;
+        } else
+        {
+            memcpy( dx, m_chomboReader->GetLevelDx( *level ), 3*sizeof(double));
+            int * temp = m_chomboReader->GetBoxDims( *level, *boxNum );
+            memcpy( gdims, temp, 3*sizeof(int) );
+            temp = m_chomboReader->GetBoxOrigin( *level, *boxNum );
+            memcpy( gorigin, temp, 3*sizeof(int) );
+
+            return 1;
+        }
+    }
+}
+
+
+/** We pass in the box extents, rather than calculate them, because a call to
+ *  m_chomboReader->GetBoxExtentsXYZ() is too expensive.
+*/
+template<class REAL_T> bool
+vtkAMRStreamSourceImpl<REAL_T>::SeedIsInsideBox( double const seed[3],
+                                            double boxExtents[6],
+                                            int nDims )
+{
+    Trace t("vtkAMRStreamSourceImpl::SeedIsInsideBox()"); t.NoOp();
+
+    double xtest = (boxExtents[0]-seed[0]) * (boxExtents[3]-seed[0]);
+    double ytest = (boxExtents[1]-seed[1]) * (boxExtents[4]-seed[1]);
+    double ztest = -1;
+    if( nDims==3 )
+    {
+        ztest = (boxExtents[2]-seed[2])*(boxExtents[5]-seed[2]);
+    }
+        
+    if( xtest<=0 && ytest <=0 && ztest<=0 )
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
+
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::PrintSelf(ostream& os, vtkIndent indent)
+{
+    vtkPolyDataSource::PrintSelf(os,indent);
+    if(m_seedPoints == 0)
+    {
+        os << "m_seedPoints == 0\n";
+    } else
+    {
+        m_seedPoints->PrintSelf(os, indent);
+    }
+    os <<"velocity components "
+       <<m_uComponent<<","
+       <<m_vComponent<<","
+       <<m_wComponent<<"\n";
+    os << "m_integrationMode: "<<m_integrationMode<<"\n";
+    os <<"m_fieldThreshold: "<<m_fieldThreshold<<"\n";
+ 
+}
+
+template<class REAL_T> unsigned long
+vtkAMRStreamSourceImpl<REAL_T>::GetMTime()
+{
+    unsigned long atime, mtime = vtkSource::GetMTime();
+    if(m_chomboReader!= 0)
+    {
+        atime = m_chomboReader->GetMTime();
+        mtime = (mtime > atime ? mtime : atime);
+    }
+    if(m_seedPoints != 0)
+    {
+        atime = m_seedPoints->GetMTime();
+        mtime = (mtime > atime ? mtime : atime);
+    }
+    return mtime;
+}
+
+
+/** Determine the bilinear coefficients for a given cell. */
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::Weight(
+    int * cellIndex,       // i, j, or k coord of a cell
+    double * coeff1,
+    double * coeff2,
+    int axisNum,           // {x:0, y:1, z:2}
+    double const seed[3],  // Current point on field line.
+    int const gorigin[3],
+    int const gdims[3],
+    double dx )
+{
+    if( *cellIndex < 0 )
+    {
+        *cellIndex = 0;
+        *coeff1 = 1;
+        *coeff2 = 0;
+    } else if( *cellIndex > gdims[ axisNum ] - 2 )
+    { 
+        *cellIndex = gdims[ axisNum ] - 2;
+        *coeff1 = 0;
+        *coeff2 = 1;
+    } else
+    {
+        *coeff1 = ( seed[0] - *cellIndex * dx ) / dx;
+        *coeff1 = ( *coeff1 > 1. ? 1.:*coeff1 );
+        *coeff1 = ( *coeff1 < 0 ? 0:*coeff1 );
+        *coeff2 = 1.0 - *coeff1;
+    }
+}
+
+
+/** Components U, V and (in 3D) W are what define the field whose streamlines
+ *  we're calculating.
+ *  Arg u is the serial number of the component we want to identify the U
+ *  component with.
+*/
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::SetUComponent( int u )
+{
+    assert( (u>=0) && (u<m_chomboReader->GetNumComponents()) );
+    if( m_uComponent != u )
+    {
+        LoadComponent( u );
+        m_uComponent = u;
+        Modified();
+    }
+}
+
+/** See SetUComponent() */
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::SetVComponent( int v )
+{
+    assert( (v>=0) && (v<m_chomboReader->GetNumComponents()) );
+    if( m_vComponent != v )
+    {
+        LoadComponent( v );
+        m_vComponent = v;
+        Modified();
+    }
+}
+
+/** See SetUComponent() */
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::SetWComponent( int w )
+{
+    assert( (w>=0) && (w<m_chomboReader->GetNumComponents()) );
+    if( m_wComponent != w )
+    {
+        LoadComponent( w );
+        m_wComponent = w;
+        Modified();
+    }
+}
+
+/** Set the level which is to be the maximum level whose data we consider when
+ *  calculating the streamlines.
+ *  Load or release FABs as needed.
+*/
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::SetMaxLevel( int newMaxLevel )
+{
+    if( m_maxLevel != newMaxLevel )
+    {
+        for( int l=m_maxLevel+1; l<=newMaxLevel; ++l )
+        {
+            LoadLevel( l );
+        }
+        m_maxLevel = newMaxLevel;
+        Modified();
+    }
+}
+
+
+/** Call vtkChomboReader::LoadFArray() on all the boxes at all visible levels
+ *  (0 through m_maxLevel) for the indicated component.
+ *  The effect is to cause unloaded FABs to be loaded from disk, and all FABs
+ *  (i.e. including those already loaded from disk) to have their refcounts
+ *  bumped up by 1.
+*/
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::LoadComponent( int compNum )
+{
+    for( int l=0; l<=m_maxLevel; ++l )
+    {
+        for( int b=0; b<m_chomboReader->GetLevelNumBoxes(l); ++b )
+        {
+            m_chomboReader->GetFArray( l, b, compNum );
+        }
+    }
+}
+
+
+/** Call vtkChomboReader::GetFArray() on all boxes at the indicated level,
+ *  and for all components -- m_uComponent, m_vComponent, m_wComponent.
+ *  The effect is to cause unloaded FABs to be loaded from disk, and all FABs
+ *  (i.e. including those already loaded from disk) to have their refcounts
+ *  bumped up by 1.
+*/
+template<class REAL_T> void
+vtkAMRStreamSourceImpl<REAL_T>::LoadLevel( int l )
+{
+    for( int b=0; b<m_chomboReader->GetLevelNumBoxes(l); ++b )
+    {
+        m_chomboReader->GetFArray( l, b, m_uComponent );
+        m_chomboReader->GetFArray( l, b, m_vComponent );
+        if( m_wComponent != -1 )
+        {
+            m_chomboReader->GetFArray( l, b, m_wComponent );
+        }
+    }
+}

@@ -1,0 +1,467 @@
+warning:vtk_data:setDebugLevel():Can't set C++ debug level until hdf5 data has been loaded. 
+info:vtk_cmap:setBlackOutliers():No cmapped range yet. 
+info:vtk_slice:cleanup():Calling self.slicing_planes[k].cleanup() 
+info:vtk_slice:cleanup():self.slicing_planes.keys()= None 
+info:vtk_slice:cleanup():Calling self.slicing_planes[k].cleanup() 
+info:vtk_slice:cleanup():self.slicing_planes.keys()= None 
+info:vtk_slice:cleanup():Calling self.slicing_planes[k].cleanup() 
+info:vtk_slice:cleanup():self.slicing_planes.keys()= None 
+Info (AttributeScan()): attrName=num_components
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 5
+Info (AttributeScan()): attrName=num_levels
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 1
+Info (AttributeScan()): attrName=component_0
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |component_0|
+Info (AttributeScan()): attrName=component_1
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |component_1|
+Info (AttributeScan()): attrName=component_2
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |component_2|
+Info (AttributeScan()): attrName=component_3
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |component_3|
+Info (AttributeScan()): attrName=component_4
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |component_4|
+Info (AttributeScan()): attrName=filetype
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |VanillaAMRFileType|
+Info (OldChomboHDF5::GatherComponentNames()): No data centering attribute found.  We'll assume the data is cell-centered...
+Info (AttributeScan()): attrName=ghost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=comps
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 5
+Info (AttributeScan()): attrName=objectType
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |FArrayBox|
+Info (AttributeScan()): attrName=dt
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 1.000000
+Info (AttributeScan()): attrName=dx
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 1.000000
+Info (AttributeScan()): attrName=time
+Info (AttributeScan()): Found H5T_FLOAT...
+Info (AttributeScan()): Read 1.000000
+Info (AttributeScan()): attrName=ref_ratio
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 1
+Info (AttributeScan()): attrName=prob_domain
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found prob_domain
+Info (AttributeScan()): attrName=ghost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=outputGhost
+Info (AttributeScan()): Found H5T_COMPOUND...
+Info (AttributeScan()): Found output_ghost, outputGhost or ghost
+Info (AttributeScan()): attrName=comps
+Info (AttributeScan()): Found H5T_INTEGER...
+Info (AttributeScan()): Read 5
+Info (AttributeScan()): attrName=objectType
+Info (AttributeScan()): Found H5T_STRING...
+Info (AttributeScan()): Read |FArrayBox|
+Info (ChomboHDF5::LoadParticleMetadata()): No particles group.  OK.
+info:vtk_cmap:setBlackOutliers():No cmapped range yet. 
+Info (LoadFArrayFromDisk): Loading real FAB from disk: level 0, box 0, comp 2
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,0,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [1,0,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [2,0,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [3,0,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,0,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,1,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,1,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,1,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,1,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,1,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,2,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,2,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,2,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,2,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,2,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,3,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,3,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,3,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,3,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,3,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,4,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [1,4,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [2,4,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [3,4,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,4,0].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,0,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,0,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,0,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,0,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,0,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,1,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,1,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,2,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,2,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,3,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,3,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,4,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,4,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,4,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,4,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,4,1].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,0,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,0,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,0,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,0,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,0,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,1,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,1,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,2,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,2,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,3,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,3,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,4,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,4,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,4,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,4,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,4,2].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,0,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,0,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,0,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,0,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,0,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,1,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,1,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,2,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,2,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [0,3,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [4,3,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,4,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,4,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,4,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,4,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,4,3].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,0,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [1,0,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [2,0,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [3,0,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,0,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,1,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,1,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,1,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,1,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,1,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,2,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,2,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,2,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,2,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,2,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,3,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [1,3,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [2,3,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a infinity in level 0, box 0, component 2, cell [3,3,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,3,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [0,4,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [1,4,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [2,4,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [3,4,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)
+Warning (ChomboHDF5::ReadFArray()): Found a NaN in level 0, box 0, component 2, cell [4,4,4].
+Use the databrowser to track it down.
+(To disable this warning, set the debug level to
+2 or less.)

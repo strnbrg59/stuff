@@ -1,0 +1,220 @@
+AC_INIT(ChomboVis, 4.16.9)
+
+#######################################################################
+# Evaluate user.make as a shell script, but let command-line arguments
+# to configure override user.make.
+#
+confdir=`dirname $0` # Needed if doing outofsource build
+. $confdir/user.make
+for i in $@; do
+    echo $i | grep '=' > /dev/null
+    has_equals=$?
+    echo $i | grep '\-\-' > /dev/null
+    has_hyphens=$?
+    if test $has_equals -eq 0; then
+        if ! test $has_hyphens -eq 0; then
+            eval $i
+        fi
+    fi
+done
+#######################################################################
+
+
+# This config.h/config.h.in thing is confusing.  If you uncomment this
+# AC_CONFIG_HEADERS line, then configure generates a new config.h.in for
+# you.  But elsewhere it says config.h.in is used as a template to generate
+# config.h.  OK, I do get a config.h.  But then that gets overwritten and my
+# custom additions (the TEMPLATE_ANGLE_ANGLE stuff, for example) get lost.
+# AC_CONFIG_HEADERS does add -DHAVE_CONFIG to your CFLAGS, which is nice.
+# To avoid losing config.h like that, I just took one good config.h and
+# checked it in as utils/ch_config.h.  Now every source file should #include
+# that.
+#
+#AC_CONFIG_HEADERS([config.h])
+#
+#    if test x[$]$1 = x ; then
+#       $1=`grep ^[$1] ${confdir}/user.make | sed 's/ //g' | awk -F"=" '{print [$]2}'`
+#       eval $1=[$]$1
+#    fi
+
+
+AM_INIT_AUTOMAKE(ChomboVis, 4.16.9)
+AC_CANONICAL_HOST
+AC_DISABLE_STATIC
+AC_PROG_INSTALL(chombovis)
+
+#######################################################################
+########################## m4 macros ##################################
+#######################################################################
+define( [CHOMBO_CHECK_HEADER],
+        [echo -n "checking for $2... "
+         if ! test -f [$]$1/$2 ; then
+            echo '*** Error: bad $1 -- [$]$1/$2 -- in user.make.'
+            exit 1
+         else
+            echo "yes"
+         fi
+        ])
+#######################################################################
+######################### end of m4 macros ############################
+#######################################################################
+
+#
+# You can skip building the whole VTK extension layer.  That
+# means you can't use chombovis, chombobrowser or chombodata,
+# but it does leave you with chombodatalite.  With chombodatalite,
+# you can traffic in VisualizableDataset's, BoxLayoutData's, FAB's etc,
+# but you can't have a ChomboVis object.
+#
+AC_ARG_WITH(vtk,
+    [AC_HELP_STRING( [--with-vtk],
+                     [don't build VTK extension layer (you get only chombodatalite then) [default=yes]])],
+    [case "${withval}" in
+      yes) vtk=true ;;
+      no)  vtk=false ;;
+      *) AC_MSG_ERROR(bad value ${withval} for --enable-vtk) ;;
+    esac],
+    [vtk=true]
+)
+AM_CONDITIONAL(VTK, test x$vtk = xtrue)
+
+
+#
+# Debug (-g) mode.  Default: off.
+#
+AC_ARG_ENABLE(debug,
+    [AC_HELP_STRING( [--enable-debug],
+                       [sets CFLAGS et al to -g, otherwise to -O2 -DNDEBUG [default=no]] )],
+    
+    [case "${enableval}" in
+      yes) [CXXFLAGS=-g; CPPFLAGS=-g; CFLAGS=-g] ;;
+      no)  [CXXFLAGS="-O2 -DNDEBUG"; CPPFLAGS="-O2 -DNDEBUG"; CFLAGS="-O2 -DNDEBUG"] ;;
+      *) AC_MSG_ERROR(bad value ${enableval} for --enable-unittests) ;;
+    esac],
+    [CXXFLAGS="-O2 -DNDEBUG"; CPPFLAGS="-O2 -DNDEBUG"; CFLAGS="-O2 -DNDEBUG"]
+)
+
+#
+# Profile (-pg) mode.  Default: off.
+#
+AC_ARG_ENABLE(profile,
+    [AC_HELP_STRING( [--enable-profile],
+                     [sets CFLAGS et al to -pg, so you can use gprof [default=no]])],
+    [case "${enableval}" in
+      yes) [CXXFLAGS="$CXXFLAGS -pg"; CPPFLAGS="$CPPFLAGS -pg"; CFLAGS="$CFLAGS -pg"] ;;
+      no)  ;;
+      *) AC_MSG_ERROR(bad value ${enableval} for --enable-unittests) ;;
+    esac]
+)
+
+#
+# Building the unit tests takes nontrivial time.
+#
+AC_ARG_ENABLE(unittests,
+    [AC_HELP_STRING( [--enable-unittests],
+                     [build unittest in data_access directory [default=no]])],
+    [case "${enableval}" in
+      yes) unittests=true ;;
+      no)  unittests=false ;;
+      *) AC_MSG_ERROR(bad value ${enableval} for --enable-unittests) ;;
+    esac],
+    [unittests=false]
+)
+AM_CONDITIONAL(UNITTESTS, test x$unittests = xtrue)
+
+
+#
+# Build options and directives settable from user.make or the "configure"
+# command line.
+#
+AC_SUBST(VTK_INSTALL_DIR)
+AC_SUBST(HDF5_INCLUDE_DIR)
+AC_SUBST(HDF5_LIBRARY_DIR)
+AC_SUBST(PYTHON_INCLUDE_DIR)
+AC_SUBST(CHOMBO_PREFIX)
+AC_SUBST(EXTRA_HDF5_LIBS)
+AC_SUBST(BUILD_CHOMBO_BRIDGE)
+
+#
+# Make sure the environment variable MACOSX_DEPLOYMENT_TARGET
+# is set.  Linking will fail otherwise (on Mac OSX that is).
+#
+# We check this in a couple of Makefiles too, but that's still
+# not going to be foolproof against someone who interrupts a
+# build, undefines MACOSX_DEPLOYMENT_TARGET, and then resumes the
+# build.
+#
+case "${host}" in
+    *darwin*)
+        if test -z $MACOSX_DEPLOYMENT_TARGET ; then
+            echo "===================================================================="
+            echo "Error: Please set the environment variable MACOSX_DEPLOYMENT_TARGET "
+            echo "(to 10.2, 10.3, 10.4 or whatever your Mac OS X version is), and try "
+            echo "again.                                                              "
+            echo "===================================================================="
+            exit 1
+        fi ;;
+    *) ;;
+esac
+ 
+
+AC_SUBST(TOP_MAKEFILE_SUBDIRS)
+TOP_MAKEFILE_SUBDIRS_PART1="premake . utils"
+TOP_MAKEFILE_SUBDIRS_PART3="data_access EBLib Vtk src_py data examples test doc"
+if test $BUILD_CHOMBO_BRIDGE = yes ; then
+    TOP_MAKEFILE_SUBDIRS_PART2="libltdl chombo_bridge"
+else
+    TOP_MAKEFILE_SUBDIRS_PART2=""
+fi
+TOP_MAKEFILE_SUBDIRS="$TOP_MAKEFILE_SUBDIRS_PART1 $TOP_MAKEFILE_SUBDIRS_PART2 $TOP_MAKEFILE_SUBDIRS_PART3"
+
+#
+# Sanity tests on correctness of above paths.
+#
+CHOMBO_CHECK_HEADER([HDF5_INCLUDE_DIR],[hdf5.h])
+CHOMBO_CHECK_HEADER([PYTHON_INCLUDE_DIR],[Python.h])
+if test $vtk = true ; then
+    CHOMBO_CHECK_HEADER([VTK_INSTALL_DIR],[/include/vtk/vtkPolyData.h])
+fi
+if test $BUILD_CHOMBO_BRIDGE = yes ; then
+    CHOMBO_CHECK_HEADER([CHOMBO_PREFIX],[2D/include/Chombo/BoxLayout.H])
+    CHOMBO_CHECK_HEADER([CHOMBO_PREFIX],[3D/include/Chombo/BoxLayout.H])
+fi
+
+
+AC_PROG_CXX
+
+#
+# Tried executing some of these (all but the AC_PROG_LIBTOOL) only when
+# BUILD_CHOMBO_BRIDGE=yes, but got error in configure.  Probably the
+# "libtoolize --ltdl" in the bootstrap script built some assumptions into
+# configure.
+#
+#AC_LIBLTDL_CONVENIENCE
+AC_LIBLTDL_INSTALLABLE
+AC_LIBTOOL_DLOPEN
+AC_PROG_LIBTOOL
+AC_SUBST(INCLTDL)
+AC_SUBST(LIBLTDL)
+
+if test $BUILD_CHOMBO_BRIDGE = yes ; then
+  AC_CONFIG_SUBDIRS(libltdl)
+fi
+AM_CONDITIONAL(BUILD_CHOMBO_BRIDGE_AM, test x$BUILD_CHOMBO_BRIDGE = xyes)
+
+AC_OUTPUT( premake/Makefile
+           Makefile
+           Vtk/Makefile
+           test/Makefile
+           test/canonicals/Makefile
+           examples/Makefile
+           src_py/Makefile
+           data/Makefile
+           doc/Makefile
+           EBLib/Makefile
+           data_access/Makefile
+           data_access/python/Makefile
+           utils/Makefile )
+if test $BUILD_CHOMBO_BRIDGE = yes ; then
+    AC_OUTPUT( chombo_bridge/Makefile )
+fi

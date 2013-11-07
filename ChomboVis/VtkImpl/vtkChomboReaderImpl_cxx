@@ -1,0 +1,1940 @@
+/*
+**   _______              __
+**  / ___/ /  ___  __ _  / /  ___
+** / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+** \___/_//_/\___/_/_/_/_.__/\___/ 
+**
+** vtkChomboReaderImpl_cxx  
+**
+** This software is copyright (C) by the Lawrence Berkeley
+** National Laboratory.  Permission is granted to reproduce
+** this software for non-commercial purposes provided that
+** this notice is left intact.
+** 
+** It is acknowledged that the U.S. Government has rights to
+** this software under Contract DE-AC03-765F00098 between
+** the U.S. Department of Energy and the University of
+** California.
+**
+** This software is provided as a professional and academic
+** contribution for joint exchange.  Thus it is experimental,
+** is provided ``as is'', with no warranties of any kind
+** whatsoever, no support, no promise of updates, or printed
+** documentation.  By using this software, you acknowledge
+** that the Lawrence Berkeley National Laboratory and
+** Regents of the University of California shall have no
+** liability with respect to the infringement of other
+** copyrights by any part of this software.
+**
+*/
+
+/* provided as a modification from source material derived from
+   the VTK distribution.  In accordance with VTK software agreement
+   the following also holds:
+=========================================================================
+
+
+
+Copyright (c) 1993-2000 Ken Martin, Will Schroeder, Bill Lorensen 
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+ * Neither name of Ken Martin, Will Schroeder, or Bill Lorensen nor the names
+   of any contributors may be used to endorse or promote products derived
+   from this software without specific prior written permission.
+
+ * Modified source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=========================================================================*/
+#include "../data_access/PointerHandleMap.h"
+#include "../data_access/NormalNumberComparator.h"
+#include "vtkArray.h"  // In this directory
+#include "vtkFieldData.h"
+#include "vtkDataSetAttributes.h"
+#include "vtkPointData.h"
+#include "vtkDataSet.h"
+#include "vtkPolyData.h"
+#include "vtkStructuredPoints.h"
+#include <algorithm>
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+
+//Timer g_timer;
+//extern Timer g_FAB_timer;
+
+/** Constructor.
+ *  Arg status is of interest to vtkChomboReader::LoadFile(), which returns a
+ *  status indicator to the Python layer.
+*/
+template<class REAL_T>
+vtkChomboReaderImpl<REAL_T>::vtkChomboReaderImpl(
+    char const * infileName,
+    int hdf5Dimensionality,
+    Status * status )
+  :
+    m_hdf5Dimensionality( hdf5Dimensionality ),
+    m_slicingMode( 0 ),
+    m_currentComponentNum(-1),
+    m_currentVisibleFAB( boost::intrusive_ptr< FAB<REAL_T> >() ),
+    m_currentPieceIndex(-1),
+    m_ebIndex(-1),
+    m_ebIsVisible(0),
+    m_finestVisibleLevel(0),
+    m_prevFinestVisibleLevel(-1),
+    m_alwaysUseRealBoxes(-1),
+    m_alwaysUsePaddedBoxes(-1),
+    m_vtkHierarchicalBoxHack(0)
+{
+    Trace t("vtkChomboReaderImpl::vtkChomboReaderImpl(char * infile)");
+
+    m_dblBuf = new double[2*THREE];
+    m_intBuf = new int[2*THREE];
+
+    for( int i=0;i<3;++i )
+    {
+        m_originShift0[i] = 0.0;
+        m_originShiftL[i] = 0.0;
+    }
+
+    m_visdat = boost::shared_ptr<VisualizableDataset<REAL_T> >(
+        new VisualizableDataset<REAL_T>( infileName ) );
+    m_fileTimeStamp = vtkTimeStamp::New();
+    if( ! m_fileTimeStamp )
+    {
+        t.FatalError( "vtkTimeStamp::New() returned NULL." );
+        // Sign of really serious problem, this.
+    }
+
+    InitializeVisibleLevelsAndBoxes();
+}
+
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::InitializeVisibleLevelsAndBoxes()
+{
+    Trace t("vtkChomboReaderImpl::InitVisLevs()");
+
+    for( int level=0;level<GetNumLevels();++level )
+    {
+        m_visibleLevelsAndBoxes.InitLevel( level,
+                                           m_visdat->GetNumRealBoxes( level ) );
+    }
+}
+
+
+/** Constructor which causes m_visdat to be shared.  Used in construction
+ *  of Python-layer LocalVtkData class.
+*/
+template<class REAL_T>
+vtkChomboReaderImpl<REAL_T>::vtkChomboReaderImpl(
+    vtkChomboReader * that,
+    int hdf5Dimensionality,
+    Status * status )
+  : m_hdf5Dimensionality( hdf5Dimensionality ),
+    m_slicingMode( 0 ),
+    m_currentComponentNum(-1),
+    m_currentVisibleFAB( boost::intrusive_ptr< FAB<REAL_T> >() ),
+    m_currentPieceIndex(-1),
+    m_ebIndex(-1),
+    m_ebIsVisible(0),
+    m_finestVisibleLevel(0),
+    m_prevFinestVisibleLevel(-1),
+    m_alwaysUseRealBoxes(-1),
+    m_alwaysUsePaddedBoxes(-1),
+    m_vtkHierarchicalBoxHack(0)
+{
+    Trace t("vtkChomboReaderImpl::vtkChomboReaderImpl(ChomboHDF5*)");
+
+    *status = STATUS_OK;
+
+    for( int i=0;i<3;++i )
+    {
+        m_originShift0[i] =
+            ((vtkChomboReaderImpl<REAL_T>*)that)->m_originShift0[i];
+        m_originShiftL[i] =
+            ((vtkChomboReaderImpl<REAL_T>*)that)->m_originShiftL[i];
+    }
+
+    m_dblBuf = new double[2*THREE];
+    m_intBuf = new int[2*THREE];
+
+    m_visdat = ((vtkChomboReaderImpl<REAL_T> *)that)->m_visdat;
+
+    m_fileTimeStamp = vtkTimeStamp::New();
+    if( ! m_fileTimeStamp )
+    {
+        t.FatalError( "vtkTimeStamp::New() returned NULL." );
+    }
+
+    InitializeVisibleLevelsAndBoxes();
+}
+
+
+template<class REAL_T>
+vtkChomboReaderImpl<REAL_T>::~vtkChomboReaderImpl()
+{
+    Trace t("vtkChomboReaderImpl dtor");
+    delete [] m_dblBuf;
+    delete [] m_intBuf;
+    assert( m_fileTimeStamp );
+    m_fileTimeStamp->Delete();
+}
+
+
+template<class REAL_T> unsigned long
+vtkChomboReaderImpl<REAL_T>::GetMTime()
+{
+    // vtkSource::GetMTime() is, unfortunately, not const, so this whole
+    // function can't be const.
+    unsigned long dtime = this->vtkSource::GetMTime();
+    return dtime;
+}
+
+
+/** Refill m_visibleFabInfo, the collection that we iterate over to assemble
+ *  the complete picture.  Each element gets passed, in turn, to Execute().
+ *  This function is called from SetCurrentComponent(), HideLevel() and
+ *  ShowLevel().
+ *
+ *  Arg finestLevelHasChanged, together with the state variables
+ *  m_finestVisibleLevel and m_prevFinestVisibleLevel, is used to determine if
+ *  we need to release FABs even at a visible level; this is the case if we
+ *  need to replace real FABs with subdivided FABs, or vice versa.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::FlattenHierarchy( bool finestLevelHasChanged )
+{
+    Trace t("vtkChomboReaderImpl::FlattenHierarchy()");
+    assert( m_alwaysUseRealBoxes != -1 );
+    assert( m_alwaysUsePaddedBoxes != -1 );
+
+    VisibleFabInfo<REAL_T> saveFabs;
+
+    // Release data arrays of FABs that won't be visible now.
+    for( unsigned i=0; i< m_visibleFabInfo.size(); ++i )
+    {
+        int level = m_visibleFabInfo.GetLevel(i);
+        int component = m_visibleFabInfo.GetComponent(i);
+        boost::intrusive_ptr< FAB<REAL_T> > fab( m_visibleFabInfo.GetFAB(i) );
+
+        if( (component != m_currentComponentNum)
+        ||  (
+                (   (1 != LevelIsVisible( level ))
+                ||  
+                    (   finestLevelHasChanged
+                     && (  ( level == m_prevFinestVisibleLevel )
+                        || ( level == m_finestVisibleLevel ) )
+                    )
+                )
+            &&
+                ( ! fab->IsPadded() ) // Padding a FAB is expensive.
+            )
+        )
+        {
+        } else
+        {
+            saveFabs.push_back( fab, level, component );
+            // Just to keep the reference count from dropping, and having the
+            // FAB release its FArray.
+        }
+    }
+
+    if( m_visibleFabInfo.contains_fab( m_currentVisibleFAB )
+    && (!saveFabs.contains_fab( m_currentVisibleFAB)) )
+    {
+        m_currentVisibleFAB = boost::intrusive_ptr<FAB<REAL_T> >();
+    }
+    m_visibleFabInfo.clear();
+    m_visdat->FreeUnusedFABs();
+
+    // Load up FABs we need now.
+    if( m_currentComponentNum != -1 )
+    {
+        m_visibleFabInfo.reserve( m_visdat->GetTotalNumBoxes() );
+        for( int level=0; level<GetNumLevels(); ++level )
+        {
+            if( ! LevelIsVisible( level ) )
+            {
+                continue;                                       // continue
+            }
+
+            bool useReal(    (level == GetFinestVisibleLevel())
+                         ||  (m_alwaysUseRealBoxes == 1) );
+            for( unsigned b=0; b<m_visdat->GetNumRealBoxes(level); ++b )
+            {
+                if( m_visibleLevelsAndBoxes.GetBoxVisible( level, b ) )
+                {
+                    if( useReal )
+                    {
+                        boost::intrusive_ptr< FAB<REAL_T> > fab(
+                            m_visdat->GetRealFAB( level, b, 
+                                m_currentComponentNum, m_alwaysUsePaddedBoxes));
+                        m_visibleFabInfo.push_back(
+                                fab, level, m_currentComponentNum );
+                    } else
+                    {
+                        vector<int> const & subBoxes(
+                            m_visdat->GetConstituentSubdividedBoxnums(level,b));
+                        for( unsigned sb=0; sb<subBoxes.size(); ++sb )
+                        {
+                            boost::intrusive_ptr< FAB<REAL_T> > fab(
+                                m_visdat->GetFAB( level, subBoxes[sb],
+                                    m_currentComponentNum,
+                                    m_alwaysUsePaddedBoxes ));
+                            m_visibleFabInfo.push_back(
+                                    fab, level, m_currentComponentNum );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/** Don't load data for the indicated box.  Results in that box not being
+ *  rendered.
+ *  Arg boxNum is always interpreted as a real box.  So if we're using
+ *  subdivided boxes, we hide the subdivided boxes that the indicated real box
+ *  has been carved up into.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::HideBox( int level, int boxNum )
+{
+    Trace t("vtkChomboReaderImpl::HideBox()");
+    m_visibleLevelsAndBoxes.SetBoxVisible( level, boxNum, false );
+    FlattenHierarchy( false );
+    // Gotta do that, or correspondence between piece-numbers and (level,boxnum)    // will be corrupted.
+}
+
+/** Undoes action of HideBox(). */
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::ShowBox( int level, int boxNum )
+{
+    Trace t("vtkChomboReaderImpl::ShowBox()");
+    m_visibleLevelsAndBoxes.SetBoxVisible( level, boxNum, true );
+    FlattenHierarchy( false );
+}
+
+
+template<typename REAL_T> void
+vtkChomboReaderImpl<REAL_T>::HideBoxes( int level, vtkIntArray * bb )
+{
+    Trace t("ChomboReader::PassIntArray()");
+    for( int b=0;b<bb->GetNumberOfTuples();++b )
+    {
+        m_visibleLevelsAndBoxes.SetBoxVisible( level, bb->GetValue(b), false );
+    }
+    FlattenHierarchy( false );
+}
+
+template<typename REAL_T> void
+vtkChomboReaderImpl<REAL_T>::ShowBoxes( int level, vtkIntArray * bb )
+{
+    Trace t("ChomboReader::PassIntArray()");
+    for( int b=0;b<bb->GetNumberOfTuples();++b )
+    {
+        m_visibleLevelsAndBoxes.SetBoxVisible( level, bb->GetValue(b), true );
+    }
+    FlattenHierarchy( false );
+}
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::HideAllBoxes( int level )
+{
+    for( int b=0; b<m_visdat->GetNumRealBoxes(level);++b )
+    {
+        m_visibleLevelsAndBoxes.SetBoxVisible( level, b, false );
+    }
+    FlattenHierarchy( false );
+}
+
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::ShowAllBoxes( int level )
+{
+    for( int b=0; b<m_visdat->GetNumRealBoxes(level);++b )
+    {
+        m_visibleLevelsAndBoxes.SetBoxVisible( level, b, true );
+    }
+    FlattenHierarchy( false );
+}
+
+
+/** Return an int[2*THREE] with corners of entire domain, in cell units.
+ *  Order is (lo_i, lo_j, lo_k, hi_i, hi_j, hi_k).
+*/
+template<class REAL_T> int *
+vtkChomboReaderImpl<REAL_T>::GetDomainExtents() const
+{
+    for( int m=0; m<THREE; ++m )
+    {
+        m_intBuf[m] = m_visdat->GetProbDomain(0).GetLoCorner(m);
+        m_intBuf[THREE+m] = (1 + m_visdat->GetProbDomain(0).GetHiCorner(m));
+    }
+    return m_intBuf;
+}
+
+/** Return a double[2*THREE] with corners of entire domain, in distance units
+ *  (hence the "XYZ" suffix).
+ *  Order is (lo_i, lo_j, lo_k, hi_i, hi_j, hi_k).
+*/
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetDomainExtentsXYZ() const
+{
+    REAL_T dx[THREE];
+    m_visdat->GetDx(dx, 0);
+    for( int m=0; m<THREE; ++m )
+    {
+        m_dblBuf[m] = m_visdat->GetProbDomain(0).GetLoCorner(m) * dx[m]
+                    + m_visdat->GetOrigin()[m];
+        m_dblBuf[THREE+m] =
+            (1 + m_visdat->GetProbDomain(0).GetHiCorner(m)) * dx[m]
+                    + m_visdat->GetOrigin()[m];
+    }
+
+    return m_dblBuf;
+}
+
+
+/** Returns a double[2] containing the min and max value of the current
+ *  component, over the visible (i.e. selected) Boxes.
+*/
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetVisibleRange() const
+{
+    return GetConstrainedVisibleRange( -HUGE_VAL, HUGE_VAL );
+}
+
+
+/** Like GetVisibleRange(), but ignores numbers outside the range [lo,hi].
+ *  Useful for ignoring what are often undefined values, so they don't end up
+ *  as the extremes of some Tk.Scale widget's range.
+*/
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetConstrainedVisibleRange( double lo,
+                                                         double hi ) const
+{
+    Trace t("vtkChomboReaderImpl::GetConstrainedVisibleRange()");
+
+    REAL_T currMin =  hi;
+    REAL_T currMax =  lo;
+    assert( hi > lo );
+
+    std::pair<REAL_T,REAL_T> fabRange;
+    for( unsigned i=0; i<m_visibleFabInfo.size(); ++i )
+    {
+        fabRange = m_visibleFabInfo.GetFAB(i)->GetRange(lo,hi);
+        currMin = std::min( currMin, fabRange.first,
+                            NormalNumberComparatorForMin() );
+        currMax = std::max( currMax, fabRange.second,
+                            NormalNumberComparatorForMax() );
+    }
+    m_dblBuf[0] = currMin;
+    m_dblBuf[1] = currMax;
+    return m_dblBuf;
+}
+
+
+/** Returns a double[2] containing the min and max value of the range of the
+ *  indicated component, at the indicated level.
+*/
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetLevelComponentRange(
+    int level, int component ) const
+{
+    REAL_T currMin =  HUGE_VAL;
+    REAL_T currMax = -HUGE_VAL;
+
+    std::pair<REAL_T,REAL_T> fabRange;
+
+    int nBoxes = GetLevelNumBoxes( level );
+
+    for( int box=0; box<nBoxes; ++box )
+    {
+        boost::intrusive_ptr< FAB<REAL_T> > fab;
+        if( (level == GetFinestVisibleLevel())
+        ||  (m_alwaysUseRealBoxes == 1) )
+        {
+            fab = m_visdat->GetRealFAB( level, box, component,
+                                            m_alwaysUsePaddedBoxes );
+        } else
+        {
+            fab = m_visdat->GetFAB( level, box, component,
+                                        m_alwaysUsePaddedBoxes );
+        }
+        fabRange = fab->GetRange();
+        currMin = std::min( currMin, fabRange.first,
+                            NormalNumberComparatorForMin() );
+        currMax = std::max( currMax, fabRange.second,
+                            NormalNumberComparatorForMax());
+    }
+
+    m_dblBuf[0] = currMin;
+    m_dblBuf[1] = currMax;
+    return m_dblBuf;
+}
+
+
+/** Indicates the FAB -- m_currentVisibleFAB -- that the next Execute() will
+ *  put onto the VTK pipeline.
+ *
+ *  Args axis and axisPosition are used when the intent is to display a 2D
+ *  slice from a 3D dataset.
+ *  In that case, instead of just setting m_currentVisibleFAB to an
+ *  already-existing element of m_visibleFabInfo, generates a 2D FAB on the fly,
+ *  at the indicated position on the indicated axis.  If that position isn't
+ *  within the boxNum-th FAB at all, does nothing and returns -1.  Otherwise
+ *  returns 0.
+ *  To not slice, set axis to ' ' and axisPosition to 0.
+ *
+ *  The Python layer must know nothing about this generated-on-the-fly 2D FAB;
+ *  when, from Python, we request information on the current visible FAB, we get
+ *  the 3D FAB (from which the slice comes), albeit with its coordinates
+ *  appropriately permuted to reflect the reslicing direction.
+ *
+ *  We'd like to use default arguments for SetPiece in vtkChomboReader, but
+ *  VTK's Python wrapper doesn't understand them.  It also doesn't understand
+ *  function overloading.  So we'll define a vtk_data.setPiece(), with default
+ *  argument axis=' '.
+ *  
+ *  Touches off a round of VTK updates for the specified box.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::SetPiece( int boxNum,
+                                       char axis, double axisPosition )
+{
+    Trace t("vtkChomboReaderImpl::SetPiece()"); t.NoOp();
+    assert( GetNumComponents() > 0 );
+
+    // Delete the existing m_currentVisibleFAB, if it was produced for
+    // reslicing purposes.
+    // Otherwise it's an element of m_visibleFabInfo and belongs to m_visdat.
+    // The only time m_currentVisibleFAB is still null at this point is when
+    // we start ChomboVis with the test_class argument.
+    if( m_currentVisibleFAB && (m_currentVisibleFAB->IsSlice() == true) )
+    {
+        m_currentVisibleFAB = boost::intrusive_ptr< FAB<REAL_T> >();
+    }
+
+    m_currentPieceIndex = boxNum;
+
+    if( axis == ' ' ) // Default -- indicates no slicing.
+    {
+        assert( m_visibleFabInfo.size() > unsigned(boxNum) );
+        assert( !m_slicingMode );
+        m_currentVisibleFAB = m_visibleFabInfo.GetFAB( boxNum );
+    } else  // slice
+    {
+        assert( (axis=='x') || (axis=='y') || (axis=='z') );
+        assert( m_slicingMode );
+
+        // Check if axis_position is within boxNum-th box.  If it isn't, just
+        // return -1.
+        assert( m_visibleFabInfo.size() > unsigned(boxNum) );
+        boost::intrusive_ptr< FAB<REAL_T> > theFAB(
+            m_visibleFabInfo.GetFAB( boxNum ) );
+        if( ! theFAB->ContainsPlane( axis, axisPosition ) )
+        {
+            return -1;
+        }
+
+        // Construct m_currentVisibleFAB as a slice.
+        m_currentVisibleFAB = boost::intrusive_ptr<FAB<REAL_T> >(
+            new FAB<REAL_T>( theFAB, axis, axisPosition ));
+    }
+
+    Modified(); // Resets the timestamp.
+
+    return 0;
+}
+
+
+/** Set the currently visible component, and reset the collection of visible
+ *  boxes.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetCurrentComponentName( char const * name )
+{
+    m_currentComponentNum = m_visdat->GetComponentNum( name );
+    FlattenHierarchy( false );
+}
+
+
+/** Like SetCurrentComponentName(), except we refer to the component by its
+ *  serial number, rather than by its name.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetCurrentComponentNum( int n )
+{
+    m_currentComponentNum = n;
+    FlattenHierarchy( false );
+}
+
+
+/** Return the name of the (arg) i-th component.  The components have a
+ *  definite order to them, as the names of their attributes in the HDF5 file
+ *  are "component_0", "component_1", etc.
+*/
+template<class REAL_T> char const *
+vtkChomboReaderImpl<REAL_T>::GetComponentName(int c) const
+{
+    m_strBuf = m_visdat->GetComponentName( c );
+    return m_strBuf.c_str();
+}
+ 
+
+/** The current component is the one whose values are currently rendered.
+ */
+template<class REAL_T> char const *
+vtkChomboReaderImpl<REAL_T>::GetCurrentComponentName() const
+{
+    m_strBuf = m_visdat->GetComponentName( m_currentComponentNum );
+    return m_strBuf.c_str();
+}
+
+
+/** Number of components in entire hdf5 dataset. */
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetNumComponents() const
+{
+    return m_visdat->GetNumComponents();
+}
+
+/** Number of Embedded Boundaries. */
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetNumEBs() const
+{
+    int result = 0;
+    int nComponents = GetNumComponents();
+    for( int i=0; i<nComponents; ++i )
+    {
+        if( !strncmp( GetComponentName(i),
+                      ChomboEBConsts::s_fraction,
+                      strlen(ChomboEBConsts::s_fraction) ))
+        {
+            ++result;
+        }
+    }
+    return result;
+}
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetEBIndex( int i )
+{
+    m_ebIndex = i;
+}
+
+
+/** Number of levels in entire hdf5 dataset. */
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetNumLevels() const
+{
+    return m_visdat->GetNumLevels();
+}
+
+
+/** Add the indicated level to the collection of visible levels. */
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::ShowLevel( int level )
+{
+    Trace t("vtkChomboReaderImpl::ShowLevel()");
+
+    if( 1 == LevelIsVisible( level ) )
+    {
+        t.Error( "Attempted to add an already-visible level, %d", level );
+        return;
+    }
+
+    m_visibleLevelsAndBoxes.SetLevelVisible( level, true );
+    m_prevFinestVisibleLevel = m_finestVisibleLevel;
+    m_finestVisibleLevel = GetFinestVisibleLevel();
+
+//    g_timer.SetSilent( false );
+//    g_timer.Start();
+    FlattenHierarchy( true );
+//    g_timer.Stop( "Time in FlattenHierarchy()" );
+//    g_FAB_timer.Pause( "Time in GetFAB()" );
+}
+
+
+/** Return 1 if the indicated level is visible, 0 if not. */
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::LevelIsVisible( int level ) const
+{
+    return m_visibleLevelsAndBoxes.GetLevelVisible( level ) ? 1:0;
+}
+    
+
+/** Return 1 if indicated level is the finest one that's visible, 0 if not. */
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetFinestVisibleLevel() const
+{
+    int result(-1);
+    for( int level=0;level<GetNumLevels();++level )
+    {
+        if( m_visibleLevelsAndBoxes.GetLevelVisible( level ) )
+        {
+            result = level;
+        }
+    }
+    return result;
+}
+
+
+/** Remove the indicated level from the collection of visible levels. */
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::HideLevel( int level )
+{
+    Trace t("vtkChomboReaderImpl::HideLevel()");
+
+    if( 0 == LevelIsVisible( level ) )
+    {
+        t.Error( "Attempted to hide a non-visible level, %d.", level );
+        return;
+    }
+
+    m_visibleLevelsAndBoxes.SetLevelVisible( level, false );
+    m_prevFinestVisibleLevel = m_finestVisibleLevel;
+    m_finestVisibleLevel = GetFinestVisibleLevel();
+
+    FlattenHierarchy( true );
+}
+
+
+/** Return the level number of the box at the (arg) boxNum-th position in
+ *  m_visibleFabInfo.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetVisibleBoxLevel( int boxNum ) const
+{
+    assert( m_visibleFabInfo.size() > unsigned(boxNum) );
+    return m_visibleFabInfo.GetLevel(boxNum);
+}
+
+/** Return the index, within the associated level, of the box at the
+ *  (arg) boxNum-th position in m_visibleFabInfo.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetVisibleBoxNum( int boxNum ) const
+{
+    assert( m_visibleFabInfo.size() > unsigned(boxNum) );
+    return m_visibleFabInfo.GetFAB( boxNum )->GetBoxNum();
+}
+
+
+/** Return just one number, specified by its level, box, component,
+ *  and cell coordinates (i,j,k) within its box.
+ *  The coordinates are relative to the loCorner of the box.
+ *
+ *  Uses a real box, if arg level is the finest visible.
+*/
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetDatum( 
+    int level, int boxNum, int component, int i, int j, int k ) const
+{
+    Trace t("vtkChomboReaderImpl::GetDatum()"); t.NoOp();
+    
+    int coords[THREE];
+    coords[0] = i;
+    coords[1] = j;
+    coords[2] = k;
+    double result;
+    boost::intrusive_ptr< FAB<REAL_T> > fab;
+
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        fab = m_visdat->GetRealFAB( level, boxNum, component,
+                                    m_alwaysUsePaddedBoxes );
+        result = fab->GetArrayItem(coords);
+    } else
+    {
+        fab = m_visdat->GetFAB( level, boxNum, component,
+                                m_alwaysUsePaddedBoxes );
+        result = fab->GetArrayItem(coords);
+    }
+    
+    return result;
+}
+
+/** Access to the 1-dimensional Fortran-order array of data.
+ *  The return value is a handle into a map, in which the corresponding value
+ *  is a pointer to that array.
+ *  Unlike FAB::GetFArray() (which this is a wrapper for), this function is
+ *  part of the public interface (and is useful mainly to classes like
+ *  vtkAMRStreamSource which need to access data directly (rather than just put
+ *  it on a pipeline and let VTK deal with it).
+ *
+ *  Uses a real box, if arg level is the finest visible.
+ *
+ *  Calls GetFAB() (or GetRealFAB()), which bumps the FAB's refcount up.  Caller
+ *  is responsible for calling ReleaseFArray(level,boxNum,component) when done
+ *  with the FArray.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetFArray(
+    int level, int boxNum, int component ) const
+{
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        return SharedArrayHandleMap<REAL_T>::GetHandle(m_visdat->GetRealFAB(
+            level, boxNum, component, m_alwaysUsePaddedBoxes )->GetFArray());
+    } else
+    {
+        return SharedArrayHandleMap<REAL_T>::GetHandle(m_visdat->GetFAB(
+            level, boxNum, component, m_alwaysUsePaddedBoxes )->GetFArray());
+    }
+}
+
+
+/** Good thing to call if you're going to call GetDatum() a lot.
+ *  Don't forget to call UnpinFAB() when finished.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::PinFAB(
+    int level, int boxNum, int component ) const
+{
+    boost::intrusive_ptr< FAB<REAL_T> > fab;
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    { 
+        fab = m_visdat->GetRealFAB( level, boxNum, component,
+                                    m_alwaysUsePaddedBoxes );
+    } else
+    {
+        fab = m_visdat->GetFAB( level, boxNum, component,
+                                m_alwaysUsePaddedBoxes );
+    }
+    m_visdat->PinFAB( fab );
+    // The FAB doesn't know it's pinned.  All that's happened is that the FAB
+    // has been pushed onto a vector of FABs that m_visdat owns.
+}
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::UnpinFAB(
+    int level, int boxNum, int component ) const
+{
+    boost::intrusive_ptr< FAB<REAL_T> > fab;
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    { 
+        fab = m_visdat->GetRealFAB( level, boxNum, component,
+                                    m_alwaysUsePaddedBoxes );
+    } else
+    {
+        fab = m_visdat->GetFAB( level, boxNum, component,
+                                m_alwaysUsePaddedBoxes );
+    }
+    int return_code( m_visdat->UnpinFAB( fab ) );
+}
+
+
+/** Return the box ID number, within the indicated level, for the box that
+ *  contains the point specified by arg coordsXYZ.  CoordsXYZ are in dx units.
+ *
+ *  Returns -1 if coords is not over any box at the indicated level.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetEnclosingBoxNumXYZ(
+    int level, REAL_T x, REAL_T y, REAL_T z )
+{
+    REAL_T coords[3] = {x, y, z};
+
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        return m_visdat->GetEnclosingBoxNumXYZ( level, coords, true );
+    } else
+    {
+        return m_visdat->GetEnclosingBoxNumXYZ( level, coords, false );
+    }
+}
+
+
+/** Return the size, in cells, of the indicated box.
+ *
+ *  Uses a real box, if arg level is the finest visible.
+ */
+template<class REAL_T> int *
+vtkChomboReaderImpl<REAL_T>::GetBoxDims( int level, int boxNum ) const
+{
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        m_visdat->GetsRealBox( level, boxNum, m_alwaysUsePaddedBoxes
+                               ).GetDims( m_intBuf );
+    } else
+    {
+        m_visdat->GetsBox( level, boxNum, m_alwaysUsePaddedBoxes
+                           ).GetDims( m_intBuf );
+    }
+    return m_intBuf;
+}
+
+
+/** Return the coordinates, in the indicated level's index space, of the
+ *  indicated box's loCorner.
+ *
+ *  Uses a real box, if arg level is the finest visible.
+*/
+template<class REAL_T> int *
+vtkChomboReaderImpl<REAL_T>::GetBoxOrigin( int level, int boxNum ) const
+{
+    Intvect iv;
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        iv = m_visdat->GetsRealBox( level, boxNum, m_alwaysUsePaddedBoxes
+                                    ).GetLoCorner();
+    } else
+    {
+        iv = m_visdat->GetsBox( level, boxNum, m_alwaysUsePaddedBoxes
+                                ).GetLoCorner();
+    }
+    for( int i=0; i<THREE; ++i )
+    {
+        m_intBuf[i] = iv[i];
+    }
+
+    return m_intBuf;
+}
+
+/** Return the low and high (+1) corners, in terms of distance (same units
+ *  in which we report dx) of the indicated box.
+ *  Thus, we return the actual corner coordinates times the level dx.
+ *
+ *  Uses a real box, if arg level is the finest visible.
+ *
+ *  Adjusts for data centering mode.
+ * 
+ *  Arg visiblePartOnly is of relevance for non-cell-centered data.  When 1,
+ *  the extents are of the box that the user should see, i.e. with margin cells
+ *  cut down the middle in the directions the data is not cell-centered.  When
+ *  0, the extents are of the whole box.
+*/
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetBoxExtentsXYZ( int level, int boxNum,
+                                               int visiblePartOnly  )
+  const
+{
+    Trace t("ChomboReader::GetBoxExtentsXYZ()");
+    Box box;
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        box = m_visdat->GetsRealBox( level, boxNum, m_alwaysUsePaddedBoxes );
+    } else
+    {
+        box = m_visdat->GetsBox( level, boxNum, m_alwaysUsePaddedBoxes );
+    }
+
+    Intvect dataCentering( GetDataCentering() );
+
+    REAL_T dx[THREE];
+    REAL_T dx0[THREE];
+    m_visdat->GetDx( dx, level );
+    m_visdat->GetDx( dx0, 0 );
+    for( int m=0; m<THREE; ++m )
+    {
+        m_dblBuf[m]       = box.GetLoCorner(m) * dx[m]
+                          + 0.5*(dx0[m]-dx[m])*dataCentering[m]
+                          + m_visdat->GetOrigin()[m];
+        m_dblBuf[THREE+m] = (box.GetHiCorner(m)+1) * dx[m]
+                          + 0.5*(dx0[m]-dx[m])*dataCentering[m]
+                          + m_visdat->GetOrigin()[m];
+
+        if( visiblePartOnly == 1 )
+        {
+            m_dblBuf[m]       += 0.5*dx[m]*dataCentering[m];
+            m_dblBuf[THREE+m] -= 0.5*dx[m]*dataCentering[m];
+        }
+    }
+
+    return m_dblBuf;
+}
+
+
+/** Number of boxes on specified level.
+ *
+ *  Counts the real boxes, if arg level is the finest visible.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetLevelNumBoxes(int level) const
+{ 
+    if( (level == GetFinestVisibleLevel())
+    ||  (m_alwaysUseRealBoxes == 1) )
+    {
+        return m_visdat->GetNumRealBoxes( level );
+    } else
+    {
+        return m_visdat->GetNumBoxes( level );
+    }
+}
+
+
+/** Note that this->GetLevelNumBoxes() also returns real boxes, under certain
+ *  circumstances.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetLevelNumRealBoxes(int level) const
+{ 
+    return m_visdat->GetNumRealBoxes( level );
+}
+
+
+/** Length of the side of a cell. */
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetLevelDx(int level) const
+{
+    REAL_T dx[THREE];
+    m_visdat->GetDx( dx, level );
+    for( int i=0;i<3;++i ) m_dblBuf[i] = dx[i]; 
+    // Don't memcpy -- REAL_T is not necessarily double!
+    return m_dblBuf;
+}
+
+
+/** Length of the time step, at a level. */
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetLevelDt(int level) const
+{
+    return m_visdat->GetDt( level );
+}
+
+
+/** Time at beginning (or, optionally, at end of the run), at a level. */
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetLevelTime(int level) const
+{
+    return m_visdat->GetTime( level );
+}
+
+/** Gotta define this here.  If we don't it'll call the version in its immediate
+ *  parent class, which is vtkChomboReader, which calls back into here, etc
+ *  for an infinite recursion.
+ *  The version we really want to call is the one two levels up -- in class
+ *  vtkStructuredPoints.
+*/
+template<class REAL_T> vtkStructuredPoints *
+vtkChomboReaderImpl<REAL_T>::GetOutput()
+{
+//  Trace t("vtkChomboReaderImpl::GetOutput()");
+    return this->vtkStructuredPointsSource::GetOutput();
+}
+
+
+/** Copies our data, which is in FAB format, into the vtkStructuredPoints object
+ *  that the superclass returns from its GetOutput() method.
+ *  This function usually gets called from vtk_data.vtkUpdate(), where
+ *  vtkChomboReader::SetPiece() is called repeatedly, to give Execute() an
+ *  m_currentVisibleFAB to work with.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::Execute()
+{
+    assert( GetNumComponents() > 0 );
+
+    Trace t("vtkChomboReader::Execute()");
+
+    if( ! m_currentVisibleFAB )
+    {
+        return;
+    }
+
+    vtkStructuredPoints *output=(vtkStructuredPoints *)(GetOutput());
+
+    int level( GetVisibleBoxLevel( m_currentPieceIndex) );
+    int boxNum( GetVisibleBoxNum( m_currentPieceIndex) );
+    int padded( m_currentVisibleFAB->IsPadded() ? 1:0);
+    int realBox( m_currentVisibleFAB->IsReal() ? 1:0 );
+
+    int axisNum;
+    if( m_currentVisibleFAB->IsSlice() == true )
+    {
+        char axis = m_currentVisibleFAB->GetSliceAxis();
+        axisNum = 0 * (axis=='x')  +  1 * (axis=='y')  +  2 * (axis=='z');
+    } else
+    {
+        axisNum = 2;
+    }
+
+    int boxDims[3];
+    memcpy( boxDims, GetDimensions(level,boxNum,axisNum,padded,realBox),
+            3*sizeof(int) );
+    output->SetDimensions( boxDims[0], boxDims[1], boxDims[2] );
+        // Pass boxDims itself and you get segfault.
+
+    int numCells = m_currentVisibleFAB->GetBox().GetNumCells();
+    vtkDataArray * scalars = vtkArray<REAL_T>::New();
+    ((vtkArray<REAL_T> *)scalars)->SetNumberOfValues( numCells );
+    ((vtkArray<REAL_T> *)scalars)->SetArray(
+        m_currentVisibleFAB->GetFArray().get(), numCells, 1 );
+        // Cast needed because g++ expands templates into code for both types.
+
+    output->GetPointData()->SetScalars( scalars );
+    scalars->Delete(); // remove local copy of reference counted data
+
+    double origin[THREE];  // loCorner in units of level-0 cell size.
+    double spacing0[THREE],   // cell size at level 0
+           spacingL[THREE];   // cell size at current piece's level
+
+    memcpy( spacing0,
+            GetSpacing( 0,axisNum),
+            3*sizeof(double) );
+    memcpy( spacingL,
+            GetSpacing( m_visibleFabInfo.GetLevel(m_currentPieceIndex),axisNum),
+            3*sizeof(double) );
+    memcpy( origin,
+            GetOrigin( level, boxNum, axisNum, padded, realBox ),
+            3*sizeof(double) );
+
+    output->SetOrigin( origin[0], origin[1], origin[2] );
+    output->SetSpacing( spacingL[0], spacingL[1], spacingL[2] );
+
+    // With vtk3.2 we did this:
+    // output->SetUpdateExtent(0,0,0,0,0,0);
+    // But with vtk4.2, that got us boxes consisting of just one cell.
+    // Leaving UpdateExtent calculation to vtk was a little better, but it was
+    // still dropping parts of our boxes.  What works is to set the extents
+    // manually, like so:
+    output->SetUpdateExtent(0,boxDims[0]-1,0,boxDims[1]-1,0,boxDims[2]-1);
+
+    //
+    // EB stuff.
+    //
+    if( GetEBIsVisible() == 1 )
+    {
+        ExecuteEB( output );
+    }
+}
+
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::ExecuteEB( vtkStructuredPoints * output )
+{
+/*
+    Timer timer;
+    timer.SetSilent( false );
+    timer.Start();
+*/
+    assert( m_ebIndex != -1 );
+    int curLevel  = m_visibleFabInfo.GetLevel(m_currentPieceIndex);
+    int curBoxNum = m_currentVisibleFAB->GetBoxNum();
+
+    // Find number of cells in current box:
+    int * temp = GetBoxDims( curLevel, curBoxNum );
+    int nCellsInBox = temp[0] * temp[1] * temp[2];
+    char ebComponentName[ChomboEBConsts::s_longestStrlen + 10]; // plenty
+
+    vtkFieldData * ebData = vtkFieldData::New();
+    ebData->AllocateArrays( 2 + m_hdf5Dimensionality );
+
+    char const * ebComponentNames[5] =
+        { ChomboEBConsts::s_fraction,
+          ChomboEBConsts::s_distance,
+          ChomboEBConsts::s_xnormal,
+          ChomboEBConsts::s_ynormal,
+          ChomboEBConsts::s_znormal };
+    vtkArray<REAL_T> * ebComponents[2+m_hdf5Dimensionality];
+    for( int i=0;i<2+m_hdf5Dimensionality;++i )
+    {
+        ebComponents[i] = (vtkArray<REAL_T>*)(vtkArray<REAL_T>::New());
+        ebComponents[i]->SetNumberOfTuples( nCellsInBox );
+        sprintf( ebComponentName, "%s%d", ebComponentNames[i], m_ebIndex );
+        int componentNum( m_visdat->GetComponentNum( ebComponentName ) );
+        PinFAB( curLevel, curBoxNum, componentNum );
+        ebComponents[i]->SetArray( 
+            SharedArrayHandleMap<REAL_T>::GetPointer(
+                GetFArray(curLevel, curBoxNum, componentNum )).get(),
+            nCellsInBox,
+            1 );
+        ebData->AddArray( ebComponents[i] );
+        ebComponents[i]->Delete();
+    }
+
+    output->SetFieldData( ebData );
+    ebData->Delete();
+
+//  timer.Stop( "Time in ExecuteEB()" );
+}
+
+/** Required by Vtk parent class (I think). */
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::PrintSelf(ostream& os, vtkIndent indent)
+{
+    os << indent << "vtkChomboReaderImpl" << endl;
+    vtkStructuredPointsSource::PrintSelf(os,indent);
+    // In VTK4 the compiler rejects this with:
+    // error: cannot call member function `virtual void
+    // vtkStructuredPointsSource::PrintSelf(std::ostream&, vtkIndent)' without
+    // object
+
+    if(GetOutput())
+    {
+        GetOutput()->PrintSelf(os,indent);
+    }
+}
+
+
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::Is3DMode() const
+{
+    return (m_hdf5Dimensionality == 3) ? 1:0;
+}
+
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::IsSlicingMode() const
+{
+    return m_slicingMode;
+}
+
+template<class REAL_T> char
+vtkChomboReaderImpl<REAL_T>::GetSlicingDirection() const
+{
+    assert( m_slicingMode );
+    return m_slicingDirection;
+}
+
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetSlicingPosition() const
+{
+    assert( m_slicingMode );
+    return m_slicingPosition;
+}
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetSlicingDirection( char direction )
+{
+    m_slicingDirection = direction;
+    m_slicingMode = 1;
+}
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetSlicingPosition( double position )
+{
+    m_slicingPosition = position;
+}
+
+
+/** Returns 1 if true, 0 if false.
+ *  Arg planeDirection is 'x', 'y' or 'z'.
+ *  Arg planePosition is in distance (i.e. not cell) units.
+*/
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::PlaneIntersectsBox(
+    int level, int box,
+    char planeDirection, double planePosition ) const
+{
+    assert( planeDirection=='x' || planeDirection=='y' || planeDirection=='z' );
+
+    if( m_hdf5Dimensionality == 2 )
+    {
+        return 1;
+    }
+
+    double * temp = GetBoxExtentsXYZ( level, box, 1 );
+    double extents[6];
+    memcpy( extents, temp, 6*sizeof(double) );
+    int axisNum = 1 * (planeDirection=='y')
+                + 2 * (planeDirection=='z');
+    if( (planePosition >= extents[axisNum])
+    &&  (planePosition <= extents[axisNum+3] ))
+    {
+        return 1;
+    } else
+    {
+        return 0;
+    }
+}
+
+
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetAlwaysUseRealBoxes( int yesno )
+{
+    assert( (yesno==0) || (yesno==1) );
+
+    // The tricky thing here is to avoid getting mixed up between the two
+    // different ways of numbering boxes -- by real box or by subdivided box.
+    if( m_alwaysUseRealBoxes == -1 )
+    {
+        m_alwaysUseRealBoxes = yesno;
+    } else
+    {
+        m_alwaysUseRealBoxes = yesno;
+        m_visibleFabInfo.clear();
+        FlattenHierarchy( false ); // Or else we look for nonexistent boxes.
+    }
+}
+
+
+/** Don't try to set this more than once, after initialization. */
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetAlwaysUsePaddedBoxes( int yesno )
+{
+    assert( (yesno==0) || (yesno==1) );
+
+    if( m_alwaysUsePaddedBoxes == -1 )
+    {
+        m_alwaysUsePaddedBoxes = yesno;
+    } else
+    {
+        m_alwaysUsePaddedBoxes = yesno;
+        m_visibleFabInfo.clear();
+        FlattenHierarchy( false ); // Or else we look for nonexistent boxes.
+    }
+}
+
+
+/** To get the boxes lined up right, when using pipelines based on
+ *  vtkHierarchicalBox (for instance, in the HierarchicalBox example).
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetVtkHierarchicalBoxHack( int yesno )
+{
+    assert( (yesno==0) || (yesno==1) );
+    m_vtkHierarchicalBoxHack = yesno;
+}
+
+
+/** A hack; eventually, we'll want to read the factors from hdf5, and they
+ *  will be constant.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetAnisotropicFactors( float x, float y, float z )
+{
+    m_visdat->SetAnisotropic( x, y, z );
+}
+
+template<class REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetAnisotropicFactors() const
+{
+    Triple<REAL_T> aniso( m_visdat->GetAnisotropic() );
+    for( int i=0;i<3;++i ) m_dblBuf[i] = aniso[i];
+    return m_dblBuf;
+}
+
+
+/** Returns 1 if hdf5 file contains ghost cell data.  Returns 0 otherwise. */
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetGhostCellsSuppliedByUser() const
+{
+    return m_visdat->GetGhostCellsSuppliedByUser();
+}
+
+
+template<class REAL_T> int /*const*/ *
+vtkChomboReaderImpl<REAL_T>::GetDataCentering() const
+{
+    Intvect iv( m_visdat->GetDataCentering() );
+    memcpy( m_intBuf, iv.m_data, 3*sizeof(int) );
+    return m_intBuf;
+}
+
+
+/** Coordinate origin is what we call "origin" in the hdf5 file -- the position,
+ *  in XYZ space, of the low corner of the [0,0,0] cell.  (We have other things
+ *  called "origin" here...)
+*/
+template<class REAL_T> double /*const*/ *
+vtkChomboReaderImpl<REAL_T>::GetCoordinateOrigin() const
+{
+    Triple<REAL_T> origin( m_visdat->GetOrigin() );
+    for( int i=0;i<3;++i )
+    {
+        m_dblBuf[i] = origin.m_data[i];
+    }
+    return m_dblBuf;
+}
+
+
+/** Like GetDataCentering(), but coordinates are permuted in line with our
+ *  conventions for reslice mode.
+*/
+template<class REAL_T> int /*const*/ *
+vtkChomboReaderImpl<REAL_T>::GetDataCenteringPermuted() const
+{
+    Trace t("vtkChomboReaderImpl::GetDataCenteringPermuted()");
+    Intvect iv( m_visdat->GetDataCentering() );
+    if( IsSlicingMode() )
+    {
+        char axis = GetSlicingDirection();
+        int axisNum = axis=='y' + 2*(axis=='z');
+        int indexPermutations[3][3] = {{1,2,0},{2,0,1},{0,1,2}};
+        for( int m=0;m<THREE;++m )
+        {
+            m_intBuf[m] = iv[indexPermutations[axisNum][m]];
+        }
+    } else
+    {
+        memcpy( m_intBuf, iv.m_data, 3*sizeof(int) );
+    }
+    return m_intBuf;
+}
+
+
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetDebugLevel( int d ) const
+{
+    m_visdat->SetDebugLevel( d );
+}
+
+
+/** Write, on stdout, an ascii representation of this dataset, in the format
+ *  that ChomboVis' ascii2hdf5 can use to produce an hdf5 file.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::DumpAscii() const
+{
+    cout << (*m_visdat) << endl;
+}
+
+/** Write this dataset as a ChomboVis-legal hdf5 file. */
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::DumpHDF5( char const * outfilename ) const
+{
+    assert( outfilename );
+    m_visdat->SaveToHDF5( outfilename );
+}
+
+
+/** The "origin" in question is the origin mentioned in this class' Execute().
+ *  We shift that origin (in the x direction, for instance) by dx0 times the x
+ *  cell size for level 0 plus dxL times the spacing for the current piece's
+ *  level.
+ *  Note the names dx, dy and dz don't refer to the cell size.
+*/
+template<class REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetOriginShift( double dx0, double dy0, double dz0,
+                                             double dxL, double dyL, double dzL)
+{
+    m_originShift0[0] = dx0;
+    m_originShift0[1] = dy0;
+    m_originShift0[2] = dz0;
+    m_originShiftL[0] = dxL;
+    m_originShiftL[1] = dyL;
+    m_originShiftL[2] = dzL;
+}
+
+
+/** Get all the data for one component.  Data is cached.
+*/
+template<class REAL_T> int /* handle to map that holds REAL_T*  */
+vtkChomboReaderImpl<REAL_T>::GetParticleComponent( char const * componentName )
+  const
+{
+    return SharedArrayHandleMap<REAL_T>::GetHandle(
+        m_visdat->GetParticleComponent( componentName ));
+}
+
+
+/** For a single particle -- the particleNum-th in the order the particles'
+ *  data are stored in the hdf5 file -- return  its value along the named
+ *  component.
+*/
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetParticleCoordinate(
+    int particleNumber, const char * compName ) const
+{
+    return m_visdat->GetParticleCoordinate( particleNumber, compName );
+}
+
+
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetNumParticles() const
+{
+    return m_visdat->GetNumParticles();
+}
+
+
+template<class REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetNumParticleComponents() const
+{
+    return m_visdat->GetNumParticleComponents();
+}
+
+
+/** Particle names are in alphabetical order. */
+template<class REAL_T> char const *
+vtkChomboReaderImpl<REAL_T>::GetParticleComponentName( int serialNumber ) const
+{
+    return m_visdat->GetParticleComponentNames()[serialNumber].c_str();
+}
+
+
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetParticleComponentRangeMin( char const * name )
+    const
+{
+    boost::shared_array<REAL_T> x = SharedArrayHandleMap<REAL_T>::GetPointer(
+        GetParticleComponent( name ));
+    double result = *(std::min_element( x.get(), x.get() + GetNumParticles() ));
+    if( ! IsNormalNumber( result ) )
+    {
+        result =  *(std::min_element( x.get(), x.get() + GetNumParticles(),
+                                      NormalNumberComparatorForMin() ));
+    }
+    return result;
+}
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetParticleComponentRangeMax( char const * name )
+    const
+{
+    boost::shared_array<REAL_T> x = SharedArrayHandleMap<REAL_T>::GetPointer(
+        GetParticleComponent( name ));
+    double result = *(std::max_element( x.get(), x.get() + GetNumParticles() ));
+    if( ! IsNormalNumber( result ) )
+    {
+        result =  *(std::max_element( x.get(), x.get() + GetNumParticles(),
+                                      NormalNumberComparatorForMax() ));
+    }
+    return result;
+}
+
+
+/** Returns m_visdat, the VisualizableDataset pointer, cast to an integer so
+ *  we can more easily smuggle it through Python code.
+ *
+ *  Increments the VisualizableDataset's refcount.
+*/
+template<class REAL_T> int /* VisualizableDataset* */
+vtkChomboReaderImpl<REAL_T>::GetVisualizableDatasetPtr() const
+{
+    return SharedPointerHandleMap<VisualizableDatasetInterfaceForPython>::GetHandle(
+        m_visdat );
+}
+
+
+/** Returns 1 iff spatial location (x,y,z) is inside an EB covered cell. */
+template<class REAL_T> double
+vtkChomboReaderImpl<REAL_T>::GetDistanceToEB( double x, double y, double z,
+                                              int level, int ebID ) const
+{
+    return m_visdat->GetDistanceToEB( x, y, z, level, ebID );
+//    return pow(x-13,2) + pow(y-12,2) + pow(z-34,2) - 25.0;
+//    return x-12;
+//      return pow(x-12,2) - 25;
+}
+
+
+template<> char const * const vtkChomboReaderImpl<double>::ChomboEBConsts::s_fraction = "fraction-";
+template<> char const * const vtkChomboReaderImpl<double>::ChomboEBConsts::s_xnormal = "xnormal-";
+template<> char const * const vtkChomboReaderImpl<double>::ChomboEBConsts::s_ynormal = "ynormal-";
+template<> char const * const vtkChomboReaderImpl<double>::ChomboEBConsts::s_znormal = "znormal-";
+template<> char const * const vtkChomboReaderImpl<double>::ChomboEBConsts::s_distance = "distance-";
+// Size of buffer big enough to hold the longest of the above strings:
+template<> int  const vtkChomboReaderImpl<double>::ChomboEBConsts::s_longestStrlen = 20;
+template<> char const * const vtkChomboReaderImpl<float>::ChomboEBConsts::s_fraction = "fraction-";
+template<> char const * const vtkChomboReaderImpl<float>::ChomboEBConsts::s_xnormal = "xnormal-";
+template<> char const * const vtkChomboReaderImpl<float>::ChomboEBConsts::s_ynormal = "ynormal-";
+template<> char const * const vtkChomboReaderImpl<float>::ChomboEBConsts::s_znormal = "znormal-";
+template<> char const * const vtkChomboReaderImpl<float>::ChomboEBConsts::s_distance = "distance-";
+// Size of buffer big enough to hold the longest of the above strings:
+template<> int  const vtkChomboReaderImpl<float>::ChomboEBConsts::s_longestStrlen = 20;
+
+
+//
+// Member functions of class VisibleFabInfo
+//
+template<typename REAL_T> typename VisibleFabInfo<REAL_T>::IterType
+VisibleFabInfo<REAL_T>::begin() const
+{
+    return m_fabs.begin();
+}
+
+
+template<typename REAL_T> typename VisibleFabInfo<REAL_T>::IterType
+VisibleFabInfo<REAL_T>::end() const
+{
+    return m_fabs.end();
+}
+
+
+template<typename REAL_T> void
+VisibleFabInfo<REAL_T>::clear()
+{
+    m_fabs.clear();
+    m_levels.clear();
+    m_components.clear();
+}
+
+
+template<typename REAL_T> unsigned
+VisibleFabInfo<REAL_T>::size() const
+{
+    assert( m_fabs.size() == m_levels.size() );
+    assert( m_fabs.size() == m_components.size() );
+    return m_fabs.size();
+}
+
+
+template<typename REAL_T> void
+VisibleFabInfo<REAL_T>::reserve( int n )
+{
+    m_fabs.reserve(n);
+    m_levels.reserve(n);
+    m_components.reserve(n);
+}
+
+
+template<typename REAL_T> void
+VisibleFabInfo<REAL_T>::push_back(
+    boost::intrusive_ptr< FAB<REAL_T> > fab, int level, int component )
+{
+    m_fabs.push_back( fab );
+    m_levels.push_back( level );
+    m_components.push_back( component );
+}
+
+
+template<typename REAL_T> boost::intrusive_ptr< FAB<REAL_T> >
+VisibleFabInfo<REAL_T>::GetFAB( int i ) const
+{
+    return m_fabs[i];
+}
+
+template<typename REAL_T> int
+VisibleFabInfo<REAL_T>::GetLevel( int i ) const
+{
+    return m_levels[i];
+}
+
+
+template<typename REAL_T> int
+VisibleFabInfo<REAL_T>::GetComponent( int i ) const
+{
+    return m_components[i];
+}
+
+
+/** Returns true iff we're already holding an intrusive_ptr that's wrapping
+ *  the same FAB pointer as the argument.
+*/
+template<typename REAL_T> bool
+VisibleFabInfo<REAL_T>::contains_fab( boost::intrusive_ptr< FAB<REAL_T> > fab )
+  const
+{
+    // FIXME: O(n) algorithm; go to a sorted vector, if this becomes a
+    // performance problem.
+    if( std::find( m_fabs.begin(), m_fabs.end(), fab ) == m_fabs.end() )
+    {
+        return false;
+    } else
+    {
+        return true;
+    }
+}
+
+
+/** Returns the static int * m_intBuf.  So copy the result before calling any
+ *  other ChomboReader functions.
+ *  Arg axisNum should be 0, 1 or 2 (for 'x', 'y' or 'z') if we're in reslice
+ *  mode, and 2 if we're not in reslice mode.
+ *  Args padded and realBox are logical booleans; valid values are 0 and 1.
+*/
+template<typename REAL_T> int *
+vtkChomboReaderImpl<REAL_T>::GetDimensions(
+  int level, int boxNum, int axisNum, int padded, int realBox ) const
+
+{
+    Trace t("vtkChomboReaderImpl::GetDimensions()");
+
+    assert( (padded==0) || (padded==1) );
+    assert( (realBox==0) || (realBox==1) );
+    int rawDims[3]; // Before permutation
+    if( realBox )
+    {
+        m_visdat->GetsRealBox( level, boxNum, padded ).GetDims( rawDims );
+    } else
+    {
+        m_visdat->GetsBox( level, boxNum, padded ).GetDims( rawDims );
+    }
+
+    if( axisNum == 2 )
+    {
+        memcpy( m_intBuf, rawDims, 3*sizeof(int) );
+    } else
+    {
+        int indexPermutations[3][3] = {{1,2,0},{2,0,1},{0,1,2}};
+        for( int m=0;m<3;++m )
+        {
+            int permutedIndex = indexPermutations[axisNum][m];
+            m_intBuf[m] = rawDims[permutedIndex];
+        }
+    }
+
+    if( (m_hdf5Dimensionality == 2) || (m_slicingMode == 1) )
+    {
+        m_intBuf[2] = 1;
+    }
+
+    return m_intBuf;
+}
+
+
+/** Returns the static int * m_dblBuf.  So copy the result before calling any
+ *  other ChomboReader functions.
+ *  Arg axisNum should be 0, 1 or 2 (for 'x', 'y' or 'z') if we're in reslice
+ *  mode, and 2 if we're not in reslice mode.
+*/
+template<typename REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetSpacing( int level, int axisNum ) const
+{
+    assert( (axisNum>=0) && (axisNum<=2) );
+
+    int indexPermutations[3][3] = {{1,2,0},{2,0,1},{0,1,2}};
+    Triple<REAL_T> dx( m_visdat->GetDx( level ) );
+
+    for( int m=0;m<3;++m )
+    {
+        int permutedIndex = indexPermutations[axisNum][m];
+        m_dblBuf[m] = dx[permutedIndex];
+    }
+
+    return m_dblBuf;
+}
+
+
+/** Returns the static int * m_dblBuf.  So copy the result before calling any
+ *  other ChomboReader functions.
+ *  Arg axisNum should be 0, 1 or 2 (for 'x', 'y' or 'z') if we're in reslice
+ *  mode, and 2 if we're not in reslice mode.
+ *  Args padded and realBox are logical booleans; valid values are 0 and 1.
+*/
+template<typename REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetOrigin( int level, int boxNum, int axisNum,
+                                        int padded, int realBox ) const
+{
+    assert( (axisNum>=0) && (axisNum<=2) );
+    assert( (padded==0) || (padded==1) );
+    assert( (realBox==0) || (realBox==1) );
+
+    double spacing0[3], spacingL[3];
+    memcpy( spacing0, GetSpacing(0,    2), 3*sizeof(double) ); // permute later
+    memcpy( spacingL, GetSpacing(level,2), 3*sizeof(double) );
+    Box box;
+    if( realBox )
+    {
+        box = m_visdat->GetsRealBox( level, boxNum, padded );
+    } else
+    {
+        box = m_visdat->GetsBox( level, boxNum, padded );
+    }
+
+    Intvect dataCentering( GetDataCentering() );
+    int indexPermutations[3][3] = {{1,2,0},{2,0,1},{0,1,2}};
+
+    for( int m=0;m<3;++m )
+    {
+        int p = indexPermutations[axisNum][m]; // permuted index
+        m_dblBuf[m] =
+            box.GetLoCorner( p ) * spacingL[p]
+          + spacingL[p]/2.0
+          + spacing0[p]*m_originShift0[p]
+          + spacingL[p]*m_originShiftL[p]
+          + m_visdat->GetOrigin()[p];
+
+        // This is to get things right in the HierarchicalBoxPipeline example:
+        if( m_vtkHierarchicalBoxHack )
+        {
+            m_dblBuf[p] += 0.5*(spacing0[p]-spacingL[p])*dataCentering[p];
+        }
+    }
+
+    if( (m_hdf5Dimensionality == 2) || (m_slicingMode == 1) )
+    {
+        m_dblBuf[2] = 0.0;
+    }
+
+    return m_dblBuf;
+}
+
+
+/** Returns the static int * m_dblBuf.  So copy the result before calling any
+ *  other ChomboReader functions.
+ *  Returns what the reader's output (the vtkStructuredPoints) calls its
+ *  "bounds".
+ *  Arg axisNum should be 0, 1 or 2 (for 'x', 'y' or 'z') if we're in reslice
+ *  mode, and 2 if we're not in reslice mode.
+ *  Args padded and realBox are logical booleans; valid values are 0 and 1.
+*/
+template<typename REAL_T> double *
+vtkChomboReaderImpl<REAL_T>::GetBounds( int level, int boxNum, int axisNum,
+                                        int padded, int realBox ) const
+{
+    assert( (axisNum>=0) && (axisNum<=2) );
+    assert( (padded==0) || (padded==1) );
+    assert( (realBox==0) || (realBox==1) );
+
+    double spacingL[3], origin[3];
+    int boxDims[3];
+    memcpy( spacingL,
+            GetSpacing( level ,axisNum),
+            3*sizeof(double) );
+    memcpy( origin,
+            GetOrigin( level, boxNum, axisNum, padded, realBox ),
+            3*sizeof(double) );
+    memcpy( boxDims, GetDimensions(level,boxNum,axisNum,padded,realBox),
+            3*sizeof(int) );
+
+    for( int i=0;i<3;++i )
+    {
+        m_dblBuf[2*i] = origin[i];
+        m_dblBuf[2*i+1] = origin[i] + (boxDims[i]-1)*spacingL[i];
+    }
+
+    return m_dblBuf;
+}
+
+
+template<typename REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetCurrentPieceIndex() const
+{
+    return m_currentPieceIndex;
+}
+
+/** Returns the level of refinement, to which the current piece (i.e.
+ *  m_currentVisibleFAB) belongs.
+*/
+template<typename REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetCurrentPieceLevel() const
+{
+    assert( m_currentVisibleFAB );
+    return GetVisibleBoxLevel( m_currentPieceIndex );
+}
+
+/** Returns the box number, within its level, to which the current piece (i.e.
+ *  m_currentVisibleFAB) belongs.
+*/
+template<typename REAL_T> int
+vtkChomboReaderImpl<REAL_T>::GetCurrentPieceBoxNum() const
+{
+    assert( m_currentVisibleFAB );
+    return GetVisibleBoxNum( m_currentPieceIndex );
+}
+
+
+/** Returns 1 if the current piece (i.e. m_currentVisibleFAB) is being used
+ *  in a padded (i.e. with ghost cells) state.  Returns 0 otherwise.
+*/
+template<typename REAL_T> int
+vtkChomboReaderImpl<REAL_T>::CurrentPieceIsPadded() const
+{
+    assert( m_currentVisibleFAB );
+    return m_currentVisibleFAB->IsPadded() ? 1:0;
+}
+
+
+/** Returns 1 if the current piece (i.e. m_currentVisibleFAB) is a real (as
+ *  opposed to a subdivided) box.  Returns 0 otherwise.
+*/
+template<typename REAL_T> int
+vtkChomboReaderImpl<REAL_T>::CurrentPieceIsReal() const
+{
+    assert( m_currentVisibleFAB );
+    return m_currentVisibleFAB->IsReal() ? 1:0;
+}
+
+
+/** 0=memory, 1=speed.
+ *  If arg is 1, then no FABs are ever deleted.  (We'll still only load them as
+ *  needed, but once they're loaded, they're never deleted as, when arg==0, they
+ *  would be deleted when they appear to not be needed.)
+ *        
+ *  By default, ChomboVis comes up in speed-optimization mode.
+*/
+template<typename REAL_T> void
+vtkChomboReaderImpl<REAL_T>::SetOptimizationMode(
+    int memory_or_speed )
+{
+    assert( (memory_or_speed==0) ||
+            (memory_or_speed==1) );
+    m_visdat->SetOptimizationMode( memory_or_speed );
+}
+
+
+/** Initialize the flags, for the indicated level.
+ *  You have to call this on each level, before using the object.
+ *  
+ *  We initialize the level to "not-visible" but all the box entries to true,
+ *  i.e. by default we show all the boxes when we visit a level.
+*/
+void
+VisibleLevelsAndBoxes::InitLevel( int level, int numBoxes )
+{
+    assert( m_rep.find(level) == m_rep.end() );
+
+    vector<bool> boxNums( numBoxes );
+    m_rep.insert( std::make_pair(level, std::make_pair(false, boxNums) ) );
+    std::fill( m_rep[level].second.begin(), m_rep[level].second.end(), true );
+}
+
+/** Returns true iff level is visible. */
+bool
+VisibleLevelsAndBoxes::GetLevelVisible( int level ) const
+{
+    assert( level >= 0 );
+    assert( level < m_rep.size() );
+    rep_type::const_iterator iter( m_rep.find(level) );
+    return iter->second.first;
+}
+
+void
+VisibleLevelsAndBoxes::SetLevelVisible( int level, bool tf )
+{
+    assert( level >= 0 );
+    assert( level < m_rep.size() );
+    rep_type::iterator iter( m_rep.find(level) );
+    iter->second.first = tf;
+}
+
+
+/** Returns true iff real box at indicated level is visible. */
+bool
+VisibleLevelsAndBoxes::GetBoxVisible( int level, int realBoxNum ) const
+{
+    assert( level >= 0 );
+    assert( level < m_rep.size() );
+    assert( realBoxNum >= 0 );
+    rep_type::const_iterator iter( m_rep.find(level) );
+    assert( realBoxNum < iter->second.second.size() );
+
+    return iter->second.second[realBoxNum];
+}
+
+void
+VisibleLevelsAndBoxes::SetBoxVisible( int level, int realBoxNum, bool tf )
+{
+    assert( level >= 0 );
+    assert( level < m_rep.size() );
+    assert( realBoxNum >= 0 );
+    rep_type::iterator iter( m_rep.find(level) );
+    assert( realBoxNum < iter->second.second.size() );
+
+    iter->second.second[realBoxNum] = tf;
+}

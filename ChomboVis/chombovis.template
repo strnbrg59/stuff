@@ -1,0 +1,110 @@
+#
+#   _______              __
+#  / ___/ /  ___  __ _  / /  ___
+# / /__/ _ \/ _ \/  ' \/ _ \/ _ \
+# \___/_//_/\___/_/_/_/_.__/\___/ 
+#
+# This software is copyright (C) by the Lawrence Berkeley
+# National Laboratory.  Permission is granted to reproduce
+# this software for non-commercial purposes provided that
+# this notice is left intact.
+# 
+# It is acknowledged that the U.S. Government has rights to
+# this software under Contract DE-AC03-765F00098 between
+# the U.S. Department of Energy and the University of
+# California.
+#
+# This software is provided as a professional and academic
+# contribution for joint exchange.  Thus it is experimental,
+# is provided ``as is'', with no warranties of any kind
+# whatsoever, no support, no promise of updates, or printed
+# documentation.  By using this software, you acknowledge
+# that the Lawrence Berkeley National Laboratory and
+# Regents of the University of California shall have no
+# liability with respect to the infringement of other
+# copyrights by any part of this software.
+#
+
+This is not the actual chombovis script; Makefile uses this file as a template.
+
+# Start the ChomboVis system.
+#
+# Usage: chombovis|chombobrowser|chombodata|chombodatalite [-i] [<option1>=<value1> ...] [something.hdf5]
+# For a list of the valid options, type "./chombovis -h".
+#
+
+# CHOMBOVIS_HOME refers to what autoconf calls $prefix, i.e. the installation
+# directory.
+export CHOMBOVIS_HOME
+
+
+# A couple of more directories in the installation tree.
+# We install all the .so's and the .py's in the same place under lib:
+LIB_DIR=${CHOMBOVIS_HOME}/lib/ChomboVis
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LIB_DIR:${HDF5_LIBRARY_DIR}
+export LD_LIBRARY_PATH
+PYTHONPATH=$PYTHONPATH:$LIB_DIR
+export PYTHONPATH
+PATH=${CHOMBOVIS_HOME}/libexec/ChomboVis:$PATH
+export PATH
+
+i_mode=0
+if [ $# -gt 0 ]; then
+   if [ $1 = '-i' ]; then
+       shift
+       i_mode=1
+   fi
+
+   #
+   # The general rule, for ChomboVis command-line arguments, is that they have to
+   # be in "key=value" format.  But we allow two exceptions:
+   #   1. If $1 matches '^-' (e.g. -h, --help), we print the usage message.
+   #   2. If $# doesn't contain a '=', we assume that's infile.
+   #        E.g. "chombovis -i slices_off=1 poisson.hdf5"
+   #
+   clean_args=`echo $* | sed 's/ *= */=/g'`
+   all_args=`echo $clean_args | python $LIB_DIR/add_infile.py`
+fi
+
+#
+# Start chombovis, chombobrowser or chombodata, as the case may be.
+# Gotta use vtkpython executable; if use just plain python, GetOutput() from
+# your Chombo classes isn't right.
+#
+if [ `basename $0` = 'chombovis' ]; then
+    if [ $i_mode -eq 0 ]; then
+        vtkpython $LIB_DIR/main.py $all_args
+    else
+        vtkpython -i $LIB_DIR/main.py $all_args python_i_mode=1
+    fi
+
+elif [ `basename $0` = 'chombobrowser' ]; then
+    if [ $i_mode -eq 0 ]; then
+        vtkpython $LIB_DIR/main.py no_vtk=1 \
+            test_class=control_fab_tables $all_args
+    else
+        vtkpython -i $LIB_DIR/main.py no_vtk=1 \
+             test_class=control_fab_tables $all_args python_i_mode=1
+    fi
+
+elif [ `basename $0` = 'chombodata' ]; then
+    if [ $i_mode -eq 0 ]; then
+        vtkpython $LIB_DIR/main.py no_vtk=1 test_class=reader_api $all_args
+    else
+        vtkpython -i $LIB_DIR/main.py no_vtk=1 \
+            test_class=reader_api $all_args python_i_mode=1
+    fi
+elif [ `basename $0` = 'chombodatalite' ]; then
+    # With chombodatalite you're on your own with nothing more than PYTHONPATH
+    # set to where the ChomboVis *.py files are.
+    python $*
+else
+    echo "********************************************************"
+    echo "This won't work if you symlink to another name.  It has "
+    echo "to be called chombovis, chombobrowser or chombodata.    "
+    echo "Your program is called " `basename $0`
+    echo "Your PATH=" $PATH
+    echo "********************************************************"
+    exit 1
+fi

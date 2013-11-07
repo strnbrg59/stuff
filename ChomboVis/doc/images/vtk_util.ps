@@ -1,0 +1,5052 @@
+%!PS-Adobe-2.0
+%%Creator: dot version 1.12 (Mon Oct  4 18:34:25 UTC 2004)
+%%For: (tdsternberg) Theodore D. Sternberg
+%%Title: chombodigraph
+%%Pages: (atend)
+%%BoundingBox: 35 35 3519 1125
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+
+EncodingVector
+  dup 306 /AE
+  dup 301 /Aacute
+  dup 302 /Acircumflex
+  dup 304 /Adieresis
+  dup 300 /Agrave
+  dup 305 /Aring
+  dup 303 /Atilde
+  dup 307 /Ccedilla
+  dup 311 /Eacute
+  dup 312 /Ecircumflex
+  dup 313 /Edieresis
+  dup 310 /Egrave
+  dup 315 /Iacute
+  dup 316 /Icircumflex
+  dup 317 /Idieresis
+  dup 314 /Igrave
+  dup 334 /Udieresis
+  dup 335 /Yacute
+  dup 376 /thorn
+  dup 337 /germandbls
+  dup 341 /aacute
+  dup 342 /acircumflex
+  dup 344 /adieresis
+  dup 346 /ae
+  dup 340 /agrave
+  dup 345 /aring
+  dup 347 /ccedilla
+  dup 351 /eacute
+  dup 352 /ecircumflex
+  dup 353 /edieresis
+  dup 350 /egrave
+  dup 355 /iacute
+  dup 356 /icircumflex
+  dup 357 /idieresis
+  dup 354 /igrave
+  dup 360 /dcroat
+  dup 361 /ntilde
+  dup 363 /oacute
+  dup 364 /ocircumflex
+  dup 366 /odieresis
+  dup 362 /ograve
+  dup 365 /otilde
+  dup 370 /oslash
+  dup 372 /uacute
+  dup 373 /ucircumflex
+  dup 374 /udieresis
+  dup 371 /ugrave
+  dup 375 /yacute
+  dup 377 /ydieresis  
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+	dup 1 exch div /InvScaleFactor exch def
+	dup scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw aligned label in bounding box aligned to current point
+/alignedtext {			% width adj text
+	/text exch def
+	/adj exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			text stringwidth pop adj mul 0 rmoveto
+		} if
+		[] 0 setdash
+		text show
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: 36 36 3519 1125
+%%PageOrientation: Portrait
+gsave
+35 35 3484 1090 boxprim clip newpath
+36 36 translate
+0 0 1 beginpage
+0 0 translate 0 rotate
+0.000 0.000 0.000 graphcolor
+14.00 /Times-Roman set_font
+
+%	algorithms
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+2965 386 49 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2965 381 moveto 73 -0.5 (algorithms) alignedtext
+end grestore
+end grestore
+
+%	anag_utils
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+816 98 48 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+816 93 moveto 71 -0.5 (anag_utils) alignedtext
+end grestore
+end grestore
+
+%	algorithms -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2963 368 moveto
+2956 322 2932 202 2856 152 curveto
+2812 123 1204 102 874 99 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 874 96 moveto
+864 99 lineto
+874 103 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 874 96 moveto
+864 99 lineto
+874 103 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	anag_megawidgets
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+2719 674 79 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2719 669 moveto 133 -0.5 (anag_megawidgets) alignedtext
+end grestore
+end grestore
+
+%	anag_megawidgets -> algorithms
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2734 656 moveto
+2777 606 2895 468 2943 411 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 2946 413 moveto
+2950 403 lineto
+2941 408 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 2946 413 moveto
+2950 403 lineto
+2941 408 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	anag_megawidgets -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2757 658 moveto
+2811 626 2842 599 2842 530 curveto
+2842 530 2842 530 2842 242 curveto
+2842 151 2538 155 2451 136 curveto
+2442 134 2440 133 2432 132 curveto
+2412 129 2407 129 2388 128 curveto
+2359 125 2287 121 2259 120 curveto
+2217 117 2206 117 2165 116 curveto
+2113 114 2099 114 2048 114 curveto
+1959 112 1937 111 1849 110 curveto
+1805 109 1795 108 1752 108 curveto
+1688 106 1672 106 1609 106 curveto
+1532 105 1513 104 1437 104 curveto
+1368 103 1351 103 1284 102 curveto
+1243 101 1234 100 1194 100 curveto
+1133 99 964 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	saved_states
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+2154 170 55 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2154 165 moveto 84 -0.5 (saved_states) alignedtext
+end grestore
+end grestore
+
+%	anag_megawidgets -> saved_states
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2704 656 moveto
+2669 616 2580 515 2498 440 curveto
+2403 353 2371 342 2273 260 curveto
+2238 230 2229 207 2202 188 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 2203 185 moveto
+2193 183 lineto
+2200 191 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 2203 185 moveto
+2193 183 lineto
+2200 191 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	self_control
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+1274 242 54 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1274 237 moveto 82 -0.5 (self_control) alignedtext
+end grestore
+end grestore
+
+%	anag_megawidgets -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2683 658 moveto
+2534 591 1972 341 1955 332 curveto
+1927 317 1924 306 1896 296 curveto
+1845 277 1710 269 1657 264 curveto
+1638 262 1633 261 1615 260 curveto
+1599 258 1562 256 1547 256 curveto
+1536 255 1374 244 1364 244 curveto
+1355 243 1347 243 1338 243 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1338 240 moveto
+1328 243 lineto
+1338 247 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1338 240 moveto
+1328 243 lineto
+1338 247 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1726 602 44 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1726 597 moveto 62 -0.5 (vtk_data) alignedtext
+end grestore
+end grestore
+
+%	anag_megawidgets -> vtk_data
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2649 665 moveto
+2620 662 2586 659 2555 656 curveto
+2263 630 1913 611 1780 605 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1780 602 moveto
+1770 604 lineto
+1780 608 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1780 602 moveto
+1770 604 lineto
+1780 608 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	notifier
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+432 26 38 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+432 21 moveto 51 -0.5 (notifier) alignedtext
+end grestore
+end grestore
+
+%	anag_utils -> notifier
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 772 91 moveto
+698 78 551 50 477 35 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 477 32 moveto
+467 33 lineto
+476 38 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 477 32 moveto
+467 33 lineto
+476 38 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+723 314 27 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+723 309 moveto 25 -0.5 (box) alignedtext
+end grestore
+end grestore
+
+%	box -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 730 297 moveto
+747 259 785 171 804 125 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 807 127 moveto
+808 116 lineto
+801 124 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 807 127 moveto
+808 116 lineto
+801 124 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 744 303 moveto
+750 300 757 298 764 296 curveto
+847 274 1093 254 1211 246 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1211 249 moveto
+1221 245 lineto
+1211 243 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1211 249 moveto
+1221 245 lineto
+1211 243 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+660 386 52 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+660 381 moveto 79 -0.5 (box_layout) alignedtext
+end grestore
+end grestore
+
+%	box_layout -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 611 380 moveto
+580 373 544 360 525 332 curveto
+516 318 517 310 525 296 curveto
+532 282 705 163 775 118 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 778 120 moveto
+784 112 lineto
+774 115 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 778 120 moveto
+784 112 lineto
+774 115 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout -> box
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 675 369 moveto
+684 360 694 348 702 338 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 705 340 moveto
+709 330 lineto
+700 335 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 705 340 moveto
+709 330 lineto
+700 335 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 700 374 moveto
+756 349 769 318 840 296 curveto
+875 284 1101 261 1212 248 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1212 251 moveto
+1222 247 lineto
+1212 245 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1212 251 moveto
+1222 247 lineto
+1212 245 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout_data
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+718 458 72 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+718 453 moveto 118 -0.5 (box_layout_data) alignedtext
+end grestore
+end grestore
+
+%	box_layout_data -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 740 441 moveto
+769 416 816 367 816 314 curveto
+816 314 816 314 816 242 curveto
+816 202 816 155 816 126 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 820 126 moveto
+816 116 lineto
+813 126 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 820 126 moveto
+816 116 lineto
+813 126 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout_data -> box
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 719 440 moveto
+720 430 721 416 721 404 curveto
+722 383 722 360 723 342 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 727 342 moveto
+723 332 lineto
+720 342 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 727 342 moveto
+723 332 lineto
+720 342 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout_data -> box_layout
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 704 440 moveto
+697 431 688 421 681 412 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 683 409 moveto
+674 404 lineto
+678 414 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 683 409 moveto
+674 404 lineto
+678 414 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	box_layout_data -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 764 444 moveto
+786 435 812 422 830 404 curveto
+866 366 835 327 878 296 curveto
+879 295 1103 265 1214 250 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1214 253 moveto
+1224 249 lineto
+1214 247 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1214 253 moveto
+1224 249 lineto
+1214 247 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	cmd_line
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+2444 458 45 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2444 453 moveto 64 -0.5 (cmd_line) alignedtext
+end grestore
+end grestore
+
+%	cmd_line -> algorithms
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2487 452 moveto
+2580 439 2804 408 2909 393 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 2909 396 moveto
+2919 392 lineto
+2909 390 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 2909 396 moveto
+2919 392 lineto
+2909 390 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	cmd_line -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2448 440 moveto
+2453 412 2462 359 2462 314 curveto
+2462 314 2462 314 2462 242 curveto
+2462 186 2427 174 2377 152 curveto
+2307 120 1149 102 874 99 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 874 96 moveto
+864 99 lineto
+874 103 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 874 96 moveto
+864 99 lineto
+874 103 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	cmd_line -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2413 445 moveto
+2337 413 2135 332 1959 296 curveto
+1841 272 1484 252 1338 245 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1338 242 moveto
+1328 244 lineto
+1338 248 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1338 242 moveto
+1328 244 lineto
+1338 248 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	dialog_inventory
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+606 314 72 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+606 309 moveto 118 -0.5 (dialog_inventory) alignedtext
+end grestore
+end grestore
+
+%	dialog_inventory -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 573 298 moveto
+522 272 428 221 411 188 curveto
+403 173 400 164 411 152 curveto
+460 93 668 106 758 100 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 758 103 moveto
+768 99 lineto
+758 97 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 758 103 moveto
+768 99 lineto
+758 97 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	dialog_inventory -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 657 301 moveto
+667 299 677 297 687 296 curveto
+876 266 1101 251 1210 245 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1210 249 moveto
+1220 245 lineto
+1210 242 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1210 249 moveto
+1220 245 lineto
+1210 242 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	module_maker
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+486 170 66 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+486 165 moveto 106 -0.5 (module_maker) alignedtext
+end grestore
+end grestore
+
+%	module_maker -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 536 158 moveto
+546 156 556 154 566 152 curveto
+634 137 713 119 764 109 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 765 112 moveto
+774 107 lineto
+764 106 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 765 112 moveto
+774 107 lineto
+764 106 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	notifier -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 468 32 moveto
+536 44 684 72 764 87 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 764 90 moveto
+774 89 lineto
+765 84 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 764 90 moveto
+774 89 lineto
+765 84 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	saved_states -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2100 166 moveto
+2045 162 1958 156 1883 152 curveto
+1497 129 1034 108 874 100 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 874 97 moveto
+864 100 lineto
+874 104 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 874 97 moveto
+864 100 lineto
+874 104 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	saved_states -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 2101 175 moveto
+1947 188 1502 224 1337 237 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1337 234 moveto
+1327 238 lineto
+1337 240 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1337 234 moveto
+1327 238 lineto
+1337 240 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	selector
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+956 890 38 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+956 885 moveto 50 -0.5 (selector) alignedtext
+end grestore
+end grestore
+
+%	selector -> algorithms
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 994 889 moveto
+1007 889 1022 888 1036 888 curveto
+1155 884 3082 829 3182 764 curveto
+3224 735 3237 703 3220 656 curveto
+3169 517 3139 463 3019 399 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 3020 396 moveto
+3010 394 lineto
+3017 402 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 3020 396 moveto
+3010 394 lineto
+3017 402 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	selector -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 918 889 moveto
+775 884 276 866 211 836 curveto
+161 812 124 801 124 746 curveto
+124 746 124 746 124 530 curveto
+124 326 285 319 464 224 curveto
+504 202 523 214 561 188 curveto
+577 175 572 163 590 152 curveto
+591 151 717 120 719 120 curveto
+725 118 727 118 734 116 curveto
+746 112 750 106 758 103 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 759 106 moveto
+768 100 lineto
+757 100 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 759 106 moveto
+768 100 lineto
+757 100 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	selector -> box
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 918 888 moveto
+699 869 638 888 424 836 curveto
+318 810 194 855 194 746 curveto
+194 746 194 746 194 674 curveto
+194 476 347 469 517 368 curveto
+555 345 568 344 612 336 curveto
+626 333 665 338 679 332 curveto
+684 330 685 326 688 323 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 690 326 moveto
+696 317 lineto
+686 320 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 690 326 moveto
+696 317 lineto
+686 320 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	selector -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 953 872 moveto
+947 831 937 732 967 656 curveto
+982 617 992 608 1027 584 curveto
+1064 557 1080 564 1124 548 curveto
+1557 385 1650 272 2091 177 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2092 180 moveto
+2101 175 lineto
+2091 174 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2092 180 moveto
+2101 175 lineto
+2091 174 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	selector -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 918 887 moveto
+842 873 818 874 748 836 curveto
+630 771 490 684 580 584 curveto
+625 532 830 585 889 548 curveto
+998 477 935 375 1039 296 curveto
+1064 276 1147 269 1178 260 curveto
+1187 257 1190 255 1200 252 curveto
+1205 250 1207 248 1210 247 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1211 250 moveto
+1220 244 lineto
+1209 244 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1211 250 moveto
+1220 244 lineto
+1209 244 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	selector -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 994 887 moveto
+1126 877 1563 844 1592 836 curveto
+1650 816 1678 816 1711 764 curveto
+1736 722 1735 665 1730 630 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1733 630 moveto
+1729 620 lineto
+1727 630 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1733 630 moveto
+1729 620 lineto
+1727 630 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1088 674 66 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1088 669 moveto 106 -0.5 (vtk_fab_tables) alignedtext
+end grestore
+end grestore
+
+%	selector -> vtk_fab_tables
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 967 873 moveto
+989 835 1044 746 1072 701 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1075 702 moveto
+1077 692 lineto
+1069 699 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1075 702 moveto
+1077 692 lineto
+1069 699 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_segment
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+715 602 75 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+715 597 moveto 125 -0.5 (vtk_line_segment) alignedtext
+end grestore
+end grestore
+
+%	selector -> vtk_line_segment
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 923 881 moveto
+857 860 706 802 647 692 curveto
+639 677 640 670 647 656 curveto
+653 643 663 632 675 624 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 677 627 moveto
+683 618 lineto
+673 621 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 677 627 moveto
+683 618 lineto
+673 621 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2275 818 43 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2275 813 moveto 61 -0.5 (vtk_slice) alignedtext
+end grestore
+end grestore
+
+%	selector -> vtk_slice
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 994 888 moveto
+1181 877 2004 832 2222 821 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2222 824 moveto
+2232 820 lineto
+2222 818 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2222 824 moveto
+2232 820 lineto
+2222 818 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vtk
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1892 530 41 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1892 525 moveto 56 -0.5 (vtk_vtk) alignedtext
+end grestore
+end grestore
+
+%	selector -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 993 885 moveto
+1127 868 1578 806 1578 746 curveto
+1578 746 1578 746 1578 674 curveto
+1578 565 1680 569 1786 546 curveto
+1797 543 1823 536 1841 533 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	self_control -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 1235 230 moveto
+1150 203 953 141 863 113 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 864 110 moveto
+853 110 lineto
+862 116 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 864 110 moveto
+853 110 lineto
+862 116 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	self_control -> notifier
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 1220 241 moveto
+1035 236 438 218 411 188 curveto
+376 151 399 89 417 53 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 420 54 moveto
+422 44 lineto
+414 51 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 420 54 moveto
+422 44 lineto
+414 51 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	self_control -> saved_states
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 1327 237 moveto
+1480 225 1924 189 2090 175 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 2090 178 moveto
+2100 174 lineto
+2090 172 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 2090 178 moveto
+2100 174 lineto
+2090 172 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	visualizable_dataset
+gsave 10 dict begin
+filled
+0.700 0.400 1.000 nodecolor
+0.700 0.400 1.000 nodecolor
+713 530 81 18 ellipse_path
+fill
+0.700 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+713 525 moveto 136 -0.5 (visualizable_dataset) alignedtext
+end grestore
+end grestore
+
+%	visualizable_dataset -> anag_utils
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 642 521 moveto
+622 510 615 498 597 476 curveto
+540 408 488 380 513 296 curveto
+523 259 530 249 559 224 curveto
+585 199 602 209 632 188 curveto
+649 174 648 164 666 152 curveto
+702 125 718 130 759 110 curveto
+760 110 760 109 761 109 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 763 112 moveto
+769 103 lineto
+759 106 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 763 112 moveto
+769 103 lineto
+759 106 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	visualizable_dataset -> box
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 657 517 moveto
+644 507 638 496 626 476 curveto
+599 434 571 409 599 368 curveto
+622 333 651 355 686 332 curveto
+688 330 689 329 691 327 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 694 329 moveto
+697 319 lineto
+688 325 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 694 329 moveto
+697 319 lineto
+688 325 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	visualizable_dataset -> box_layout
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 677 514 moveto
+662 505 646 492 637 476 curveto
+627 456 635 431 643 413 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 646 414 moveto
+648 404 lineto
+640 411 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 646 414 moveto
+648 404 lineto
+640 411 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	visualizable_dataset -> box_layout_data
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 714 512 moveto
+715 504 715 495 716 486 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 719 486 moveto
+717 476 lineto
+713 486 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 719 486 moveto
+717 476 lineto
+713 486 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	visualizable_dataset -> self_control
+gsave 10 dict begin
+0.700 0.400 1.000 edgecolor
+newpath 745 513 moveto
+762 504 783 491 799 476 curveto
+827 449 829 436 851 404 curveto
+881 357 869 326 916 296 curveto
+920 293 1082 272 1087 272 curveto
+1111 268 1117 267 1141 264 curveto
+1165 260 1192 255 1215 252 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.700 0.400 1.000 edgecolor
+newpath 1216 255 moveto
+1225 250 lineto
+1215 249 lineto
+closepath
+fill
+0.700 0.400 1.000 edgecolor
+newpath 1216 255 moveto
+1225 250 lineto
+1215 249 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vol_tk_interactor
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1768 962 73 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1768 957 moveto 121 -0.5 (vol_tk_interactor) alignedtext
+end grestore
+end grestore
+
+%	vol_tk_interactor -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1841 961 moveto
+1864 961 1890 960 1913 960 curveto
+2052 955 2087 953 2227 944 curveto
+2365 934 3472 957 3472 818 curveto
+3472 818 3472 818 3472 242 curveto
+3472 156 3425 117 3342 100 curveto
+3334 98 1251 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vol_tk_interactor -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1841 961 moveto
+1852 960 1863 960 1873 960 curveto
+1909 958 1918 957 1954 956 curveto
+2156 945 2731 930 2848 764 curveto
+2919 662 2836 571 2727 512 curveto
+2637 463 2605 470 2505 460 curveto
+2503 460 2501 459 2499 459 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2499 456 moveto
+2489 459 lineto
+2499 463 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2499 456 moveto
+2489 459 lineto
+2499 463 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vol_tk_interactor -> selector
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1699 956 moveto
+1538 942 1141 907 1004 894 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1004 891 moveto
+994 893 lineto
+1004 897 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1004 891 moveto
+994 893 lineto
+1004 897 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vol_tk_interactor -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1695 960 moveto
+1346 943 1257 945 909 908 curveto
+640 879 309 1088 308 818 curveto
+308 818 308 818 308 674 curveto
+309 558 439 612 551 584 curveto
+660 556 705 605 803 548 curveto
+924 476 876 371 996 296 curveto
+1012 285 1150 264 1170 260 curveto
+1182 257 1185 255 1197 252 curveto
+1203 250 1206 248 1210 246 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1211 249 moveto
+1220 244 lineto
+1210 243 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1211 249 moveto
+1220 244 lineto
+1210 243 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vol_tk_interactor -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1768 944 moveto
+1768 916 1768 863 1768 818 curveto
+1768 818 1768 818 1768 746 curveto
+1768 704 1755 695 1745 656 curveto
+1742 645 1741 637 1741 630 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1744 629 moveto
+1739 620 lineto
+1738 630 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1744 629 moveto
+1739 620 lineto
+1738 630 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1370 746 57 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1370 741 moveto 89 -0.5 (vtk_particles) alignedtext
+end grestore
+end grestore
+
+%	vol_tk_interactor -> vtk_particles
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1738 946 moveto
+1666 907 1487 809 1408 767 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1409 764 moveto
+1399 762 lineto
+1406 770 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1409 764 moveto
+1399 762 lineto
+1406 770 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vol_tk_interactor -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1840 959 moveto
+2007 951 2409 929 2430 908 curveto
+2510 820 2430 730 2337 656 curveto
+2289 618 2257 651 2206 620 curveto
+2187 608 2191 595 2173 584 curveto
+2137 562 2122 569 2082 560 curveto
+2058 554 2052 552 2028 548 curveto
+2019 546 1967 537 1943 533 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1943 530 moveto
+1933 531 lineto
+1942 536 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1943 530 moveto
+1933 531 lineto
+1942 536 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_annotation
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1238 674 66 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1238 669 moveto 107 -0.5 (vtk_annotation) alignedtext
+end grestore
+end grestore
+
+%	vtk_annotation -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1189 662 moveto
+1180 660 1171 658 1163 656 curveto
+1001 620 961 613 799 584 curveto
+706 566 679 578 590 548 curveto
+524 525 501 524 452 476 curveto
+426 450 428 437 414 404 curveto
+367 296 270 244 340 152 curveto
+379 100 417 129 480 114 curveto
+499 109 504 109 524 106 curveto
+541 103 545 101 563 100 curveto
+573 99 686 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_annotation -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1261 657 moveto
+1289 635 1337 594 1364 548 curveto
+1384 512 1388 499 1388 458 curveto
+1388 458 1388 458 1388 386 curveto
+1388 344 1388 329 1364 296 curveto
+1352 281 1335 269 1319 260 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1321 257 moveto
+1310 256 lineto
+1318 263 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1321 257 moveto
+1310 256 lineto
+1318 263 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_annotation -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1295 665 moveto
+1314 662 1336 659 1356 656 curveto
+1469 639 1603 620 1674 609 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1674 612 moveto
+1684 608 lineto
+1674 606 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1674 612 moveto
+1684 608 lineto
+1674 606 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_annotation -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1273 659 moveto
+1332 633 1445 585 1450 584 curveto
+1565 552 1597 563 1716 548 curveto
+1770 540 1785 536 1841 532 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_axes
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1498 746 44 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1498 741 moveto 62 -0.5 (vtk_axes) alignedtext
+end grestore
+end grestore
+
+%	vtk_axes -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1455 741 moveto
+1448 736 1446 730 1435 728 curveto
+1428 726 506 693 500 692 curveto
+354 656 304 651 196 548 curveto
+70 425 71 278 193 152 curveto
+238 106 264 107 327 100 curveto
+337 98 630 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_axes -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1540 740 moveto
+1567 736 1581 731 1617 728 curveto
+1757 712 2121 747 2251 692 curveto
+2337 655 2351 624 2405 548 curveto
+2419 529 2429 504 2436 485 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2439 487 moveto
+2439 476 lineto
+2433 484 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2439 487 moveto
+2439 476 lineto
+2433 484 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_axes -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1462 736 moveto
+1455 733 1448 730 1436 728 curveto
+1381 717 979 732 942 692 curveto
+931 680 933 669 942 656 curveto
+974 599 1010 610 1070 584 curveto
+1114 563 1139 582 1174 548 curveto
+1194 527 1247 341 1266 270 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1269 271 moveto
+1269 260 lineto
+1263 269 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1269 271 moveto
+1269 260 lineto
+1263 269 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cameras
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1455 674 57 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1455 669 moveto 89 -0.5 (vtk_cameras) alignedtext
+end grestore
+end grestore
+
+%	vtk_axes -> vtk_cameras
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1487 728 moveto
+1483 720 1476 710 1471 701 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1474 699 moveto
+1466 692 lineto
+1468 702 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1474 699 moveto
+1466 692 lineto
+1468 702 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_axes -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1517 730 moveto
+1548 703 1613 652 1682 618 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1683 621 moveto
+1691 614 lineto
+1680 615 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1683 621 moveto
+1691 614 lineto
+1680 615 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_axes -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1506 728 moveto
+1510 718 1516 704 1521 692 curveto
+1540 644 1524 616 1564 584 curveto
+1567 581 1790 542 1841 533 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cameras -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1405 665 moveto
+1310 648 1095 610 914 584 curveto
+785 565 738 609 623 548 curveto
+585 528 586 509 560 476 curveto
+459 350 321 292 399 152 curveto
+418 117 441 123 480 114 curveto
+504 107 511 108 536 104 curveto
+547 102 550 100 562 100 curveto
+572 99 686 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cameras -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1512 672 moveto
+1690 666 2231 639 2377 548 curveto
+2401 532 2420 506 2431 485 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2434 486 moveto
+2436 476 lineto
+2428 483 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2434 486 moveto
+2436 476 lineto
+2428 483 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cameras -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1449 656 moveto
+1440 629 1426 576 1426 530 curveto
+1426 530 1426 530 1426 386 curveto
+1426 342 1413 330 1387 296 curveto
+1368 271 1358 261 1335 251 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1337 248 moveto
+1326 247 lineto
+1334 254 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1337 248 moveto
+1326 247 lineto
+1334 254 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cameras -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1499 662 moveto
+1549 649 1628 628 1679 615 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1680 618 moveto
+1689 612 lineto
+1678 612 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1680 618 moveto
+1689 612 lineto
+1678 612 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cameras -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1464 656 moveto
+1475 635 1497 601 1526 584 curveto
+1539 575 1778 541 1841 533 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_clip
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2201 674 41 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2201 669 moveto 57 -0.5 (vtk_clip) alignedtext
+end grestore
+end grestore
+
+%	vtk_clip -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2238 666 moveto
+2326 647 2538 594 2538 530 curveto
+2538 530 2538 530 2538 242 curveto
+2538 177 2483 177 2424 152 curveto
+2320 108 2284 134 2173 128 curveto
+2141 126 2134 125 2103 124 curveto
+2056 121 2045 121 1999 120 curveto
+1948 118 1935 117 1885 116 curveto
+1754 112 1722 112 1592 110 curveto
+1552 109 1543 108 1504 108 curveto
+1464 107 1454 106 1414 106 curveto
+1307 103 1280 104 1174 102 curveto
+1141 101 1134 100 1102 100 curveto
+1059 99 944 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_clip -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2185 657 moveto
+2123 590 1892 346 1800 296 curveto
+1766 277 1753 282 1716 276 curveto
+1673 268 1662 268 1619 264 curveto
+1601 262 1597 261 1580 260 curveto
+1565 258 1562 258 1548 258 curveto
+1479 253 1462 252 1395 248 curveto
+1394 247 1343 244 1343 244 curveto
+1341 244 1340 244 1338 244 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1338 241 moveto
+1328 243 lineto
+1338 247 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1338 241 moveto
+1328 243 lineto
+1338 247 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_clip -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2165 666 moveto
+2149 662 2130 659 2113 656 curveto
+1994 635 1853 617 1778 608 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1778 605 moveto
+1768 607 lineto
+1778 611 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1778 605 moveto
+1768 607 lineto
+1778 611 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_clip -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2166 664 moveto
+2124 652 2054 631 2030 620 curveto
+1989 601 1947 572 1920 552 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1922 549 moveto
+1912 546 lineto
+1918 555 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1922 549 moveto
+1912 546 lineto
+1918 555 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cmap
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2498 674 48 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2498 669 moveto 71 -0.5 (vtk_cmap) alignedtext
+end grestore
+end grestore
+
+%	vtk_cmap -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2518 657 moveto
+2523 647 2522 636 2528 620 curveto
+2538 588 2542 580 2548 548 curveto
+2576 371 2638 237 2482 152 curveto
+2441 129 2321 123 2275 120 curveto
+2248 117 2242 117 2216 116 curveto
+2166 113 2153 115 2104 114 curveto
+2057 112 1942 108 1896 108 curveto
+1835 106 1415 104 1355 104 curveto
+1299 103 1286 103 1231 102 curveto
+1203 101 1196 100 1169 100 curveto
+1113 99 960 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cmap -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2506 656 moveto
+2512 638 2520 609 2514 584 curveto
+2503 546 2480 507 2463 483 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2466 481 moveto
+2457 475 lineto
+2460 485 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2466 481 moveto
+2457 475 lineto
+2460 485 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cmap -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2486 656 moveto
+2435 581 2233 286 2172 197 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2174 194 moveto
+2166 188 lineto
+2169 198 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2174 194 moveto
+2166 188 lineto
+2169 198 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cmap -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2471 659 moveto
+2429 635 2344 588 2273 548 curveto
+2079 437 2046 380 1840 296 curveto
+1813 285 1805 286 1777 280 curveto
+1769 278 1767 277 1759 276 curveto
+1742 273 1670 266 1645 264 curveto
+1625 262 1621 261 1602 260 curveto
+1595 259 1358 244 1352 244 curveto
+1347 244 1343 244 1338 243 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1338 240 moveto
+1328 243 lineto
+1338 247 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1338 240 moveto
+1328 243 lineto
+1338 247 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cmap -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2451 670 moveto
+2315 657 1923 621 1779 607 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1779 604 moveto
+1769 606 lineto
+1779 610 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1779 604 moveto
+1769 606 lineto
+1779 610 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_cmap -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2462 662 moveto
+2396 640 2259 595 2210 584 curveto
+2090 554 2053 548 1943 535 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1943 532 moveto
+1933 534 lineto
+1943 538 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1943 532 moveto
+1933 534 lineto
+1943 538 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1769 597 moveto
+1827 589 1933 571 1972 548 curveto
+2150 441 2361 301 2218 152 curveto
+2193 126 1136 105 874 99 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 96 moveto
+864 99 lineto
+874 103 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 96 moveto
+864 99 lineto
+874 103 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1770 599 moveto
+1933 582 1981 584 2149 548 curveto
+2240 527 2343 493 2400 473 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2401 476 moveto
+2410 470 lineto
+2399 470 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2401 476 moveto
+2410 470 lineto
+2399 470 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> notifier
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1682 602 moveto
+1502 600 830 590 623 548 curveto
+442 511 349 547 234 404 curveto
+215 379 224 224 224 224 curveto
+268 119 302 87 392 41 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 394 44 moveto
+401 36 lineto
+391 38 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 394 44 moveto
+401 36 lineto
+391 38 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1767 595 moveto
+1841 578 1876 597 1942 548 curveto
+2066 456 2127 269 2146 198 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2149 199 moveto
+2149 188 lineto
+2143 197 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2149 199 moveto
+2149 188 lineto
+2143 197 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1729 584 moveto
+1736 531 1750 374 1668 296 curveto
+1655 284 1444 260 1336 248 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1336 245 moveto
+1326 247 lineto
+1336 251 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1336 245 moveto
+1326 247 lineto
+1336 251 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> visualizable_dataset
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1682 599 moveto
+1529 588 1008 551 800 536 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 800 533 moveto
+790 535 lineto
+800 539 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 800 533 moveto
+790 535 lineto
+800 539 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1757 589 moveto
+1773 587 1788 591 1788 602 curveto
+1788 611 1779 615 1767 615 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1767 612 moveto
+1757 615 lineto
+1767 619 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1767 612 moveto
+1757 615 lineto
+1767 619 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_data -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1756 589 moveto
+1783 577 1824 560 1854 547 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1855 550 moveto
+1863 543 lineto
+1852 544 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1855 550 moveto
+1863 543 lineto
+1852 544 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2384 890 37 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2384 885 moveto 49 -0.5 (vtk_eb) alignedtext
+end grestore
+end grestore
+
+%	vtk_eb -> algorithms
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2421 888 moveto
+2584 877 3237 831 3296 764 curveto
+3323 732 3274 512 3274 512 curveto
+3197 412 3136 419 3022 393 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 3022 390 moveto
+3012 391 lineto
+3021 396 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 3022 390 moveto
+3012 391 lineto
+3021 396 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2421 889 moveto
+2562 887 3063 875 3218 836 curveto
+3318 810 3434 850 3434 746 curveto
+3434 746 3434 746 3434 242 curveto
+3434 73 3251 107 3083 100 curveto
+3054 98 1227 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2421 889 moveto
+2435 889 2450 888 2457 888 curveto
+2462 887 2464 888 2470 886 curveto
+2478 882 2477 875 2487 872 curveto
+2499 867 2705 868 2718 868 curveto
+2851 861 3231 871 3311 764 curveto
+3339 725 3315 703 3313 656 curveto
+3308 591 3327 565 3291 512 curveto
+3129 272 2991 281 2708 224 curveto
+2510 184 2458 195 2258 174 curveto
+2249 173 2246 172 2238 172 curveto
+2234 171 2227 171 2219 171 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2219 168 moveto
+2209 171 lineto
+2219 175 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2219 168 moveto
+2209 171 lineto
+2219 175 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2347 888 moveto
+2344 888 2341 888 2338 888 curveto
+1876 850 1761 835 1304 764 curveto
+1136 737 1037 822 929 692 curveto
+888 643 983 590 994 584 curveto
+1034 557 1059 579 1097 548 curveto
+1206 455 1153 354 1242 265 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1244 268 moveto
+1249 258 lineto
+1239 263 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1244 268 moveto
+1249 258 lineto
+1239 263 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> vtk_clip
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2348 885 moveto
+2292 874 2264 880 2223 836 curveto
+2189 800 2191 738 2196 702 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2199 702 moveto
+2197 692 lineto
+2193 702 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2199 702 moveto
+2197 692 lineto
+2193 702 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2393 872 moveto
+2414 835 2460 746 2484 701 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2487 702 moveto
+2489 692 lineto
+2481 699 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2487 702 moveto
+2489 692 lineto
+2481 699 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2347 888 moveto
+2311 882 2301 881 2267 868 curveto
+2080 797 2028 789 1854 692 curveto
+1818 672 1780 644 1754 624 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1756 621 moveto
+1746 618 lineto
+1752 627 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1756 621 moveto
+1746 618 lineto
+1752 627 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> vtk_slice
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2362 875 moveto
+2347 865 2325 851 2308 839 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2309 836 moveto
+2299 833 lineto
+2305 841 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2309 836 moveto
+2299 833 lineto
+2305 841 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_eb -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2384 872 moveto
+2383 827 2373 713 2308 656 curveto
+2264 617 2234 645 2182 620 curveto
+2156 608 2156 595 2131 584 curveto
+2071 555 2051 560 1987 544 curveto
+1967 539 1961 536 1943 533 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1943 530 moveto
+1933 532 lineto
+1943 536 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1943 530 moveto
+1933 532 lineto
+1943 536 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1024 670 moveto
+856 655 804 659 631 620 curveto
+532 597 502 599 416 548 curveto
+324 493 238 492 238 386 curveto
+238 386 238 386 238 242 curveto
+238 198 244 182 274 152 curveto
+304 123 321 131 360 120 curveto
+391 110 400 111 433 108 curveto
+454 105 460 105 482 104 curveto
+508 102 515 100 542 100 curveto
+563 99 683 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> box
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1047 660 moveto
+991 641 888 607 799 584 curveto
+721 564 683 600 623 548 curveto
+560 494 542 440 582 368 curveto
+595 343 609 342 637 336 curveto
+655 331 661 339 679 332 curveto
+684 330 685 326 688 323 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 691 325 moveto
+696 316 lineto
+686 320 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 691 325 moveto
+696 316 lineto
+686 320 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1147 666 moveto
+1151 662 1155 658 1163 656 curveto
+1171 653 1788 620 1797 620 curveto
+1986 598 2037 599 2221 548 curveto
+2298 526 2315 513 2388 480 curveto
+2392 478 2396 476 2399 474 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2401 477 moveto
+2408 469 lineto
+2398 471 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2401 477 moveto
+2408 469 lineto
+2398 471 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1135 661 moveto
+1136 661 1137 660 1138 660 curveto
+1140 658 1140 658 1143 658 curveto
+1191 639 1205 640 1253 620 curveto
+1284 606 1290 597 1322 584 curveto
+1616 457 1741 524 1997 332 curveto
+2048 293 2049 271 2092 224 curveto
+2103 211 2107 201 2114 192 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2117 194 moveto
+2120 184 lineto
+2111 190 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2117 194 moveto
+2120 184 lineto
+2111 190 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1125 659 moveto
+1184 633 1298 582 1326 548 curveto
+1351 515 1350 499 1350 458 curveto
+1350 458 1350 458 1350 386 curveto
+1350 344 1346 332 1326 296 curveto
+1320 285 1311 274 1302 266 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1305 264 moveto
+1295 259 lineto
+1300 269 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1305 264 moveto
+1295 259 lineto
+1300 269 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1135 661 moveto
+1144 659 1154 657 1163 656 curveto
+1347 624 1571 610 1672 605 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1672 608 moveto
+1682 604 lineto
+1672 602 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1672 608 moveto
+1682 604 lineto
+1672 602 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_fab_tables -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1133 661 moveto
+1139 659 1146 657 1152 656 curveto
+1161 653 1317 624 1326 620 curveto
+1345 609 1340 594 1360 584 curveto
+1403 561 1744 539 1793 536 curveto
+1814 534 1819 533 1841 532 curveto
+1841 532 1841 532 1841 532 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2272 746 43 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2272 741 moveto 60 -0.5 (vtk_grid) alignedtext
+end grestore
+end grestore
+
+%	vtk_grid -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2315 745 moveto
+2320 744 2325 744 2330 744 curveto
+2381 740 2508 728 2560 724 curveto
+2597 720 2606 719 2644 716 curveto
+2696 710 2710 711 2763 704 curveto
+2788 700 2796 703 2819 692 curveto
+2929 634 3108 387 3108 386 curveto
+3108 386 3108 386 3108 242 curveto
+3108 47 2878 142 2685 132 curveto
+2014 97 1846 106 1175 100 curveto
+1068 99 945 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> box
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2229 745 moveto
+2135 741 1904 733 1711 728 curveto
+1647 725 619 737 576 692 curveto
+553 669 585 595 598 584 curveto
+667 522 743 618 803 548 curveto
+856 484 782 382 744 337 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 746 334 moveto
+737 329 lineto
+741 339 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 746 334 moveto
+737 329 lineto
+741 339 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2314 743 moveto
+2380 737 2798 701 2807 692 curveto
+2817 680 2813 670 2807 656 curveto
+2674 379 2511 412 2270 224 curveto
+2245 204 2238 190 2217 178 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2219 175 moveto
+2208 174 lineto
+2216 181 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2219 175 moveto
+2208 174 lineto
+2216 181 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2229 744 moveto
+2228 744 2227 744 2226 744 curveto
+2208 743 2204 742 2187 742 curveto
+2107 738 2087 737 2007 734 curveto
+2003 733 1015 694 1013 692 curveto
+1001 680 1004 669 1013 656 curveto
+1014 653 1228 550 1231 548 curveto
+1273 515 1312 511 1312 458 curveto
+1312 458 1312 458 1312 386 curveto
+1312 344 1297 298 1286 269 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1289 268 moveto
+1282 260 lineto
+1283 271 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1289 268 moveto
+1282 260 lineto
+1283 271 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> vtk_clip
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2256 729 moveto
+2247 720 2235 708 2225 698 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2228 696 moveto
+2218 691 lineto
+2223 701 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2228 696 moveto
+2218 691 lineto
+2223 701 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2306 735 moveto
+2345 723 2408 702 2451 689 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2452 692 moveto
+2461 686 lineto
+2450 686 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2452 692 moveto
+2461 686 lineto
+2450 686 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2230 742 moveto
+2154 733 1994 714 1944 692 curveto
+1919 681 1919 668 1896 656 curveto
+1857 636 1809 622 1775 613 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1776 610 moveto
+1765 610 lineto
+1774 616 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1776 610 moveto
+1765 610 lineto
+1774 616 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_grid -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2273 728 moveto
+2273 707 2269 675 2251 656 curveto
+2204 608 2168 642 2106 620 curveto
+2027 591 2010 561 1941 538 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1942 535 moveto
+1931 535 lineto
+1940 541 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1942 535 moveto
+1931 535 lineto
+1940 541 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+1664 746 38 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+1664 741 moveto 51 -0.5 (vtk_iso) alignedtext
+end grestore
+end grestore
+
+%	vtk_iso -> algorithms
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1702 745 moveto
+1709 745 1716 744 1722 744 curveto
+1752 742 2780 706 2807 692 curveto
+2911 633 2949 478 2960 414 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2963 414 moveto
+2962 404 lineto
+2957 413 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2963 414 moveto
+2962 404 lineto
+2957 413 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1626 744 moveto
+1623 744 1621 744 1620 744 curveto
+1596 741 1590 737 1567 732 curveto
+1559 730 1558 729 1551 728 curveto
+1549 727 1306 720 1305 720 curveto
+1222 717 638 724 562 692 curveto
+434 637 391 603 337 476 curveto
+286 355 369 340 520 224 curveto
+548 201 564 209 594 188 curveto
+611 174 609 163 628 152 curveto
+650 137 716 126 741 116 curveto
+749 112 753 108 759 104 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 760 107 moveto
+768 100 lineto
+757 101 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 760 107 moveto
+768 100 lineto
+757 101 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1701 742 moveto
+1808 730 2109 695 2113 692 curveto
+2246 553 2186 285 2163 198 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2166 197 moveto
+2160 188 lineto
+2160 199 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2166 197 moveto
+2160 188 lineto
+2160 199 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1626 743 moveto
+1595 738 1585 732 1551 728 curveto
+1487 719 1023 738 980 692 curveto
+969 680 971 669 980 656 curveto
+988 641 1093 591 1108 584 curveto
+1145 565 1160 572 1194 548 curveto
+1237 516 1274 511 1274 458 curveto
+1274 458 1274 458 1274 386 curveto
+1274 346 1274 299 1274 270 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1278 270 moveto
+1274 260 lineto
+1271 270 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1278 270 moveto
+1274 260 lineto
+1271 270 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> vtk_cameras
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1633 735 moveto
+1599 723 1543 704 1504 690 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1505 687 moveto
+1494 687 lineto
+1503 693 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1505 687 moveto
+1494 687 lineto
+1503 693 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> vtk_clip
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1702 743 moveto
+1799 734 2060 710 2146 692 curveto
+2151 691 2155 690 2159 688 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2160 691 moveto
+2169 685 lineto
+2158 685 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2160 691 moveto
+2169 685 lineto
+2158 685 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1702 743 moveto
+1802 735 2086 713 2322 692 curveto
+2362 688 2407 683 2442 680 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2442 683 moveto
+2452 679 lineto
+2442 677 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2442 683 moveto
+2452 679 lineto
+2442 677 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1672 728 moveto
+1683 704 1702 658 1714 629 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1717 631 moveto
+1718 620 lineto
+1711 628 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1717 631 moveto
+1718 620 lineto
+1711 628 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_iso -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1659 728 moveto
+1651 695 1639 626 1673 584 curveto
+1684 569 1798 543 1841 535 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1842 538 moveto
+1851 533 lineto
+1841 532 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1842 538 moveto
+1851 533 lineto
+1841 532 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_plot
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+716 674 60 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+716 669 moveto 94 -0.5 (vtk_line_plot) alignedtext
+end grestore
+end grestore
+
+%	vtk_line_plot -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 667 663 moveto
+620 653 547 636 484 620 curveto
+428 605 415 599 360 584 curveto
+300 567 263 597 224 548 curveto
+117 408 115 290 224 152 curveto
+267 97 308 128 375 116 curveto
+409 109 418 108 453 106 curveto
+468 104 532 100 542 100 curveto
+563 99 683 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_plot -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 741 657 moveto
+772 637 828 603 880 584 curveto
+950 557 988 597 1046 548 curveto
+1137 469 1060 381 1144 296 curveto
+1156 283 1193 268 1225 257 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1226 260 moveto
+1235 254 lineto
+1224 254 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1226 260 moveto
+1235 254 lineto
+1224 254 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_plot -> vtk_line_segment
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 716 656 moveto
+715 648 715 639 715 630 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 719 630 moveto
+715 620 lineto
+712 630 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 719 630 moveto
+715 620 lineto
+712 630 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_plot -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 767 664 moveto
+903 640 1283 574 1603 548 curveto
+1603 548 1839 532 1839 532 curveto
+1840 532 1840 532 1841 532 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_segment -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 647 594 moveto
+571 582 449 551 376 476 curveto
+273 370 210 266 302 152 curveto
+339 106 503 104 562 100 curveto
+572 99 686 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_segment -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 782 594 moveto
+866 583 1004 563 1022 548 curveto
+1111 470 1022 379 1106 296 curveto
+1122 280 1175 264 1218 254 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1219 257 moveto
+1228 252 lineto
+1218 251 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1219 257 moveto
+1228 252 lineto
+1218 251 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_line_segment -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 786 596 moveto
+834 593 899 588 956 584 curveto
+1293 562 1700 540 1841 533 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 536 moveto
+1851 532 lineto
+1841 530 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1313 745 moveto
+1304 744 1295 744 1286 744 curveto
+1205 741 1185 739 1106 736 curveto
+761 720 662 788 332 692 curveto
+175 646 48 621 48 458 curveto
+48 458 48 458 48 314 curveto
+48 236 53 203 110 152 curveto
+171 97 208 123 287 104 curveto
+295 102 297 100 305 100 curveto
+317 98 626 98 758 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 758 102 moveto
+768 98 lineto
+758 95 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1313 744 moveto
+1142 737 637 716 613 692 curveto
+578 658 574 619 607 584 curveto
+656 529 875 588 937 548 curveto
+998 507 985 469 1020 404 curveto
+1045 356 1032 331 1073 296 curveto
+1096 275 1178 263 1208 252 curveto
+1209 251 1210 251 1211 250 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1213 253 moveto
+1220 245 lineto
+1210 247 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1213 253 moveto
+1220 245 lineto
+1210 247 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles -> vtk_cameras
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1390 729 moveto
+1401 720 1415 708 1427 698 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1430 700 moveto
+1435 691 lineto
+1425 695 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1430 700 moveto
+1435 691 lineto
+1425 695 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1413 734 moveto
+1423 731 1434 729 1445 728 curveto
+1800 677 1893 713 2251 692 curveto
+2316 688 2391 683 2441 679 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2441 682 moveto
+2451 678 lineto
+2441 676 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2441 682 moveto
+2451 678 lineto
+2441 676 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1368 728 moveto
+1367 707 1369 674 1389 656 curveto
+1389 656 1551 632 1551 632 curveto
+1573 628 1578 627 1601 624 curveto
+1626 619 1633 620 1659 614 curveto
+1665 612 1669 610 1672 608 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1673 611 moveto
+1682 605 lineto
+1671 605 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1673 611 moveto
+1682 605 lineto
+1671 605 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_particles -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1367 728 moveto
+1363 696 1349 683 1365 656 curveto
+1368 649 1472 586 1480 584 curveto
+1557 555 1582 566 1664 556 curveto
+1679 553 1718 550 1734 548 curveto
+1738 547 1740 546 1745 546 curveto
+1750 545 1834 532 1840 532 curveto
+1840 532 1841 532 1841 532 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1841 535 moveto
+1851 531 lineto
+1841 529 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_print
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2694 746 46 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2694 741 moveto 66 -0.5 (vtk_print) alignedtext
+end grestore
+end grestore
+
+%	vtk_print -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2740 743 moveto
+2870 730 2925 769 3036 692 curveto
+3113 637 3222 575 3222 314 curveto
+3222 314 3222 314 3222 242 curveto
+3222 140 3143 114 3043 100 curveto
+3036 98 1225 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_print -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2735 738 moveto
+2761 730 2791 717 2807 692 curveto
+2815 678 2814 670 2807 656 curveto
+2752 554 2692 566 2590 512 curveto
+2547 489 2530 479 2495 469 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2496 466 moveto
+2485 466 lineto
+2494 472 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2496 466 moveto
+2485 466 lineto
+2494 472 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_print -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2652 739 moveto
+2647 735 2645 731 2638 728 curveto
+2507 681 2141 747 2015 692 curveto
+1994 682 1997 667 1978 656 curveto
+1926 626 1901 647 1849 620 curveto
+1836 613 1654 472 1654 458 curveto
+1654 458 1654 458 1654 386 curveto
+1654 261 1524 287 1403 260 curveto
+1389 257 1358 249 1338 246 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1338 243 moveto
+1328 244 lineto
+1337 249 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1338 243 moveto
+1328 244 lineto
+1337 249 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_print -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2660 734 moveto
+2627 722 2577 704 2542 691 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2543 687 moveto
+2532 687 lineto
+2540 694 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2543 687 moveto
+2532 687 lineto
+2540 694 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_print -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2674 729 moveto
+2646 706 2598 666 2578 656 curveto
+2346 535 2262 562 2003 536 curveto
+1984 534 1979 533 1961 532 curveto
+1955 531 1949 531 1943 531 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1943 528 moveto
+1933 531 lineto
+1943 535 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1943 528 moveto
+1933 531 lineto
+1943 535 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> algorithms
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2317 814 moveto
+2323 809 2324 803 2333 800 curveto
+2344 795 2772 767 2785 764 curveto
+2908 725 2972 731 3038 620 curveto
+3078 550 3043 513 3011 440 curveto
+3005 428 3003 418 2999 410 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 3002 408 moveto
+2994 401 lineto
+2996 411 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 3002 408 moveto
+2994 401 lineto
+2996 411 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2318 816 moveto
+2442 811 2796 793 2908 764 curveto
+2984 744 2998 725 3070 692 curveto
+3182 638 3298 654 3298 530 curveto
+3298 530 3298 530 3298 242 curveto
+3298 119 3183 113 3061 100 curveto
+3046 98 1226 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> box
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2232 817 moveto
+2029 814 1170 798 904 764 curveto
+692 736 556 802 446 620 curveto
+395 536 377 561 560 368 curveto
+574 352 581 353 600 344 curveto
+610 338 614 337 626 336 curveto
+637 334 668 336 679 332 curveto
+683 330 685 326 688 323 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 690 326 moveto
+696 317 lineto
+686 320 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 690 326 moveto
+696 317 lineto
+686 320 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2313 809 moveto
+2318 806 2323 802 2332 800 curveto
+2511 750 2580 841 2749 764 curveto
+2790 744 2804 734 2822 692 curveto
+2841 644 2816 619 2779 584 curveto
+2681 490 2632 485 2499 461 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2499 458 moveto
+2489 459 lineto
+2498 464 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2499 458 moveto
+2489 459 lineto
+2498 464 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2318 816 moveto
+2330 812 2330 804 2343 800 curveto
+2344 799 2475 792 2477 792 curveto
+2641 780 2687 805 2848 764 curveto
+2923 744 2947 741 3007 692 curveto
+3071 638 3073 594 3062 512 curveto
+3053 446 3070 414 3023 368 curveto
+2891 239 2402 196 2221 172 curveto
+2221 172 2220 172 2219 172 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2219 169 moveto
+2209 171 lineto
+2219 175 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2219 169 moveto
+2209 171 lineto
+2219 175 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2232 816 moveto
+2069 810 1487 786 1304 764 curveto
+1135 743 1037 822 929 692 curveto
+902 659 960 588 965 584 curveto
+1002 551 1033 580 1071 548 curveto
+1162 467 1102 388 1182 296 curveto
+1199 275 1211 267 1228 259 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1229 262 moveto
+1237 255 lineto
+1226 256 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1229 262 moveto
+1237 255 lineto
+1226 256 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> vtk_clip
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2254 802 moveto
+2242 793 2228 779 2220 764 curveto
+2209 745 2205 721 2203 702 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2206 702 moveto
+2202 692 lineto
+2200 702 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2206 702 moveto
+2202 692 lineto
+2200 702 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2299 803 moveto
+2316 792 2339 777 2360 764 curveto
+2396 741 2437 714 2465 696 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2468 698 moveto
+2474 690 lineto
+2464 693 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2468 698 moveto
+2474 690 lineto
+2464 693 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2234 812 moveto
+2083 780 2028 780 1892 692 curveto
+1873 680 1876 668 1858 656 curveto
+1831 638 1798 624 1772 615 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1773 612 moveto
+1762 612 lineto
+1771 618 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1773 612 moveto
+1762 612 lineto
+1771 618 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> vtk_grid
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2274 800 moveto
+2273 792 2273 783 2273 774 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2277 774 moveto
+2273 764 lineto
+2270 774 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2277 774 moveto
+2273 764 lineto
+2270 774 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_slice -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2295 802 moveto
+2306 792 2318 779 2324 764 curveto
+2343 714 2316 686 2273 656 curveto
+2224 621 2198 643 2144 620 curveto
+2115 607 2112 597 2085 584 curveto
+2055 569 1982 543 1943 534 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1943 531 moveto
+1933 532 lineto
+1942 537 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1943 531 moveto
+1933 532 lineto
+1942 537 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2578 746 52 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2578 741 moveto 79 -0.5 (vtk_stream) alignedtext
+end grestore
+end grestore
+
+%	vtk_stream -> algorithms
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2616 733 moveto
+2623 731 2631 729 2639 728 curveto
+2716 712 2939 750 2992 692 curveto
+3063 612 3008 472 2979 413 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2982 412 moveto
+2975 404 lineto
+2976 415 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2982 412 moveto
+2975 404 lineto
+2976 415 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2625 738 moveto
+2629 734 2632 731 2639 728 curveto
+2641 727 2821 716 2824 716 curveto
+2847 714 2853 713 2877 712 curveto
+2898 710 2903 710 2925 708 curveto
+2965 703 2983 718 3015 692 curveto
+3043 668 3146 422 3146 386 curveto
+3146 386 3146 386 3146 242 curveto
+3146 162 3113 123 3037 100 curveto
+3033 98 1225 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> box
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2526 744 moveto
+2524 744 2522 744 2520 744 curveto
+2509 743 2334 728 2324 728 curveto
+2277 725 683 721 647 692 curveto
+609 661 599 620 631 584 curveto
+707 496 812 635 889 548 curveto
+937 491 892 491 794 368 curveto
+777 348 773 335 758 324 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 759 321 moveto
+749 319 lineto
+756 327 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 759 321 moveto
+749 319 lineto
+756 327 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2613 733 moveto
+2619 731 2625 729 2630 728 curveto
+2637 725 2639 725 2648 724 curveto
+2685 716 2788 715 2819 692 curveto
+2859 661 2878 629 2856 584 curveto
+2727 322 2561 368 2309 224 curveto
+2271 202 2263 186 2219 174 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2220 171 moveto
+2209 171 lineto
+2218 177 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2220 171 moveto
+2209 171 lineto
+2218 177 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2526 744 moveto
+2498 741 2366 729 2347 728 curveto
+2324 726 2319 725 2297 724 curveto
+2268 721 2260 721 2232 720 curveto
+2208 718 2202 717 2179 716 curveto
+1950 698 1856 756 1673 620 curveto
+1634 591 1616 577 1616 530 curveto
+1616 530 1616 530 1616 386 curveto
+1616 317 1416 266 1338 246 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1338 243 moveto
+1328 244 lineto
+1337 249 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1338 243 moveto
+1328 244 lineto
+1337 249 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> vtk_cmap
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2559 729 moveto
+2548 720 2535 708 2524 698 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2526 695 moveto
+2516 691 lineto
+2521 700 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2526 695 moveto
+2516 691 lineto
+2521 700 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2527 742 moveto
+2387 732 2006 702 1982 692 curveto
+1958 682 1959 667 1937 656 curveto
+1910 642 1834 628 1806 620 curveto
+1795 616 1792 616 1783 612 curveto
+1781 611 1780 611 1779 610 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1780 607 moveto
+1770 605 lineto
+1777 613 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1780 607 moveto
+1770 605 lineto
+1777 613 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_stream -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2578 728 moveto
+2578 707 2574 674 2555 656 curveto
+2494 599 2451 644 2372 620 curveto
+2332 607 2326 595 2287 584 curveto
+2190 556 2163 562 2065 548 curveto
+2010 540 1997 536 1943 532 curveto
+1943 532 1943 532 1943 532 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1943 529 moveto
+1933 531 lineto
+1943 535 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1943 529 moveto
+1933 531 lineto
+1943 535 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vol
+gsave 10 dict begin
+filled
+0.500 0.400 1.000 nodecolor
+0.500 0.400 1.000 nodecolor
+2064 674 40 18 ellipse_path
+fill
+0.500 0.400 1.000 nodecolor
+gsave 10 dict begin
+0.000 0.000 0.000 nodecolor
+2064 669 moveto 54 -0.5 (vtk_vol) alignedtext
+end grestore
+end grestore
+
+%	vtk_vol -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2080 657 moveto
+2149 584 2411 288 2246 152 curveto
+2224 133 2020 129 1992 128 curveto
+1906 123 1884 123 1799 120 curveto
+1750 118 1738 117 1690 116 curveto
+1598 113 1368 108 1276 106 curveto
+1191 104 1169 103 1085 102 curveto
+1049 101 1040 100 1005 100 curveto
+961 99 911 98 874 98 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 95 moveto
+864 98 lineto
+874 102 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vol -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2027 667 moveto
+1990 654 1892 620 1892 620 curveto
+1758 518 1831 395 1696 296 curveto
+1667 275 1415 254 1380 250 curveto
+1379 249 1353 246 1338 245 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1338 242 moveto
+1328 244 lineto
+1338 248 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1338 242 moveto
+1328 244 lineto
+1338 248 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vol -> vtk_data
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2028 666 moveto
+1967 654 1844 627 1775 612 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1775 609 moveto
+1765 610 lineto
+1774 615 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1775 609 moveto
+1765 610 lineto
+1774 615 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vol -> vtk_vtk
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 2031 664 moveto
+1990 650 1924 628 1916 620 curveto
+1901 603 1895 578 1893 558 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1896 558 moveto
+1892 548 lineto
+1890 558 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1896 558 moveto
+1892 548 lineto
+1890 558 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vtk -> anag_utils
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1894 512 moveto
+1898 468 1900 355 1840 296 curveto
+1683 143 1102 126 874 101 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 874 98 moveto
+864 100 lineto
+874 104 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 874 98 moveto
+864 100 lineto
+874 104 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vtk -> cmd_line
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1932 525 moveto
+2029 511 2281 479 2391 465 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2391 468 moveto
+2401 464 lineto
+2391 462 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2391 468 moveto
+2401 464 lineto
+2391 462 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vtk -> saved_states
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1914 515 moveto
+1928 505 1945 491 1959 476 curveto
+1980 451 2095 266 2138 197 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 2141 198 moveto
+2143 188 lineto
+2135 195 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 2141 198 moveto
+2143 188 lineto
+2135 195 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	vtk_vtk -> self_control
+gsave 10 dict begin
+0.500 0.400 1.000 edgecolor
+newpath 1879 513 moveto
+1872 502 1862 489 1855 476 curveto
+1810 399 1841 347 1769 296 curveto
+1734 271 1463 253 1338 246 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.500 0.400 1.000 edgecolor
+newpath 1338 243 moveto
+1328 245 lineto
+1338 249 lineto
+closepath
+fill
+0.500 0.400 1.000 edgecolor
+newpath 1338 243 moveto
+1328 245 lineto
+1338 249 lineto
+closepath
+stroke
+end grestore
+end grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+end
+restore
+%%EOF

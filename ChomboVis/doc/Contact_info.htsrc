@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Contact Info</title>
+  </head>
+
+  <body bgcolor="#111111" text="#FFFFFF" link="#AFE3EA" vlink="#D6B5E0"
+    alink="#FFAD00">
+
+<CENTER><FONT SIZE=18> Contact Information and Web Links</FONT></CENTER>
+<HR>
+
+This software was originally distributed by the Applied Numerical Algorithms
+Group, ANAG, which is part of the National Energy Research Scientific
+Computing Center, NERSC, located at Lawrence Berkeley National Laboratory,
+LBNL.  It is a collaborative effort between ANAG and
+LBNL/NERSC Visualization Group.  Related WWW sites:
+
+<DL>
+        <DD><b><a href="http://seesar.lbl.gov/anag/chombo/chomboVis/UsersGuide.html" target="_parent">Most up to date version of the User's Guide</a></b></DD>
+	<DD>&nbsp;</DD>
+        <DD><b><a href="http://seesar.lbl.gov/anag/chombo/chombovis.html" target="_parent">ChomboVis homepage</a></b></DD>
+        <DD><b><a href="http://seesar.lbl.gov/anag/chombo" target="_parent">Chombo homepage</a></b></DD>
+	<DD>&nbsp;</DD>
+        <DD><b><a href="http://seesar.lbl.gov/anag/" target="_parent">ANAG's homepage</a></b></DD>
+        <DD><b><a href="http://www-vis.lbl.gov/" target="_parent">Vis. Group's homepage</a></b></DD>
+	<DD>&nbsp;</DD>
+        <DD><b><a href="http://www.nersc.gov" target="_parent">NERSC's homepage</a></b></DD>
+        <DD><b><a href="http://www.lbl.gov/" target="_parent">LBNL's homepage</a></b></DD>
+</DL>
+
+    <hr>
+    <address><a href="mailto:chombovis@davis.lbl.gov">ChomboVis Development Team</a></address>
+<!-- Created: Wed Oct  4 11:10:17 PDT 2000 -->
+<!-- hhmts start -->
+<!-- hhmts end -->
+  </body>
+</html>

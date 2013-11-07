@@ -1,0 +1,33 @@
+g++ -Wall -c userfunc_lib_float.cpp
+ar -r libuserfunc_lib_float.a userfunc_lib_float.o
+ranlib libuserfunc_lib_float.a
+g++ -Wall -c userfunc_lib_double.cpp
+ar -r libuserfunc_lib_double.a userfunc_lib_double.o
+ranlib libuserfunc_lib_double.a
+vector=[ 0 8 8 11 23 23 ]
+x[0]=-0.00132595
+x[1]=-0.00397264
+x[2]=-0.00668645
+x[3]=-0.00949996
+x[4]=-0.0123592
+x[5]=-0.0148227
+x[6]=-0.0169915
+x[7]=-0.0188821
+x[8]=-0.0205147
+x[9]=-0.0219124
+bld_0.sum()= -122.695404693
+    *** Function of one  float * argument: ***
+bld_0.sum()= -22.6954044103
+    *** Function of two  float * arguments: ***
+bld_1.sum()= 3456.0
+
+
+
+bld_0.sum()= -122.695405295
+    *** Function of one  double * argument: ***
+bld_0.sum()= -22.6954052952
+    *** Function of two  double * arguments: ***
+bld_1.sum()= 3456.0
+
+
+
