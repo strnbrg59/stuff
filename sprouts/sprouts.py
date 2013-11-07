@@ -80,5 +80,5 @@ if __name__ == '__main__':
         done = makeNewSpot()
         print "done=", done
         print "*** g_spots=", g_spots
-        toPostscript(i)
+        if done: toPostscript(i)
         i += 1
