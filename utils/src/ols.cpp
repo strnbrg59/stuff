@@ -41,8 +41,8 @@ main () {
 
     cout << "resid:\n";
     cvector yhat(MatCvectMult(rhs,beta));
-    double resid_min=1E309;
-    double resid_max=-1E309;
+    double resid_min=MAXDOUBLE;
+    double resid_max=-MAXDOUBLE;
     double resid_sum = 0;
     for(int i=0;i<n;++i)
     {
