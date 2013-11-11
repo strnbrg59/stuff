@@ -1,6 +1,6 @@
 == My hobby software projects ==
 
-    AndroidFlashcards: http://strnbrg59.com/cardation.html
+    <A HREF="http://strnbrg59.com/cardation.html">AndroidFlashcards</A>
 
     ants: Anthill simulator -- births, deaths, food, etc.
 
