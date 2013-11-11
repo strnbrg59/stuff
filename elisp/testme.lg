@@ -1,8 +1,0 @@
-to spiral :s
-    hideturtle
-    fd :s rt 10
-    if :s > 5 [stop]
-    spiral :s * 1.02
-end
-
-spiral 1

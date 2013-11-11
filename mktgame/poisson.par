@@ -1,6 +1,0 @@
-security: conv
-lambda:     .003333333
-mu:        0
-sigma:     12.5
-openhour:  8
-closehour: 19

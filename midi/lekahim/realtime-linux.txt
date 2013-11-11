@@ -1,1 +1,0 @@
-Try man sched_setscheduler.

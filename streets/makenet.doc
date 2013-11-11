@@ -1,4 +1,0 @@
-1.  Be careful when adding nodes and connections to an existing system.  If 
-you add a node between two existing ones, the originals will still be connected 
-to each other and you'll see cars doing u-turns when approaching either of the 
-two original nodes.

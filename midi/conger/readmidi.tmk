@@ -1,8 +1,0 @@
-# readmidi.mak  TURBOC make file for readmidi
-
-readmidi.exe:	readmidi.obj
-    tlink l:\c0s readmidi io401,readmidi,,l:\cs
-
-readmidi.obj:	readmidi.c
-    tcc -c -DTURBOC=1 readmidi
-

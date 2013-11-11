@@ -1,6 +1,0 @@
-K g1
-P f2
-P g2
-P h2
-k f4
-q g4

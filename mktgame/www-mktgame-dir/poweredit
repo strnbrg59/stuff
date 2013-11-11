@@ -1,6 +1,0 @@
-for i in *.?pp
-do
-	echo $i
-	sed "s/$1/$2/g" $i > $i.new
-	mv $i.new $i
-done

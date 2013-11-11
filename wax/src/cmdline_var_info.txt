@@ -1,9 +1,0 @@
-# This file is used by generate_config.py to produce C++ code for the config facility.
-# Each line gives information on one config variable.  The format is:
-# name         type     default      comment
-max_moves      int       5           "Max game length"
-max_depth      int       3           "Search depth"
-prune_quantile double    1.0         "Throw away all but this quantile"
-machine_plays  string   "bw"         "b=black, w=white, bw=both"
-init_pos       string   "/dev/null"  "initial locations of pieces"
-n_ranks        int       8           "Number of squares along side of board"

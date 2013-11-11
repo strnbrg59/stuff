@@ -1,8 +1,0 @@
-#ifndef INCLUDED_STATUS_CODES_HPP
-#define INCLUDED_STATUS_CODES_HPP
-
-enum Status {
-    STATUS_OK,
-    STATUS_ERROR
-};
-#endif

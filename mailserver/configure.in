@@ -1,7 +1,0 @@
-AC_INIT( mailserver.cpp )
-AM_INIT_AUTOMAKE(mailserver, 1.0)
-AC_CONFIG_HEADERS(config.h)
-AC_PROG_CXX
-AC_PROG_LIBTOOL
-AC_PROG_INSTALL(mailserver)
-AC_OUTPUT(Makefile)

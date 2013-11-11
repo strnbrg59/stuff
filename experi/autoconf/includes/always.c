@@ -1,1 +1,0 @@
-char always() { return 'a'; }

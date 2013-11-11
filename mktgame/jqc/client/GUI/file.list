@@ -1,5 +1,0 @@
-AssetMenuFrame.java:		resize( 600,350 );
-CancelOrderFrame.java:		resize(400,200);
-LoginFrame.java: 		resize(700,400);
-PlaceOrderFrame.java:        resize(400,150);
-TopMenuFrame.java:		resize(400,200);

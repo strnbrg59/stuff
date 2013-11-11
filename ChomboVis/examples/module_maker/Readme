@@ -1,6 +1,0 @@
-This directory contains what it takes to demonstrate the facility whereby the
-user can supply a C++ function and have it automagically wrapped into a
-function callable from Python.
-
-Type "make" in this directory, then go to the ChomboVis home directory and type:
-$ ./chombodatalite examples/module_maker/runit.py

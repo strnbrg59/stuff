@@ -1,8 +1,0 @@
-#
-# Use max_depth=3
-# Should segfault after one move.
-#
-k e5
-P f3
-K g3
-q h1

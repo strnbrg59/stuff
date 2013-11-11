@@ -1,2 +1,0 @@
-echo "yes"
-echo "no"

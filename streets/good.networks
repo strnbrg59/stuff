@@ -1,9 +1,0 @@
-Certified bug-free networks (when 100% of cars are started from node
-1 heading to node 2).
-
-network.6
-network.10
-network.22
-network.30: no (out-of-bounds array subscript)
-network.36
-network.38

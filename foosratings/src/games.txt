@@ -1,6 +1,0 @@
-Ada Bob 5 Chuck Dave 1
-Ed Fred 5 Gene Howe 0
-Izzy Jeff 5 Kendra Lisa 0
-Mary Norbert 5 Oscar Pud 0
-Quark Roz 5 Sri Tuan 0
-U Voon 5 Weissfisch Xavier 0

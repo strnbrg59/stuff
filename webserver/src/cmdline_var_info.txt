@@ -1,7 +1,0 @@
-seconds_timeout      int       60      ""
-http_port            int       80      "Has to be 80, for real deployment"
-public_html          string  "public_html" ""
-log_file             string  "/var/log/webserver.logs" ""
-
-do_fork              bool      true    "forks off grandchild for each client"
-become_daemon        bool      true    "uses setuid, so only succeeds as root"

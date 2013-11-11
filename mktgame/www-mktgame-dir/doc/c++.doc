@@ -1,6 +1,0 @@
-**Adaptation to C++ style, February 1997**
-
-1. Turned Order into a struct with a constructor replacing the
-create_order() and interpret_order() functions.
-
-2. Pass references to const Order, instead of all those pointers.

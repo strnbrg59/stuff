@@ -1,9 +1,0 @@
-date: 02 04 95
-time: 13 00 00
-faceval: 10
-intrate: .30
-freq: 60
-sell_too: 1
-security: Tbill
-
-sell_too means, place offers as well as bids.
