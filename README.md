@@ -21,3 +21,5 @@
     utils: Miscellaneous utility library that's needed by most of the above.
            Lots of wheel-reinvention.  It reflects some of the earliest stages
            in my learning about C++ and programming generally.
+
+    wax: Bad chess engine
