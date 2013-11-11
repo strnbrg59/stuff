@@ -1,0 +1,1 @@
+/home/tsternberg/usr/share/libtool/ltmain.sh
