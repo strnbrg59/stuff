@@ -10,6 +10,8 @@
 
     fingers: Cello fingering
 
+    foosratings: Pairwise comparison for sports ratings (http://en.wikipedia.org/wiki/Pairwise_comparison)
+
     ngrams: Random language generator (http://strnbrg59.com/ngrams/frames.html)
 
     puns: Shakespearean pun generator (http://strnbrg59.com/puns.html)
