@@ -2,7 +2,7 @@ Contents:
 
     ants: Anthill simulator -- births, deaths, food, etc.
 
-    astro: Digital astrophoto registration (i.e. alignment and addition)
+    astro: Digital astrophoto registration (alignment and addition)
 
     cardation: Language flashcards (http://strnbrg59.com/cardation.html)
 
@@ -21,7 +21,6 @@ Contents:
     turtle3d: 3D turtle graphics (http://strnbrg59.com/turtle3d.html)
 
     utils: Miscellaneous utility library that's needed by most of the above.
-           Lots of wheel-reinvention.  It reflects some of the earliest stages
-           in my learning about C++ and programming generally.
+           Lots of wheel-reinvention.  Not recommended.
 
-    wax: Bad chess engine
+    wax: Chess engine
