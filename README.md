@@ -1,10 +1,10 @@
 Contents:
 
-    AndroidFlashcards (http://strnbrg59.com/cardation.html)
-
     ants: Anthill simulator -- births, deaths, food, etc.
 
     astro: Digital astrophoto registration (i.e. alignment and addition)
+
+    cardation: flashcards (http://strnbrg59.com/cardation.html)
 
     elevators: Elevator simulator -- people getting on and off
 
