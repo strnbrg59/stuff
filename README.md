@@ -10,7 +10,7 @@ Contents:
 
     fingers: Cello fingering
 
-    foosratings: Pairwise comparison for sports ratings (http://en.wikipedia.org/wiki/Pairwise_comparison)
+    foosratings: rating system for foosball (or pingpong, etc)
 
     ngrams: Random language generator (http://strnbrg59.com/ngrams/frames.html)
 
