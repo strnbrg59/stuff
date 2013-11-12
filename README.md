@@ -1,4 +1,4 @@
-== My hobby software projects ==
+Contents:
 
     AndroidFlashcards (http://strnbrg59.com/cardation.html)
 
