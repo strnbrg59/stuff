@@ -4,7 +4,7 @@ Contents:
 
     astro: Digital astrophoto registration (i.e. alignment and addition)
 
-    cardation: flashcards (http://strnbrg59.com/cardation.html)
+    cardation: Language flashcards (http://strnbrg59.com/cardation.html)
 
     elevators: Elevator simulator -- people getting on and off
 
