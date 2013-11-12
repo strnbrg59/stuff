@@ -1,0 +1,320 @@
+<HTML>
+
+<TITLE> Cardation flashcards </TITLE>
+
+<H2><CENTER> Cardation Android flashcards app </CENTER></H2>
+
+<image src="images/cardation_logo.jpg" ALIGN="left" HSPACE=20>
+
+<P>
+Cardation is a flashcard app for Android that's optimized for
+learning languages.  I wrote it because among the many fine Android
+flashcard apps out there (see
+<A HREF="http://www.droidforums.net/forum/android-applications/5536-review-flashcard-apps-droid.html">http://www.droidforums.net</A>
+for a good review of what's out there) I could not find one that handled
+the direction -- English-to-foreign vs foreign-to-English -- the way I liked.
+Well, and also because programming is fun.
+
+<P>
+Get Cardation <A HREF="Cardation.apk">here.</A>
+
+<P> Cardation is simple and crude -- kind of like this web page!  I
+might add features and snazzy looks in time, but since at this point
+it does what I need, I'm now mostly a user, rather than a developer,
+of my own app.
+
+<P> Before I get into screen shots and usage details, I'll explain the
+main "pedagogical" algorithm, including that dual-direction-handling
+that made me get started.  The algorithm is based on the idea of a
+"streak" (in which I was inspired by Leo Wandersleb's very nice <A
+HREF="http://fluxcards.de">FluxCards</A> app).  Every word has its streak,
+and the streak goes up by one every time you get that word right.  The
+next time Cardation quizzes you on that word will be in about 2^streak
+days (where "^" means "power-of").  So the better you know a word, the
+less often you'll see it, allowing you to concentrate on the words you
+don't know so well.  That's the basic idea, and up to this point
+Cardation uses streaks much like FluxCards (and probably a lot of
+other such apps).
+
+<P> The difference is the direction, i.e. English-to-foreign vs
+foreign-to-English.  And here's Cardation's rule: it starts you out in
+the foreign-to-English direction (because it's easier), but after your
+streak hits a certain point, the direction switches to
+English-to-foreign.  (I should say, "native-to-foreign", since there's
+nothing about Cardation that requires you to use English; by "English"
+I mean simply the language you use to provide yourself with a
+definition for the foreign word.)  But get the wrong answer a few
+times and the direction will switch back to foreign-to-English.
+
+<P> I'll save the finer streak-related details for a little later.
+Now let's go to the screenshots and instructions.  Or just <A
+HREF="Cardation.apk">download</A> the thing and start using it;
+there's probably not much that's unobvious.
+
+<P> Here's the "home" screen: <P> <image
+src="images/cardation_menu.jpg" ALIGN="left" HSPACE=20> <P> Gets
+right down to business, doesn't it?  You can "learn" (which means, get
+quizzed), "input", and so forth.  For, as indicated above those
+options, your French words.  What?  You don't want to learn French?
+OK, that's just the first of Cardation's many rough edges.  French
+happens to be one of <EM>my</EM> languages, so it shows up in my
+screen shot.  The brand-new Cardation you'll download actually has no
+languages at all -- only an option for "New language",
+
+<P>
+<image src="images/cardation_languages.jpg" ALIGN="right" HSPACE=20>
+<P>
+
+which, when tapped (not shown here) prompts you to enter the name of a
+language you do care about.  (As you can see, besides French, I'm interested
+in two other languages you might care about even less.)
+
+<H3> Learn </H3>
+
+<P> At this point, you'll want some words, but I want to cover the
+menu options in the order they appear, so let's assume you somehow
+acquired some words, and you're ready to be quizzed on them.  Hence
+the <EM>Learn</EM> option.  A word (in this example the foreign one)
+is shown.  If you think you know what it means, tap the green
+<EM>yes</EM> button.  If you don't know, tap the red <EM>no</EM>
+button.  If you know, but you had to think a while, tap the amber
+<EM>meh</EM> button.  Tapping any one of these buttons reveals the
+answer (and the quote, if there is one).  At that point, tap the
+<EM>yes,</EM> <EM>no</EM> or <EM>meh</EM> button again.  Only this
+second tap really counts, and it "counts" in the sense that it affects
+your streak.  The streak is actually a pair of numbers (in this case
+(-3,-3)), of which the first is your "forward streak", the second your
+"backwards streak".  If you're currently in "forward" mode, i.e. the
+clue word is the foreign word, then tapping <EM>yes</EM> increases the
+forward streak (leaving the backwards streak unaffected).
+
+<P>
+<image src="images/cardation_learn.jpg" ALIGN="left" HSPACE=20>
+<P>
+
+<P> Notice (I'm sure you've already noticed) that the streak is a negative
+number.  If you apply the 2^streak formula from above, the implication is
+that this word will come up again in one-eighth of a day.  But actually
+that's not what happens.  The 2^streak rule applies only to nonnegative
+streaks.  A negative streak means the word will come up again...now.  Well,
+not <EM>right</EM> now, but right after the other words in your current
+"batch" (which I will define).
+
+<P> That (-3,-3) streak happens to be the streak assigned to a
+brand-new word.  And so after the first press of the green <EM>yes</EM>
+button, the streak goes to (-2,-3).  If you press green the next time
+the word comes up, the streak goes to (-1,-3).  The next step is of
+course to (0,-3), but that's a special point because when your forward
+streak reaches zero, Cardation switches direction on you.  It starts
+quizzing you in the reverse, i.e. English-to-foreign, direction.  At
+that point, if you keep pressing the green button, you whittle down your
+streak to (0,-2), then (0,-1) and (0,0).  Once you're at (0,0), you're
+finally in the 2^streak regime: that word falls out of your current batch
+and it won't show up again for one (i.e. 2^0) day.
+
+<P> That covers the green <EM>yes</EM> button.  If you don't know the
+word and, accordingly, press the red <EM>no</EM> button, your streak
+goes down.  But it doesn't work quite symmetrically.  It works as in
+the "Snakes and Ladders" game: if your streak is positive -- it could
+be 5, 6 or even 107 -- pressing the red button drops your streak all
+the way to -1.  That ensures you'll see the word again during your current
+session.  When it comes up again, if you press the green button, the
+streak goes to zero and the word will next show up in a day's time.  But
+if you still don't remember and press the red button again, your streak
+drops to -2, and next time to -3.  If after that you <EM>still</EM> can't
+get it, the streak will not drop further.  But something else happens: if
+you're in backwards mode (English-to-foreign) and you drop to -3, then
+Cardation sets both streaks to -3 and switches the direction to forward; at
+this point you've proven that you really need to relearn this word starting
+with the easier direction.
+
+<P> Having gone through the effects of the green and red buttons, explaining
+the amber <EM>meh</EM> button is easy: it simply leave both streaks unaffected.
+That's it.  You may choose not to ever use the amber button; you don't
+have to.  It's just there to give you a little more control, if you want it.
+
+<P> Below "streak" there is something about "batch".  The batch is
+your current set of cards, the cards Cardation will present to you
+over and over.  Some of these are cards with negative streaks -- new
+words, or older words you've forgotten.  Others could be words you
+know well -- words with positive streaks -- which just happen to have
+come up because it's time.  For example, a word with a streak of 3 is
+a word that you pressed <EM>yes</EM> on eight days ago.
+
+<P> The number "now due" (here shown as 15), is related to the batch.  As you
+work through the words in your batch, they will drop out of the batch, one by
+one, as you press <EM>yes</EM> and get their streaks to zero or more.  When
+a word drops out of the batch like that, another word enters the batch to take
+its place, and that word comes from those "now due".  After a while, all your
+due words will be in your batch, and at that point when a word leaves your
+batch, there's nothing to replace it, and so your batch will diminish.  When
+it reaches zero, you're done.  Until next time.
+
+<P> Below the <EM>yes</EM>, <EM>meh</EM> and <EM>no</EM> buttons you see
+"Cram".  Cram mode sort of lets you change Cardation's clock.  Set cram to 1
+and your "now due" cards will be those that would have come up one day from
+now.  Set cram to, say, 4, and your "now due" cards will be those (possibly
+a large number) that, under normal circumstances would have come up in 2^4=16
+days.  I recommend leaving cram at 0.
+
+<P> And one more thing about streaks and the power-of-two rule: Cardation
+throws in a little randomness, so that word "due dates" get spread out
+a little.  So don't expect to see a word in <EM>exactly</EM> 2^streak days.
+
+<H3> Input </H3>
+
+<P> Now for the <EM>Input</EM> option.
+
+<image src="images/cardation_input.jpg" ALIGN="left" HSPACE=20>
+
+It's simple: type your foreign word on the first line and
+your definition (in English or whatever) on the second line.  The
+third line is the "quote" line: it's for an illustrative quote, or
+really anything you like.  Or nothing at all.
+
+<P> The checkbox labeled <EM>active</EM> indicates if you want
+Cardation to quiz you in the English-to-foreign direction (after you
+master the easier foreign-to-English direction of course, as discussed
+above).  <EM>Active</EM> is checked by default as I've assumed you'd
+like most of your words to become part of your <EM>active</EM> (hence the name)
+vocabulary.
+
+<P> The <EM>Input</EM> screen is how I happen to acquire most of my
+words; typically I'm reading something, I see a word I don't know, I
+look it up in Wiktionary, and I enter it into Cardation.  There's
+a faster alternative, a way to import an arbitrary number of words
+wholesale.  But I'll cover that when I get to the <EM>Restore</EM> option
+because first I have to talk about the format your imported words will
+need to be in, and that has to do with the <EM>Backup</EM> option, which
+also comes later.
+
+<H3> List All </H3>
+
+<P> The very next option is <EM>List All,</EM> which is pretty much what it
+sounds like.
+
+<P>
+<image src="images/cardation_list.jpg" ALIGN="right" HSPACE=20>
+<image src="images/cardation_edit.jpg" ALIGN="right" HSPACE=20>
+<P>
+
+If you tap on one of these words, that takes you to a page where you can
+edit that word as well as its definition, the quote if any, and the
+<EM>active</EM> checkbox.  You can also delete a word.  To do that,
+just backspace over the first (i.e. foreign) line, and press "Save".
+(By the way, I don't know why all those words are underlined in red
+here, as though to tell me they're misspelled; it's just something
+about my Android emulator, because it doesn't happen on my real
+device.)
+
+<H3> Backup </H3>
+
+<P> Backup is, of course, for backing up your cards.  I know there are
+fancy cloud backup solutions in the Android API, but I picked
+something alot simpler: email.  Backup just emails you a file that has
+all your words (and their definitions, quotes, streaks and due dates
+-- everything).  You can save that email, if you like.  If you save it
+to a file, and then mail that file to yourself as an attachment, your
+phone will offer Cardation as one of your options for handling that
+attachment.  If you accept that "offer", Cardation will import those words.
+And that is the wholesale word-importation feature I mentioned earlier.
+Obviously, it's a way to restore from your own backups, but it's also
+a way to import new cards.  You just have to get the file format right,
+but it's pretty simple -- fields delimited by '@'.
+
+<H3> Restore </H3>
+
+<P> Restore is not the recommended way to restore (say, from a
+backup).  To make it work, you need a way to copy a file (in the
+format described above, under "Backup") to the /mnt/sdcard directory
+of your Android device.  So don't; it's not worth the bother, since
+you can do it over email.  (But "Restore" is useful for my debugging,
+and I'm too lazy to maintain two different versions of the code.)
+
+<H3> Delete </H3>
+
+"Delete" removes a language from your list.  It does not, however, drop the
+associated database table.  I thought that would be too unpleasantly final.
+So to get your language back, with all its words, just re-add it in the
+"New language" option of the home page.
+
+<H3> Configure </H3>
+
+We come finally to the configuration screen.  Yeah, Cardation isn't very
+configurable at this point, sorry.
+
+<image src="images/cardation_config.jpg" ALIGN="left" HSPACE=20>
+
+<UL>
+    <LI> Batch size is, well, batch size.  Bigger batches are harder.  I like 10.
+    <LI> Initial Streak is what's assigned to a new word.  Set it to, say, -5,
+and you'll get more practice on that word, before Cardation decides to remove
+it from your batch (and plan on showing it to you again in about one day's time).
+    <LI> RandReversal is the probability that, even though your forward streak
+    is nonnegative and you've checked the "active" box, you'll get quizzed in
+    the forward direction.  The default of 10 (%) seems reasonable to me.  It
+    seems wise to "randomly reverse" now and then, but not so often.
+</UL>
+
+
+<P>
+<H3> Infrequently-asked questions </H3>
+
+<P>
+Q1. Can Cardation use my Android device's speaker to pronounce a word?<BR>
+A1. No.<BR><BR>
+
+Q2. Can Cardation look up a word's meaning and fill that in for me
+automatically?<BR>
+A2. No.<BR><BR>
+
+Q3. Can Cardation use my device's accelerometer to detect that I've shaken
+my phone to indicate that I'd like the order of my words scrambled?<BR>
+A3. No.<BR><BR>
+
+Q4. Is there a version for the iPhone/Pod/Pad family of products?  Is there
+an online Javascript-powered version?<BR>
+A4. No, nope. <BR><BR>
+
+Q5. Why don't you upload Cardation to the Google Android app store?<BR>
+A5. Who'd ever pay money for this?<BR><BR>
+
+Q6. Can we see your source code?<BR>
+A6. It's at <A HREF="https://github.com/strnbrg59">GitHub.</A>
+<BR><BR>
+
+Q7. Do you have any intention whatsoever of making this app less lame?<BR>
+A7. Yes.  Here's some of my to-do list.<BR>
+<UL>
+    <LI> Respond to pinch gesture </LI>
+    <LI> Labels shouldn't look like they're editable </LI>
+    <LI> Long press goes to Wiktionary </LI>
+    <LI> Statistics and graphs kinda like FluxCards has </LI>
+    <LI> Miscellaneous user interface improvements </LI>
+</UL>
+
+<BR>
+Q8. What's my expected daily "load", that is, if I tend to add <IT>w</IT> new
+words each day, then in steady state how many words will be "due" every day?<BR>
+
+A8. Growing but manageable.  Let's assume, for now, that you never
+forget.  Then your load today is the <IT>w</IT> new words you added
+today; plus the <IT>w</IT> new words from yesterday (you got them
+right yesterday, putting their streak at 0 and their due date therefore one
+day (<IT>2^streak</IT>) into the future); the <IT>w</IT> words you added three
+days ago (they came up 3 days ago, then 2 days ago at which point their streak
+went to 1 and their due date was pushed 2 (<IT>= 2^streak</IT>) days ahead);
+the <IT>w</IT> words you added 7 days ago; the <IT>w</IT> words you added
+15 days ago; etc.  So if you started using Cardation <IT>n</IT> days ago,
+your load today is <IT>w*log_2(n+1)</IT>.  Say you're a power user and you
+plan to add a word a day for the next thousand days.  Then
+a thousand days from now your daily load will be about 10 words.  In ten
+thousand days your daily load will be about 13 words.  An eager beaver who
+adds ten new words a day will have a load of 100 words a day, a thousand
+days from now.  That's a pretty heavy load, but it seems unlikely anyone
+will reach that point; we're talking about knowing 10,000 words.  Long before
+reaching that point, the eager beaver will be an expert at whatever language
+and he's unlikely to encounter anything like ten unfamiliar words a day, and
+so the ten-new-words-a-day regimen is unlikely to last for a thousand days.
+
+</HTML>
