@@ -294,27 +294,73 @@ A7. Yes.  Here's some of my to-do list.<BR>
 </UL>
 
 <BR>
-Q8. What's my expected daily "load", that is, if I tend to add <IT>w</IT> new
+Q8. What's my expected daily "load", that is, if I tend to add <I>w</I> new
 words each day, then in steady state how many words will be "due" every day?<BR>
 
 A8. Growing but manageable.  Let's assume, for now, that you never
-forget.  Then your load today is the <IT>w</IT> new words you added
-today; plus the <IT>w</IT> new words from yesterday (you got them
+forget.  Then your load today is the <I>w</I> new words you added
+today; plus the <I>w</I> new words from yesterday (you got them
 right yesterday, putting their streak at 0 and their due date therefore one
-day (<IT>2^streak</IT>) into the future); the <IT>w</IT> words you added three
+day (<I>2^streak</I>) into the future); the <I>w</I> words you added three
 days ago (they came up 3 days ago, then 2 days ago at which point their streak
-went to 1 and their due date was pushed 2 (<IT>= 2^streak</IT>) days ahead);
-the <IT>w</IT> words you added 7 days ago; the <IT>w</IT> words you added
-15 days ago; etc.  So if you started using Cardation <IT>n</IT> days ago,
-your load today is <IT>w*log_2(n+1)</IT>.  Say you're a power user and you
-plan to add a word a day for the next thousand days.  Then
-a thousand days from now your daily load will be about 10 words.  In ten
-thousand days your daily load will be about 13 words.  An eager beaver who
-adds ten new words a day will have a load of 100 words a day, a thousand
-days from now.  That's a pretty heavy load, but it seems unlikely anyone
-will reach that point; we're talking about knowing 10,000 words.  Long before
-reaching that point, the eager beaver will be an expert at whatever language
-and he's unlikely to encounter anything like ten unfamiliar words a day, and
-so the ten-new-words-a-day regimen is unlikely to last for a thousand days.
+went to 1 and their due date was pushed 2 (<I>= 2^streak</I>) days ahead);
+the <I>w</I> words you added 7 days ago; the <I>w</I> words you added
+15 days ago; etc.  So if you started using Cardation <I>n</I> days ago,
+your load today is <I>w*log_2(n+1)</I>.  Say you're a power user and you
+plan to add a word a day forever.  Then your daily load will be nine words
+after one year, eleven after five years, and twelve after ten years.
+
+<BR><BR>
+
+If you're an eager beaver and plan to add ten new words a day, your
+load will indeed be ten times higher, and of course 85 (in five years
+of that) is quite a lot.  But it seems unlikely anyone will reach that
+point; we're talking about knowing <I>5*365*10=18,250</I> words!
+Long before reaching that point, you're an expert at whatever language
+and unlikely to encounter anything like ten unfamiliar words a day.
+
+<BR><BR>
+
+All of that assumes you never forget.  When you forget a word
+(i.e. you press the red "No" button), its streak goes to -1.  That
+increases your load.  There's a formula for that too but it's too
+complicated to be very enlightening.  And so instead, here is a table
+with some representative values.  None of them look at all onerous to me.
+
+<BR><BR>
+<!-- produced with cards_due.cpp -->
+<TABLE border="1" align="center">
+<TR> <TD></TD>
+<TD>0% forgotten</TD>
+<TD>5% forgotten</TD>
+<TD>10% forgotten</TD>
+<TD>15% forgotten</TD>
+<TR>
+<TD> 365 days</TD>
+<TD> 9</TD>
+<TD> 9.8</TD>
+<TD> 12</TD>
+<TD> 15.55</TD>
+</TR>
+<TR>
+<TD> 1825 days</TD>
+<TD> 11</TD>
+<TD> 12.85</TD>
+<TD> 17.4</TD>
+<TD> 26.75</TD>
+</TR>
+<TR>
+<TD> 3650 days</TD>
+<TD> 12</TD>
+<TD> 14.45</TD>
+<TD> 21.6</TD>
+<TD> 30.15</TD>
+</TR>
+</TABLE>
+
+<I>Expected daily word load assuming one new word is added per day,
+for alternative periods of days, and for alternative rates of
+forgetting words (getting them wrong).
+</I>
 
 </HTML>
