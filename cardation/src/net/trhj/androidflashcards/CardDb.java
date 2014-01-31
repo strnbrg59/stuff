@@ -578,11 +578,12 @@ public class CardDb {
                                  importance,
                                  quote);
 
+            recto = recto.replace("'", "''"); // That's how you escape a quote.
             Cursor cursor =
                 db.rawQuery("SELECT " + Contract.RECTO + " FROM "
                 +   getTableName()
                 + " WHERE " + Contract.RECTO + " == "
-                + "\"" + recto + "\"", null);
+                + "\'" + recto + "\'", null);
             if (cursor.getCount() == 0) {
                 Log.i("Cardation", "Inserting new card " + recto);
                 saveCard(context, card);

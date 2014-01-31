@@ -7,39 +7,57 @@
     tools:context=".MainActivity" >
 
 <LinearLayout
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
+    <Spinner
+        android:id="@+id/deck_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/deck_prompt" />
+
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="learn"
         android:text="@string/button_learn" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="inputCard"
         android:text="@string/button_input" />
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="listAll"
+        android:text="@string/button_list_all" />
+
+    <Button
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="backup"
         android:text="@string/button_backup" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="restore"
         android:text="@string/button_restore" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="delete"
+        android:text="@string/button_delete" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="config"
+        android:text="@string/button_config" />
 </LinearLayout>
 
 

@@ -7,13 +7,12 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:permission="android.permission.WRITE_EXTERNAL_STORAGE">
+        android:theme="@style/AppTheme" >
 
         <!-- main -->
         <activity
@@ -36,21 +35,56 @@
                 android:value="net.trhj.androidflashcards.MainActivity" />
         </activity>
 
-        <!-- save -->
-        <activity
-            android:name="net.trhj.androidflashcards.SaveCardActivity"
-            android:label="@string/title_activity_save_card"
-            android:parentActivityName="net.trhj.androidflashcards.InputActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.trhj.androidflashcards.InputActivity" />
-        </activity>
-
         <!-- learn -->
         <activity
             android:name="net.trhj.androidflashcards.LearnActivity"
             android:label="@string/title_activity_learn"
             android:parentActivityName="net.trhj.androidflashcards.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.trhj.androidflashcards.MainActivity" />
+        </activity>
+
+        <!-- list -->
+        <activity
+            android:name="net.trhj.androidflashcards.ListActivity"
+            android:label="@string/title_activity_list_all"
+            android:parentActivityName="net.trhj.androidflashcards.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.trhj.androidflashcards.MainActivity" />
+        </activity>
+
+        <!-- edit -->
+        <activity
+            android:name="net.trhj.androidflashcards.EditActivity"
+            android:label="@string/title_activity_edit"
+            android:parentActivityName="net.trhj.androidflashcards.ListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.trhj.androidflashcards.ListActivity" />
+        </activity>
+
+        <!-- config -->
+        <activity
+            android:name="net.trhj.androidflashcards.ConfigActivity"
+            android:label="@string/title_activity_config"
+            android:parentActivityName="net.trhj.androidflashcards.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.trhj.androidflashcards.MainActivity" />
+        </activity>
+
+        <!-- dbbk email processor -->
+        <activity
+            android:name="net.trhj.androidflashcards.DbbkActivity"
+            android:label="@string/title_activity_dbbk"
+            android:parentActivityName="net.trhj.androidflashcards.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" host="*" android:pathPattern="*.dbbk" android:scheme="content" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.trhj.androidflashcards.MainActivity" />

@@ -8,17 +8,29 @@
 <EditText android:id="@+id/recto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/recto" />    
+        android:hint="...................." />
 
 <EditText android:id="@+id/verso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/verso" />    
+        android:hint="...................." />
 
-<Button
+<EditText android:id="@+id/quote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="saveCard"
-        android:text="@string/button_save" />
+        android:hint="...................." />
+
+<CheckBox
+    android:id="@+id/activeCheckBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:checked="true"
+    android:text="@string/checkbox_active" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="saveCard"
+    android:text="@string/button_save" />
 
 </LinearLayout>

@@ -3,7 +3,7 @@ package net.trhj.androidflashcards;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 public class ConfigActivity extends Activity {
 
@@ -32,17 +32,17 @@ public class ConfigActivity extends Activity {
             min_rand_reversal_,
             max_rand_reversal_,
             ConfigDb.getRandReversal(this),
-            (EditText) findViewById(R.id.rand_reversalText));
+            (TextView) findViewById(R.id.rand_reversalText));
 
         batch_size_picker_ = new NumberPicker(min_batch_size_,
             max_batch_size_,
             ConfigDb.getBatchSize(this),
-            (EditText) findViewById(R.id.batchsizeText));
+            (TextView) findViewById(R.id.batchsizeText));
 
         streak_picker_ = new NumberPicker(min_streak_,
             max_streak_,
             ConfigDb.getStreak(this),
-            (EditText) findViewById(R.id.streakText));
+            (TextView) findViewById(R.id.streakText));
     }
 
     // It only seems like we don't use the View argument but we do; functions

@@ -1,6 +1,6 @@
 package net.trhj.androidflashcards;
 
-import android.widget.EditText;
+import android.widget.TextView;
 
 // Can't use NumberPicker as that starts with Android 3.x.  So making
 // one by hand.
@@ -8,11 +8,11 @@ public class NumberPicker {
 
     int min_val_;
     int max_val_;
-    EditText widget_;
+    TextView widget_;
     int curr_val_;
 
     public NumberPicker(int min_val, int max_val, int init_val,
-                          EditText widget)
+                        TextView widget)
     {
         min_val_ = min_val;
         max_val_ = max_val;

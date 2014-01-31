@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.CheckBox;
@@ -35,10 +36,9 @@ public class LearnActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn);
-        setTextSizes();
 
         G.cram_picker_ = new NumberPicker(0, 8, 0,
-            (EditText) findViewById(R.id.cramText));
+            (TextView) findViewById(R.id.cramText));
         CardDb.setCramIncrement(G.cram_picker_.getVal());
         G.total_rows = CardDb.totalRows(getBaseContext());
         G.max_batch_size = ConfigDb.getBatchSize(this);
@@ -71,13 +71,6 @@ public class LearnActivity extends Activity {
         advanceCard();
     }
 
-    public void setTextSizes() {
-        EditText clue = (EditText) findViewById(R.id.clue);
-        clue.setTextSize(clue.getTextSize()*1);
-        EditText answer = (EditText) findViewById(R.id.answer);
-        answer.setTextSize(answer.getTextSize()*1);
-    }
-
     /* We pass rand_reversal_prob, instead of just use G.rand_reversal, cuz
      * sometimes we want to get just the "deterministic" result.
      */
@@ -91,8 +84,6 @@ public class LearnActivity extends Activity {
             int now = CardationUtils.epochNow();
             Random r = new Random(now);
             int rr = r.nextInt(101);
-            Log.e("Cardation", "rr = " + rr + ", rand_reversal_prob = "
-                + rand_reversal_prob);
             if (rr < 100*rand_reversal_prob) {
                 forward = true;
             }
