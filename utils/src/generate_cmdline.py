@@ -181,6 +181,7 @@ if __name__ == '__main__':
     """
     varinfo_file = open(sys.argv[1])
     varinfo_lines = varinfo_file.readlines()
+    varinfo_lines.append('debug_level d int 3 "debug level"')
     g_cmdline_file = sys.argv[2]
     comment_regex_pattern = '^ *#|^\s*$'
     comment_regex = re.compile(comment_regex_pattern)
@@ -190,22 +191,26 @@ if __name__ == '__main__':
     #
     cmdline_cpp = open('cmdline.cpp', 'w')
     cmdline_cpp.write(g_cmdline_cpp_part1)
+    wrote_one_member = False
     for line in varinfo_lines:
         if comment_regex.match(line):
             continue
         varinfo = VariableInfo(line[:-1])
+        if varinfo.long_name == 'debug_level':
+            continue
+        if wrote_one_member:
+            cmdline_cpp.write(',\n')
         cmdline_cpp.write('        ' + varinfo.foo_bar2m_foo_bar(varinfo.long_name) \
                          + '(' + varinfo.default + ')')
-        if line != varinfo_lines[-1]:
-            cmdline_cpp.write(',')
-        cmdline_cpp.write('\n')
+        wrote_one_member = True
 
-    cmdline_cpp.write('    {\n')
+    cmdline_cpp.write('\n    {\n')
     for line in varinfo_lines:
         if comment_regex.match(line):
             continue
         varinfo = VariableInfo(line[:-1])
-        cmdline_cpp.write('        ' + varinfo.makeArgmapElement() + '\n')
+        if varinfo.long_name != 'debug_level':
+            cmdline_cpp.write('        ' + varinfo.makeArgmapElement() + '\n')
         cmdline_cpp.write('        ' + varinfo.buildShort2LongargMap() + '\n')
         cmdline_cpp.write('        ' + varinfo.buildShortOpts() + '\n')
         cmdline_cpp.write('        ' + varinfo.buildLongOpts() + '\n')
@@ -224,6 +229,8 @@ if __name__ == '__main__':
         if comment_regex.match(line):
             continue
         varinfo = VariableInfo(line[:-1])
+        if varinfo.long_name == 'debug_level':
+            continue
         accessors = varinfo.makeAccessorDeclarations()
         cmdline_hpp.write('        ' + accessors[0] + '\n'
                          +'        ' + accessors[1] + '\n\n')
@@ -234,6 +241,7 @@ if __name__ == '__main__':
         if comment_regex.match(line):
             continue
         varinfo = VariableInfo(line[:-1])
-        cmdline_hpp.write('        ' + varinfo.makeMemberDataDeclaration()+'\n')
+        if varinfo.long_name != 'debug_level':
+            cmdline_hpp.write('        ' + varinfo.makeMemberDataDeclaration()+'\n')
 
     cmdline_hpp.write(g_cmdline_hpp_part2 + '\n')
