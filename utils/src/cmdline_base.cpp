@@ -10,10 +10,12 @@
 #include <sys/types.h> 
 #include <sys/stat.h>
 #include <time.h> 
+#include <getopt.h>
 #include <vector>
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::vector;
 
 //----------------------------------------------------------------- 
 // 
@@ -177,6 +179,8 @@ void CmdlineBase::LoadDefaultsFromFile()
  *
  *  The only other valid thing for the command line is "-h" or "--help".
 */
+
+
 void CmdlineBase::ParseCommandLine( int argc, char *argv[] )
 {
     Trace t("ParseCommandLine()");
@@ -195,22 +199,23 @@ void CmdlineBase::ParseCommandLine( int argc, char *argv[] )
         exit(0);
     }
 
-    // Go through all of argv[].
-    for( int i=1;i<argc;i++ )
+    char c;
+    while (-1 != (c = getopt_long(argc, argv, m_shortopts.c_str(),
+                                  &m_longopts[0], NULL)))
     {
-        if( m_argmap.find( ArgName(argv[i]) ) == m_argmap.end() )
+        if(c == '?')
         {
-            cerr << "***Error: " << ArgName(argv[i]) << " is not a legal "
+            cerr << "***Error: " << argv[optind-1] << " is not a legal "
                  << "command-line argument.  " << endl
                  << "Use -h option for help." << endl;
             exit(1);
         }
-        m_argmap[ArgName(argv[i])]->set(ArgVal(argv[i]));
-        t.Info() << "cmd-line-option " << ArgName(argv[i]) << "=" 
-                 << ArgVal(argv[i]) << '\n';
-        if( ArgName(argv[i]) == "debug_level" )
+        m_argmap[m_short2longarg_map[c]]->set(optarg);
+        t.Info() << "cmd-line-option " << m_short2longarg_map[c] << "="
+                 << optarg << '\n';
+        if( m_short2longarg_map[c] == "debug_level" )
         {
-            DebugLevel( atoi(ArgVal(argv[i]).c_str()) );
+            DebugLevel(atoi(optarg));
         }
     } 
 } 
@@ -282,6 +287,18 @@ CmdlineBase::PrintCmdlineParams( std::ostream & ost ) const
         t.Info() << "  " << iter->first << "=" << iter->second->toString()
                  << '\n';
     }
+}
+
+struct option
+CmdlineBase::MakeStructOption(char const* name, int has_arg, int* flag, int val)
+    const
+{
+    struct option opt;
+    opt.name = name;
+    opt.has_arg = has_arg;
+    opt.flag = flag;
+    opt.val = val;
+    return opt;
 }
 
 Anything CmdlineBase::s_debug_level = 3;

@@ -3,9 +3,11 @@
 
 #include "argmap.hpp"
 #include <stdlib.h>  // <cstdlib> and getenv not recognized!?
+#include <getopt.h>
 #include <cstdlib>
 #include <map>
 #include <string>
+#include <vector>
  
 //----------------------------------------------------------------- 
 // 
@@ -75,6 +77,12 @@ class CmdlineBase
 
     std::string ArgName( std::string );
     std::string ArgVal( std::string );
+    struct option MakeStructOption(char const* name, int has_arg, int* flag, int val)
+        const;
+
+    std::string m_shortopts;
+    std::vector<struct option> m_longopts;
+    std::map<char, std::string> m_short2longarg_map;
 
   private:
     enum {k_max_line_length=256};

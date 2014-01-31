@@ -1,10 +1,10 @@
 # This file is used by generate_cmdline.py to produce C++ code for the cmdline facility.
 # Each line gives information on one cmdline variable.  The format is:
-# name        type     default      comment
-n_iterations  int     20            "Of the entire simulation, -1=>forever"
-n_floors      int      5            "obvious"
-n_shafts      int      3            "obvious"
-delay         int      0            "in milliseconds"
-use_curses    bool     false        "use ncurses, or not"
-rider_arrival_rate double 2.0       "Poisson parameter, per second"
-elevator_capacity int  10           "obvious"
+# name        short     type     default      comment
+n_iterations  i         int     20            "Of the entire simulation, -1=>forever"
+n_floors      f         int      5            "obvious"
+n_shafts      s         int      3            "obvious"
+delay         d         int      0            "in milliseconds"
+use_curses    c         bool     false        "use ncurses, or not"
+rider_arrival_rate r    double 2.0       "Poisson parameter, per second"
+elevator_capacity y     int  10           "obvious"

@@ -1,3 +1,3 @@
-do_fork              bool      true    "forks off grandchild for each client"
-become_daemon        bool      true    "uses setuid, so only succeeds as root"
-port                 int       8088    "port"
+do_fork              d      bool      true    "forks off grandchild for each client"
+become_daemon        b      bool      true    "uses setuid, so only succeeds as root"
+port                 p      int       8088    "port"
