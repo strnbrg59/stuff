@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+<!-- home-made NumberPicker, Batch Size -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+<TextView
+    android:text="Batch size"
+    android:editable="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/batchsizeDownButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="batchsizeDown"
+    android:text="@string/batchsize_down" />
+
+<TextView
+    android:id="@+id/batchsizeText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/batchsizeUpButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="batchsizeUp"
+    android:text="@string/batchsize_up" />
+
+</LinearLayout>
+
+<!-- home-made NumberPicker, Streak -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+<TextView
+    android:text="Initial Streak"
+    android:editable="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/streakDownButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="streakDown"
+    android:text="@string/streak_down" />
+
+<TextView
+    android:id="@+id/streakText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/streakUpButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="streakUp"
+    android:text="@string/streak_up" />
+
+</LinearLayout>
+
+<!-- home-made NumberPicker, Rand_Reversal -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+<TextView
+    android:text="RandReversal"
+    android:editable="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/randReversalDownButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="randReversalDown"
+    android:text="@string/rand_reversal_down" />
+
+<TextView
+    android:id="@+id/rand_reversalText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/randReversalUpButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="randReversalUp"
+    android:text="@string/rand_reversal_up" />
+
+</LinearLayout>
+
+
+<!-- Save -->
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="saveConfig"
+    android:text="@string/button_save" />
+
+</LinearLayout>
