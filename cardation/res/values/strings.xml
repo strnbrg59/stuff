@@ -6,7 +6,6 @@
     <!-- main screen -->
     <string name="button_input">Input</string>
     <string name="button_learn">Learn</string>
-    <string name="button_list_all">List All</string>
 
     <string name="deck_prompt">Choose a deck</string>
  
@@ -23,6 +22,12 @@
     <string name="info_edit_text">info</string>
     <string name="cram_up">+</string>
     <string name="cram_down">-</string>
+    <string name="go_back">previous word</string>
+
+    <!-- list screen -->
+    <string name="search">search</string>
+
+    <!-- edit screen -->
 
     <!-- backup & restore buttons -->
     <string name="button_backup">Backup</string>
@@ -43,10 +48,12 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_input">Input</string>
-    <string name="title_activity_list_all">List All</string>
+    <string name="title_activity_list_all">Search</string>
+    <string name="title_activity_dbexplorer">Hack Database (danger!)</string>
     <string name="title_activity_edit">Edit</string>
     <string name="title_activity_learn">Learn</string>
     <string name="title_activity_config">Configure</string>
+    <string name="title_activity_stats">Statistics</string>
     <string name="title_activity_dbbk">Cardation importer</string>
 
 </resources>

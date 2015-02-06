@@ -26,6 +26,26 @@
     android:layout_height="wrap_content"
     android:text="@string/checkbox_active" />
 
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:orientation="horizontal">
+
+<EditText
+        android:text="streaks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false" />
+<EditText android:id="@+id/forwardStreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+<EditText android:id="@+id/backwardStreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
 <!-- Save button -->
 <Button
     android:layout_width="wrap_content"

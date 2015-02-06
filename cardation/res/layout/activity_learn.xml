@@ -5,35 +5,101 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-<EditText android:id="@+id/clue"
+<EditText android:id="@+id/recto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/clue" />    
+        android:hint="@string/recto" />    
 
-<EditText android:id="@+id/answer"
+<EditText android:id="@+id/verso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/answer" />
+        android:hint="@string/verso" />
 
 <EditText android:id="@+id/quote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/quote" />
 
+<!-- checkbox on left, back button on right -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 <CheckBox
     android:id="@+id/activeCheckBox"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/checkbox_active" />
+<View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+<Button
+    android:id="@+id/goBackButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="goBack"
+    android:gravity="right"
+    android:text="@string/go_back" />
+</LinearLayout>
+
+<!-- info on left, cram on right -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
 <EditText
     android:id="@+id/infoEditText"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:ems="10"
     android:text="@string/info_edit_text"
     android:inputType="textMultiLine" >
 </EditText>
+
+<View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
+<!-- home-made NumberPicker, Cram -->
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dip"
+    android:gravity="right"
+    android:orientation="horizontal">
+
+<TextView
+    android:text="Cram"
+    android:editable="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/cramDownButton"
+    android:layout_width="40dp"
+    android:layout_height="wrap_content"
+    android:onClick="cramDown"
+    android:text="@string/cram_down" />
+
+<TextView
+    android:id="@+id/cramText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<Button
+    android:id="@+id/cramUpButton"
+    android:layout_width="40dp"
+    android:layout_height="wrap_content"
+    android:onClick="cramUp"
+    android:text="@string/cram_up" />
+
+</LinearLayout>
+<!-- end of homemade cram widget -->
+</LinearLayout>
+
+
 
 <RadioGroup
     android:id="@+id/know_radio_group"
@@ -79,38 +145,5 @@
         android:onClick="onRadioButtonClicked" />
 
 </RadioGroup>
-
-<!-- home-made NumberPicker, Cram -->
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-<TextView
-    android:text="Cram"
-    android:editable="false"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-<Button
-    android:id="@+id/cramDownButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="cramDown"
-    android:text="@string/cram_down" />
-
-<TextView
-    android:id="@+id/cramText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-<Button
-    android:id="@+id/cramUpButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="cramUp"
-    android:text="@string/cram_up" />
-
-</LinearLayout>
 
 </LinearLayout>

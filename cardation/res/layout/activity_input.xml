@@ -5,20 +5,59 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 <EditText android:id="@+id/recto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="...................." />
+<Space
+        android:layout_width="10dp"
+        android:layout_height="1dp" />
+<TextView
+        android:text="@string/clue"
+        android:editable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 <EditText android:id="@+id/verso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="...................." />
+<Space
+        android:layout_width="10dp"
+        android:layout_height="1dp" />
+<TextView
+        android:text="@string/answer"
+        android:editable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 <EditText android:id="@+id/quote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="...................." />
+<Space
+        android:layout_width="10dp"
+        android:layout_height="1dp" />
+<TextView
+        android:text="@string/quote"
+        android:editable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
 
 <CheckBox
     android:id="@+id/activeCheckBox"
@@ -28,6 +67,7 @@
     android:text="@string/checkbox_active" />
 
 <Button
+    android:id="@+id/saveButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:onClick="saveCard"

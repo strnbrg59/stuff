@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/action_search"
+          android:icon="@drawable/ic_action_search"
+          android:title="search"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_config"
+          android:title="language-specific configuration"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_stats"
+          android:title="statistics"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_backup"
+          android:title="backup everything"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_restore"
+          android:title="restore language"
+          android:showAsAction="ifRoom" />
+
+    <!--
+    <item android:id="@+id/action_hack_db"
+          android:title="hack_database"
+          android:showAsAction="ifRoom" />
+    -->
+
+    <item android:id="@+id/action_delete"
+          android:title="delete language"
+          android:showAsAction="ifRoom" />
+
+</menu>

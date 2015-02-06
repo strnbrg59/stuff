@@ -12,6 +12,7 @@
         android:prompt="@string/deck_prompt" />
 
     <Button
+        android:id="@+id/go_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="go"
