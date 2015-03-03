@@ -7,14 +7,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="8"
         android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:logo="@drawable/ic_launcher">
+        android:theme="@style/AppThemeLight" android:logo="@drawable/ic_launcher">
 
         <!-- main -->
         <activity
@@ -50,6 +50,17 @@
                 android:value="net.trhj.cardation.MainActivity" />
         </activity>
 
+        <!-- decram -->
+        <activity
+            android:name="net.trhj.cardation.DecramActivity"
+            android:label="@string/title_activity_decram"
+            android:icon="@drawable/ic_launcher"
+            android:parentActivityName="net.trhj.cardation.LearnActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.trhj.cardation.LearnActivity" />
+        </activity>
+
         <!-- list -->
         <!-- android:noHistory is here and in the edit activity so that if we
              list-edit-save-edit-save-edit-save, then pressing Back won't walk
@@ -78,10 +89,10 @@
                 android:value="net.trhj.cardation.ListActivity" />
         </activity>
 
-        <!-- config -->
+        <!-- restore -->
         <activity
-            android:name="net.trhj.cardation.ConfigActivity"
-            android:label="@string/title_activity_config"
+            android:name="net.trhj.cardation.RestoreActivity"
+            android:label="@string/title_activity_restore"
             android:icon="@drawable/ic_launcher"
             android:parentActivityName="net.trhj.cardation.MainActivity" >
             <meta-data
@@ -89,10 +100,10 @@
                 android:value="net.trhj.cardation.MainActivity" />
         </activity>
 
-        <!-- stats -->
+        <!-- config -->
         <activity
-            android:name="net.trhj.cardation.StatsActivity"
-            android:label="@string/title_activity_stats"
+            android:name="net.trhj.cardation.ConfigActivity"
+            android:label="@string/title_activity_config"
             android:icon="@drawable/ic_launcher"
             android:parentActivityName="net.trhj.cardation.MainActivity" >
             <meta-data

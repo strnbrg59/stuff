@@ -1,16 +1,18 @@
 package net.trhj.cardation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.graphics.Color;
 import android.app.Activity;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.util.Log;
 import java.util.*;
 import java.lang.Math;
@@ -19,30 +21,45 @@ public class LearnActivity extends Activity {
 
     static class G {
         // Initialized in onResume()
-        static CardDb.Card curr_card;
-        static LinkedList<CardDb.Card> batch;
-        static Stack<CardDb.Card> prev_cards;
+        static CardDb.Card curr_card=null;
+        static LinkedList<CardDb.Card> batch=null;
+        static Stack<CardDb.Card> prev_cards=null;
         static boolean forward;
         static int total_rows;
         static boolean clicked_yesnomeh_already;
         static int max_batch_size;
         static int rand_reversal;
-        static MyNumberPicker cram_picker_;
+        static MyNumberPicker cram_picker_=null;
         static String default_quote_;
+
+        static int enabled_text_color_;
     }
 
 	@Override
     @SuppressWarnings("unchecked")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        Log.d("Cardation", "onCreate()");
+
+        setContentView(R.layout.activity_learn);
+        final Intent intent = new Intent(this, DecramActivity.class);
+        Button cramdown_button = (Button) findViewById(R.id.cramDownButton);
+        cramdown_button.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (G.cram_picker_.getVal() == 0) {
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
 	}
 
     public void onResume() {
         super.onResume();
-        Log.d("Cardation", "onResume()");
+        Log.i("Cardation", "LearnActivity.onResume()");
 
-        setContentView(R.layout.activity_learn);
+        EditText recto = (EditText) findViewById(R.id.recto);
+        G.enabled_text_color_ = recto.getCurrentTextColor();
 
         G.curr_card = null;
         G.batch = null;
@@ -73,19 +90,19 @@ public class LearnActivity extends Activity {
         G.rand_reversal = ConfigDb.getRandReversal(this);
         G.batch = CardDb.getDueCards(this, G.max_batch_size);
 
-        getActionBar().setTitle("Learn/" + CardDb.getCurrLanguage());
+        getActionBar().setTitle("Learn " + CardDb.getCurrLanguage());
 
         advanceCard();
     }
 
     public void onPause() {
         super.onPause();
-        Log.d("Cardation", "onPause()");
+        Log.i("Cardation", "LearnActivity.onPause()");
     }
 
     public void onStop() {
         super.onStop();
-        Log.d("Cardation", "onStop()");
+        Log.i("Cardation", "LearnActivity.onStop()");
     }
 
     public static int getMinStreak(Context context) {
@@ -99,7 +116,10 @@ public class LearnActivity extends Activity {
     }
     public void cramDown(View view)
     {
-        G.cram_picker_.down();
+        if (G.cram_picker_.getVal() >= 0) {
+            G.cram_picker_.down();
+        }
+            
         cramChangeCommon();
     }
 
@@ -127,26 +147,6 @@ public class LearnActivity extends Activity {
         }
     }
 
-
-    /* We pass rand_reversal_prob, instead of just use G.rand_reversal, cuz
-     * sometimes we want to get just the "deterministic" result.
-     */
-    public boolean shouldGoForward(int importance,
-                                   int fwd_streak,
-                                   double rand_reversal_prob)
-    {
-        // Doesn't depend on bkwd_streak, doesn't need to.
-        boolean forward = (importance == 0) || (fwd_streak < 0);
-        if (!forward) {
-            int now = CardationUtils.epochNow();
-            Random r = new Random(now);
-            int rr = r.nextInt(101);
-            if (rr < 100*rand_reversal_prob) {
-                forward = true;
-            }
-        }
-        return forward;
-    }
 
     /* When cards drop out of G.batch, we replace them with other cards
      * that are now due.
@@ -207,9 +207,10 @@ public class LearnActivity extends Activity {
             verso.setText("---");
         } else {
             batch_size = G.batch.size() + 1; // Just did that pop()
-            G.forward = shouldGoForward(G.curr_card.importance_,
-                                        G.curr_card.fwd_streak_,
-                                        G.rand_reversal/100.0);
+            G.forward = CardationUtils.shouldGoForward(
+                G.curr_card.importance_ == 1,
+                G.curr_card.fwd_streak_,
+                G.rand_reversal/100.0);
             if (G.forward == true) {
                 recto.setText(G.curr_card.recto_);
                 verso.setText("?");
@@ -228,7 +229,9 @@ public class LearnActivity extends Activity {
         info_msg += "\n" + CardDb.getNDue() + " now due.";
         info_msg += "\n" + "Total in DB = " + G.total_rows;
         info.setText(info_msg);
-        info.setTextColor(Color.WHITE);
+        info.setTextColor(G.enabled_text_color_);
+        Log.i("Cardation", "G.enabled_text_color_ = "
+            + Integer.toHexString(G.enabled_text_color_ & 0x00FFFFFF));
     }
 
     /** Display the verso and the quote */
@@ -329,51 +332,31 @@ public class LearnActivity extends Activity {
             updated_card.importance_ = 0;
         }
 
-        final int max_delay = 365*24*3600;
-        int streak;
-        boolean new_forward = shouldGoForward(updated_card.importance_,
-                                              updated_card.fwd_streak_, 0.0);
-        if (new_forward == true) {
-            streak = updated_card.fwd_streak_;
-        } else {
-            streak = updated_card.bkwd_streak_;
-        }
 
-        // The delay is 0 if streak<0, otherwise it's one day times 2^streak.
-        // We add some randomness too, to ensure that a whole bunch of cards
-        // don't all come due at the same time.
-        int now = CardationUtils.epochNow();
-        Random r = new Random(now);
-        double day_secs = 24*3600;
-        int delay;
-        if (streak < 0) {
-            delay = 0;
-        } else {
-            // XXX As we approach 2036, everything will bunch up against the
-            // maximal Unix epoch.
-            double ideal_delay = day_secs *
-                Math.pow(2, streak) * (1.0 + (r.nextInt(101) - 50)/1000.0);
-            int max_int = (int)(Math.pow(2, 31) - 1);
-            delay = (int)
-                Math.min(ideal_delay, max_int - now);
-        }
-
-        int due = now + Math.min(delay, max_delay);
         // We never needed two due-date columns, but let's not monkey with the
         // DB's schema now or we'll need to do a custom restore.
-        updated_card.due_ = due;
+        int due = CardationUtils.dueDate(updated_card.fwd_streak_,
+                                         updated_card.bkwd_streak_,
+                                         updated_card.importance_==1);
+        int now = CardationUtils.epochNow();
         Log.w("Cardation", "due in " +
-            (due - now)/day_secs + " days from now.");
+            (due - now)/(24.0*3600) + " days from now.");
+        updated_card.due_ = due;
 
         if (G.curr_card.recto_.equals(updated_card.recto_)) {
-            CardDb.updateByRecto(getBaseContext(), updated_card);
+            CardDb.saveCard(getBaseContext(), updated_card);
         } else { // Must have edited recto.
             CardDb.deleteCard(getBaseContext(), G.curr_card);
-            CardDb.saveCard(getBaseContext(), updated_card);
-            Toast.makeText(this, "Modified recto, ok",
-                           Toast.LENGTH_LONG).show();
-            Log.w("Cardation", "Changed recto from " + G.curr_card.recto_+" to "
-                               + updated_card.recto_);
+            if (updated_card.recto_.equals("")) {
+                Toast.makeText(this, "Deleted " + G.curr_card.recto_,
+                               Toast.LENGTH_LONG).show();
+            } else {
+                CardDb.saveCard(getBaseContext(), updated_card);
+                Toast.makeText(this, "Modified recto, ok",
+                               Toast.LENGTH_LONG).show();
+                Log.w("Cardation", "Changed recto from " + G.curr_card.recto_
+                    +" to " + updated_card.recto_);
+            }
         }
 
         if (due > now) {

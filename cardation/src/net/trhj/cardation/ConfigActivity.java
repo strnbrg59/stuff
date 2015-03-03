@@ -84,11 +84,12 @@ public class ConfigActivity extends Activity {
 
     private void save()
     {
-        int signed_batch_size = ConfigDb.getSignedBatchSize(this);
-        int batch_size_sign = signed_batch_size/Math.abs(signed_batch_size);
+        ConfigDbFields all = ConfigDb.getDbFieldsForCurrLang(this);
+        int batch_size_sign = (int)Math.signum(all.batch_size_);
+        int rand_reversal_sign = (int)Math.signum(all.rand_reversal_);
         ConfigDb.update(getBaseContext(),
                         CardDb.getCurrLanguage(),
-                        rand_reversal_picker_.getVal(),
+                        rand_reversal_picker_.getVal() * rand_reversal_sign,
                         batch_size_picker_.getVal() * batch_size_sign,
                         streak_picker_.getVal());
     }

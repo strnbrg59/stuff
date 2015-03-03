@@ -2,8 +2,9 @@ package net.trhj.cardation;
 
 import android.widget.TextView;
 
-// Can't use MyNumberPicker as that starts with Android 3.x.  So making
-// one by hand.
+// Android's NumberPicker is too big, especially in the vertical direction,
+// and AFAIK doesn't give any control over its size or orientation.
+// So rolling my own...
 public class MyNumberPicker {
 
     int min_val_;
@@ -12,7 +13,7 @@ public class MyNumberPicker {
     int curr_val_;
 
     public MyNumberPicker(int min_val, int max_val, int init_val,
-                        TextView widget)
+                          TextView widget)
     {
         min_val_ = min_val;
         max_val_ = max_val;
@@ -41,6 +42,15 @@ public class MyNumberPicker {
     public int getVal()
     {
         return curr_val_;
+    }
+
+    public int getMin()
+    {
+        return min_val_;
+    }
+    public int getMax()
+    {
+        return max_val_;
     }
 }
 

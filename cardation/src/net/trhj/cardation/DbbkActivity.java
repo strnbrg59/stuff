@@ -53,10 +53,9 @@ public class DbbkActivity extends Activity {
                            + ", ok?";
             } else {
                 dialog_msg = "You do not currently have a deck for the "
-                    + language_identified_ + " language.  Create it if you "
-                    + "wish, ok?";
-                pos = adapter.getPosition(
-                    new LangNumdue(Globals.new_language, 0));
+                    + language_identified_ + " language.  Select an existing "
+                    + "language or create a new one, ok?";
+                pos = 0;
             }
         } else {
             dialog_msg = "Attachment is called " + filename_
@@ -116,13 +115,11 @@ public class DbbkActivity extends Activity {
     }
 
     public void go(View view) {
-        CardDb.restoreFromInputStream(attachment_, this);
-        info_text_.setText("Done");
-
-        Button go_button = (Button) findViewById(R.id.go_button);
-        go_button.setEnabled(false);
-        language_spinner_.setEnabled(false);
-        info_text_.setText("Done");
+        RestoreActivity.restore_source_ = "email";
+        RestoreActivity.restore_attachment_ = attachment_;
+        // Would be more elegant to pass this information through the Intent.
+        Intent intent = new Intent(this, RestoreActivity.class);
+        startActivity(intent);
     }
 
     class RestoreFromEmailPopupFunctor implements PopupFunctor {

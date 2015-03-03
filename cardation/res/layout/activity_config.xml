@@ -22,7 +22,7 @@
     android:layout_weight="1" />
 <Button
     android:id="@+id/batchsizeDownButton"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:gravity="right"
     android:onClick="batchsizeDown"
@@ -35,7 +35,7 @@
 
 <Button
     android:id="@+id/batchsizeUpButton"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:gravity="right"
     android:onClick="batchsizeUp"
@@ -60,7 +60,7 @@
     android:layout_weight="1" />
 <Button
     android:id="@+id/streakDownButton"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:gravity="right"
     android:onClick="streakDown"
@@ -73,7 +73,7 @@
 
 <Button
     android:id="@+id/streakUpButton"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:gravity="right"
     android:onClick="streakUp"
@@ -98,7 +98,7 @@
     android:layout_weight="1" />
 <Button
     android:id="@+id/randReversalDownButton"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:gravity="right"
     android:onClick="randReversalDown"
@@ -111,7 +111,7 @@
 
 <Button
     android:id="@+id/randReversalUpButton"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:gravity="right"
     android:onClick="randReversalUp"

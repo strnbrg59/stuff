@@ -59,18 +59,41 @@
         android:layout_height="wrap_content" />
 </LinearLayout>
 
-<CheckBox
-    android:id="@+id/activeCheckBox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checked="true"
-    android:text="@string/checkbox_active" />
 
-<Button
-    android:id="@+id/saveButton"
+<LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:onClick="saveCard"
-    android:text="@string/button_save" />
+    android:orientation="horizontal">
+    <CheckBox
+        android:id="@+id/activeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/checkbox_active" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveCard"
+        android:gravity="right"
+        android:text="@string/button_save" />
+</LinearLayout>
+
+<!-- separation bar -->
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@color/blue"/>
+
+<ListView android:id="@+id/full_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/clue" />    
 
 </LinearLayout>

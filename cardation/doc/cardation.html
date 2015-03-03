@@ -10,8 +10,7 @@
 Cardation is a flashcard app for Android that's optimized for
 learning languages.  I wrote it because among the many fine Android
 flashcard apps out there (see
-<A HREF="http://www.droidforums.net/forum/android-applications/5536-review-flashcard-apps-droid.html">http://www.droidforums.net</A>
-for a good review of what's out there) I could not find one that handled
+<A HREF="http://www.droidforums.net/forum/android-applications/5536-review-flashcard-apps-droid.html">http://www.droidforums.net</A>) I could not find one that handled
 the direction -- English-to-foreign vs foreign-to-English -- the way I liked.
 
 <P>
@@ -47,13 +46,13 @@ times and the direction will switch back to foreign-to-English.
 
 <P> I'll save the finer streak-related details for a little later.
 Now let's go to the screenshots and instructions.  Or just <A
-HREF="Cardation.apk">download</A> the thing and start using it;
+HREF="CardationCLI-signed.apk">download</A> the thing and start using it;
 there's not much that's unobvious.
 
 <P> Here's the "home" screen: <P> <image
 src="images/cardation_menu.jpg" ALIGN="left" HSPACE=20> <P> Gets
 right down to business, doesn't it?  You can "learn" (which means, get
-quizzed) or "input".
+quizzed) or "input".  (I cover the graph later.)
 For, as indicated above those options, your Yiddish words.  What?  Yiddish
 happens to be one of <EM>my</EM> languages, so it shows up in my
 screen shot.  The brand-new Cardation you'll download actually has no
@@ -185,7 +184,7 @@ a little.  So don't expect to see a word in <EM>exactly</EM> 2^streak days.
 It's simple: type your foreign word on the first line and your
 definition (in English or whatever) on the second line.  The third
 line is the "quote" line: it's for an illustrative quote, an
-etymological note, or really anything you like.  Or nothing at all.
+etymological note, anything you like, or nothing at all.
 
 <P> The checkbox labeled <EM>active</EM> indicates if you want
 Cardation to quiz you in the English-to-foreign direction (after you
@@ -193,6 +192,11 @@ master the easier foreign-to-English direction of course, as discussed
 above).  <EM>Active</EM> is checked by default as I've assumed you'd
 like most of your words to become part of your <EM>active</EM> (hence
 the name) vocabulary.
+
+<P> The bottom half of the screen shows a list of the words you already
+have.  As you type in the <EM>clue</EM> box, that list gets filtered down
+to just the words that match what you've typed.  This way you can know if
+you already have that word.
 
 <P> The <EM>Input</EM> screen is how I happen to acquire most of my
 words; typically I'm reading something, I see a word I don't know, I
@@ -205,8 +209,8 @@ also comes later.
 
 <H3> Search </H3>
 
-<P> The very next option is <EM>Search,</EM> which is pretty much what it
-sounds like.  Type in the search box, or scroll through the list.
+<P> Press the magnifying-glass icon.  Type in the search box, or
+scroll through the list.
 
 <P>
 <image src="images/cardation_list.jpg" ALIGN="right" HSPACE=20>
@@ -239,16 +243,52 @@ it from your batch (and plan on showing it to you again in about one day's time)
     seems wise to "randomly reverse" now and then, but not so often.
 </UL>
 
-<H3>Statistics</H3>
+<H3>Date-due distribution</H3>
 
-The graph shows how many words will be due at all future dates.  The
+Returning now to the home screen,
+
+<image src="images/cardation_precram.jpg" ALIGN="right" HSPACE=20>
+
+the graph shows how many words will be due at all future dates.  The
 horizontal axis (whose label does not, for some reason, show up in the
 Android emulator I grabbed these screenshots from) is logarithmic.
 
 <P>
-Some day, perhaps, I will add other information on this page, and then its
-plural name will finally be justified.
+<H4> Decram </H4>
+
+<EM>Cram</EM> (on the <EM>Learn</EM> screen) doesn't go below zero,
+but if it's already at zero and you long-press the '-' button, you go
+into a whole different regime, called <EM>Decram.</EM>  Decram is
+analogous to cram (up to a point).  A Cram setting above zero gives
+you more words.  Decram gives you fewer.  Say you're coming back to
+Cardation after an extended "vacation".  The number of words currently
+due could be overwhelming.  You could try chipping away at them a few
+a day, but the problem is that tomorrow your batch will be drawn at
+random from <EM>all</EM> the cards due, and the problem with that is
+you're unlikely to get to review those cards you got wrong today
+(unless you go through a large number of other cards).  Digging
+yourself out of that hole could thus prove difficult.
+
+<image src="images/cardation_decram.jpg" ALIGN="left" HSPACE=20>
+
 <P>
+
+<EM>Decram</EM> solves this problem by resetting your cards' due
+dates.  Using the buttons, select a number.  This number tells
+Cardation how many cards you want to "catch up" on today, tomorrow and
+every subsequent day until you've dug your way all the way out of your
+backlog.  The histogram shows you what your date-due situation would
+be at that number of cards-per-day...IF you press <EM>Commit.</EM>
+
+<P>
+So pressing <EM>Commit</EM> actually changes your database (unlike
+pressing cram buttons on the <EM>Learn</EM> screen, which only changes
+an internal clock but otherwise has no effect the database).  So think
+twice before pressing <EM>Commit.</EM>  (But you can restore the
+status quo ante by clicking your way back to zero and
+pressing <EM>Commit</EM> again.  Or -- always a good practice -- make
+a backup first.)
+
 
 <H3> Backup </H3>
 
@@ -262,8 +302,8 @@ you as many attachments as you have languages.
 
 <P>
 If you try to open such an attachment in your Android device's email,
-Cardation offer itself up to "open" that attachment.  If you accept
-that offer, Cardation will import those words.  And that is the
+Cardation offer itself up to do the work.  Accept
+that offer and Cardation will import those words.  And that is the
 wholesale word-importation feature I mentioned earlier.  Obviously,
 it's a way to restore from your own backups, but it's also a way to
 import new cards.  You just have to get the file format right, but
@@ -291,8 +331,8 @@ backup first.
 <H3> Infrequently-asked questions </H3>
 
 <P>
-Q0. How do you pronounce _Cardation_?<BR>
-A0. "Car-day-shee-un".  Just remember the second 'a' is long.<BR><BR>
+Q0. How do you pronounce <EM>Cardation</EM>?<BR>
+A0. "Car-DAY-shee-un".  Just remember the second 'a' is long.<BR><BR>
 
 Q1. Can Cardation use my Android device's speaker to pronounce a word?<BR>
 A1. No.<BR><BR>
@@ -301,16 +341,19 @@ Q2. Can Cardation look up a word's meaning and fill that in for me
 automatically?<BR>
 A2. No.<BR><BR>
 
-Q3. Can Cardation use my device's accelerometer to detect that I've shaken
-my phone to indicate that I'd like the order of my words scrambled?<BR>
+Q3. Is there a parental controls feature, to filter out potty-mouth words?<BR>
 A3. No.<BR><BR>
 
-Q4. Is there a version for the iPhone/Pod/Pad family of products?  Is there
-an online Javascript-powered version?<BR>
-A4. No, nope. <BR><BR>
+Q4. Can Cardation use my device's accelerometer to detect that I've shaken
+my phone to indicate that I'd like the order of my words scrambled?<BR>
+A4. No.<BR><BR>
 
-Q5. Why don't you upload Cardation to the Google Android app store?<BR>
-A5. Sloth.<BR><BR>
+Q5. Is there a version for the iPhone/Pod/Pad family of products?  Is there
+an online Javascript-powered version?<BR>
+A5. No, nope. <BR><BR>
+
+Q5.1. Why don't you upload Cardation to the Google Android app store?<BR>
+A5.1. Sloth.<BR><BR>
 
 Q6. Can we see your source code?<BR>
 A6. It's at <A HREF="https://github.com/strnbrg59">GitHub.</A>
@@ -341,7 +384,8 @@ the <I>w</I> words you added 7 days ago; the <I>w</I> words you added
 15 days ago; etc.  So if you started using Cardation <I>n</I> days ago,
 your load today is <I>w*log_2(n+1)</I>.  Say you're a power user and you
 plan to add a word a day forever.  Then your daily load will be nine words
-after one year, eleven after five years, and twelve after ten years.
+after one year, eleven after five years, twelve after ten years, and
+fifteen after a hundred years.
 
 <BR><BR>
 
@@ -399,7 +443,7 @@ forgetting words (getting them wrong).
 <BR><BR>
 Q9. How can I merge two decks?<BR>
 
-A9. Good question!  This comes when people use Cardation to study for
+A9. Good question!  This comes up when people use Cardation to study for
 school tests in memory-intensive subjects such as anatomy.  Then let's
 say you have a "language" called Anatomy_master and another called
 Anatomy_new which you created because you wanted to study for a test

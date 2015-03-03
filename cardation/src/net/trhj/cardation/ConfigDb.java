@@ -17,6 +17,7 @@ public class ConfigDb {
         public static final String LANGUAGE = "language";
         public static final String RAND_REVERSAL
             = "rand_reversal";
+            // If negative, indicates language is not to show up in the spinner.
         public static final String BATCH_SIZE = "batch_size";
             // If negative, indicates this was the last language, and so
             // on Cardation init, set the language spinner to that language.
@@ -72,31 +73,24 @@ public class ConfigDb {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             int lang_col = cursor.getColumnIndex(Contract.LANGUAGE);
-            int rand_col = cursor.getColumnIndex(Contract.RAND_REVERSAL);
-            int batch_col = cursor.getColumnIndex(Contract.BATCH_SIZE);
-            int streak_col = cursor.getColumnIndex(Contract.STREAK);
-
             String lang = cursor.getString(lang_col);
 
             if (lang == null) {
                 // Older versions introduced (often lots of) rows in the config
                 // db for a "null" language.  Without this fix, we crash on
                 // startup.
+                Log.w("Cardation", "Found null language, sigh.");
                 cursor.moveToNext();
                 continue;
             }
 
-            int rand_reversal = Integer.parseInt(cursor.getString(rand_col));
-            int batch_size = Integer.parseInt(cursor.getString(batch_col));
-            int init_streak = Integer.parseInt(cursor.getString(streak_col));
-                
-            int indicator = Math.abs(batch_size);
+            ConfigDbFields all = getDbFields(context, lang);
+            all.batch_size_ = Math.abs(all.batch_size_);
             if (lang.equals(language)) {
-                Log.i("Cardation", "Setting batch_size neg for lang="
-                      + lang);
-                indicator *= -1;
+                Log.i("Cardation", "Setting batch_size neg for lang=" + lang);
+                all.batch_size_ *= -1;
             }
-            update(context, lang, rand_reversal, indicator, init_streak);
+            update(context, all);
 
             cursor.moveToNext();
         }
@@ -120,11 +114,15 @@ public class ConfigDb {
         helper.close();
     }
 
-    private static ConfigDbFields getDbFieldsForCurrLang(Context context)
+    public static ConfigDbFields getDbFieldsForCurrLang(Context context)
+    {
+        return getDbFields(context, CardDb.getCurrLanguage());
+    }
+
+    public static ConfigDbFields getDbFields(Context context, String lang)
     {
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String lang = CardDb.getCurrLanguage();
 
         String query = new String("SELECT * FROM " + table_name_
                 + " WHERE " + Contract.LANGUAGE + " = '" + lang + "'");
@@ -142,7 +140,7 @@ public class ConfigDb {
         } else {
             cursor.moveToFirst();
 
-            result.language_ = CardDb.getCurrLanguage();
+            result.language_ = lang;
             result.batch_size_ = Integer.parseInt(
                 cursor.getString(cursor.getColumnIndex(
                     Contract.BATCH_SIZE)));
@@ -175,7 +173,13 @@ public class ConfigDb {
     public static int getRandReversal(Context context)
     {
         ConfigDbFields all = getDbFieldsForCurrLang(context);
-        return all.rand_reversal_;
+        return Math.abs(all.rand_reversal_);
+    }
+
+    public static Boolean getIsHidden(Context context, String lang)
+    {
+        ConfigDbFields all = getDbFields(context, lang);
+        return (all.rand_reversal_ < 0);
     }
 
     public static int getInitialStreaks(Context context)
@@ -184,15 +188,14 @@ public class ConfigDb {
         return all.initial_streaks_;
     }
 
-    static class DbHelper extends SQLiteOpenHelper {
+    static class DbHelper extends DbCommonHelper {
     
         private static final String DATABASE_NAME = "cardation"
             + Integer.toString(database_version_) + ".db";
         private static Boolean first_time_ = true;
 
         DbHelper(Context context) {
-            super(context, DATABASE_NAME, null, database_version_);
-            Log.d("Cardation", "ConfigDb.DbHelper ctor");
+            super(context, DATABASE_NAME, database_version_);
             if (first_time_) {
                 showTableInfo();
                 first_time_ = false;
@@ -219,7 +222,6 @@ public class ConfigDb {
         @Override
         public void close() {
             super.close();
-            Log.d("Cardation", "ConfigDb.DbHelper.close() called");
         }
     
         @Override
@@ -290,5 +292,10 @@ public class ConfigDb {
 
         db.close();
         helper.close();
+    }
+
+    public static void update(Context context, ConfigDbFields all) {
+        update(context, all.language_,
+               all.rand_reversal_, all.batch_size_, all.initial_streaks_);
     }
 }

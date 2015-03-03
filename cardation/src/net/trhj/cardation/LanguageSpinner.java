@@ -14,7 +14,7 @@ public class LanguageSpinner
 {
     Spinner spinner_;
     ArrayAdapter<LangNumdue> adapter_;
-    Activity activity_;
+    Activity parent_activity_;
     LinkedList<String> languages_;
 
     public LanguageSpinner(Activity activity)
@@ -25,7 +25,7 @@ public class LanguageSpinner
     @SuppressWarnings("unchecked")
     void init(Activity activity)
     {
-        activity_ = activity;
+        parent_activity_ = activity;
         spinner_ = (Spinner) activity.findViewById(R.id.deck_spinner);
         adapter_ = new ArrayAdapter<LangNumdue>(activity,
                         android.R.layout.simple_list_item_1) {
@@ -39,8 +39,13 @@ public class LanguageSpinner
             }};
 
         languages_ = CardDb.listLanguages(activity);
-        LinkedList<String> languages_copy =
-            (LinkedList<String>)languages_.clone();
+        LinkedList<String> languages_copy = new LinkedList<String>();
+        for (int i=0; i<languages_.size(); ++i) {
+            String lang = languages_.get(i);
+            if (!ConfigDb.getIsHidden(activity, lang)) {
+                languages_copy.add(lang);
+            }
+        }
         while (languages_copy.size() > 0) {
             String lang = languages_copy.poll();
             int numdue =
@@ -52,7 +57,7 @@ public class LanguageSpinner
 
         spinner_.setAdapter(adapter_);
         adapter_.sort(new LangNumdueComparator());
-        spinner_.setOnItemSelectedListener(new SpinnerActivity(activity));
+        spinner_.setOnItemSelectedListener(new SpinnerActivity());
 
         String last_lang = ConfigDb.getLastLanguage(activity);
         Log.i("Cardation", "LanguageSpinner.init(), last_lang=|" + last_lang
@@ -103,31 +108,25 @@ public class LanguageSpinner
         // If you leave the current language as is, then when init() calls
         // CardDb.listLanguages(), that thing will call getReadableDatabase()
         // which will call createTableIfNotExists().
-        LinkedList<String> langs = CardDb.listLanguages(activity_);
+        LinkedList<String> langs = CardDb.listLanguages(parent_activity_);
         Log.i("Cardation", "langs.size() = " + langs.size());
         if (langs.size() == 0) {
             // That's if we had only one language, and we deleted it.
-            Toast.makeText(activity_, "No languages left exiting now.",
+            Toast.makeText(parent_activity_, "No languages left exiting now.",
                            Toast.LENGTH_LONG).show();
             System.exit(0);  // Clean enough way to exit.
         }
-        CardDb.setCurrLanguage(langs.get(0), activity_);
+        CardDb.setCurrLanguage(langs.get(0), parent_activity_);
 
         // Should work, because we've dropped the corresponding table in the DB.
-        init(activity_);
+        init(parent_activity_);
     }
 
     final class SpinnerActivity extends Activity
         implements OnItemSelectedListener
     {
-        Activity parent_activity_;
-        // I need the parent_activity so that onItemSelected() can pass it
-        // to CardDb.setCurrLanguage().  Before I figured that out, I was
-        // passing the *this* pointer, and getting a NullPointerException when
-        // CardDb tried to open the database.
-        public SpinnerActivity(Activity parent_activity) {
+        public SpinnerActivity() {
             super();
-            parent_activity_ = parent_activity;
         }
 
         public void onItemSelected(AdapterView<?> parent, View view, 
@@ -135,15 +134,32 @@ public class LanguageSpinner
         {
             Log.i("Cardation", "SpinnerActivity.onItemSelected()");
             LangNumdue ln = (LangNumdue) parent.getItemAtPosition(pos);
+
+            // The parent activity *is* MainActivity except when we're
+            // processing an email attachment, in which case it's the
+            // DbbkActivity.  Gotta make sure we don't crash with a bad cast.
+            MainActivity main_activity = null;
+            try {
+                main_activity = (MainActivity)parent_activity_;
+            } catch (ClassCastException cce) {
+                Log.i("Cardation", "No histogram, fine.");
+            }
+
             String choice = ln.lang_;
             if (choice.equals(Globals.new_language)) {
+                if (main_activity != null) {                
+                    main_activity.clearHistogram();
+                }
                 NewLanguagePopup dialog =
-                    new NewLanguagePopup(activity_, Globals.new_language,
+                    new NewLanguagePopup(parent_activity_, Globals.new_language,
                                          languages_,
                                          new LanguageAddFunctor());
                 dialog.show();
             } else {
                 CardDb.setCurrLanguage(choice, parent_activity_);
+                if (main_activity != null) {
+                    main_activity.showHistogram();
+                }
             }
         }
 
@@ -177,8 +193,14 @@ public class LanguageSpinner
             if (new_lang.contains("_")) {
                 Log.w("Cardation", "Languages with underscores are illegal "
                   + "(until I make CardDb.listLanguages() more sophisticated)");
-                Toast.makeText(activity_, "No underscores allowed!",
+                Toast.makeText(parent_activity_, "No underscores allowed!",
                            Toast.LENGTH_LONG).show();
+                return;
+            }
+            if ((new_lang == null) || (new_lang.equals(""))) {
+                if (adapter_.getCount() == 1) { // 1 item -- "New language".
+                    System.exit(0);
+                }
                 return;
             }
 
@@ -197,7 +219,10 @@ public class LanguageSpinner
 
         public void onNegativeButton(Activity activity) {
             Log.i("Cardation", "LanguageAddFunctor.onNegativeButton()");
-            // Gotta make sure spinner doesn't come to rest on "New Language".
+            // Gotta make sure spinner doesn't come to rest on "New language".
+            if (adapter_.getCount() == 1) { // 1 item -- "New language".
+                System.exit(0);
+            }
             spinner_.setSelection(adapter_.getPosition(new LangNumdue(
                 CardDb.getCurrLanguage(), 0)));
         }

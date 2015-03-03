@@ -29,6 +29,9 @@
 
     <!-- edit screen -->
 
+    <!-- decram screen -->
+    <string name="decram_info_text">This is what your date-due distribution will look like if you press Commit.</string>
+
     <!-- backup & restore buttons -->
     <string name="button_backup">Backup</string>
     <string name="button_restore">Restore</string>
@@ -52,6 +55,8 @@
     <string name="title_activity_dbexplorer">Hack Database (danger!)</string>
     <string name="title_activity_edit">Edit</string>
     <string name="title_activity_learn">Learn</string>
+    <string name="title_activity_restore">Restore</string>
+    <string name="title_activity_decram">Decram</string>
     <string name="title_activity_config">Configure</string>
     <string name="title_activity_stats">Statistics</string>
     <string name="title_activity_dbbk">Cardation importer</string>

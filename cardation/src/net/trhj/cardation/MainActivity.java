@@ -11,10 +11,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewConfiguration;
 import java.lang.reflect.Field;
+import java.util.Vector;
+import java.util.ArrayList;
+import com.jjoe64.graphview.*;
 
 public class MainActivity extends Activity
 {
     LanguageSpinner language_spinner_;
+    Histogram histogram_ = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +32,35 @@ public class MainActivity extends Activity
     public void onResume() {
         super.onResume();
         String curr_lang = CardDb.getCurrLanguage();
+        if (curr_lang == null) {
+            return;
+        }
         int n_due = CardDb.getNDue();
         Log.i("Cardation", "MainActivity.onResume(), curr_language="
             + curr_lang + ", n_due=" + n_due);
         language_spinner_.updateNumDue(curr_lang, n_due);
+
+        GraphView histogram_widget = (GraphView) findViewById(R.id.histogram);
+        ArrayList<Integer> duedates = CardDb.getOrderedDueDates(this,
+                                                     CardDb.getCurrLanguage());
+        histogram_ = new Histogram(histogram_widget, duedates);
+        histogram_.setTitle("Date-due distribution");
+        histogram_.show();
     }
+
+    public void showHistogram() {
+        assert(histogram_ != null);
+        histogram_.resetDuedates(CardDb.getOrderedDueDates(this,
+                                                     CardDb.getCurrLanguage()));
+        histogram_.show();
+    }
+
+    public void clearHistogram() {
+        if (histogram_ != null) { // On new Cardation with no languages
+            histogram_.clear();
+        }
+    }
+
 
     // Forces the three-dots overflow icon to appear.  (It won't, otherwise,
     // if your device has a hardware menu button.)
@@ -72,11 +100,6 @@ public class MainActivity extends Activity
                 startActivity(intent);
                 return true;
 
-            case R.id.action_stats:
-                intent = new Intent(this, StatsActivity.class);
-                startActivity(intent);
-                return true;
-
             case R.id.action_backup:
                 Popup dialog = new Popup(this, "Confirm backup...",
                                      new BackupPopupFunctor());
@@ -90,12 +113,11 @@ public class MainActivity extends Activity
                 dialog.show();
                 return true;
 
-            /*
             case R.id.action_hack_db:
                 intent = new Intent(this, AndroidDatabaseManager.class);
                 startActivity(intent);
                 return true;
-            */
+
             case R.id.action_delete:
                 dialog = new Popup(this,
                     "Really delete " + CardDb.getCurrLanguage() + "?",
@@ -118,4 +140,5 @@ public class MainActivity extends Activity
         Intent intent = new Intent(this, LearnActivity.class);
         startActivity(intent);
     }
+
 }

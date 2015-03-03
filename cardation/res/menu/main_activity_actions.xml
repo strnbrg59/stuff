@@ -9,10 +9,6 @@
           android:title="language-specific configuration"
           android:showAsAction="ifRoom" />
 
-    <item android:id="@+id/action_stats"
-          android:title="statistics"
-          android:showAsAction="ifRoom" />
-
     <item android:id="@+id/action_backup"
           android:title="backup everything"
           android:showAsAction="ifRoom" />
@@ -21,14 +17,12 @@
           android:title="restore language"
           android:showAsAction="ifRoom" />
 
-    <!--
-    <item android:id="@+id/action_hack_db"
-          android:title="hack_database"
-          android:showAsAction="ifRoom" />
-    -->
-
     <item android:id="@+id/action_delete"
           android:title="delete language"
+          android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_hack_db"
+          android:title="hack database"
           android:showAsAction="ifRoom" />
 
 </menu>

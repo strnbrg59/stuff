@@ -48,7 +48,7 @@ public class CardDb {
             double ideal_cram = Math.pow(2, cram_widget_val) * day_secs;
             double max_cram = (int)(Math.pow(2, 31) - 1) - now;
             cram_increment_ = (int) Math.min(max_cram, ideal_cram);
-            Log.w("Cardation", "cram_increment_ = " + cram_increment_/86400.
+            Log.i("Cardation", "cram_increment_ = " + cram_increment_/86400.
                     + " days");
         }
     }
@@ -86,7 +86,7 @@ public class CardDb {
 
     static public String getCurrentTableName()
     {
-        return tableName(curr_language_);
+        return tableName(getCurrLanguage());
     }
 
     static String tableName(String lang)
@@ -126,15 +126,14 @@ public class CardDb {
     /**
      * This class helps open, create, and upgrade the database file.
      */
-    static class DbHelper extends SQLiteOpenHelper {
+    static class DbHelper extends DbCommonHelper {
     
         private static final String DATABASE_NAME = "cardation"
             + Integer.toString(database_version_) + ".db";
         Context context_;
     
         DbHelper(Context context) {
-            super(context, DATABASE_NAME, null, database_version_);
-            Log.d("Cardation", "CardDb.DbHelper ctor");
+            super(context, DATABASE_NAME, database_version_);
             context_ = context;
         }
 
@@ -145,7 +144,6 @@ public class CardDb {
         @Override
         public void close() {
             super.close();
-            Log.d("Cardation", "CardDb.DbHelper.close() called");
         }
     
         @Override
@@ -183,65 +181,12 @@ public class CardDb {
                  "CardDb DB version has changed, but we have no upgrade " +
                  "gameplan as of yet.");
        }
-
-        //
-        // This comes from
-        // https://github.com/sanathp/DatabaseManager_For_Android
-        //
-        public ArrayList<Cursor> getData(String Query){
-        	//get writable database
-        	SQLiteDatabase sqlDB = this.getWritableDatabase();
-        	String[] columns = new String[] { "mesage" };
-        	// An array list of cursor to save two cursors.  One has results
-            // from the query, the other stores error message if any errors are
-            // triggered.
-        	ArrayList<Cursor> alc = new ArrayList<Cursor>(2);
-        	MatrixCursor Cursor2= new MatrixCursor(columns);
-        	alc.add(null);
-        	alc.add(null);
-        	
-        	
-        	try{
-        		String maxQuery = Query ;
-        		//execute the query results will be save in Cursor c
-        		Cursor c = sqlDB.rawQuery(maxQuery, null);
-        		
-        
-        		//add value to cursor2
-        		Cursor2.addRow(new Object[] { "Success" });
-        		
-        		alc.set(1,Cursor2);
-        		if (null != c && c.getCount() > 0) {
-        
-        			
-        			alc.set(0,c);
-        			c.moveToFirst();
-        			
-        			return alc ;
-        		}
-        		return alc;
-        	} catch(SQLException sqlEx){
-        		Log.d("printing exception", sqlEx.getMessage());
-        		// If any exceptions are triggered save the error message to
-                // cursor and return the arraylist.
-        		Cursor2.addRow(new Object[] { ""+sqlEx.getMessage() });
-        		alc.set(1,Cursor2);
-        		return alc;
-        	} catch(Exception ex){
-        
-        		Log.d("printing exception", ex.getMessage());
-        
-        		// If any exceptions are triggered save the error message to
-                // cursor an return the arraylist.
-        		Cursor2.addRow(new Object[] { ""+ex.getMessage() });
-        		alc.set(1,Cursor2);
-        		return alc;
-        	}
-        
-        	
-        }
     }
 
+    /**
+      If recto matches a card already in the DB, then we replace the old card
+      with the new one.  I.e. always clobber what's there.
+     */
     public static long saveCard(Context context, Card card)
     {
         DbHelper helper = new DbHelper(context);
@@ -256,8 +201,10 @@ public class CardDb {
         values.put(Contract.IMPORTANCE, card.importance_);
         values.put(Contract.QUOTE, card.quote_);
 
-        long newRowId =
-            db.insert(getCurrentTableName(), null, values);
+        long newRowId;
+        newRowId =
+            db.insertWithOnConflict(getCurrentTableName(), null, values,
+                                    SQLiteDatabase.CONFLICT_REPLACE);
 
         db.close();
         helper.close();
@@ -305,14 +252,14 @@ public class CardDb {
         Cursor cursor = db.rawQuery(
             "SELECT NAME FROM sqlite_master WHERE TYPE='table'",
             null);
-        Log.w("Cardation",
+        Log.i("Cardation",
               "Table-list query, #rows = " + cursor.getCount());
 
         LinkedList<String> result = new LinkedList<String>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String table_name = cursor.getString(0);
-            Log.w("Cardation", "table: |" + table_name + "|");
+            Log.i("Cardation", "table: |" + table_name + "|");
             if (   table_name.equals("android_metadata")
                 || table_name.equals(ConfigDb.table_name_)) {
                 cursor.moveToNext();
@@ -321,7 +268,7 @@ public class CardDb {
 
             // Language name is last token.
             String language = extractLanguageTokenFromDbTableName(table_name);
-            Log.w("Cardation", "language = |" + language + "|");
+            Log.i("Cardation", "language = |" + language + "|");
             if (language != null) {
                 // E.g. net_trhj_cardation_Polish.  For now, let's disallow
                 // "languages" with underscores in their names.
@@ -386,7 +333,7 @@ public class CardDb {
 
     public static LinkedList<Card> getDueCards(Context context, int max_cards)
     {
-        return getDueCards(context, max_cards, curr_language_);
+        return getDueCards(context, max_cards, getCurrLanguage());
     }
 
 
@@ -402,7 +349,7 @@ public class CardDb {
         String query = new String("SELECT * FROM " + tableName(language)
                 + " WHERE " + Contract.DUE + " < " +
                 ((int)CardationUtils.epochNow() + 1 + getCramIncrement()));
-        Log.w("Cardation", "Query = " + query);
+        Log.i("Cardation", "Query = " + query);
 
         Cursor cursor = db.rawQuery(query, null);
         // The "ORDER BY" ensures that we'll get the same batch when
@@ -420,7 +367,7 @@ public class CardDb {
         LinkedList<Card> result = new LinkedList<Card>();
         n_due_ = cursor.getCount();
         if (n_due_ == 0) {
-            Log.w("Cardation", "n_due_ = 0 in getDueCards()");
+            Log.i("Cardation", "n_due_ = 0 in getDueCards()");
             db.close();
             helper.close();
             return result;
@@ -430,16 +377,12 @@ public class CardDb {
         do {
             Card newCard = makeCard(cursor);
             result.push(newCard);
-            Log.i("Cardation", "getDueCards(): " +
-                  newCard.recto_ + ", now-due(string) = "
-                + ((int)CardationUtils.epochNow() - newCard.due_));
-
         } while (cursor.moveToNext() && (result.size() < max_cards));
 
         int now = CardationUtils.epochNow();
         Collections.shuffle(result, new Random(now));
 
-        Log.w("Cardation", "Retrieved " + result.size() + " due cards.");
+        Log.i("Cardation", "Retrieved " + result.size() + " due cards.");
         db.close();
         helper.close();
         return result;
@@ -449,10 +392,13 @@ public class CardDb {
     {
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from " +
-            getCurrentTableName() + " WHERE " + Contract.RECTO +
-            " = \"" + recto + "\"",
-            null);
+        String selection = Contract.RECTO + " LIKE ?";
+        String[] selectionArgs = {recto};
+        String[] columns = null;
+        Cursor cursor = db.query(getCurrentTableName(),
+                                 columns,
+                                 selection, selectionArgs,
+                                 null, null, null);
         cursor.moveToFirst();
         Card result = makeCard(cursor);
 
@@ -463,42 +409,6 @@ public class CardDb {
         return result;
     }
 
-    public static void updateByRecto(Context context, Card new_card)
-    {
-        String selection = Contract.RECTO + " LIKE ?";
-        String[] selectionArgs = { String.valueOf(new_card.recto_) };
-        update(context, new_card, selection, selectionArgs);
-    }
-
-    public static void update(Context context, Card new_card,
-                              String selection,
-                              String[] selectionArgs) {
-        DbHelper helper = new DbHelper(context);
-        SQLiteDatabase db = helper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(Contract.RECTO, new_card.recto_);
-        values.put(Contract.VERSO, new_card.verso_);
-        values.put(Contract.FWD_STREAK, new_card.fwd_streak_);
-        values.put(Contract.BKWD_STREAK, new_card.bkwd_streak_);
-        values.put(Contract.DUE, new_card.due_);
-        values.put(Contract.IMPORTANCE, new_card.importance_);
-        values.put(Contract.QUOTE, new_card.quote_);
-
-        double now = CardationUtils.epochNow();
-        Log.w("Cardation", "update(): new_card.due_ = now + " +
-                (new_card.due_-now)  + " seconds from now");
-
-        int count = db.update(getCurrentTableName(),
-                              values,
-                              selection,
-                              selectionArgs);
-        Log.w("Cardation", "db.update() returned " + count);
-
-        db.close();
-        helper.close();
-    }
-
     public static void deleteCard(Context context, Card card)
     {
         DbHelper helper = new DbHelper(context);
@@ -507,7 +417,7 @@ public class CardDb {
         String selection = Contract.RECTO + " LIKE ?";
         String[] selectionArgs = { String.valueOf(card.recto_) };
         db.delete(getCurrentTableName(), selection, selectionArgs);
-        Log.w("Cardation", "Deleted card " + card.recto_);
+        Log.i("Cardation", "Deleted card " + card.recto_);
 
         db.close();
         helper.close();
@@ -608,7 +518,7 @@ public class CardDb {
                                                               "UTF-8"));
                 writer.write(everything);
                 writer.close();
-                Log.w("Cardation", "Backed up " + outfile.getAbsolutePath());
+                Log.i("Cardation", "Backed up " + outfile.getAbsolutePath());
             } catch (Exception ex) {
                 Log.e("Cardation", "Could not write backup to /mnt/sdcard.");
             }
@@ -639,7 +549,8 @@ public class CardDb {
      * the key.  If key is already present, updates the record.  Otherwise,
      * creates an all-new record.
      */
-    public static void restore(Context context) {
+    public static void restore(Context context,
+                               RestoreActivity.FieldOverwrites fo) {
         if (!isExternalStorageWritable()) {
             // Don't bother writing a separate function to determine if the
             // SD card is readable.
@@ -665,11 +576,12 @@ public class CardDb {
         }
 
         assert(instream != null);
-        restoreFromInputStream(instream, context);
+        restoreFromInputStream(instream, context, fo);
     }
 
     public static void restoreFromInputStream(InputStream instream,
-                                              Context context)
+                                            Context context,
+                                            RestoreActivity.FieldOverwrites fo)
     {
         List<List<String>> records = CardationUtils.dbbk2records(instream);
         if (records == null) {
@@ -677,6 +589,7 @@ public class CardDb {
                        Toast.LENGTH_LONG).show();
             System.exit(0);
         }
+        Log.i("Cardation", "Found " + records.size() + " cards.");
 
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -692,33 +605,41 @@ public class CardDb {
             int importance = Integer.parseInt(record.get(Contract.importance));
             String quote = record.get(Contract.quote);
 
-            Card card = new Card(recto, verso,
-                                 fwd_streak, bkwd_streak,
-                                 due,
-                                 importance,
-                                 quote);
+            Card file_card = new Card(recto, verso,
+                                      fwd_streak, bkwd_streak,
+                                      due,
+                                      importance,
+                                      quote);
 
             recto = recto.replace("'", "''"); // That's how you escape a quote.
-            Cursor cursor =
-                db.rawQuery("SELECT " + Contract.RECTO + " FROM "
-                +   getCurrentTableName()
+            String query = "SELECT * FROM " +   getCurrentTableName()
                 + " WHERE " + Contract.RECTO + " == "
-                + "\'" + recto + "\'", null);
+                + "\'" + recto + "\'";
+            Cursor cursor = db.rawQuery(query, null);
+            Log.i("Cardation", "cursor.getCount()=" + cursor.getCount());
+            Card merge_card;
             if (cursor.getCount() == 0) {
                 Log.i("Cardation", "Inserting new card " + recto);
-                saveCard(context, card);
+                merge_card = file_card;
             } else {
                 Log.i("Cardation", "Updating " + recto);
-                updateByRecto(context, card);
-            }
-            cursor.close();
-        }
-        Log.w("Cardation", "Found " + records.size() + " cards.");
+                cursor.moveToFirst();
+                merge_card = makeCard(cursor);
 
-        if (db != null) {
-            db.close();
-            helper.close();
+                if (fo.verso) { merge_card.verso_ = file_card.verso_; }
+                if (fo.quote) { merge_card.quote_ = file_card.quote_; }
+                if (fo.active) { merge_card.importance_=file_card.importance_; }
+                if (fo.streaks) {
+                    merge_card.fwd_streak_ = file_card.fwd_streak_;
+                    merge_card.bkwd_streak_ = file_card.bkwd_streak_;
+                }
+                if (fo.duedate) { merge_card.due_ = file_card.due_; }
+            }
+            saveCard(context, merge_card);
         }
+
+        db.close();
+        helper.close();
     }
 
     public static void deleteCurrentLanguage(Context context,
@@ -729,7 +650,7 @@ public class CardDb {
 
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
-        Log.w("Cardation", "Dropping table|" + getCurrentTableName() + "|");
+        Log.i("Cardation", "Dropping table|" + getCurrentTableName() + "|");
         db.execSQL("DROP TABLE IF EXISTS " + getCurrentTableName() + ";");
 
         db.close();
@@ -751,7 +672,7 @@ public class CardDb {
                 null);
         cursor.moveToFirst();
         String result_str = cursor.getString(0);
-        Log.w("Cardation", "Found " + result_str + " rows in table "
+        Log.i("Cardation", "Found " + result_str + " rows in table "
               + getCurrentTableName());
 
         db.close();
@@ -760,42 +681,53 @@ public class CardDb {
         return Integer.parseInt(result_str);
     }
 
-    public static Vector<ComplexInt> duedateHistogram(Context context,
-                                                      String lang) {
+    public static ArrayList<Integer> getOrderedDueDates(Context context,
+                                                        String lang)
+    {
         DbHelper helper = new DbHelper(context);
         SQLiteDatabase db = helper.getReadableDatabase();
-        Vector<ComplexInt> result = new Vector<ComplexInt>();
-        String query_template = "SELECT COUNT(*) FROM " + tableName(lang)
-            + " WHERE (%s > %d) AND (%s <= %d);";
-
-        final int now = CardationUtils.epochNow();
-        int later_than = 0;
-        int earlier_than = now;
-
-        // Make histogram with power-of-two time categories.
-        final int day_seconds = 24*3600;
-        final int n_bins = 12;
-        for (int x=0; x<=n_bins-2; ++x) {
-            String query = String.format(query_template,
-                Contract.DUE, later_than, Contract.DUE, earlier_than);
-            Log.i("Cardation", "histogram query = " + query);
-            Cursor cursor = db.rawQuery(query,null);
-            cursor.moveToFirst();
-            int count = Integer.parseInt(cursor.getString(0));
-
-            result.add(new ComplexInt(x-1, count));
-
-            later_than = earlier_than;
-            if (x == n_bins-2) {
-                earlier_than = Integer.MAX_VALUE;
-            } else {
-                earlier_than += (int)(Math.pow(2,x))*day_seconds;
-            }
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        String query = "SELECT " + Contract.DUE + " FROM " + tableName(lang)
+            + " ORDER BY " + Contract.DUE + ";";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            result.add(Integer.parseInt(cursor.getString(0)));
+            cursor.moveToNext();
         }
 
         db.close();
         helper.close();
 
+        Collections.sort(result);
         return result;
     }
+
+    public static void setOrderedDueDates(ArrayList<Integer> duedates,
+                                          Context context, String lang)
+    {
+        DbHelper helper = new DbHelper(context);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String query = "SELECT * FROM " + tableName(lang)
+            + " ORDER BY " + Contract.DUE + ";";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int cards_changed = 0;
+        int i=0;
+        while (!cursor.isAfterLast()) {
+            Card card = makeCard(cursor);
+            int newdue = duedates.get(i);
+            if (newdue != card.due_) {
+                card.due_ = duedates.get(i);
+                long newRowId = saveCard(context, card);
+                ++cards_changed;
+            }
+            cursor.moveToNext();
+            ++i;
+        }
+        Log.i("Cardation", "Decram, cards_changed=" + cards_changed);
+
+        db.close();
+        helper.close();
+    }        
 }

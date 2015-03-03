@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+<TextView
+    android:editable="false"
+    android:gravity="left"
+    android:text="On conflict..."
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+<CheckBox
+    android:id="@+id/clobberVersoBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="overwrite answer" />
+
+<CheckBox
+    android:id="@+id/clobberQuoteBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="overwrite quote" />
+
+<CheckBox
+    android:id="@+id/clobberActiveBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="overwrite active" />
+
+<CheckBox
+    android:id="@+id/clobberStreaksBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="overwrite streaks" />
+
+<CheckBox
+    android:id="@+id/clobberDuedateBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="overwrite duedate" />
+
+<View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@color/blue"/>
+<Button
+    android:id="@+id/go_button"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:onClick="go"
+    android:gravity="bottom"
+    android:text="Go!" />
+<TextView
+    android:id="@+id/done"
+    android:editable="false"
+    android:gravity="left"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>

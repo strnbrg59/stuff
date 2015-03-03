@@ -81,6 +81,7 @@
     android:layout_width="40dp"
     android:layout_height="wrap_content"
     android:onClick="cramDown"
+    android:longClickable="true"
     android:text="@string/cram_down" />
 
 <TextView

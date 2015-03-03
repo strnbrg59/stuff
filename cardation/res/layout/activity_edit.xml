@@ -5,52 +5,66 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-<EditText android:id="@+id/clue"
-        android:layout_width="wrap_content"
+    <EditText android:id="@+id/clue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/clue" />    
+
+    <EditText android:id="@+id/answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/answer" />
+
+    <EditText android:id="@+id/quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/quote" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/clue" />    
+        android:paddingTop="10dip"
+        android:orientation="horizontal">
 
-<EditText android:id="@+id/answer"
-        android:layout_width="wrap_content"
+        <CheckBox
+            android:id="@+id/activeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_active" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Save button -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="save"
+            android:gravity="right"
+            android:text="@string/button_save" />
+    </LinearLayout>
+
+    <!-- Streaks -->
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/answer" />
+        android:paddingTop="10dip"
+        android:orientation="horizontal">
 
-<EditText android:id="@+id/quote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/quote" />
+        <EditText
+            android:text="streaks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false" />
+        <EditText android:id="@+id/forwardStreak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText android:id="@+id/backwardStreak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-<CheckBox
-    android:id="@+id/activeCheckBox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/checkbox_active" />
-
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="10dip"
-    android:orientation="horizontal">
-
-<EditText
-        android:text="streaks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:editable="false" />
-<EditText android:id="@+id/forwardStreak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-<EditText android:id="@+id/backwardStreak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
-
-<!-- Save button -->
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="save"
-    android:text="@string/button_save" />
+    </LinearLayout>
 
 </LinearLayout>

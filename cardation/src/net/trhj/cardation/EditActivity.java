@@ -53,18 +53,35 @@ public class EditActivity extends Activity {
         EditText bkwd_streak = (EditText) findViewById(R.id.backwardStreak);
         new_card.bkwd_streak_ = new Integer(bkwd_streak.getText().toString());
 
+        // Reset due-date.  Only if a streak has been edited.  And respecting
+        // a soon-to-come due-date on a high-streak card.
+        if (   (new_card.fwd_streak_ != curr_card.fwd_streak_)
+            || (new_card.bkwd_streak_ != curr_card.bkwd_streak_)) {
+            int new_due = CardationUtils.dueDate(new_card.fwd_streak_,
+                                                 new_card.bkwd_streak_,
+                                                 new_card.importance_==1);
+            int old_due = CardationUtils.dueDate(curr_card.fwd_streak_,
+                                                 curr_card.bkwd_streak_,
+                                                 curr_card.importance_==1);
+            Log.i("Cardation", "curr_due=" + curr_card.due_
+                + ", new_due=" + new_due + ", old_due=" + old_due
+                + ", diff=" + (new_due - old_due));
+            new_card.due_ = curr_card.due_ + (new_due - old_due);
+        }
+
         if (new_card.recto_.equals(curr_card.recto_)) {
-            CardDb.updateByRecto(this, new_card);
+            CardDb.saveCard(this, new_card);
         } else {
             CardDb.deleteCard(this, curr_card);
-            if (!new_card.recto_.equals("")) {
-                CardDb.saveCard(this, new_card);
-            } else {
+            if (new_card.recto_.equals("")) {
                 Log.w("Cardation", "deleted " + curr_card.recto_);
                 Toast.makeText(this, "Deleted " + curr_card.recto_,
                                Toast.LENGTH_LONG).show();
+            } else {
+                CardDb.saveCard(this, new_card);
+                Log.w("Cardation", "Changed recto from " + curr_card.recto_
+                    +" to " + new_card.recto_);
             }
-            ListActivity.needs_refresh_ = true;
         }
 
         // Go back to List

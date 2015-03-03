@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+<View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- home-made NumberPicker, Cram -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <TextView
+        android:text="Words per day"
+        android:editable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/cramDownButton"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:onClick="cramDown"
+        android:text="@string/cram_down" />
+
+    <TextView
+        android:id="@+id/cramText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/cramUpButton"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:onClick="cramUp"
+        android:text="@string/cram_up" />
+
+    </LinearLayout>
+    <!-- end of homemade cram widget -->
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/commitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="commit"
+        android:text="Commit" />
+</LinearLayout>
+
+<View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@color/blue"/>
+
+<!-- Explanation for the user -->
+<TextView
+    android:text="@string/decram_info_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:editable="false" />
+
+<com.jjoe64.graphview.GraphView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:gravity="center"
+    android:id="@+id/histogram" /> 
+
+</LinearLayout>
